@@ -1,0 +1,268 @@
+\section{Distributed Algorithm with Partial Information}
+\label{sec:algorithm}
+
+In this section, we shall introduce a novel approximation method to decouple the centralized optimization on the RHS of the Bellman's equations to each AP for arbitrary system state.
+Specifically, the decoupling can be achieved via the following two steps:
+\begin{enumerate}
+    \item We first introduce a baseline policy, use its value function to approximate the value function of the optimal policy $\Policy^*$, and derive the analytical expression of the approximate value function in Section \ref{subsec:baseline}.
+    \item Based on the approximate value function, an alternative action update algorithm, where a subset of APs are selected to update their dispatching action distributed in each broadcast interval, is proposed to solve the RHs of the Bellman's equation in equation (\ref{eqn:sp_0}) in Section \ref{subsec:ap_alg}.
+    Moreover, the analytical performance bound is also derived in Section \ref{subsec:analysis}.
+\end{enumerate}
+{As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge on system state.
+These approaches cannot be used for POMDP.
+In our proposed approximate solution framework, however, we follow a similar two-step procedure but with novel techniques to solve the POMDP problem in P1: (1) find approximate value function, instead of solving the accurate value function V; (2) use alternative method to optimize the RHS of the Bellman's equation gradually, instead of simultaneous action optimization at all APs.}
+
+\subsection{Baseline Policy and Approximate Value Function}
+\label{subsec:baseline}
+To alleviate the curse of dimensionality, we first use the baseline policy with fixed dispatching action to approximate value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}).
+Specifically, the baseline policy is elaborated below.
+
+\begin{policy}[Baseline Policy]
+    In the baseline policy $\Baseline$, each AP fixes the target processing edge server for each job type as the previous broadcast interval. Specifically, at the $t$-th broadcast interval,
+    \begin{align}
+        \Baseline(\Stat(t)) &\define \Bracket{ \Pi_{1}(\Stat_{1}(t)), \dots, \Pi_{K}(\Stat_{K}(t)) },
+    \end{align}
+    where 
+    \begin{align}
+        \Pi_{k}(\Stat_{k}(t)) &\define
+        \hat{\mathcal{A}}_{k}(t)
+        \nonumber\\
+        &= \Brace{
+            \omega_{k,j}(t) \Big| \forall j\in\jSpace
+        }, \forall k\in\apSet.
+    \end{align}
+\end{policy}
+
+Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy, we shall approximate the value function of the optimal policy $V(\cdot)$ via $W_{\Baseline}$, i.e.,
+{\small
+\begin{align}
+    &V\Paren{\Stat(t+1)} \approx W_{\Baseline}\Paren{\Stat(t+1)}
+    \nonumber\\
+    =& \sum_{m\in\esSet,j\in\jSpace}\Brace{
+        \sum_{k\in\apSet} \tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))
+        +\tilde{W}^{\ES}_{m,j}(\Stat(t+1))
+    },
+\end{align}
+}
+where $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs which are being transmitted from the $k$-th AP to the $m$-th edge server with the baseline policy $\Baseline$ and initial system state $\Stat(t+1)$, and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs on the $m$-th server.
+Their definitions are given below.
+{\small
+\begin{align}
+    \tilde{W}^{\AP}_{k,m,j} \Paren{\Stat(t+1)} &\define
+        \sum_{i=0}^{\infty} \gamma^{i+1} \mathbb{E}^{\Baseline}\Bracket{
+            \Inorm{\vec{R}^{(k)}_{m,j}(t+i+1)}
+        },
+    \\    
+    \tilde{W}^{\ES}_{m,j} \Paren{\Stat(t+1)} &\define
+        \sum_{i=0}^{\infty} \gamma^{i+1} \mathbb{E}^{\Baseline}\Bracket{
+            Q_{m,j}(t+i+1) +
+            \nonumber\\
+            &~~~~~~~~~~\beta I[Q_{m,j}(t+i+1) = L_{max}]
+        }.
+\end{align}
+}
+
+Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ are derived in the following lemmas, respectively.
+
+\begin{lemma}[Analytical Expression of $\tilde{W}^{\AP}_{k,m,j}$]
+    \label{lemma:w_ap}
+    \begin{align}
+        &\tilde{W}^{\AP}_{k,m,j}\Paren{\Stat(t+1)} =
+        \Inorm{
+            \vecG{\Theta}^{(k, \Baseline)}_{m,j}(t+1) \times
+            \Bracket{
+                \mat{I} - \gamma \Gamma^{(k)}_{m,j}
+            }^{-1}
+        },
+        \label{w_ap}
+    \end{align}
+    where $\mat{I}$ is the identity matrix, and $\vecG{\Theta}^{(k, \Baseline)}_{m,j}(t)$ and $\Gamma^{(k)}_{m,j}$ are defined below.
+    \begin{itemize}
+        \item {$\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t) \define \Bracket{
+            \theta^{(k,\Baseline)}_{m,j}(0,t),
+            \theta^{(k,\Baseline)}_{m,j}(1,t),
+            \dots,
+            \theta^{(k,\Baseline)}_{m,j}(\Xi,t)
+            }$},
+        where 
+        \begin{align}
+            \theta^{(k)}_{m,j}(\xi,t) \define 
+            \begin{cases}
+                \lambda_{k,j} I[\omega_{k,j}(t)=m], & \xi=0
+                \\
+                \Pr\{R^{(k)}_{m,j}(\xi,t,0) = 1\}, & \text{otherwise}
+            \end{cases}
+        \end{align}
+        \item $\Gamma^{(k)}_{m,j} \in \mathbb{R}^{(\Xi+1)\times(\Xi+1)}$ denotes the transition matrix whose entries are provided in Appendix \ref{append_1}.
+    \end{itemize}
+\end{lemma}
+\begin{proof}
+    Please refer to Appendix \ref{append_1}.
+\end{proof}
+
+\begin{lemma}[Analytical Expression of $\tilde{W}^{\ES}_{m,j}$]
+    \label{lemma:w_es}
+    {\small
+    \begin{align}
+        &\tilde{W}^{\ES}_{m,j}\Paren{\Stat(t+1)}
+    = \sum_{i=0,\dots,\frac{\Xi}{T}} \gamma^{i} \mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) | \Stat(t+i)]
+    \nonumber\\
+    &~~~~~~~~~~~~+ \gamma^{\frac{\Xi}{T}} 
+    \vecG{\nu}({t+\frac{\Xi}{T}+1})
+    \Paren{
+        \mat{I} - \gamma \mat{P}^{\Baseline}_{m,j}(t)
+    }^{-1} \vec{g}',
+        \label{w_es}
+    \end{align}   
+    }
+    where $\vecG{\nu}_{m,j}(t)$, $\mat{P}_{m,j}(\beta_{m,j}(t))$, $\beta_{m,j}(t)$ and $\vec{g}$ are defined below.
+    \begin{itemize}
+        \item {\small
+        $\vecG{\nu}_{m,j}(t) \define [\Pr\{Q_{m,j}(t)=0\}, \dots, \Pr\{Q_{m,j}(t)=L_{max}\}]$
+        }.
+        \item $\vec{g} \in \mathbb{R}^{(L_{max}+1) \times 1}$, and its $i$-th entry is
+        \begin{align}
+            [\vec{g}]_{i} \define 
+            \begin{cases}
+                i, & i=0,1,\dots,L_{max}-1
+                \\
+                L_{max}+\beta, & \text{otherwise}
+            \end{cases}.
+            \label{eqn:g_vec}
+        \end{align}
+        \item The expression of $\mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) | \Stat(t+i)]$ is elaborated in Appendix \ref{append_2}.
+        \item $\mat{P}^{\Baseline}_{m,j}(t) \in \mathbb{R}^{(L_{max}+1) \times (L_{max}+1)}$ denotes the transition matrix under baseline policy $\Baseline$ whose entries are described in Appendix \ref{append_2}.
+    \end{itemize}   
+\end{lemma}
+\begin{proof}
+    Please refer to Appendix \ref{append_2}.
+\end{proof}
+
+\subsection{Distributed Action Update}
+\label{subsec:ap_alg}
+Although the optimal value function has been approximated via the baseline policy in the previous part, it is still infeasible for all the APs to solve the RHS of the Bellman's equations in a distributed manner with OSI and local \brlatency~only.
+This is because the evaluation of equation (\ref{w_ap}) and (\ref{w_es}) requires the knowledge of GSI and \brlatency~at all APs.
+Instead, it is feasible for part of APs to update their dispatching actions distributed and achieve a better performance compared with baseline policy.
+Hence, we first define the following sequence of AP subsets, where each subset are selected to update dispatching actions periodically.
+\begin{definition}[Subsets of Periodic Actions Update]
+    Let $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \ccSet$ be a sequence of subset, where each subset satisfies the following constraints
+    \begin{align}
+        &\bigcup_{n=0,\dots,N-1} \mathcal{Y}_{n} = \apSet
+        \\
+        \esSet_{y} \cap \esSet_{y'} &=\emptyset, y' \neq y~(\forall y',y \in \mathcal{Y}_{n}).
+    \end{align}
+\end{definition}
+For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could be decomposed of two subsets as $\set{1,3}$ and $\set{2}$.
+At the $t$-th broadcast interval, the APs in the subset indexed with $n \define t \pmod{N}$ update their dispatching actions, while the other APs keep the same dispatching actions as the previous broadcast interval.
+Hence, let 
+\begin{align}
+    \tilde{\mathcal{A}}_{y}(t) \define \Brace{\tilde{\omega}_{y,j}(t)\in \esSet_{y} \Big| \forall j\in\jSpace}
+\end{align}
+and 
+\begin{align}
+    \tilde{\mathcal{A}}(t) \define \Brace{\tilde{\mathcal{A}}_{y}(t) \Big| \forall y\in\mathcal{Y}_{n} }
+\end{align}
+be the aggregation of dispatching actions for the $y$-th AP and the APs in the subset $\mathcal{Y}_{n}$, respectively. Let
+\begin{align}
+    \hat{\mathcal{A}}(t) \define \Brace{\omega_{y,j}(t) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
+\end{align}
+be the aggregation of dispatching actions of the rest APs, which are the same as the previous broadcast interval.
+At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}_{y}(t)$ ($\forall y\in\mathcal{Y}_{n}$) at the RHS of the Bellman's equations can be rewritten as the following problem.
+{\small
+\begin{align}
+    \textbf{P2:}~
+    \min_{ \tilde{\mathcal{A}}(t) }
+    &\sum_{\Stat(t+1)} \Pr\Brace{
+        \Stat(t+1) \Big| \Stat(t), \tilde{\mathcal{A}}(t), \hat{\mathcal{A}}(t)
+    } \cdot W_{\Baseline}\Paren{\Stat(t+1)},
+\end{align}
+}
+
+Moreover, we have the following conclusion on the decomposition of P2.
+\begin{lemma}[]
+    The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs.
+    Specifically, the local optimization at the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) can be written as
+    \begin{align}
+        &\textbf{P3:}~
+        \min_{ \tilde{\mathcal{A}}_{y}(t) }
+        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \tilde{\mathcal{A}}_{y}(t) }}
+        \nonumber\\
+        &~~~~\sum_{j\in\jSpace,m\in\esSet_{y}} \Brace{
+            \tilde{W}^{\AP}_{y,m,j}\Paren{\Stat_{y}(t+1)}
+            +\tilde{W}^{\ES}_{m,j}\Paren{\Stat_{y}(t+1)}
+        }.
+        \label{eqn:partial}
+    \end{align} 
+    \label{lemma:w_partial}
+\end{lemma}
+\begin{proof}
+    At the $t$-th broadcast interval, the $y$-th AP in the subset $\mathcal{Y}_{n}$ updates its dispatching actions, which could only affect the future cost raised on itself and its corresponding \emph{candidate server set}, i.e., the part of its OSI.
+    Hence, it's obvious that the expression of equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) as illustrated in equation (\ref{eqn:partial}).
+\end{proof}
+
+The optimization of $\tilde{\mathcal{A}}_{y}(t)$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational complexity is $O(JMK)$ per AP.
+As a result, the overall algorithm of job dispatching is elaborated in Algorithm \ref{alg_1}.
+\begin{algorithm}[ht]
+    \caption{Online Alternative Actions Update Algorithm}\label{alg_1}
+    \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+    % \KwIn{$\Stat(t), \Delay(t)$}
+    % \KwOut{$\tilde{\mathcal{A}}(t)$}
+    Initialize $\tilde{\mathcal{A}}(0),\hat{\mathcal{A}}(0)$ with heuristic dispatching actions.\;
+    \For{$t=0,1,2,\dots$}{
+        \tcc{Get the index of the subset to update at $t$.}
+        $n \gets t \pmod{N}$\;
+        \tcc{Parallelly update the actions of APs in the subset $\mathcal{Y}_{n}$.}
+        \ForPar{$y \in \mathcal{Y}_{n}$}{
+            \tcc{Each AP observes its LSI asynchronously.}
+            The $y$-th AP observes $\Stat_{y}(t)$ after $\mathcal{D}_{y}(t)$.\;
+            \tcc{Then update actions by solving P3.}
+            $\tilde{\mathcal{A}}_{y}(t+1) \gets$ solving P3 with $\Stat_{y}(t), \mathcal{D}_{y}(t)$\;
+        }
+        \tcc{The other APs fix the actions as the previous interval.}
+        \ForPar{$y \not\in \mathcal{Y}_{n}$}{
+            \eIf{$y\in\mathcal{Y}_{n-1}$}{
+                $\hat{\mathcal{A}}_{y}(t+1) \gets \tilde{\mathcal{A}}_{y}(t)$
+            }
+            {
+                $\hat{\mathcal{A}}_{y}(t+1) \gets \hat{\mathcal{A}}_{y}(t)$
+            }
+        }
+        % \Return $\tilde{\mathcal{A}}(t+1)$\;
+    }
+\end{algorithm}
+
+As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
+At the $t$-th broadcast interval, the dispatching actions is given by
+\begin{align}
+    \tilde{\Policy}(\Stat(t), t) \define \tilde{\mathcal{A}}(t) \cup \hat{\mathcal{A}}(t).
+\end{align}
+This is because we choose different AP subset to update dispatching actions.
+Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
+
+\subsection{{Theoretical Analysis}}
+\label{subsec:analysis}
+Finally, we have the following conclusion on the performance of the above proposed algorithm.
+\begin{lemma}[Analytical Cost Upper Bound]
+    \label{lemma:bound}
+    Let $W_{\tilde{\Policy}}(\cdot)$ be the value function of the policy $\tilde{\Omega}$
+    \begin{align}
+        W_{\tilde{\Policy}}(\Stat) \define
+        \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
+            g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')} \Big| \Stat(1)=\Stat
+        },
+    \end{align}
+    we have
+    \begin{align}
+        V_{\Policy^*}(\Stat)
+        \leq W_{\tilde{\Policy}}(\Stat)
+        \leq W_{\Baseline}(\Stat),
+        \forall \Stat.
+    \end{align}
+\end{lemma}
+\begin{proof}
+    Please refer to Appendix \ref{append_3}.
+\end{proof}
+Therefore, the average system cost of the proposed algorithm is upper bounded by $W_{\Baseline}(\Stat)$ ($\forall \Stat$) which means it is always better than the baseline policy. 
+% The worst case could be upper bounded.
+%----------------------------------------------------------------------------------------%
+%----------------------------------------------------------------------------------------%

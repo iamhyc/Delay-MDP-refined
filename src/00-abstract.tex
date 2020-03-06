@@ -1,0 +1,12 @@
+\begin{abstract}
+    In this paper, we consider the distributed job dispatching problem in an edge computing network residing in a Metropolitan Area Network (MAN), where the job arrivals, uploading latency and computation time are all random.
+    Specifically, multiple access points (APs) collect jobs from the mobile users, and upload each job to one edge server according to the job type.
+    APs and edge servers periodically broadcast their local state information.
+    The signaling latency of broadcast information is also random, and the APs update their job dispatching strategy according to outdated and partially observable broadcast information.
+    We formulate the distributed optimization of job dispatching strategies at all the APs as a partially observable Markov decision process (POMDP), whose minimization objective is a discount measurement of job delivery and computation time.
+    The conventional solution for POMDP is impractical due to huge complexity.
+    In this paper, we propose a novel low-complexity solution framework to address the issue of algorithm complexity.
+    Specifically, we first derive the analytical expression of the approximate value function according to a baseline policy.
+    Based on it, the optimization of job dispatching strategy can be decoupled via an alternative policy iteration algorithm, so that the distributed policy iteration of each AP can be made according to the partially observable system state information.
+    Finally, an analytical performance lower bound is provided, despite of approximate MDP solution.
+\end{abstract}

@@ -1,0 +1,64 @@
+
+\section{Introduction}
+%NOTE: General Background of MEC and Motivation
+Edge computing is a promising solution for increasing computation-intensive and energy-hungry applications on mobile devices.
+Large amount of mobile devices can connect to the access points (APs) which functions as gateway to aggregate and offload jobs to the edge servers \cite{MEC-SURVEY}.
+The edge servers are deployed in closer proximity to APs than cloud infrastructure, which alleviate the communication overhead and enable offloading of time-sensitive jobs.
+However, the edge servers are always deployed with limited computation resources.
+The establishment of efficient cooperation among APs and edge servers is one of the major design challenges, given the network transmission latency and signaling overhead.
+
+%NOTE: Motivation with MAN
+We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
+The APs should collect jobs offloaded from the mobile users in its service area and make dispatching decisions for each job.
+The existing literature, such as \cite{tan-online,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}, usually assumed that the transmission latency of jobs is non-negligible but fixed in MAN.
+However, according to the MAN performance analysis research in \cite{MAN-LATENCY}, the transmission latency will vary a lot with respect to different hours of day and devices' locations in a MAN.
+This brings new challenges to the job dispatcher design in the edge computing network.
+Firstly, the centralized dispatcher design is discouraged with outdated system information and unpredictable signaling latency.
+Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random transmission latency causes the inconsistency of system information at different dispatchers.
+
+%NOTE: Our contributions
+In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP problem formulation and a novel low-complexity approximate MDP solution framework.
+Specifically, the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and hence each AP can only observe part of the system state with random latency.
+Our contributions in this new optimization scenario are summarized as follows.
+\begin{itemize}
+    \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs, where each AP collects the information only from the APs and edge servers in a close proximity and make dispatching decision with random signaling latency. We directly derive the expression of approximate value function and obtain distributed dispatching policy via alternative policy iteration. Thus, the complicated POMDP solution or value iteration is avoided. To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem under MDP framework.
+    \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP method, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
+\end{itemize}
+
+The remainder of this paper is organized as follows.
+In Section \ref{sec:review}, the related works are elaborated.
+In Section \ref{sec:model}, we illustrate the system model and the signaling model with random latency.
+In Section \ref{sec:formulation}, we formulate the global optimization of dispatching decisions at all APs as an POMDP.
+In Section \ref{sec:algorithm}, we introduce the novel low-complexity distributed solution framework for the above POMDP.
+The numerical analysis of the proposed solution is provided in Section \ref{sec:evaluation}, and the conclusion is drawn in Section \ref{sec:conclusion}.
+
+\section{Related Works}
+\label{sec:review}
+%NOTE: resource placement (cache-like problem), service migration
+There have been a number of works focusing on the resource allocation, job dispatching and service migration of edge computing system.
+For example, in \cite{TON19-WangSq}, the edge servers are one-to-one bound to the base stations (BSs), and the job migration could be applied according to users' mobility traces via the backhaul network connecting the BSs.
+However, according to a recent research \cite{INFOCOM19-WuC}, the resource re-allocation for running jobs on servers is hard to implement in practice, as it's hard for jobs migration among heterogeneous edge servers with different resource configurations.
+Hence, it might be more important to optimize the job dispatching strategy at their arrival time.
+
+%NOTE: single-agent dispatching, single UE/server
+There also have been a number of works considering the centralized job dispatching with instant and complete knowledge on the states of edge computing systems. For example, in order to minimize the average job response time in the worst case, the authors in \cite{tan-online} designed an online algorithm for job dispatching in edge computing systems with fixed offloading latency. In the scenario that BSs and edge servers are connected via software defined network (SDN), the authors in \cite{IOTJ18-FanQ} proposed a heuristic algorithm to dispatch the jobs to the closest edge servers according to geographical locations. When the jobs can be dispatched to either edge servers or cloud servers with fixed offloading latency, the authors in \cite{MASS18-MengZ} formulated job dispatching problem as an integer linear programming to minimize the total offloading latency.
+In the above works, a centralized dispatcher with complete and instant knowledge of the system status is assumed in the edge computing systems, which might be impractical.
+
+Hence, there are also some works considering the distributed job dispatching in edge computing systems. For example, in order to minimize a weighted sum of total energy consumption and uploading latency, the authors in \cite{ToN-Xuchen2016} proposed a distributed job dispatching algorithm based on game theory to achieve the Nash equilibrium. 
+Considering job migration at edge servers, the authors in \cite{ToN-xujie2018} optimized the edge computing performance in a distributed manner with limited energy resources via a congestion game framework.
+However, in the above works, the latency of information exchange among APs and edge servers is ignored.
+In fact, due to the complicated network traffic, this latency might be significant, and the staleness of system state information at the dispatcher of a edge computing systems should be considered.
+
+%NOTE: stale-information based multi-agent related works
+The staleness of information sharing among APs and edge servers may degrade the performance of the job dispatching algorithm in edge computing systems.
+To the best of our knowledge, there are very limited works investigating this issue.
+For example, the authors in \cite{JSAC17-LyuX} proposed a randomized policy via Lyapunov optimization approach to stabilize the queues in a MEC system with multiple IoT devices offloading jobs to one edge server, where \brlatency~is considered. 
+In \cite{TWC18-LyuX}, the above approach is applied to the scenario that mobile devices offload jobs to each others via D2D link.
+In the above two works, there is one centralized dispatcher in the system and the objective is to stabilize the transmission queues.
+Hence, the existence of \brlatency~may not raise significant challenge to the algorithm design with Lyapunov optimization.
+However, the design of distributed dispatchers with \brlatency~could be more challenging.
+For example, the signaling latencies at distributed dispatchers could be different, and the synchronization of them become infeasible.
+Furthermore, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observed system state information, instead of global state information.
+To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
+
+%----------------------------------------------------------------------------------------%
