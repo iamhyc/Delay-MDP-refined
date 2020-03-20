@@ -1,6 +1,7 @@
 \section{System Model}
 \label{sec:model}
-In this section, we elaborate the model of edge computing networks with random job arrivals, uploading latency and computation time, as well as the distributed job dispatching model with partially observable system state information at each AP.
+In this section, we elaborate the model of edge computing networks with random job arrivals, uploading latency and computation time,
+\hongyc{as well as the signaling model with periodic broadcast which introduce the job dispatching actions making under partially observable system state at each AP.}
 %----------------------------------------------------------------------------------------%
 \subsection{Network Model}
 \begin{figure*}[htp!]
@@ -39,24 +40,27 @@ It is assumed that the random uploading latency are independent for each job.
 Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), whose expectation is denoted as $u_{k,m,j}$.
 
 %NOTE: [processing process]
-There are $J$ parallel virtual machines (VMs) running on each edge server for processing the $J$ job types, respectively.
-For each job type, the uploaded jobs are computed in a First-Come-First-Serve (FCFS) manner.
-Hence, a processing queue with a maximum job number $L_{max}$ is established for each VM.
-The arrival jobs will be discarded when the processing queue is full.
-Furthermore, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online}, and assume that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
-\footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of notations. In fact, the proposed algorithm can be easily extended to other distributions.}
-with different expectations \cite{TOWC18-HuangKb}.
+\hongyc{(We adopt one reasonable and general VM-based computation environment support on the edge servers.)}\comments{There are $J$ parallel virtual machines (VMs) running on each edge server for processing the $J$ job types, respectively.}
+\hongyc{
+    we adopt the \emph{unrelated machines assumption} as in \cite{tan-online}, hence, the computation time of each VM is independently distributed.
+    Furthermore, we assume that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
+    \footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of notations. In fact, the proposed algorithm can be easily extended to other distributions.}
+    with different expectations \cite{TOWC18-HuangKb}.
+}
 Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, and $c_{m,j}$ is the expectation.
 Let $f_{m,j}$ be its probability mass function (PMF), we have
 \begin{align}
     f_{m,j}(x) \define (1-\frac{1}{c_{m,j}})^{x-1} \frac{1}{c_{m,j}}.
 \end{align}
+For each job type, the uploaded jobs are computed in a First-Come-First-Serve (FCFS) manner, and a processing queue with a maximum job number $L_{max}$ is established for each VM.
+The arrival jobs will be discarded when the processing queue is full.
 %----------------------------------------------------------------------------------------%
 
-\subsection{Periodic Broadcast of State Information}
+\subsection{Signaling Model with Periodic Broadcast}
 \label{subsec:broadcast}
+\hongyc{(Signaling information definition, then with inevitable signaling latencys)}
 In order to facilitate distributed dispatching for the APs, we refer to every $t_B$ time slots as a broadcast interval.
-As illustrated in Fig.\ref{fig:brd-timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its strategy of job dispatching when {observing} the broadcast LSIs {from some APs and edge servers. As a remark notice that the observed LSI may be outdated due to transmission latency among APs and edge servers.}
+As illustrated in Fig.\ref{fig:brd-timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its strategy of job dispatching when {observing} the broadcast LSI s {from some APs and edge servers. As a remark notice that the observed LSI may be outdated due to transmission latency among APs and edge servers.}
 The LSI at the APs and edge servers, global state information, and observed LSI at the APs are defined below.
 
 %NOTE: State and Broadcast Information for AP

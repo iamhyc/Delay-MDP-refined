@@ -4,6 +4,7 @@
 In this section, we formulate the optimization of job dispatching at all APs as a Markov decision process (MDP) problem.
 Since each AP update the job dispatching actions according to OSI instead of GSI, the MDP problem is a partially observable MDP (POMDP).
 Specifically, the individual dispatching policy of one AP, the system dispatching policy, and the cost function are first defined below.
+\hongyc{(explain the practical meaning why collecting cost per broadcast interval.)}
 
 \begin{definition}[Dispatching Policy]
     The individual policy of the $k$-th AP, denoted as $\Omega_{k}$ ($\forall k \in\apSet$), maps from its OSI $\Stat_{k}$ and its \brlatency~$\mathcal{D}_{k}$ to the dispatching action for each job type, i.e.,
