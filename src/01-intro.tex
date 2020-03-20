@@ -4,14 +4,14 @@
 Edge computing is a promising solution for increasing computation-intensive and energy-hungry applications on mobile devices.
 Large amount of mobile devices can connect to the access points (APs) which functions as gateway to aggregate and offload jobs to the edge servers \cite{MEC-SURVEY}.
 The edge servers are deployed in closer proximity to APs than cloud infrastructure, which alleviate the communication overhead and enable offloading of time-sensitive jobs.
-However, the edge servers are always deployed with limited computation resources.
-The establishment of efficient cooperation among APs and edge servers is one of the major design challenges, given the network transmission latency and signaling overhead.
+\comments{However, the edge servers are always deployed with limited computation resources.}\hongyc{(why? energy constraint? scaling?)}
+\hongyc{Hence, the} establishment of efficient cooperation among APs and edge servers is one of the major design challenges, \comments{given the network transmission latency and signaling overhead}\hongyc{(what the hell does th 'given' thing mean??)}.
 
 %NOTE: Motivation with MAN
 We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
 The APs should collect jobs offloaded from the mobile users in its service area and make dispatching decisions for each job.
 The existing literature, such as \cite{tan-online,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}, usually assumed that the transmission latency of jobs is non-negligible but fixed in MAN.
-However, according to the MAN performance analysis research in \cite{MAN-LATENCY}, the transmission latency will vary a lot with respect to different hours of day and devices' locations in a MAN.
+\comments{However, according to the MAN performance analysis research in \cite{MAN-LATENCY}, the transmission latency will vary a lot with respect to different hours of day and devices' locations in a MAN.}\hongyc{(referece is not enough)}
 This brings new challenges to the job dispatcher design in the edge computing network.
 Firstly, the centralized dispatcher design is discouraged with outdated system information and unpredictable signaling latency.
 Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random transmission latency causes the inconsistency of system information at different dispatchers.
@@ -21,6 +21,7 @@ In this paper, we would like to shed some lights on the above challenging distri
 Specifically, the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and hence each AP can only observe part of the system state with random latency.
 Our contributions in this new optimization scenario are summarized as follows.
 \begin{itemize}
+    \item \hongyc{(a dispatching scheme design aware of delayed information, with a specified periodic signaling model)}
     \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs, where each AP collects the information only from the APs and edge servers in a close proximity and make dispatching decision with random signaling latency. We directly derive the expression of approximate value function and obtain distributed dispatching policy via alternative policy iteration. Thus, the complicated POMDP solution or value iteration is avoided. To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem under MDP framework.
     \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP method, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
 \end{itemize}

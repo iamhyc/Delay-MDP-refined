@@ -1,6 +1,7 @@
 % \documentclass[journal, 12pt, onecolumn, draftclsnofoot]{IEEEtran} %JSAC 20'
 % \documentclass[sigconf]{acmart} %ACM Mobihoc 20'
-\documentclass[conference]{IEEEtran}
+% \documentclass[conference]{IEEEtran} %ICDCS 20'
+\documentclass[10pt,journal,compsoc]{IEEEtran} %TMC 20'
 % \IEEEoverridecommandlockouts
 \usepackage[linesnumbered,vlined,ruled]{algorithm2e}
 \usepackage{algorithmic}
@@ -51,7 +52,8 @@
 \DeclarePairedDelimiter{\Bracket}{\bigg[}{\bigg]}
 \DeclarePairedDelimiter{\Brace}{\bigg\{}{\bigg\}}
 %---------------------------------------------------------------%
-\newcommand{\fixit}[1]{{\color{red}{#1}}}
+\newcommand{\fixit}[1]{\textcolor{red}{#1}}
+\newcommand{\comments}[1]{\textcolor{blue}{#1}}
 \newcommand{\accept}[1]{#1}
 \newcommand{\deny}[1]{\st{#1}}
 \newcommand{\delete}[2]{}
@@ -70,8 +72,6 @@
 \newcommand{\Baseline}{\vecG{\Pi}}
 \newcommand{\algname}{Solver}
 
-\newcommand{\red}[1]{\textcolor{red}{#1}}
-\newcommand{\blue}[1]{\textcolor{blue}{#1}}
 \newcommand{\wangr}[1]{\textcolor{orange}{#1}}
 \newcommand{\hongyc}[1]{{\color{purple}{#1}}}
 \newcommand{\tann}[1]{\textcolor{blue}{#1}}
@@ -113,7 +113,7 @@
     \input{src/00-abstract}
     \input{src/01-intro}
     % \input{src/02a-background}
-    \input{src/02b-motivation}
+    % \input{src/02b-motivation}
 
     \input{src/03a-model}
     \input{src/03b-formulation}
