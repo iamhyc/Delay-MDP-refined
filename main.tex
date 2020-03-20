@@ -6,16 +6,25 @@
 \usepackage[linesnumbered,vlined,ruled]{algorithm2e}
 \usepackage{algorithmic}
 \usepackage{etoolbox}
-\usepackage{cite}
+\ifCLASSOPTIONcompsoc
+  % IEEE Computer Society needs nocompress option
+  % requires cite.sty v4.0 or later (November 2003)
+  \usepackage[nocompress]{cite}
+\else
+  % normal IEEE
+  \usepackage{cite}
+\fi
 % \usepackage[noend]{algpseudocode}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{mathtools}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{dcolumn}
-\usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage{soul}
-\usepackage{mathtools}
-\graphicspath{ {./images/} }
+\usepackage{array}
+\usepackage{blindtext}
 % \renewcommand{\algorithmicforall}{\textbf{for all}}
 %---------------------------------------------------------------%
 \newtheorem{definition}{Definition}   % 
@@ -89,28 +98,40 @@
     }
 
     \author{
-        \IEEEauthorblockN{
-            Yuncong Hong\IEEEauthorrefmark{1}\IEEEauthorrefmark{2},
-            Bojie Lv\IEEEauthorrefmark{1},
-            Rui Wang\IEEEauthorrefmark{1},
-            Haisheng Tan\IEEEauthorrefmark{3},
-            Zhenhua Han\IEEEauthorrefmark{2},
-            Francis C.M. Lau\IEEEauthorrefmark{2}
-        }
-        \IEEEauthorblockA{\IEEEauthorrefmark{1}
-            Department of Electrical and Electronic Engineering, Southern University of Science and Technology, Shenzhen, China \\
-        }
-        \IEEEauthorblockA{\IEEEauthorrefmark{2}
-            Department of Computer Science, The University of Hong Kong, Hong Kong, China \\
-        }
-        \IEEEauthorblockA{\IEEEauthorrefmark{3}
-           LINKE Lab, University of Science and Technology of China, Hefei, China \\
-        }
-    }
+        Yuncong~Hong,~\IEEEmembership{Member,~IEEE,}
+        Bojie~Lv,~\IEEEmembership{Member,~IEEE,}
+        Rui~Wang,~\IEEEmembership{Member,~IEEE,}
+        Haisheng~Tan,~\IEEEmembership{Member,~IEEE,}
+        Zhenhua~Han,~\IEEEmembership{Member,~IEEE,}
+        and~Francis~C.M.~Lau,~\IEEEmembership{Member,~IEEE,}
+    }%
+    % \author{
+    %     \IEEEauthorblockN{
+    %         Yuncong Hong\IEEEauthorrefmark{1}\IEEEauthorrefmark{2},
+    %         Bojie Lv\IEEEauthorrefmark{1},
+    %         Rui Wang\IEEEauthorrefmark{1},
+    %         Haisheng Tan\IEEEauthorrefmark{3},
+    %         Zhenhua Han\IEEEauthorrefmark{2},
+    %         Francis C.M. Lau\IEEEauthorrefmark{2}
+    %     }
+    %     \IEEEauthorblockA{\IEEEauthorrefmark{1}
+    %         Department of Electrical and Electronic Engineering, Southern University of Science and Technology, Shenzhen, China \\
+    %     }
+    %     \IEEEauthorblockA{\IEEEauthorrefmark{2}
+    %         Department of Computer Science, The University of Hong Kong, Hong Kong, China \\
+    %     }
+    %     \IEEEauthorblockA{\IEEEauthorrefmark{3}
+    %        LINKE Lab, University of Science and Technology of China, Hefei, China \\
+    %     }
+    % }
+    % \thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
 
-    \maketitle
+    % \markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+    % {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Computer Society Journals}
 
     \input{src/00-abstract}
+    \maketitle
+    
     \input{src/01-intro}
     % \input{src/02a-background}
     % \input{src/02b-motivation}
@@ -122,9 +143,22 @@
     \input{src/05-evaluation}
     \input{src/06-conclusion}
 
-    % \clearpage
+    \input{src/99-appendix}
+    % \ifCLASSOPTIONcompsoc
+    %     % The Computer Society usually uses the plural form
+    %     \section*{Acknowledgments}
+    % \else
+    %     % regular IEEE prefers the singular form
+    %     \section*{Acknowledgment}
+    % \fi
+    % The authors would like to thank...
+
+    \ifCLASSOPTIONcaptionsoff
+        \newpage
+    \fi
+
     \bibliographystyle{IEEEtrans}
     \bibliography{references/final.bib}
 
-    \input{src/99-appendix}
+    \input{src/100-biography}
 \end{document}
