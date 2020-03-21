@@ -7,14 +7,16 @@
 \IEEEPARstart{E}{dge} computing is a promising solution for increasing computation-intensive and energy-hungry applications on mobile devices.
 Large amount of mobile devices can connect to the access points (APs) which functions as gateway to aggregate and offload jobs to the edge servers \cite{MEC-SURVEY}.
 The edge servers are deployed in closer proximity to APs than cloud infrastructure, which alleviate the communication overhead and enable offloading of time-sensitive jobs.
-\comments{However, the edge servers are always deployed with limited computation resources, compared with cloud servers.}
-\hongyc{Hence, the} establishment of efficient cooperation among APs and edge servers is one of the major design challenges, \comments{given the network transmission latency and signaling overhead}\hongyc{(what the hell does th 'given' thing mean??)}.
+However, the edge servers are always deployed with limited computation resources.
+The establishment of efficient cooperation among APs and edge servers is one of the major design challenges, \comments{given the signaling overhead introduced in signaling mechanism design.}
+%given the network transmission latency and signaling overhead
 
 %NOTE: Motivation with MAN
 We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
 The APs should collect jobs offloaded from the mobile users in its service area and make dispatching decisions for each job.
 The existing literature, such as \cite{tan-online,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}, usually assumed that the transmission latency of jobs is non-negligible but fixed in MAN.
-\comments{However, according to the MAN performance analysis research in \cite{MAN-LATENCY}, the transmission latency will vary a lot with respect to different hours of day and devices' locations in a MAN.}\hongyc{(referece is not enough)}
+However, according to the MAN performance analysis research in \cite{MAN-LATENCY}, the transmission latency will vary a lot with respect to different hours of day and devices' locations in a MAN.
+\hongyc{(referece is not enough)}
 This brings new challenges to the job dispatcher design in the edge computing network.
 Firstly, the centralized dispatcher design is discouraged with outdated system information and unpredictable signaling latency.
 Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random transmission latency causes the inconsistency of system information at different dispatchers.
