@@ -1,8 +1,8 @@
 \section{System Model}
 \label{sec:model}
 In this section, we elaborate the model of edge computing networks with random job arrivals, uploading latency and computation time,
-\comments{as well as the signaling model where APs and edge servers periodically braodcast }
-\hongyc{as well as the signaling model with periodic broadcast which introduce the job dispatching actions making under partially observable system state at each AP.}
+\comments{as well as the signaling mechanism with periodic broadcast.}
+% as well as the signaling model with periodic broadcast which introduce the job dispatching actions making under partially observable system state at each AP.
 %----------------------------------------------------------------------------------------%
 \subsection{Network Model}
 \begin{figure*}[htp!]
@@ -59,7 +59,7 @@ The arrival jobs will be discarded when the processing queue is full.
 
 \subsection{Signaling Model with Periodic Broadcast}
 \label{subsec:broadcast}
-\hongyc{(Signaling information definition, then with inevitable signaling latencys)}
+\hongyc{(Signaling information definition, then with inevitable signaling latency)}
 In order to facilitate distributed dispatching for the APs, we refer to every $t_B$ time slots as a broadcast interval.
 As illustrated in Fig.\ref{fig:brd-timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its strategy of job dispatching when {observing} the broadcast LSI s {from some APs and edge servers. As a remark notice that the observed LSI may be outdated due to transmission latency among APs and edge servers.}
 The LSI at the APs and edge servers, global state information, and observed LSI at the APs are defined below.
