@@ -1,7 +1,7 @@
 \section{System Model}
 \label{sec:model}
 In this section, we elaborate the model of edge computing networks with random job arrivals, uploading latency and computation time,
-\comments{as well as the signaling mechanism with periodic broadcast.}
+\hongyc{as well as the signaling mechanism with periodic broadcast.}
 % as well as the signaling model with periodic broadcast which introduce the job dispatching actions making under partially observable system state at each AP.
 %----------------------------------------------------------------------------------------%
 \subsection{Network Model}
@@ -15,8 +15,7 @@ In this section, we elaborate the model of edge computing networks with random j
 We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, which are connected in a network as illustrated in Fig.\ref{fig:system}.
 The sets of APs and edge servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{1,\dots,M}$, respectively.
 The communication latency among these APs and edge servers is random.
-Without loss of generality, it is assumed that there are $J$ types of jobs computed in this system, which are denoted via the set $\mathcal{J} \define \set{1,\dots,J}$.
-Each AP collects the computation jobs from the mobile users within its coverage, and makes decision on the processing edge servers for each job type.
+Each AP collects the computation jobs from the mobile users within its coverage, and makes dispatching action on the processing edge servers for each job.
 It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
 Let $\esSet_{k} \subseteq \esSet$ be the set of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the set of APs, which may upload jobs to the $m$-th edge server.
 We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, and $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server ($\forall k\in\apSet, m\in\esSet$).
@@ -25,7 +24,13 @@ In this edge computing network, each AP and edge server periodically broadcast t
 In this paper, we shall optimize the job dispatching strategy distributed at APs with partially collected state information{, where both job uploading and state information broadcasting suffer from random transmission latency.}
 
 %NOTE: [job space support and arrival process]
-The time axis is organized by time slots.
+\comments{
+    Without loss of generality, it is assumed that there are $J$ types of jobs computed in this system, which are denoted via the set $\jSpace \define \set{1,\dots,J}$.
+    \hongyc{
+        This implies that the resource allocation is fixed for some types of jobs supported in the edge computing system, which is not the optimization issue in this paper's consideration.
+    }
+    The time axis is organized by time slots.
+}
 The arrivals of the type-$j$ jobs at the $k$-th AP ($\forall k\in\apSet,j\in\jSpace$) in different time slots are assumed to be independent and identically distributed (i.i.d.) Bernoulli random variables, and the arrival probability is denoted as $\lambda_{k,j}$.
 Let $A_{k,j}(t) \in \set{0,1}$ represents the event of job arrival, where $A_{k,j}(t)=1$ means one type-$j$ job arrives at the $k$-th AP in the $t$-th time slot, and $A_{k,j}(t)=0$ means otherwise.
 Hence,
@@ -40,11 +45,11 @@ Moreover, due to the random traffic in the network, the job uploading from one A
 It is assumed that the random uploading latency are independent for each job.
 Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), whose expectation is denoted as $u_{k,m,j}$.
 
-%NOTE: [processing process]
-\hongyc{(We adopt one reasonable and general VM-based computation environment support on the edge servers.)}\comments{There are $J$ parallel virtual machines (VMs) running on each edge server for processing the $J$ job types, respectively.}
-\hongyc{
-    we adopt the \emph{unrelated machines assumption} as in \cite{tan-online}, hence, the computation time of each VM is independently distributed.
-    Furthermore, we assume that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
+%NOTE: [computation process]
+\comments{
+    For jobs computation process on edge server, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different edge servers would follow independent distribution.
+    Furthermore, there are $J$ parallel virtual machines (VMs) running on each edge server for processing the $J$ job types, respectively.
+    And we assume that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
     \footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of notations. In fact, the proposed algorithm can be easily extended to other distributions.}
     with different expectations \cite{TOWC18-HuangKb}.
 }
@@ -57,7 +62,7 @@ For each job type, the uploaded jobs are computed in a First-Come-First-Serve (F
 The arrival jobs will be discarded when the processing queue is full.
 %----------------------------------------------------------------------------------------%
 
-\subsection{Signaling Model with Periodic Broadcast}
+\subsection{\comments{Signaling Mechanism with Periodic Broadcast}}
 \label{subsec:broadcast}
 \hongyc{(Signaling information definition, then with inevitable signaling latency)}
 In order to facilitate distributed dispatching for the APs, we refer to every $t_B$ time slots as a broadcast interval.
