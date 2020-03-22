@@ -65,9 +65,10 @@ The arrival jobs will be discarded when the processing queue is full.
 
 \subsection{\comments{Signaling Mechanism with Periodic Broadcast}}
 \label{subsec:broadcast}
-\hongyc{(Signaling information definition, then with inevitable signaling latency)}
-In order to facilitate distributed dispatching for the APs, we refer to every $t_B$ time slots as a broadcast interval.
-As illustrated in Fig.\ref{fig:brd-timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its strategy of job dispatching when {observing} the broadcast LSI s {from some APs and edge servers. As a remark notice that the observed LSI may be outdated due to transmission latency among APs and edge servers.}
+In order to facilitate distributed dispatching for the APs, \comments{the signling mechanism with periodic broadcast is introduced.}
+We refer to every $t_B$ time slots as a broadcast interval.
+As illustrated in Fig.\ref{fig:brd-timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its dispatching strategy of job dispatching when observing the broadcast LSI s from some APs and edge servers.
+As a remark notice that the observed LSI may be outdated due to transmission latency among APs and edge servers.
 The LSI at the APs and edge servers, global state information, and observed LSI at the APs are defined below.
 
 %NOTE: State and Broadcast Information for AP
