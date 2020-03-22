@@ -27,10 +27,11 @@ In this paper, we shall optimize the job dispatching strategy distributed at APs
 \comments{
     Without loss of generality, it is assumed that there are $J$ types of jobs computed in this system, which are denoted via the set $\jSpace \define \set{1,\dots,J}$.
     \hongyc{
-        This implies that the resource allocation is fixed for some types of jobs supported in the edge computing system, which is not the optimization issue in this paper's consideration.
+        This implies that the resource allocation is fixed for some classified jobs, which is not the concern to optimize in this paper.
+        Hence, the dispatcher design in this paper could generalized to any edge-cloud model, with pre-defined resource allocation scheme.
     }
-    The time axis is organized by time slots.
 }
+The time axis is organized by time slots.
 The arrivals of the type-$j$ jobs at the $k$-th AP ($\forall k\in\apSet,j\in\jSpace$) in different time slots are assumed to be independent and identically distributed (i.i.d.) Bernoulli random variables, and the arrival probability is denoted as $\lambda_{k,j}$.
 Let $A_{k,j}(t) \in \set{0,1}$ represents the event of job arrival, where $A_{k,j}(t)=1$ means one type-$j$ job arrives at the $k$-th AP in the $t$-th time slot, and $A_{k,j}(t)=0$ means otherwise.
 Hence,
