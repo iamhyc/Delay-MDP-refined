@@ -156,35 +156,19 @@ Hence, we first define the following sequence of AP subsets, where each subset a
 For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could be decomposed of two subsets as $\set{1,3}$ and $\set{2}$.
 \comments{
     The subset slit is not trivial and should maximize the parallelism.
-    Aa heuristic algorithm is given as follows.
-    \begin{algorithm}[ht]
-        \caption{Subset Split Algorithm}\label{alg_0}
-        \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
-        % \KwIn{$\Stat(t), \Delay(t)$}
-        % \KwOut{$\tilde{\mathcal{A}}(t)$}
-        % Initialize $\tilde{\mathcal{A}}(0),\hat{\mathcal{A}}(0)$ with heuristic dispatching actions.\;
-        % \For{$t=0,1,2,\dots$}{
-        %     \tcc{Get the index of the subset to update at $t$.}
-        %     $n \gets t \pmod{N}$\;
-        %     \tcc{Parallelly update the actions of APs in the subset $\mathcal{Y}_{n}$.}
-        %     \ForPar{$y \in \mathcal{Y}_{n}$}{
-        %         \tcc{Each AP observes its LSI asynchronously.}
-        %         The $y$-th AP observes $\Stat_{y}(t)$ after $\mathcal{D}_{y}(t)$.\;
-        %         \tcc{Then update actions by solving P3.}
-        %         $\tilde{\mathcal{A}}_{y}(t+1) \gets$ solving P3 with $\Stat_{y}(t), \mathcal{D}_{y}(t)$\;
-        %     }
-        %     \tcc{The other APs fix the actions as the previous interval.}
-        %     \ForPar{$y \not\in \mathcal{Y}_{n}$}{
-        %         \eIf{$y\in\mathcal{Y}_{n-1}$}{
-        %             $\hat{\mathcal{A}}_{y}(t+1) \gets \tilde{\mathcal{A}}_{y}(t)$
-        %         }
-        %         {
-        %             $\hat{\mathcal{A}}_{y}(t+1) \gets \hat{\mathcal{A}}_{y}(t)$
-        %         }
-        %     }
-        % }
-    \end{algorithm}
+    An heuristic greedy algorithm is given as follows.
 }
+\begin{algorithm}[ht]
+    \caption{Subset Split Algorithm}\label{alg_0}
+    \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+    \KwIn{$\apSet, \esSet_{k}$ ($\forall k\in\apSet$)}
+    \KwOut{$\set{ \mathcal{Y}_{n} }$}
+    Initialize $\mathcal{Y}_{n} = \set{n}$ ($\forall n\in\apSet$).\;
+    \While{$\exists \esSet_{\mathcal{Y}} \cap \esSet_{\mathcal{Y'}} \neq \Phi$}
+    {
+        merge two set with minimum intersection.\;
+    }
+\end{algorithm}
 
 At the $t$-th broadcast interval, the APs in the subset indexed with $n \define t \pmod{N}$ update their dispatching actions, while the other APs keep the same dispatching actions as the previous broadcast interval.
 Hence, let 
