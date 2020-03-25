@@ -113,9 +113,9 @@ The transition matrix $\hat{\mat{P}}_{m,j}(\hat{\beta}^{\Policy}_{m,j}(t,n))$ fo
     &\Bracket{ \hat{\mat{P}}_{m,j}(\hat{\beta}^{\Policy}_{m,j}(t,n)) }_{a,b} =
     \nonumber\\
     &\begin{cases}
-        (1/c_{m,j})(1-\hat{\beta}^{\Policy}_{m,j}(t,n)), & j=i-1 \\
-        (1-1/c_{m,j})\hat{\beta}^{\Policy}_{m,j}(t,n), & j=i+1 \\
-        (1/c_{m,j})\hat{\beta}^{\Policy}_{m,j}(t,n) + (1-1/c_{m,j})(1-\hat{\beta}^{\Policy}_{m,j}(t,n)), & i=j \\
+        (1/c_{m,j})(1-\hat{\beta}^{\Policy}_{m,j}(t,n)), & b=a-1 \\
+        (1-1/c_{m,j})\hat{\beta}^{\Policy}_{m,j}(t,n), & b=a+1 \\
+        (1/c_{m,j})\hat{\beta}^{\Policy}_{m,j}(t,n) + (1-1/c_{m,j})(1-\hat{\beta}^{\Policy}_{m,j}(t,n)), & a=b \\
         0, &\text{otherwise}
     \end{cases}.
 \end{align}
