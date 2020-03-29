@@ -7,15 +7,17 @@ The sensitivity study on parameters is also applied to provide some insights on 
 
 \subsection{Experiment Setup}
 \label{subsec:setup}
-In the simulation, there are $K=5$ APs, $M=3$ edge servers and $J=5$ types of jobs in the system.
-\comments{The connection map between APs and edge servers is randomly generated.}
+\comments{
+    In the simulation, there are $K=15$ APs, $M=10$ edge servers and $J=10$ types of jobs in the system.
+    The \emph{candidate server set} of APs are randomly generated, which creates a connection map between APs and edge servers.
+}
 
 The time slot duration is 50 milliseconds and one broadcast interval consists of $t_{B}=20$ time slots, i.e., its duration is $1$ second.
 The \brlatency~is a discrete random variable with an integer support from $10$ to $16$ time slots.
 The maximum uploading latency is $3$ seconds, i.e., $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
 The expected computation time $c_{m,j}$ ($\forall m\in\esSet, j\in\jSpace$) is an integer uniformly generated in the range $[30,50]$ (with the unit of time slot) in each figure.
 
-Each queue for VMs on edge server is with maximum queue length $L_{max}=20$, i.e., there would be at most $100$ jobs on one edge server.
+Each queue for VMs on edge server is with maximum queue length $L_{max}=100$, i.e., there would be at most $100$ jobs on one edge server.
 The arrival rate in each time slot is uniformly generated from the range $[0.02, 0.03]$ for each job type at each AP in each figure.
 The discount factor $\gamma$ is $0.95$ and the penalty weight $\beta$ is $20$.
 % The arrival rate is taken as small probability with enough APs in the system, and correspondingly enough edge servers for the processing.
