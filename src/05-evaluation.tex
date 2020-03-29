@@ -37,7 +37,9 @@ We compare the proposed MDP policy with other three benchmarks which are listed 
     \item \textbf{Selfish Policy}:
             Always choose the edge server with the minimum sum of the expected uploading time and processing time;
     \item \textbf{Queue-aware Policy}:
-            Always choose the edge server with the minimum sum of expected uploading time, processing time and queueing time based on the observation of outdated queue states.
+            Always choose the edge server with the minimum sum of expected uploading time, processing time and queueing time based on the observation of outdated queue states;
+    \item \textbf{OnDisc}\needref{tan-ondisc}:
+            (Tan's online algorithm with no downling time, and expectation time as input)
 \end{itemize}
 Moreover, we choose the Selfish Policy as the initial dispatching action for our proposed algorithm (Algorithm \ref{alg_1}).
 %NOTE: Basic Performance
