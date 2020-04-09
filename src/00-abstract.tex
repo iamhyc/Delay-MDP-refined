@@ -5,9 +5,9 @@
         \comments{
             The signaling mechanism with periodic broadcast is introduced to facilitate cooperation among APs to minimize the global average job response time.
             % , where APs and edge server periodically broadcast their local state information.
-            The signaling latency is random and non-negligible in MAN, and the APs have to update their job dispatching strategies according to outdated and partially observable broadcast information.
+            The signaling latency is random and non-negligible in MAN, and the APs have to update their job dispatching strategies according to outdated broadcast information.
         }
-        Hence, We formulate the distributed optimization of job dispatching strategies at all the APs as a partially observable Markov decision process (POMDP), whose minimization objective is a discount measurement of job delivery and computation time.
+        Hence, we formulate the distributed optimization of job dispatching strategies at all the APs as a partially observable Markov decision process (POMDP), whose minimization objective is a discounted measurement of job delivery and computation time.
         The conventional solution for POMDP is impractical due to huge complexity.
         In this paper, we propose a novel low-complexity solution framework to address the issue of algorithm complexity.
         % Specifically, we first derive the analytical expression of the approximate value function according to a baseline policy.

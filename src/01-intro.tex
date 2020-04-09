@@ -15,10 +15,9 @@ The establishment of efficient cooperation among edge servers is one of the majo
 We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
 The APs should collect jobs offloaded from the mobile users in its service area and make dispatching decisions for each job.
 \comments{
-    The existing literature, such as \cite{tan-online,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}, usually assumed that the transmission latency of global system information sharing or dispatching decisions distributing is negligible and fixed in MAN.
-    \hongyc{
-        However, in the following literture \cite{TWC18-LyuX,latency-EDGE19}, the network transmission latency could be fluctuate in such extensive network.
-    }
+    The existing literature, such as \cite{tan-online,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}, usually assumed that the transmission latency cause of job offloading is non-negligible and fixed in the edge computing network.
+    Moreover, it would cause big problem with job dispatching decision making with random signaling overhead (because no work considering the practical dispatcher design).
+    In the following literature \cite{TWC18-LyuX,latency-EDGE19}, the network transmission latency could be fluctuate in such extensive network.
 }
 However, according to the MAN performance analysis research in \cite{MAN-LATENCY}, the transmission latency will vary a lot with respect to different hours of day and devices' locations in a MAN.
 This brings new challenges to the job dispatcher design in the edge computing network.
