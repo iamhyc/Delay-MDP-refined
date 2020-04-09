@@ -255,6 +255,15 @@ At the $t$-th broadcast interval, the dispatching actions is given by
 \end{align}
 This is because we choose different AP subset to update dispatching actions.
 Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
+\hongyc{
+    \begin{remark}[Scalability Analysis]
+        With similar connection ratio between APs and edge servers,
+        \begin{enumerate}
+            \item For one AP, algorithm complexity only relies on partially observable information;
+            \item The update interval would not change.
+        \end{enumerate}
+    \end{remark}
+}
 
 \subsection{{Theoretical Analysis}}
 \label{subsec:analysis}
