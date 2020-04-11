@@ -159,14 +159,16 @@ For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could b
     A heuristic greedy algorithm is given as follows.
 }
 \begin{algorithm}[ht]
-    \caption{Subset Split Algorithm}\label{alg_0}
+    \caption{Subset-Split Algorithm}\label{alg_0}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
     \KwIn{$\apSet, \esSet_{k}$ ($\forall k\in\apSet$)}
     \KwOut{$\set{ \mathcal{Y}_{n} }$}
     Initialize $\mathcal{Y}_{n} = \set{n}$ ($\forall n\in\apSet$).\;
-    \While{$\exists \esSet_{\mathcal{Y}} \cap \esSet_{\mathcal{Y'}} \neq \Phi$}
+    \While{$\exists \cup\set{ \esSet_{y}|y\in\mathcal{Y} } \bigcap \cup\set{ \esSet_{y'}|y'\in\mathcal{Y}' } \neq \Phi$}
     {
-        merge the two set with minimum candidate pairs.\;
+        Count number of disjoint sets of $y$-th subset ($\forall y$), denoted as $I_{n}$.\;
+        $\tilde{n} \gets \arg\min I_{n}$\;
+        merge subset $Y_{\tilde{n}}$ with one of other disjoint subsets.\;
     }
 \end{algorithm}
 
@@ -256,7 +258,7 @@ At the $t$-th broadcast interval, the dispatching actions is given by
 This is because we choose different AP subset to update dispatching actions.
 Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
 \hongyc{
-    \begin{remark}[Scalability Analysis]
+    \begin{remark}[Scalability Discussion]
         With similar connection ratio between APs and edge servers,
         \begin{enumerate}
             \item For one AP, algorithm complexity only relies on partially observable information;
