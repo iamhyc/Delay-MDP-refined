@@ -257,13 +257,13 @@ At the $t$-th broadcast interval, the dispatching actions is given by
 \end{align}
 This is because we choose different AP subset to update dispatching actions.
 Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
-\hongyc{
-    \begin{remark}[Scalability Discussion]
-        With similar connection ratio between APs and edge servers,
-        \begin{enumerate}
-            \item For one AP, algorithm complexity only relies on partially observable information;
-            \item The update interval would not change.
-        \end{enumerate}
+\comments{
+    \begin{remark}[Algorithm Scalability]
+        Given the partial information observation setting, the Algorithm \ref{alg_1} could be simply extended to massive deployed APs scenario, with respect to reasonable numbers of connected edge servers.
+        \hongyc{
+            We refer to \emph{connection ratio} as the average number of edge servers one AP would connect to in the edge computing system (concept borrowed from bipartite graph).
+            For Algorithm \ref{alg_0}, the update interval would be relatively stable when scaling . The simulation results support would be given in the Section \ref{subsec:basic}. 
+        }
     \end{remark}
 }
 
