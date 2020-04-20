@@ -201,17 +201,17 @@ Moreover, we have the following conclusion on the decomposition of P2.
 \begin{lemma}[]
     The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs.
     Specifically, the local optimization at the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) can be written as
-    \begin{align}
+    \small{\begin{align}
         &\textbf{P3:}~
         \min_{ \tilde{\mathcal{A}}_{y}(t) }
         \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \tilde{\mathcal{A}}_{y}(t) }}
         \nonumber\\
-        &~~~~\sum_{j\in\jSpace,m\in\esSet_{y}} \Brace{
-            \tilde{W}^{\AP}_{y,j}\Paren{\Stat_{y}(t+1)}
+        &~~~~\sum_{ j\in\jSpace,m\in\esSet_{y},k\in\ccSet_{y} } \Brace{
+            \tilde{W}^{\AP}_{k,j}\Paren{\Stat_{k}(t+1)}
             +\tilde{W}^{\ES}_{m,j}\Paren{\Stat_{y}(t+1)}
         }.
         \label{eqn:partial}
-    \end{align} 
+    \end{align} }
     \label{lemma:w_partial}
 \end{lemma}
 \begin{proof}
@@ -259,10 +259,10 @@ This is because we choose different AP subset to update dispatching actions.
 Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
 \comments{
     \begin{remark}[Algorithm Scalability]
-        Given the partial information observation setting, the Algorithm \ref{alg_1} could be simply extended to massive deployed APs scenario, with respect to reasonable numbers of connected edge servers.
+        Given the partial information observation setting, the Algorithm \ref{alg_1} could be simply extended to massive deployed APs scenario, with respect to reasonable \emph{candidate set} size for each AP.
         \hongyc{
-            We refer to \emph{connection ratio} as the average number of edge servers one AP would connect to in the edge computing system (concept borrowed from bipartite graph).
-            For Algorithm \ref{alg_0}, the update interval would be relatively stable when scaling . The simulation results support would be given in the Section \ref{subsec:basic}. 
+            We refer to \emph{connectivity degree} as the average number of edge servers one AP would connect to in the edge computing system, which is usually contrained by network and physical topology.
+            For Algorithm \ref{alg_1}, the update interval would be relatively stable when scaling . The simulation results support would be given in the Section \ref{subsec:basic}. 
         }
     \end{remark}
 }
