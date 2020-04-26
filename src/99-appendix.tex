@@ -173,11 +173,12 @@ where $\vec{g}$ is the cost vector taking the definition in equation (\ref{eqn:g
 Let 
 {\small
 \begin{align*}
-\Delta(t)\triangleq  
-\sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
-	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t-1)}
-	- 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t)}
-}
+    \Delta(t) \triangleq &
+    \sum_{t'=1}^{\infty} \gamma^{t'-1}\\\nonumber
+    &\mathbb{E}^{ \tilde{\Policy} } \Bracket{
+        g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t-1)}
+        -  g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t)}
+    }
 \end{align*}
 }
 denote the improvement of the $t$-th policy update.
