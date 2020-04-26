@@ -8,22 +8,18 @@ The sensitivity study on parameters is also applied to provide some insights on 
 \subsection{Experiment Setup}
 \label{subsec:setup}
 \comments{
-    The parameter settings are generated arbitrarily but following some basic rules.
-    \hongyc{
-        Firstly, stable system.
-        Secdon, same expectation without distribution assumed.
-        Hence, the fairness is achieved.
-        \begin{enumerate}
-            \item arbitrarily generated \emph{but} with same expectation, i.e. totally without distribution assumption;
-            \item arbitrarily generated with: summed average arrival \emph{smaller than} summed departure rate, for each job type.
-        \end{enumerate}
-    }    
-}
-\comments{
-    In the simulation, there are $K=15$ APs, $M=10$ edge servers and $J=10$ types of jobs in the system.
-    The \emph{candidate server set} of APs are randomly generated with \emph{connectivity degree} as $0.4$, which creates a connection map between APs and edge servers \hongyc{, given as follows}.
+    \begin{enumerate}
+        \item arbitrarily generated with: summed average arrival \emph{smaller than} summed departure rate, for each job type.
+    \end{enumerate}
 }
 
+\comments{
+    In the simulation, we assume that there are $K=15$ APs, $M=10$ edge servers and $J=10$ types of jobs in the system.
+    The \emph{connectivity degree} is set as $0.4$, i.e. each AP would have at most $4$ edge servers in its candidate set.
+    Without other specified, the bipartite graph between APs and edge servers is given as illustrated in Fig. \ref{fig:bar_plot}.
+}
+
+% The other parameter are generated arbitrarily without presumed distributions, but with same expectation.
 The time slot duration is 50 milliseconds and one broadcast interval consists of $t_{B}=20$ time slots, i.e., its duration is $1$ second.
 The \brlatency~is a discrete random variable with an integer support from $10$ to $16$ time slots.
 The maximum uploading latency is $3$ seconds, i.e., $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
@@ -52,8 +48,8 @@ We also propose \comments{three heuristic benchmarks to profile the perfomance o
             Always choose the edge server with the minimum sum of the expected uploading time and processing time;
     \item \textbf{Queue-aware Policy}:
             Always choose the edge server with the minimum sum of expected uploading time, processing time and queueing time based on the observation of outdated queue states;
-    \item \textbf{OnDisc}\cite{tan-online}:
-            (Tan's online algorithm with no downling time, weight with 1, and expectation time as input)
+    % \item \textbf{OnDisc}\cite{tan-online}:
+    %         (Tan's online algorithm with no downling time, weight with 1, and expectation time as input)
 \end{itemize}
 Moreover, we choose the Selfish Policy as the initial dispatching action for our proposed algorithm (Algorithm \ref{alg_1}).
 
