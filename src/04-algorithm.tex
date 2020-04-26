@@ -168,7 +168,7 @@ For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could b
     {
         Count number of disjoint sets of $y$-th subset ($\forall y$), denoted as $I_{n}$.\;
         $\tilde{n} \gets \arg\min I_{n}$\;
-        merge subset $Y_{\tilde{n}}$ with one of other disjoint subsets.\;
+        merge subset $Y_{\tilde{n}}$ with one of its disjoint subsets.\;
     }
 \end{algorithm}
 
@@ -257,16 +257,17 @@ At the $t$-th broadcast interval, the dispatching actions is given by
 \end{align}
 This is because we choose different AP subset to update dispatching actions.
 Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
-\comments{
-    \begin{remark}[Algorithm Scalability]
-        Given the partial information observation setting, the Algorithm \ref{alg_1} could be simply extended to massive deployed APs scenario, with respect to reasonable \emph{candidate set} size for each AP.
-        \hongyc{
-            We refer to \emph{connectivity degree} as the average number of edge servers one AP would connect to in the edge computing system, which is usually contrained by network and physical topology.
-            For Algorithm \ref{alg_1}, the update interval would be relatively stable when scaling both the number of APs and edge servers accordingly.
-            The simulation results support would be given in the Section \ref{subsec:basic}. 
-        }
-    \end{remark}
-}
+\begin{remark}[Algorithm Scalability]
+    \comments{
+        Given the partial information observation setting, the Algorithm \ref{alg_1} could be simply extended to massive deployed APs scenario as the sizes of \emph{candidate set} and \emph{conflict set} are always limited due to network topology.
+    }
+    
+    \comments{
+        Furthermore, we refer to \emph{connectivity degree} as the {candidate set} size of the AP.
+        For Algorithm \ref{alg_1}, the update interval would be relative constant with fixed \emph{connectivity degree} and reasonable numbers of APs and edge servers.
+        The simulation results support would be given in Section \ref{subsec:basic}. 
+    }
+\end{remark}
 
 \subsection{{Theoretical Analysis}}
 \label{subsec:analysis}

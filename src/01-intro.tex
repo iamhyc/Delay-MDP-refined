@@ -8,7 +8,7 @@
 Large amount of mobile devices can connect to the access points (APs) which functions as gateway to aggregate and dispatch jobs to the edge servers \cite{MEC-SURVEY}.
 The edge servers are deployed in closer proximity to APs than cloud infrastructure, which alleviate the communication overhead and enable computation of time-sensitive jobs.
 However, the edge servers are always deployed with limited computation resources.
-The establishment of efficient cooperation among edge servers is one of the major design challenges, \comments{given the signaling overhead introduced in signaling mechanism design.}
+The establishment of efficient cooperation among edge servers is one of the major design challenges, \comments{given the signaling overhead for distributed information exchange and decision making.}
 %given the network transmission latency and signaling overhead
 
 %NOTE: Motivation with MAN
@@ -18,7 +18,7 @@ The APs should collect jobs offloaded from the mobile users in its service area 
     According to the MAN performance analysis research in \cite{MAN-LATENCY}, the transmission latency will vary a lot with respect to different hours of day and devices' locations in a MAN.
     There has been existing literature considering random transmission latency in the edge computing network \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}.
     However, there are few works considering signaling overhead with coopeartion among distributed dispatchers \cite{tan-online,TWC18-LyuX}.
-    And it is a big problem with job dispatching decision making with random signaling overhead, considering the practical dispatcher design.
+    And it is a big problem with job dispatching decision making with random signaling overhead.
 }
 This brings new challenges to the job dispatcher design in the edge computing network.
 Firstly, the centralized dispatcher design is discouraged for outdated system information and unpredictable signaling latency.
