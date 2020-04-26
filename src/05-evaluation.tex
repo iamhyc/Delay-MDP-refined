@@ -8,18 +8,13 @@ The sensitivity study on parameters is also applied to provide some insights on 
 \subsection{Experiment Setup}
 \label{subsec:setup}
 \comments{
-    \begin{enumerate}
-        \item arbitrarily generated with: summed average arrival \emph{smaller than} summed departure rate, for each job type.
-    \end{enumerate}
-}
-
-\comments{
     In the simulation, we assume that there are $K=15$ APs, $M=10$ edge servers and $J=10$ types of jobs in the system.
     The \emph{connectivity degree} is set as $0.4$, i.e. each AP would have at most $4$ edge servers in its candidate set.
     Without other specified, the bipartite graph between APs and edge servers is given as illustrated in Fig. \ref{fig:bar_plot}.
 }
 
 % The other parameter are generated arbitrarily without presumed distributions, but with same expectation.
+arbitrarily generated with: summed average arrival \emph{smaller than} summed departure rate, for each job type.
 The time slot duration is 50 milliseconds and one broadcast interval consists of $t_{B}=20$ time slots, i.e., its duration is $1$ second.
 The \brlatency~is a discrete random variable with an integer support from $10$ to $16$ time slots.
 The maximum uploading latency is $3$ seconds, i.e., $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
