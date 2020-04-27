@@ -61,6 +61,19 @@ Moreover, we choose the Selfish Policy as the initial dispatching action for our
 %NOTE: Basic Performance
 \subsection{Performance Analysis}
 \label{subsec:basic}
+\comments{
+    Firstly, we show that our parallel update algorithm could outperform the serial polling policy update, with subset split in Algorithm \ref{alg_0}.
+    As illustradted in Fig.\ref{fig:update}.
+}
+%-----------------------------------------------------------------------------------------------%
+\begin{figure}[ht!]                                                                             %
+    \centering                                                                                  %
+    \includegraphics[width=0.45\textwidth]{update-compare.png}                     %
+    \caption{Compare of number of jobs in the system with parallel and serial policy update.}
+    \label{fig:update}                                                                %
+\end{figure}                                                                                    %
+%-----------------------------------------------------------------------------------------------%
+
 As illustrated in Fig.\ref{fig:bar_plot}(a), the proposed algorithm (MDP Policy) outperforms all the benchmarks in the average system cost.
 Moreover, the Queue-aware Policy has better performance than the other benchmarks due to its capability of adapting dispatching action according to the outdated observation of queueing state.
 More insights on the performance comparison are provided in Fig.\ref{fig:bar_plot}(b) and (c).
@@ -71,8 +84,6 @@ It is shown that the proposed policy can process the approximately the same numb
 Finally, an realization of job dispatching is illustrated in Fig.\ref{fig:general_timeline}, where the number of jobs in the system is plot versus the index of broadcast interval.
 It can be observed that the proposed policy manage to keep the number of jobs in lower level, compared with the benchmarks.
 This demonstrates its high dispatching efficiency.
-
-% \hongyc{(add one graph shows how number of subset increases with scale of APs and edge servers cluster.)}
 
 %-----------------------------------------------------------------------------------------------%
 \begin{figure}[ht!]                                                                             %
