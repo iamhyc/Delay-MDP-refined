@@ -62,8 +62,7 @@ Moreover, we choose the Selfish Policy as the initial dispatching action for our
 \subsection{Performance Analysis}
 \label{subsec:basic}
 \comments{
-    Firstly, we show that our parallel update algorithm could outperform the serial polling policy update, with subset split in Algorithm \ref{alg_0}.
-    As illustradted in Fig.\ref{fig:update}.
+    Firstly, as illustradted in Fig.\ref{fig:update}, we show that our parallel update algorithm could outperform the serial polling policy update (i.e., without subset split Algorithm \ref{alg_0}).
 }
 %-----------------------------------------------------------------------------------------------%
 \begin{figure}[ht!]                                                                             %
@@ -79,8 +78,10 @@ Moreover, the Queue-aware Policy has better performance than the other benchmark
 More insights on the performance comparison are provided in Fig.\ref{fig:bar_plot}(b) and (c).
 In the former figure, the average job response times, measuring the average number of broadcast intervals from job's arrival at one AP to the completeness of computation at one edge server, are compared.
 It can be observed that the proposed policy still outperforms all the benchmarks.
-In Fig.\ref{fig:bar_plot}(c), the job dropping rates, measuring the ratio of jobs dropped by edge servers due to queue overflow, are also compared.
-It is shown that the proposed policy can process the approximately the same number of jobs as Queue-aware Policy and Random Policy, while with the minimum average cost and job response time.
+\comments{
+    In Fig.\ref{fig:bar_plot}(c), the job dropping rates, measuring the ratio of jobs dropped by edge servers due to queue overflow, are also compared.
+    It is shown that the proposed policy can process the approximately the same number of jobs as Queue-aware Policy and Random Policy, while with the minimum average cost and job response time.
+}
 Finally, an realization of job dispatching is illustrated in Fig.\ref{fig:general_timeline}, where the number of jobs in the system is plot versus the index of broadcast interval.
 It can be observed that the proposed policy manage to keep the number of jobs in lower level, compared with the benchmarks.
 This demonstrates its high dispatching efficiency.
