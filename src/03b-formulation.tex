@@ -44,12 +44,13 @@ Hence, we define the cost function per broadcast interval as follows, \comments{
                 &~~~~~+ \beta \cdot I[Q_{m,j}(t,0)=L_{max}]
             },
     \end{align}
-    }where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, and $\beta$ is the weight of overflow penalty.
+    }
+    where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, and $\beta$ is the weight of overflow penalty.
+    \comments{
+        The cost function per broadcast interval could be taken as a uniform sampling of cost function per time slot.
+    }
 \end{definition}
 
-\comments{
-    The cost function per broadcast interval could be taken as a uniform sampling of cost function per time slot.
-}
 Since the job dispatching in one broadcast interval will affect the GSI of the following broadcast intervals, we should consider the joint minimization of the costs of all the broadcast intervals.
 Specifically, we consider the following discounted sum of the costs of all the broadcast intervals as the system objective.
 \begin{align}
