@@ -17,7 +17,7 @@ The APs should collect jobs offloaded from the mobile users in its service area 
 \comments{
     According to the MAN performance analysis research in \cite{MAN-LATENCY}, the transmission latency will vary a lot with respect to different hours of day and devices' locations in a MAN.
     There has been existing literature considering random transmission latency in the edge computing network \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}.
-    However, there are few works considering signaling overhead with coopeartion among distributed dispatchers \cite{tan-online,TWC18-LyuX}.
+    However, there are few works considering signaling overhead with cooperation among distributed dispatchers \cite{tan-online,TWC18-LyuX}.
     And it is a big problem with job dispatching decision making with random signaling overhead.
 }
 This brings new challenges to the job dispatcher design in the edge computing network.
@@ -30,7 +30,7 @@ Specifically, the signaling latency among APs and edge servers and job uploading
 Our contributions in this new optimization scenario are summarized as follows.
 \begin{itemize}
     \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs, where each AP collects the information only from the APs and edge servers in a close proximity and make dispatching decisions with random signaling latency. We directly derive the expression of approximate value function and obtain distributed dispatching policy via alternative policy iteration. Thus, the complicated POMDP solution or value iteration is avoided. To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem under MDP framework.
-    \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP method, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
+    \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
 \end{itemize}
 
 The remainder of this paper is organized as follows.
