@@ -6,7 +6,7 @@ Since each AP update the job dispatching actions according to OSI instead of GSI
 Specifically, the individual dispatching policy of one AP, the system dispatching policy, and the cost function are first defined below.
 
 \begin{definition}[Dispatching Policy]
-    The individual policy of the $k$-th AP, denoted as $\Omega_{k}$ ($\forall k \in\apSet$), maps from its OSI $\Stat_{k}$ and its \brlatency~$\mathcal{D}_{k}$ to the dispatching action for each job type, i.e.,
+    The individual dispatching policy of the $k$-th AP, denoted as $\Omega_{k}$ ($\forall k \in\apSet$), maps from its OSI $\Stat_{k}$ and its \brlatency~$\mathcal{D}_{k}$ to the dispatching action for each job type, i.e.,
     \begin{align}
         \Omega_{k} \Paren{ \Stat_{k}(t), \mathcal{D}_{k}(t) }
         &\define \mathcal{A}_{k}(t+1)
@@ -30,7 +30,7 @@ Specifically, the individual dispatching policy of one AP, the system dispatchin
 \end{definition}
 
 According to the Little's law \cite{Little1961}, the average response time per job, counting the number of broadcast intervals from job arrival to the accomplishment of computation, is proportional to the number of jobs in the system, given the job arrival rates at all the APs.
-Hence, we define the cost function per broadcast interval as follows, \comments{given the information contained in periodic broadcast.}
+Hence, we define the cost function per broadcast interval as follows, {given the information contained in periodic broadcast.}
 
 \begin{definition}[Cost Function per Broadcast Interval]
     The cost function of the $t$-th broadcast interval with GSI $\Stat(t)$ is defined as
@@ -46,7 +46,7 @@ Hence, we define the cost function per broadcast interval as follows, \comments{
     \end{align}
     }
     where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, and $\beta$ is the weight of overflow penalty.
-    \comments{
+    \deny{
         The cost function per broadcast interval could be taken as a uniform sampling of cost function per time slot.
     }
 \end{definition}
@@ -89,9 +89,11 @@ where the value function $V(\Stat(t))$ of the optimal policy $\Policy^{*}$ (if G
 \end{align}
 Moreover, the optimal policy $\Omega^{*}$ can be obtained by solving the right-hand-side (RHS) of the above Bellman's equations.
 
-However, it is infeasible to solve the above Bellman's equations in our problem {and achieve the performance of $\Policy^*$ in our problem.}
+However, it is infeasible to solve the above Bellman's equations {and achieve the performance of $\Policy^*$ in our considered dispatching system.}
 This is because each AP (say the $k$-th AP) only has the knowledge of its own OSI $\Stat_{k}(t)$ and local \brlatency~$\mathcal{D}_{k}(t)$.
 Thus, problem P1 is actually a POMDP.
-The general solution of POMDP is of huge complexity {as all the historical system states should be involved in the current system state} \cite{IJCAI03-NairR,IJCAI99-BoutilierC}.
-In this paper, we shall propose a novel low-complexity solution framework based on an analytical approximation of the value function $V(\cdot)$ and alternative actions update, where distributed job dispatching via the Bellman's equations becomes feasible even with OSI and local signaling latency.
+The general solution of POMDP is of huge complexity {as all the historical system states should be traced back in the current system state} \cite{IJCAI03-NairR,IJCAI99-BoutilierC}.
+In this paper, we shall propose a novel low-complexity solution framework based on an analytical approximation of the value function $V(\cdot)$ and alternative actions update, where distributed job dispatching via the Bellman's equations becomes feasible
+(the minimization at the RHS of equation (\ref{eqn:sp_0}) is solvable with the approximate value function)
+even with OSI and local signaling latency.
 %----------------------------------------------------------------------------------------%
