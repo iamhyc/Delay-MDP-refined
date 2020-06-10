@@ -2,19 +2,22 @@
 \label{sec:algorithm}
 
 In this section, we shall introduce a novel approximation method to decouple the centralized optimization on the RHS of the Bellman's equations in equation (\ref{eqn:sp_0}) to each AP for arbitrary system state.
-Specifically, the decoupling can be achieved via the following two steps:
+For the AP outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other APs.
+Thus, the optimization of their dispatching actions can be decoupled.
+On the other hand, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
+Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
+Hence, cooperative optimization of disaptching actions for the APs within the same conflict AP set is infeasible.
+\comments{In this section, we introduce an alternative algorithm to optimize the dispatching actions of one AP in a conflict AP set in each broadcast interval periodically, while other APs maintain their dispatching actions in the previous broadcast interval.}
+Specifically, the proposed distributed algorithm consists of the following two steps:
 %\hongyc{(move two steps adjacent in the following subsections)}
 \begin{enumerate}
     \item We first introduce a baseline policy, use its value function to approximate the value function of the optimal policy $\Policy^*$, and derive the analytical expression of the approximate value function for arbitrary GSI in Section \ref{subsec:baseline}.
-    \item With the approximate value function, the RHS of equation (\ref{eqn:sp_0}) can still not be solved for all the APs in the same broadcast interval.
-    This is because the GSI is partially available at the APs with random signaling latency.
-    Hence, an alternative action update algorithm, where only a subset of APs are selected to update their dispatching actions \comments{distributedly} in each broadcast interval, is proposed in Section \ref{subsec:ap_alg}.
-    Thus, in each broadcast interval, only the dispatching actions of the APs in the selected subset are optimized via the RHS of equation (\ref{eqn:sp_0}), and the AP subsets are different in different broadcast interval to make sure all the APs' dispatching actions can be updated periodically.
+    \item With the approximate value function, an alternative action update algorithm, where only a subset of APs are selected to update their dispatching actions distributedly in each broadcast interval, is proposed in Section \ref{subsec:ap_alg}.
     Moreover, the analytical performance bound is also derived in Section \ref{subsec:analysis}.
 \end{enumerate}
-{As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge on system state.
-These approaches cannot be used for POMDP.
-In our proposed approximate solution framework, however, we follow a similar two-step procedure but with novel techniques to solve the POMDP problem in P1: (1) find approximate value function, instead of solving the accurate value function V; (2) use alternative method to optimize the RHS of the Bellman's equation gradually, instead of simultaneous action optimization at all APs.}
+As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge on system state.
+In our proposed approximate solution framework, we extend this procedure to the POMDP problem in P1 by exploiting the structure of partially connected edge computing systems.
+To the best knowledge of authors, a POMDP can hardly be solved via the Bellman's equations with full knowledge of system state in the existing literature.
 
 \subsection{Baseline Policy and Approximate Value Function}
 \label{subsec:baseline}
@@ -23,21 +26,23 @@ Specifically, the baseline policy is elaborated below.
 
 \begin{policy}[Baseline Policy]
     In the baseline policy $\Baseline$, each AP fixes the target processing edge server for each job type as the previous broadcast interval. Specifically, at the $t$-th broadcast interval,
+    {\small
     \begin{align}
-        \Baseline(\Stat(t)) &\define \Bracket{ \Pi_{1}(\Stat_{1}(t)), \dots, \Pi_{K}(\Stat_{K}(t)) },
+        \Baseline\Paren{\Stat(t),\Delay(t)} &\define \Bracket{ \Pi_{1}(\Paren{\Stat_{1}(t),\Delay(t)}, \dots, \Pi_{K}\Paren{\Stat_{K}(t),\Delay(t)} },
     \end{align}
+    }
     where 
     \begin{align}
-        \Pi_{k}(\Stat_{k}(t)) &\define
-        \hat{\mathcal{A}}_{k}(t)
+        \Pi_{k}\Paren{\Stat_{K}(t),\Delay(t)} &\define
+        \hat{\mathcal{A}}_{k}(t+1)
         \nonumber\\
         &= \Brace{
-            \omega_{k,j}(t) \Big| \forall j\in\jSpace
+            \omega_{k,j}(t+1) \Big| \forall j\in\jSpace
         }, \forall k\in\apSet.
     \end{align}
 \end{policy}
 
-Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy, we shall approximate the value function of the optimal policy $V(\cdot)$ via $W_{\Baseline}$, i.e.,
+Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseline$, we shall approximate the value function of the optimal policy $V(\cdot)$ via $W_{\Baseline}$, i.e.,
 {\small
 \begin{align}
     &V\Paren{\Stat(t+1)} \approx W_{\Baseline}\Paren{\Stat(t+1)}
@@ -162,16 +167,16 @@ For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could b
     A heuristic greedy algorithm is given as follows.
 }
 \begin{algorithm}[ht]
-    \caption{Greedy Subset Split Algorithm}\label{alg_0}
+    \caption{Greedy Subset Partition Algorithm}\label{alg_0}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
-    \KwIn{$\apSet, \esSet_{k}$ ($\forall k\in\apSet$)}
-    \KwOut{$\set{ \mathcal{Y}_{n} }$}
-    Initialize $\mathcal{Y}_{n} = \set{n}$ ($\forall n\in\apSet$).\;
-    \While{$\exists \cup\set{ \esSet_{y}|y\in\mathcal{Y} } \bigcap \cup\set{ \esSet_{y'}|y'\in\mathcal{Y}' } \neq \Phi$}
+    \KwIn{$\apSet, \set{\esSet_{k}, \forall k\in\apSet}$ }
+    \KwOut{a subset partition $\set{ \mathcal{Y}_{n} }$}
+    Initialize a subset partition as $\mathcal{Y}_{n} = \set{n}$ ($\forall n\in\apSet$).\;
+    \While{ $\exists \mathcal{Y}_a$ and $\mathcal{Y}_b$ ($a \neq b$), $\cup\set{ \esSet_{y}|y\in\mathcal{Y}_a } \bigcap \cup\set{ \esSet_{y}|y\in\mathcal{Y}_b } \neq \emptyset$ }
     {
-        Count number of disjoint sets of $y$-th subset ($\forall y$), denoted as $I_{n}$.\;
-        $\tilde{n} \gets \arg\min I_{n}$\;
-        merge subset $Y_{\tilde{n}}$ with one of its disjoint subsets.\;
+        Count number of subsets in the current subset partition which have disjoint candidate set with $\mathcal{Y}_a$ ($\forall a$), denoted the number as $I_{a}$.\;
+        $\tilde{n} \gets \arg\min_{a} I_{a}$\;
+        Merge the subset $Y_{\tilde{n}}$ with one of its disjoint subsets.\;
     }
 \end{algorithm}
 
@@ -222,7 +227,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
     Hence, it's obvious that the expression of equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) as illustrated in equation (\ref{eqn:partial}).
 \end{proof}
 
-The optimization of $\tilde{\mathcal{A}}_{y}(t)$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational complexity is $O(JMK)$ per AP.
+The optimization of $\tilde{\mathcal{A}}_{y}(t)$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational \comments{complexity is $O(JMK)$ per AP}.
 As a result, the overall algorithm of job dispatching is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
     \caption{Online Alternative Actions Update Algorithm}\label{alg_1}
