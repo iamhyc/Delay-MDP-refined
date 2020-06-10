@@ -48,7 +48,7 @@ Specifically, there are $J$ parallel virtual machines (VMs) running on each edge
 It is assumed that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
 \footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of algorithm. In fact, the proposed algorithm can be easily extended to other distributions.}
 with different expectations as in \cite{TOWC18-HuangKb}.
-Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, $c_{m,j}$ is the expectation, and \comments{$1/c_{m,j}$ represents the parameter of geometric distribution}.
+Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, $c_{m,j}$ is the expectation, and {$1/c_{m,j}$ represents the parameter of geometric distribution}.
 Let $f_{m,j}$ be its probability mass function (PMF), we have
 \begin{align}
     f_{m,j}(x) \define (1-\frac{1}{c_{m,j}})^{x-1} \frac{1}{c_{m,j}}.
