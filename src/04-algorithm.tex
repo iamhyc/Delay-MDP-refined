@@ -87,7 +87,7 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
     \end{align}
     where $\mat{I}$ is the identity matrix, and $\vecG{\Theta}^{(k, \Baseline)}_{m,j}(t)$ and $\Gamma^{(k)}_{m,j}$ are defined below.
     \begin{itemize}
-        \item {$\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t) \define \Bracket{
+        \item {\small $\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t) \define \Bracket{
             \theta^{(k,\Baseline)}_{m,j}(0,t),
             \theta^{(k,\Baseline)}_{m,j}(1,t),
             \dots,
@@ -153,19 +153,20 @@ Although the optimal value function has been approximated via the baseline polic
 This is because the evaluation of equation (\ref{w_ap}) and (\ref{w_es}) requires the knowledge of GSI and \brlatency~at all APs.
 Instead, it is feasible for part of APs to update their dispatching actions distributed and achieve a better performance compared with baseline policy.
 Hence, we first define the following sequence of AP subsets, where each subset are selected to update dispatching actions periodically.
-\begin{definition}[Subsets of Periodic Actions Update]
-    Let $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \ccSet$ be a sequence of subset, where each subset satisfies the following constraints
+\begin{definition}[Subsets Partition]
+    Let $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \ccSet$ be a \comments{collection} of subsets of AP set $\apSet$, which satisfy
     \begin{align}
         &\bigcup_{n=0,\dots,N-1} \mathcal{Y}_{n} = \apSet
+        \label{eqn:subset_cup}
         \\
         \esSet_{y} \cap \esSet_{y'} &=\emptyset, y' \neq y~(\forall y',y \in \mathcal{Y}_{n}).
+        \label{eqn:subset_disjoint}
     \end{align}
 \end{definition}
+The condition in equation (\ref{eqn:subset_cup}) is to ensure all the APs can update their dispatching actions periodically; whereas the condition in equation (\ref{eqn:subset_disjoint}) is to ensure APs in the conflict AP sets of each other will not update their dispatching actions in the same broadcast interval.
 For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could be decomposed of two subsets as $\set{1,3}$ and $\set{2}$.
-\comments{
-    The subset split is not trivial and should be applied to maximize the algorithm parallelism.
-    A heuristic greedy algorithm is given as follows.
-}
+The subset partition is not trivial and {a partition minimizing the update period $N$ is preferred}.
+A heuristic greedy algorithm is given as follows in Algorithm \ref{alg_0}.
 \begin{algorithm}[ht]
     \caption{Greedy Subset Partition Algorithm}\label{alg_0}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
