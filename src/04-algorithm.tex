@@ -184,26 +184,27 @@ A heuristic greedy algorithm is given as follows in Algorithm \ref{alg_0}.
 
 At the $t$-th broadcast interval, the APs in the subset indexed with $n \define t \pmod{N}$ update their dispatching actions, while the other APs keep the same dispatching actions as the previous broadcast interval.
 Hence, let 
-% \begin{align}
-%     \tilde{\mathcal{A}}_{y}(t) \define \Brace{\tilde{\omega}_{y,j}(t)\in \esSet_{y} \Big| \forall j\in\jSpace}
-% \end{align}
-% and 
 \begin{align}
-    \tilde{\mathcal{A}}(t) \define \Brace{ \tilde{\omega}_{y,j}(t)\in \esSet_{y} \Big| \forall y\in\mathcal{Y}_{n}, \forall j\in\jSpace }
+    \tilde{\mathcal{A}}_{y}(t) \define \Brace{\tilde{\omega}_{y,j}(t)\in \esSet_{y} \Big| \forall j\in\jSpace}
 \end{align}
-be the aggregation of dispatching actions for the APs in the subset $\mathcal{Y}_{n}$, and
+and 
+\begin{align}
+    \tilde{\mathcal{A}}(t) \define \Brace{ \tilde{\mathcal{A}}_{y}(t) \Big| \forall y\in\mathcal{Y}_{n} }
+\end{align}
+be the aggregation of dispatching actions for the $y$-th AP and the APs in the subset $\mathcal{Y}_{n}$, respectively.
+Let
 \begin{align}
     \hat{\mathcal{A}}(t) \define \Brace{\omega_{y,j}(t) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
 \end{align}
 be the aggregation of dispatching actions of the rest APs, which are the same as the previous broadcast interval.
-At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}_{y}(t)$ ($\forall y\in\mathcal{Y}_{n}$) at the RHS of the Bellman's equations can be rewritten as the following problem.
+At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ at the RHS of the Bellman's equations can be rewritten as the following problem.
 {\small
 \begin{align}
     \textbf{P2:}~
     \min_{ \tilde{\mathcal{A}}(t) }
     &\sum_{\Stat(t+1)} \Pr\Brace{
         \Stat(t+1) \Big| \Stat(t), \tilde{\mathcal{A}}(t), \hat{\mathcal{A}}(t)
-    } \cdot W_{\Baseline}\Paren{\Stat(t+1)},
+    } \cdot W_{\Baseline}\Paren{\Stat(t+1)}.
 \end{align}
 }
 
@@ -214,7 +215,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
     \small{\begin{align}
         &\textbf{P3:}~
         \min_{ \tilde{\mathcal{A}}_{y}(t) }
-        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \tilde{\mathcal{A}}_{y}(t) }}
+        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), {\mathcal{A}}_{y}(t) }}
         \nonumber\\
         &~~~~\sum_{ j\in\jSpace,m\in\esSet_{y},k\in\ccSet_{y} } \Brace{
             \tilde{W}^{\AP}_{k,j}\Paren{\Stat_{k}(t+1)}
@@ -236,7 +237,7 @@ As a result, the overall algorithm of job dispatching is elaborated in Algorithm
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
     % \KwIn{$\Stat(t), \Delay(t)$}
     % \KwOut{$\tilde{\mathcal{A}}(t)$}
-    Initialize $\tilde{\mathcal{A}}(0),\hat{\mathcal{A}}(0)$ with heuristic dispatching actions $\Policy$.\;
+    Initialize all the APs with heuristic dispatching actions $\set{\omega_{k,j}(0)|\forall k\in\apSet,j\in\jSpace}$.\;
     \For{$t=0,1,2,\dots$}{
         \tcc{Get the index of the subset to update at $t$.}
         $n \gets t \pmod{N}$\;
@@ -272,10 +273,10 @@ At the $t$-th broadcast interval, the dispatching actions is given by
 \begin{align}
     \tilde{\Policy}(\Stat(t), t) \define \tilde{\mathcal{A}}(t) \cup \hat{\mathcal{A}}(t).
 \end{align}
-This is because we choose different AP subset to update dispatching actions.
-Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
+% This is because we choose different AP subset to update dispatching actions.
+% Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
 
-Moreover since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to \comments{what what}, it can be deployed in a scenario with massive APs and edge servers, as long as the \comments{graph connective ratio} is limited.
+Moreover since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to \comments{what what}, it can be deployed in a scenario with massive APs and edge servers, as long as the \comments{"graph connective ratio"} is limited.
 
 \subsection{Analytical Performance Bound}
 \label{subsec:analysis}
@@ -305,7 +306,7 @@ This conclusion is summarized below.
     Please refer to Appendix \ref{append_3}.
 \end{proof}
 Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
-Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the \comments{static dispatching policy} is used as the baseline policy.
+Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.
 % the average system cost of the proposed algorithm is upper bounded by $W_{\Baseline}(\Stat)$ ($\forall \Stat$) which means it is always better than the baseline policy. 
 
 % \subsection{Scalability Analysis}
