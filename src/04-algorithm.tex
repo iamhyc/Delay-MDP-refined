@@ -2,12 +2,12 @@
 \label{sec:algorithm}
 
 In this section, we shall introduce a novel approximation method to decouple the centralized optimization on the RHS of the Bellman's equations in equation (\ref{eqn:sp_0}) to each AP for arbitrary system state.
-For the AP outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other APs.
+For the APs outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other APs.
 Thus, the optimization of their dispatching actions can be decoupled.
 On the other hand, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
 Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
 Hence, cooperative optimization of disaptching actions for the APs within the same conflict AP set is infeasible.
-\comments{In this section, we introduce an alternative algorithm to optimize the dispatching actions of one AP in a conflict AP set in each broadcast interval periodically, while other APs maintain their dispatching actions in the previous broadcast interval.}
+\comments{In this section,} we introduce an alternative algorithm to optimize the dispatching actions of one AP in a conflict AP set in each broadcast interval periodically, while other APs maintain their dispatching actions in the previous broadcast interval.
 Specifically, the proposed distributed algorithm consists of the following two steps:
 %\hongyc{(move two steps adjacent in the following subsections)}
 \begin{enumerate}
@@ -176,22 +176,22 @@ A heuristic greedy algorithm is given as follows in Algorithm \ref{alg_0}.
     Initialize a subset partition as $\mathcal{Y}_{n} = \set{n}$ ($\forall n\in\apSet$).\;
     \While{ $\exists \mathcal{Y}_a$ and $\mathcal{Y}_b$ ($a \neq b$), $\cup\set{ \esSet_{y}|y\in\mathcal{Y}_a } \bigcap \cup\set{ \esSet_{y}|y\in\mathcal{Y}_b } \neq \emptyset$ }
     {
-        Count number of subsets in the current subset partition which have disjoint candidate set with $\mathcal{Y}_a$ ($\forall a$), denoted the number as $I_{a}$.\;
-        $\tilde{n} \gets \arg\min_{a} I_{a}$\;
+        Count number of subsets in the current subset partition which have disjoint candidate set with $\mathcal{Y}_n$ ($\forall n$), denoted the number as $I_{n}$.\;
+        $\tilde{n} \gets \arg\min_{n} I_{n}$\;
         Merge the subset $Y_{\tilde{n}}$ with one of its disjoint subsets.\;
     }
 \end{algorithm}
 
 At the $t$-th broadcast interval, the APs in the subset indexed with $n \define t \pmod{N}$ update their dispatching actions, while the other APs keep the same dispatching actions as the previous broadcast interval.
 Hence, let 
+% \begin{align}
+%     \tilde{\mathcal{A}}_{y}(t) \define \Brace{\tilde{\omega}_{y,j}(t)\in \esSet_{y} \Big| \forall j\in\jSpace}
+% \end{align}
+% and 
 \begin{align}
-    \tilde{\mathcal{A}}_{y}(t) \define \Brace{\tilde{\omega}_{y,j}(t)\in \esSet_{y} \Big| \forall j\in\jSpace}
+    \tilde{\mathcal{A}}(t) \define \Brace{ \tilde{\omega}_{y,j}(t)\in \esSet_{y} \Big| \forall y\in\mathcal{Y}_{n}, \forall j\in\jSpace }
 \end{align}
-and 
-\begin{align}
-    \tilde{\mathcal{A}}(t) \define \Brace{\tilde{\mathcal{A}}_{y}(t) \Big| \forall y\in\mathcal{Y}_{n} }
-\end{align}
-be the aggregation of dispatching actions for the $y$-th AP and the APs in the subset $\mathcal{Y}_{n}$, respectively. Let
+be the aggregation of dispatching actions for the APs in the subset $\mathcal{Y}_{n}$, and
 \begin{align}
     \hat{\mathcal{A}}(t) \define \Brace{\omega_{y,j}(t) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
 \end{align}
