@@ -154,7 +154,7 @@ This is because the evaluation of equation (\ref{w_ap}) and (\ref{w_es}) require
 Instead, it is feasible for part of APs to update their dispatching actions distributed and achieve a better performance compared with baseline policy.
 Hence, we first define the following sequence of AP subsets, where each subset are selected to update dispatching actions periodically.
 \begin{definition}[Subsets Partition]
-    Let $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \ccSet$ be a \comments{collection} of subsets of AP set $\apSet$, which satisfy
+    Let $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \ccSet$ be a collection of subsets of AP set $\apSet$, which satisfy
     \begin{align}
         &\bigcup_{n=0,\dots,N-1} \mathcal{Y}_{n} = \apSet
         \label{eqn:subset_cup}
@@ -231,11 +231,11 @@ Moreover, we have the following conclusion on the decomposition of P2.
 The optimization of $\tilde{\mathcal{A}}_{y}(t)$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational \comments{complexity is $O(JMK)$ per AP}.
 As a result, the overall algorithm of job dispatching is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
-    \caption{Online Alternative Actions Update Algorithm}\label{alg_1}
+    \caption{\comments{Online Alternative Actions Update Algorithm}}\label{alg_1}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
     % \KwIn{$\Stat(t), \Delay(t)$}
     % \KwOut{$\tilde{\mathcal{A}}(t)$}
-    Initialize $\tilde{\mathcal{A}}(0),\hat{\mathcal{A}}(0)$ with heuristic dispatching actions.\;
+    Initialize $\tilde{\mathcal{A}}(0),\hat{\mathcal{A}}(0)$ with heuristic dispatching actions $\Policy$.\;
     \For{$t=0,1,2,\dots$}{
         \tcc{Get the index of the subset to update at $t$.}
         $n \gets t \pmod{N}$\;
@@ -259,6 +259,13 @@ As a result, the overall algorithm of job dispatching is elaborated in Algorithm
     }
 \end{algorithm}
 
+\comments{
+    Moreover, we use the following example to illustrate the procedure of Algorithm \ref{alg_1}.
+    \begin{example}
+        (Update procedure of algorithm two)
+    \end{example}   
+}
+
 As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
 At the $t$-th broadcast interval, the dispatching actions is given by
 \begin{align}
@@ -275,12 +282,16 @@ Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, 
     }
 \end{remark}
 
-\subsection{{Theoretical Analysis}}
+\subsection{Analytical Performance Bound}
 \label{subsec:analysis}
-Finally, we have the following conclusion on the performance of the above proposed algorithm.
+In most of the existing approximate MDO soultions \needref{(existing MDP work)}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
+In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate.
+Hence, the alternative dispatching action update can \comments{ensure to achieve} a better performance than the baseline policy.
+This conclusion is summarized below.
+% We have the following conclusion on the performance of the above proposed algorithm.
 \begin{lemma}[Analytical Cost Upper Bound]
     \label{lemma:bound}
-    Let $W_{\tilde{\Policy}}(\cdot)$ be the value function of the policy $\tilde{\Omega}$
+    Let $W_{\tilde{\Policy}}(\cdot)$ be the value function (average cost) of the proposed policy $\tilde{\Omega}$
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \define
         \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
