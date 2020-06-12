@@ -51,6 +51,7 @@ Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseli
         \sum_{k\in\apSet} \tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))
         +\tilde{W}^{\ES}_{m,j}(\Stat(t+1))
     },
+    \label{eqn:baseline}
 \end{align}
 }
 where $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs which are being transmitted from the $k$-th AP to the $m$-th edge server with the baseline policy $\Baseline$ and initial system state $\Stat(t+1)$, and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs on the $m$-th server.
@@ -273,14 +274,8 @@ At the $t$-th broadcast interval, the dispatching actions is given by
 \end{align}
 This is because we choose different AP subset to update dispatching actions.
 Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
-\begin{remark}[Algorithm Scalability]
-    \comments{
-        Given the partial information observation setting, the Algorithm \ref{alg_1} could be simply extended to massive deployed APs scenario as the sizes of \emph{candidate set} and \emph{conflict set} are always limited due to network topology.
-        Furthermore, we refer to \emph{connectivity degree} as the {candidate set} size of the AP.
-        For Algorithm \ref{alg_1}, the update interval would be relative constant with fixed \emph{connectivity degree} and reasonable numbers of APs and edge servers.
-        The simulation results support would be given in Section \ref{subsec:basic}. 
-    }
-\end{remark}
+
+Moreover since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to \comments{what what}, it can be deployed in a scenario with massive APs and edge servers, as long as the \comments{graph connective ratio} is limited.
 
 \subsection{Analytical Performance Bound}
 \label{subsec:analysis}
@@ -291,7 +286,7 @@ This conclusion is summarized below.
 % We have the following conclusion on the performance of the above proposed algorithm.
 \begin{lemma}[Analytical Cost Upper Bound]
     \label{lemma:bound}
-    Let $W_{\tilde{\Policy}}(\cdot)$ be the value function (average cost) of the proposed policy $\tilde{\Omega}$
+    Let $W_{\tilde{\Policy}}(\cdot)$ be the value function (average cost) of the proposed policy $\tilde{\Omega}$, i.e.,
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \define
         \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
@@ -300,7 +295,7 @@ This conclusion is summarized below.
     \end{align}
     we have
     \begin{align}
-        V_{\Policy^*}(\Stat)
+        V(\Stat)
         \leq W_{\tilde{\Policy}}(\Stat)
         \leq W_{\Baseline}(\Stat),
         \forall \Stat.
@@ -309,8 +304,9 @@ This conclusion is summarized below.
 \begin{proof}
     Please refer to Appendix \ref{append_3}.
 \end{proof}
-Therefore, the average system cost of the proposed algorithm is upper bounded by $W_{\Baseline}(\Stat)$ ($\forall \Stat$) which means it is always better than the baseline policy. 
-% The worst case could be upper bounded.
+Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
+Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the \comments{static dispatching policy} is used as the baseline policy.
+% the average system cost of the proposed algorithm is upper bounded by $W_{\Baseline}(\Stat)$ ($\forall \Stat$) which means it is always better than the baseline policy. 
 
 % \subsection{Scalability Analysis}
 % \hongyc{(append the subsection to show that scalability is good, when connection is uniform with APs and edge servers.)}
