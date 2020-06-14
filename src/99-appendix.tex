@@ -23,6 +23,9 @@ where
     \end{cases}.
 \end{align}
 }
+\comments{
+    Thus, $\hat{\theta}^{(k,\Policy)}_{m,j}(\xi,t,n)$ represents the probability that $\xi$ jobs are uploading from the $k$-th AP to the $m$-th edge server under dispatching policy $\Policy$, at the $n$-th time slot of the $t$-th broadcast interval.
+}
 The dispatching policy $\Policy$ only affects the first entry of the probability vector, i.e., the arrival probability of one job in the time slot.
 Hence, we denote the time-invariant and policy-independent transition matrix $\hat{\Gamma}^{(k)}_{m,j}$ for the state transition on AP between adjacent time slots which is defined below
 \begin{align}
@@ -52,7 +55,7 @@ Based on the previous definition in the time slot, the explicit definitions is g
 \end{align}
 % is composed of two-phase policy separated by $D_k(t)$, which is expressed as follows.
 
-Given that the cost raised on APs is approximated with baseline policy $\Baseline$, the AP (saying the $k$-th AP) would adopt the same dispatching actions as $\Baseline(\Stat(t))$ before and after $\mathcal{D}_{k}(t)$ time slots at the $t$-th broadcast interval.
+Given that the cost raised on APs is approximated via baseline policy $\Baseline$, the AP (saying the $k$-th AP) would adopt the same dispatching actions as $\Baseline(\Stat(t))$ before and after $\mathcal{D}_{k}(t)$ time slots at the $t$-th broadcast interval.
 Hence, we have
 \begin{align}
     \vecG{\Theta}^{(k,\Baseline)}_{m,j}(t+1) = \vecG{\Theta}^{(k,\Baseline)}_{m,j}(t) \times (\hat{\Gamma}^{(k)}_{m,j})^{t_B}.
@@ -169,7 +172,7 @@ where $\vec{g}$ is the cost vector taking the definition in equation (\ref{eqn:g
 
 \section{ Proof of Lemma \ref{lemma:bound} }
 \label{append_3}
- Since policy $\tilde{\Policy}$ is not optimal policy, $V_{\Policy^*}(\Stat) \leq W_{\tilde{\Policy}}(\Stat)$ is straightforward.
+ Since the proposed policy $\tilde{\Policy}$ is not optimal policy and $W_{\tilde{\Policy}}(\Stat)$ represents the average system cost with the proposed policy $\tilde{\Policy}$, $V(\Stat) \leq W_{\tilde{\Policy}}(\Stat)$ is straightforward.
 Let 
 {\small
 \begin{align*}
