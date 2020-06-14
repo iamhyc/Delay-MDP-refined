@@ -210,7 +210,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
         \min_{ \tilde{\mathcal{A}}(t) } \sum_{y\in\mathcal{Y}_{n}}
         \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), {\mathcal{A}}_{y}(t) }}
         \nonumber\\
-        &~~~~\sum_{ j\in\jSpace,m\in\esSet_{y},k\in\ccSet_{y} } \Brace{
+        &~~~~\sum_{ j\in\jSpace,m\in\esSet_{y} } \Brace{
             \tilde{W}^{\AP}_{k,j}\Paren{\Stat_{y}(t+1)}
             +\tilde{W}^{\ES}_{m,j}\Paren{\Stat_{y}(t+1)}
         }.
@@ -223,8 +223,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
     Hence, it's obvious that the expression of equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$), \comments{and linearly summed as illustrated in equation (\ref{eqn:partial})}.
 \end{proof}
 
-The optimization of \comments{collection of dispatching actions $\set{\hat{\omega}_{y,j}|\forall j\in\jSpace}$} for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, \comments{whose computational complexity is $O(JMK)$}.
-\comments{As a remark notice that (the computational complexity is constant).}
+The optimization of \comments{collection of dispatching actions $\set{\hat{\omega}_{y,j}|\forall j\in\jSpace}$} for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, \comments{whose computational complexity is $O(J|\mathcal{M}_{y}|)$}.
 As a result, the overall algorithm of job dispatching is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
     \caption{\comments{Online Alternative Actions Update Algorithm}}\label{alg_1}
@@ -275,7 +274,7 @@ Moreover since in Algorithm \ref{alg_1}, the computation complexity at each AP s
 
 \subsection{Analytical Performance Bound}
 \label{subsec:analysis}
-In most of the existing approximate MDO soultions \needref{(existing MDP work)}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
+In most of the existing approximate MDP soultions \needref{(existing MDP work)}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate.
 Hence, the alternative dispatching action update can \comments{ensure to achieve} a better performance than the baseline policy.
 This conclusion is summarized below.
