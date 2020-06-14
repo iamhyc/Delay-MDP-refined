@@ -255,28 +255,26 @@ As a result, the overall algorithm of job dispatching is elaborated in Algorithm
     }
 \end{algorithm}
 
-\comments{
-    Moreover, we use the following example to illustrate the procedure of Algorithm \ref{alg_1}.
-    \begin{example}
+Moreover, we use the following example to illustrate the procedure of Algorithm \ref{alg_1}.
+\begin{example}
+    \comments{
         (Update procedure of algorithm 2)
-    \end{example}   
-}
+    }
+\end{example}
 
 As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
 At the $t$-th broadcast interval, the dispatching actions is given by
 \begin{align}
     \tilde{\Policy}(\Stat(t), \Delay(t)) \define \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
 \end{align}
-% This is because we choose different AP subset to update dispatching actions.
-% Since the AP subsets are selected periodically, we have $\tilde{\Policy}(\Stat, t) = \tilde{\Policy}(\Stat, t+N), \forall \Stat,t$.
 
-Moreover since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to \comments{what what}, it can be deployed in a scenario with massive APs and edge servers, as long as the \comments{"graph connective ratio"} is limited.
+Moreover since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to \comments{the size of candidate edge server set}, it can be deployed in a scenario with massive APs and edge servers, as long as the \comments{the available number of edge servers for each AP} is limited.
 
 \subsection{Analytical Performance Bound}
 \label{subsec:analysis}
-In most of the existing approximate MDP soultions \needref{(existing MDP work)}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
+In most of the existing approximate MDP solutions\comments{(need ref)}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate.
-Hence, the alternative dispatching action update can \comments{ensure to achieve} a better performance than the baseline policy.
+Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
 This conclusion is summarized below.
 % We have the following conclusion on the performance of the above proposed algorithm.
 \begin{lemma}[Analytical Cost Upper Bound]
