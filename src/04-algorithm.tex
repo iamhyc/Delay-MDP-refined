@@ -33,9 +33,9 @@ Specifically, the baseline policy is elaborated below.
     }
     where
     \begin{align}
-        \Pi_{k}\Paren{\Stat_{K}(t),\Delay(t)} % &\define \hat{\mathcal{A}}_{k}(t+1) \nonumber\\
+        \Pi_{k}\Paren{\Stat_{K}(t),\Delay(t)}
         &= \Brace{
-            \omega_{k,j}(t+1) \Big| \forall j\in\jSpace
+            \hat{\omega}_{k,j}(t+1) \Big| \forall j\in\jSpace
         }, \forall k\in\apSet.
     \end{align}
 \end{policy}
@@ -181,18 +181,13 @@ A heuristic greedy algorithm is given as follows in Algorithm \ref{alg_0}.
 \end{algorithm}
 
 At the $t$-th broadcast interval, the APs in the subset indexed with $n \define t \pmod{N}$ update their dispatching actions, while the other APs keep the same dispatching actions as the previous broadcast interval.
-Hence, let 
+Hence, let
 \begin{align}
-    \tilde{\mathcal{A}}_{y}(t) \define \Brace{\tilde{\omega}_{y,j}(t)\in \esSet_{y} \Big| \forall j\in\jSpace}
+    \tilde{\mathcal{A}}(t) \define \Brace{ \tilde{\omega}_{y,j}(t) \Big| \forall y\in\mathcal{Y}_{n},j\in\jSpace }
 \end{align}
-and 
+be the aggregation of dispatching actions the APs in the subset $\mathcal{Y}_{n}$, and
 \begin{align}
-    \tilde{\mathcal{A}}(t) \define \Brace{ \tilde{\mathcal{A}}_{y}(t) \Big| \forall y\in\mathcal{Y}_{n} }
-\end{align}
-be the aggregation of dispatching actions for the $y$-th AP and the APs in the subset $\mathcal{Y}_{n}$, respectively.
-Let
-\begin{align}
-    \hat{\mathcal{A}}(t) \define \Brace{\omega_{y,j}(t) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
+    \hat{\mathcal{A}}(t) \define \Brace{ \hat{\omega}_{y,j}(t) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
 \end{align}
 be the aggregation of dispatching actions of the rest APs, which are the same as the previous broadcast interval.
 At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ at the RHS of the Bellman's equations can be rewritten as the following problem.
@@ -216,7 +211,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
         \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), {\mathcal{A}}_{y}(t) }}
         \nonumber\\
         &~~~~\sum_{ j\in\jSpace,m\in\esSet_{y},k\in\ccSet_{y} } \Brace{
-            \tilde{W}^{\AP}_{k,j}\Paren{\Stat_{k}(t+1)}
+            \tilde{W}^{\AP}_{k,j}\Paren{\Stat_{y}(t+1)}
             +\tilde{W}^{\ES}_{m,j}\Paren{\Stat_{y}(t+1)}
         }.
         \label{eqn:partial}
@@ -262,7 +257,7 @@ As a result, the overall algorithm of job dispatching is elaborated in Algorithm
 \comments{
     Moreover, we use the following example to illustrate the procedure of Algorithm \ref{alg_1}.
     \begin{example}
-        (Update procedure of algorithm two)
+        (Update procedure of algorithm 2)
     \end{example}   
 }
 
