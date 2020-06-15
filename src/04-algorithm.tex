@@ -253,8 +253,9 @@ Moreover, we use the following example to illustrate the procedure of Algorithm 
     \label{exp:update}
     \comments{
        In Fig.\ref{fig:system}, the AP set $\apSet$ could be partitioned into two subsets which are denoted as $\mathcal{Y}_{0} = \set{1,3}$ and $\mathcal{Y}_{1} = \set{2}$, respectively.
-       As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3, while the AP in subset $\mathcal{Y}_{1}$ fix their actions.
-       Then in the $2$-nd interval, the AP in subset $\mathcal{Y}_{1}$ updates the dispatching actions while APs in subset $\mathcal{Y}_{0}$ fix the actions.
+       As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3 which consists of $\tilde{\mathcal{A}}(1)$, while the AP in subset $\mathcal{Y}_{1}$ fix its actions which consists of $\hat{\mathcal{A}}(1)$.
+       Then in the $2$-nd interval, the APs in subset $\mathcal{Y}_{0}$ in turn fix their actions $\tilde{\mathcal{A}}(1)$ which consists of $\hat{\mathcal{A}}(2)$, while 
+       the AP in subset $\mathcal{Y}_{1}$ updates the dispatching actions based on $\hat{\mathcal{A}}(1)$ which consists of $\tilde{\mathcal{A}}(2)$.
        This procedure repeats with the period $N=2$.
     }
     \begin{figure*}[htp!]
