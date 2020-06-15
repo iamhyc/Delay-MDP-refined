@@ -243,23 +243,26 @@ As a result, the overall algorithm of job dispatching is elaborated in Algorithm
         }
         $\tilde{\mathcal{A}}(t+1) \gets \set{\tilde{\omega}_{y,j}(t+1)|\forall y\in\mathcal{Y}_{n},j\in\jSpace}$\;
         \tcc{The other APs fix the actions as the previous interval.}
-        \ForPar{$y \not\in \mathcal{Y}_{n}$}{
-            \eIf{$y\in\mathcal{Y}_{n-1}$}{
-                $\hat{\mathcal{A}}_{y}(t+1) \gets \tilde{\mathcal{A}}_{y}(t)$
-            }
-            {
-                $\hat{\mathcal{A}}_{y}(t+1) \gets \hat{\mathcal{A}}_{y}(t)$
-            }
-        }
-        % \Return $\tilde{\mathcal{A}}(t+1)$\;
+        $\hat{\mathcal{A}}(t+1) \gets \hphantom{~~} \set{ \tilde{\omega}_{y,j}(t) | \forall y\in\mathcal{Y}_{n-1},j\in\jSpace }$\;
+        $\hphantom{~~~~~~~~~~~~~~~~~} \cup \set{ \hat{\omega}_{y,j}(t) | \forall y\notin\mathcal{Y}_{n-1},j\in\jSpace }$\;
     }
 \end{algorithm}
 
 Moreover, we use the following example to illustrate the procedure of Algorithm \ref{alg_1}.
 \begin{example}
+    \label{exp:update}
     \comments{
-        (Update procedure of algorithm 2)
+       In Fig.\ref{fig:system}, the AP set $\apSet$ could be partitioned into two subsets which are denoted as $\mathcal{Y}_{0} = \set{1,3}$ and $\mathcal{Y}_{1} = \set{2}$, respectively.
+       As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3, while the AP in subset $\mathcal{Y}_{1}$ fix their actions.
+       Then in the $2$-nd interval, the AP in subset $\mathcal{Y}_{1}$ updates the dispatching actions while APs in subset $\mathcal{Y}_{0}$ fix the actions.
+       This procedure repeats with the period $N=2$.
     }
+    \begin{figure*}[htp!]
+        \centering
+        \includegraphics[width=0.80\textwidth]{update-timeline.pdf}
+        \caption{The Illustration of Example \ref{exp:update}.}
+        \label{fig:update_timeline}
+    \end{figure*}
 \end{example}
 
 As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
