@@ -6,7 +6,7 @@ For the APs outside the conflict AP sets of each other, the update of dispatchin
 Thus, the optimization of their dispatching actions can be decoupled.
 On the other hand, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
 Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
-Hence, cooperative optimization of disaptching actions for the APs within the same conflict AP set is infeasible.
+Hence, cooperative optimization of dispatching actions for the APs within the same conflict AP set is infeasible.
 \comments{In this section,} we introduce an alternative algorithm to optimize the dispatching actions of one AP in a conflict AP set in each broadcast interval periodically, while other APs maintain their dispatching actions in the previous broadcast interval.
 Specifically, the proposed distributed algorithm consists of the following two steps:
 %\hongyc{(move two steps adjacent in the following subsections)}
@@ -259,7 +259,7 @@ Moreover, we use the following example to illustrate the procedure of Algorithm 
     }
     \begin{figure*}[htp!]
         \centering
-        \includegraphics[width=0.80\textwidth]{update-timeline.pdf}
+        \includegraphics[width=0.60\textwidth]{update-timeline.pdf}
         \caption{The Illustration of Example \ref{exp:update}.}
         \label{fig:update_timeline}
     \end{figure*}
