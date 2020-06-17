@@ -101,7 +101,7 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
             \end{cases}
         \end{align}
         denotes the probability that there is one type-$j$ job have been delivered from $k$-th AP to $m$-th edge server for $\xi$ time slots at the very beginning of the $t$-th broadcast interval, when the baseline policy $\Baseline$ is adopted;
-        \item $\Gamma^{(k)}_{m,j} \in \mathbb{R}^{(\Xi+1)\times(\Xi+1)}$ denotes the transition matrix of $\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t)$ whose entries are provided in Appendix \ref{append_1}.
+        \item $\Gamma^{(k)}_{m,j} \in \mathbb{R}^{(\Xi+1)\times(\Xi+1)}$ denotes the transition matrix of $\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t)$ ($\forall t$) under baseline policy $\Baseline$ whose entries are provided in Appendix \ref{append_1}.
     \end{itemize}
 \end{lemma}
 \begin{proof}
@@ -116,9 +116,9 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
     = \sum_{i=0,\dots,\frac{\Xi}{T}} \gamma^{i} \mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) | \Stat(t+i)]
     \nonumber\\
     &~~~~~~~~~~~~+ \gamma^{\frac{\Xi}{T}} 
-    \vecG{\nu}({t+\frac{\Xi}{T}+1})
+    \vecG{\nu}_{m,j}({t+\frac{\Xi}{T}+1})
     \Paren{
-        \mat{I} - \gamma \mat{P}^{\Baseline}_{m,j}(t)
+        \mat{I} - \gamma \mat{P}^{\Baseline}_{m,j}(t+\frac{\Xi}{T}+1)
     }^{-1} \vec{g}',
         \label{w_es}
     \end{align}   
@@ -127,8 +127,8 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
     \begin{itemize}
         \item {\small
         $\vecG{\nu}_{m,j}(t) \define [\Pr\{Q_{m,j}(t)=0\}, \dots, \Pr\{Q_{m,j}(t)=L_{max}\}]$
-        }.
-        \item $\vec{g} \in \mathbb{R}^{(L_{max}+1) \times 1}$, and its $i$-th entry is
+        } denotes the PMF (probability mass function) vector of $Q_{m,j}(t)$.
+        \item $\vec{g} \in \mathbb{R}^{(L_{max}+1) \times 1}$ denotes the cost vector of edge server, and its $i$-th entry is
         \begin{align}
             [\vec{g}]_{i} \define 
             \begin{cases}
@@ -139,7 +139,7 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
             \label{eqn:g_vec}
         \end{align}
         \item The expression of $\mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) | \Stat(t+i)]$ is elaborated in Appendix \ref{append_2}.
-        \item $\mat{P}^{\Baseline}_{m,j}(t) \in \mathbb{R}^{(L_{max}+1) \times (L_{max}+1)}$ denotes the transition matrix under baseline policy $\Baseline$ whose entries are described in Appendix \ref{append_2}.
+        \item $\mat{P}^{\Baseline}_{m,j}(t) \in \mathbb{R}^{(L_{max}+1) \times (L_{max}+1)}$ denotes the transition matrix of $\vecG{\nu}_{m,j}(t)$ under baseline policy $\Baseline$ whose entries are described in Appendix \ref{append_2}.
     \end{itemize}   
 \end{lemma}
 \begin{proof}
@@ -183,11 +183,11 @@ A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
 At the $t$-th broadcast interval, the APs in the subset indexed with $n \define t \pmod{N}$ update their dispatching actions, while the other APs keep the same dispatching actions as the previous broadcast interval.
 Hence, let
 \begin{align}
-    \tilde{\mathcal{A}}(t) \define \Brace{ \tilde{\omega}_{y,j}(t) \Big| \forall y\in\mathcal{Y}_{n},j\in\jSpace }
+    \tilde{\mathcal{A}}(t) \define \Brace{ {\omega}_{y,j}(t) \Big| \forall y\in\mathcal{Y}_{n},j\in\jSpace }
 \end{align}
 be the aggregation of dispatching actions the APs in the subset $\mathcal{Y}_{n}$, and
 \begin{align}
-    \hat{\mathcal{A}}(t) \define \Brace{ \hat{\omega}_{y,j}(t) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
+    \hat{\mathcal{A}}(t) \define \Brace{ {\omega}_{y,j}(t) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
 \end{align}
 be the aggregation of dispatching actions of the rest APs, which are the same as the previous broadcast interval.
 At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ at the RHS of the Bellman's equations can be rewritten as the following problem.
