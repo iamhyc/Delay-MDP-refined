@@ -3,7 +3,6 @@
 In this section, we elaborate the model of edge computing networks with random job arrivals, uploading latency and computation time,
 as well as the signaling mechanism with periodic broadcast.
 % as well as the signaling model with periodic broadcast which introduce the job dispatching actions making under partially observable system state at each AP.
-\comments{(need a notation table somewhere)}
 %----------------------------------------------------------------------------------------%
 \subsection{Network Model}
 \begin{figure*}[htp!]
@@ -160,3 +159,21 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
     At the start of the $(t+1)$-th broadcast interval, it will firstly keep the previous actions, and then updates the actions $\mathcal{D}_{1}(t+1)$ time slots later based on $\Stat_{1}(t+1)$ which is denotes as $\mathcal{A}_{1}(t+2)$.
     The signaling latency $\mathcal{D}_1(t)$ and $\mathcal{D}_1(t+1)$ can be different.
 \end{example}
+
+\comments{
+    The major notations used throughout this paper are summarized as in Table \ref{table:symbols}.
+}
+\begin{table}[h!]
+    \centering
+    \caption{Table of major notations and their descriptions in this paper.}
+    \label{table:symbols}
+    \begin{tabular}{|c|c|}
+        \hline
+        Notation & Description \\
+        \hline\hline
+        $\mathcal{K}$   & AP set \\
+        $\mathcal{M}$   & Edge server set \\
+        $\mathcal{J}$   & Job types set \\
+        \hline
+    \end{tabular}
+\end{table}
