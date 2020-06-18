@@ -14,9 +14,9 @@ The sensitivity study on parameters is also applied to provide some insights on 
 }
 
 % arbitrarily generated with: summed average arrival \emph{smaller than} summed departure rate, for each job type.
-\comments{
+{
     The other parameters for signaling, job processing and uploading are generated arbitrarily following no presumed distributions.
-    Specifically, the job processing related parameters are chosen to satisfy the systam stability, i.e., the average arrival rate is always smaller than the departure rate on one edge server for each job type.
+    Specifically, the job processing related parameters are chosen to satisfy the system stability, i.e., the average arrival rate is always smaller than the departure rate on one edge server for each job type.
 }
 The \brlatency~is a discrete random variable with an integer support from $12$ to $20$ time slots.
 The maximum uploading latency is $3$ seconds, i.e., $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
@@ -51,7 +51,7 @@ The discount factor $\gamma$ is $0.95$ and the penalty weight $\beta$ is $30$.
 %-----------------------------------------------------------------------%
 
 %NOTE: Benchmark Elaboration
-We also propose \comments{three heuristic benchmarks to profile the perfomance of the proposed MDP policy}, which are listed as follows.
+We also propose {three heuristic benchmarks to profile the performance of the proposed MDP policy}, which are listed as follows.
 \begin{itemize}
     \item \textbf{Random Dispatching Policy}:
             Randomly choose a dispatching edge server in each time slot; 
@@ -66,13 +66,13 @@ Moreover, we choose the Selfish Policy as the initial dispatching action for our
 \subsection{Performance Analysis}
 \label{subsec:basic}
 \comments{
-    Firstly, as illustradted in Fig.\ref{fig:update}, we show that our parallel update algorithm could outperform the serial polling policy update (i.e., without subset split Algorithm \ref{alg_0}).
+    Firstly, as illustradted in Fig.\ref{fig:update}, we show that our parallel update algorithm could outperform the serial polling policy update (i.e., without subset partition Algorithm \ref{alg_0}).
 }
 %-----------------------------------------------------------------------------------------------%
 \begin{figure}[ht!]                                                                             %
     \centering                                                                                  %
     \includegraphics[width=0.45\textwidth]{the-update-compare.pdf}                              %
-    \caption{\comments{(not altered)} Compare of number of jobs in the system with parallel and serial policy update.}
+    \caption{Compare of number of jobs in the system with parallel and serial policy update.}
     \label{fig:update}                                                                %
 \end{figure}                                                                                    %
 %-----------------------------------------------------------------------------------------------%
@@ -94,7 +94,7 @@ This demonstrates its high dispatching efficiency.
 \begin{figure}[ht!]                                                                             %
     \centering                                                                                  %
     \includegraphics[width=0.45\textwidth]{41122-timeline-number-alter.pdf}                     %
-    \caption{\comments{(not altered)} Illustration of number of jobs on all the APs and edge servers versus index of broadcast interval.}
+    \caption{Illustration of number of jobs on all the APs and edge servers versus index of broadcast interval.}
     \label{fig:general_timeline}                                                                %
 \end{figure}                                                                                    %
 %-----------------------------------------------------------------------------------------------%
@@ -125,7 +125,7 @@ This demonstrates its high dispatching efficiency.
 \begin{figure}[hbt]                                                 %
     \centering                                                      %
     \includegraphics[width=0.45\textwidth]{Study-NumAPs.pdf}        %
-    \caption{\comments{(not altered)} Illustration of average system cost versus the number of APs.}
+    \caption{Illustration of average system cost versus the number of APs.}
     \label{fig:ss_scale}                                            %
 \end{figure}                                                        %
 %-------------------------------------------------------------------%
@@ -134,7 +134,7 @@ This demonstrates its high dispatching efficiency.
 \begin{figure}[hbt]                                                 %
     \centering                                                      %
     \includegraphics[width=0.45\textwidth]{Study-ProcDist.pdf}      %
-    \caption{\comments{(not altered)} Illustration of average system cost versus the processing time distributions.}
+    \caption{Illustration of average system cost versus the processing time distributions.}
     \label{fig:ss_dist}                                             %
 \end{figure}                                                        %
 %-------------------------------------------------------------------%
