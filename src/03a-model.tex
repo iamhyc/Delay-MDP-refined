@@ -161,27 +161,41 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
 \end{example}
 
 The major notations used throughout this paper are summarized as in Table \ref{table:symbols}.
-\begin{table}[hbtp]
+\begin{table}[htp!]
     % \footnotesize
     \centering
     \caption{Table of major notations and their descriptions in this paper.}
     \label{table:symbols}
-    \begin{tabulary}{1.0\linewidth}{|p{1.5cm}|L|}
+    \begin{tabulary}{1.0\linewidth}{|p{1.8cm}|L|}
         \hline
         Notation & Description \\
         \hline
-        $\mathcal{K}$               & AP set \\
-        $\mathcal{M}$               & Edge server set \\
-        $\mathcal{K}_{m}$           & The potential AP set of the $m$-th edge server \\
-        $\mathcal{M}_{k}$           & The candidate edge server set of the $k$-th AP \\
-        $\mathcal{J}$               & Job types set \\
-        $\lambda_{k,j}$             & The average arrival rate for the type-$j$ job on the $k$-th AP \\
-        $c_{m,j}$                   & The average computation time for the type-$j$ job on the $m$-th edge server \\
-        $R^{(k)}_{m,j}(\xi,t,n)$    & (descriptions) \\
-        $\omega_{k,j}(t)$           & (descriptions) \\
-        $\mathcal{A}_{k}$           & (descriptions) \\
-        $\hat{\mathcal{A}}$         & (descriptions) \\
-        $\tilde{\mathcal{A}}$       & (descriptions) \\
+        $\mathcal{K}$                   & AP set \\
+        $\mathcal{M}$                   & Edge server set \\
+        $\mathcal{K}_{m}$               & The potential AP set of the $m$-th edge server \\
+        $\mathcal{M}_{k}$               & The candidate edge server set of the $k$-th AP \\
+        $\ccSet$                        & (descriptions) \\
+        $\mathcal{J}$                   & Job types set \\
+        $\lambda_{k,j}$                 & The average arrival rate for the type-$j$ job on the $k$-th AP \\
+        $c_{m,j}$                       & The average computation time for the type-$j$ job on the $m$-th edge server \\
+        $L_{max}$                       & The maximum job number for each VM \\
+        $t_B$                           & The number of time slots of a broadcast interval \\
+        $\Xi$                           & The maximum uploading time for any job \\
+        $\xi$                           & The index of time slot of uploading time for one job \\
+        $\mathcal{R}_{k}(t)$            & (descriptions) \\
+        $\mathcal{Q}_{m}(t)$            & (descriptions) \\
+        $D_{k}(t)$                      & (descriptions) \\
+        $\Stat_{k}(t)$                  & (OSI) \\
+        $\Stat(t)$                      & (GSI) \\
+        $\omega_{k,j}(t)$               & (descriptions) \\
+        $\mathcal{A}_{k}$               & (descriptions) \\
+        $\Policy(\Stat(t),\Delay(t))$   & (descriptions) \\
+        $\Baseline(\Stat(t),\Delay(t))$ & (descriptions) \\
+        $\gamma$                        & (descriptions) \\
+        $\beta$                         & (descriptions) \\
+        $\hat{\mathcal{A}}$             & (descriptions) \\
+        $\tilde{\mathcal{A}}$           & (descriptions) \\
+        $\mathcal{Y}_{n}$               & (descriptions) \\
         \hline
     \end{tabulary}
 \end{table}
