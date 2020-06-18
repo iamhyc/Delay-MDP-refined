@@ -153,7 +153,7 @@ This is because the evaluation of equation (\ref{w_ap}) and (\ref{w_es}) require
 Instead, it is feasible for part of APs to update their dispatching actions distributedly in each broadcast interval and achieve a better performance compared with baseline policy.
 Hence, we first define the following sequence of AP subsets, where each subset are selected to update dispatching actions periodically.
 \begin{definition}[Subsets Partition]
-    Let $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \ccSet$ be a collection of subsets of AP set $\apSet$, which satisfy
+    Let $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \apSet$ be a collection of subsets of AP set $\apSet$, which satisfy
     \begin{align}
         &\bigcup_{n=0,\dots,N-1} \mathcal{Y}_{n} = \apSet
         \label{eqn:subset_cup}
@@ -185,7 +185,7 @@ Hence, let
 \begin{align}
     \tilde{\mathcal{A}}(t) \define \Brace{ {\omega}_{y,j}(t) \Big| \forall y\in\mathcal{Y}_{n},j\in\jSpace }
 \end{align}
-be the aggregation of dispatching actions the APs in the subset $\mathcal{Y}_{n}$, and
+be the aggregation of dispatching actions of the APs in the subset $\mathcal{Y}_{n}$, and
 \begin{align}
     \hat{\mathcal{A}}(t) \define \Brace{ {\omega}_{y,j}(t) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
 \end{align}

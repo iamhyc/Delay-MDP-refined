@@ -90,7 +90,7 @@ The LSI at the APs and edge servers, global state information, and observable st
     \begin{align}
         \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
     \end{align}
-    are referred as status of the type-$j$ job type uploading from the $k$-th AP to $m$-th edge server and the dispatching actions of the $k$-th AP at the start of the $t$-th broadcast interval, respectively.
+    are referred as status of the type-$j$ job type uploading from the $k$-th AP to $m$-th edge server and the dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
 \end{definition}
 
 %NOTE: State and Broadcast Information for Edge Server
@@ -156,7 +156,7 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
     In Fig.\ref{fig:brd_timeline}, the $2$-nd AP and $1$-st server are in the \emph{conflict AP set} and \emph{candidate server set} of the $1$-st AP, respectively.
     At the beginning of the $t$-th broadcast interval, the dispatching actions $\mathcal{A}_{1}(t)$ is adopted by the $1$-st AP.
     After $\mathcal{D}_{1}(t)$ time slots, it updates the dispatching actions to $\mathcal{A}_{1}(t+1)$ based on the OSI $\Stat_{1}(t)$.
-    At the start of the $(t+1)$-th broadcast interval, it will firstly keep the previous actions, and then updates the actions $\mathcal{D}_{1}(t+1)$ time slots later based on $\Stat_{1}(t+1)$ which is denotes as $\mathcal{A}_{1}(t+2)$.
+    At the beginning of the $(t+1)$-th broadcast interval, it will firstly keep the previous actions, and then updates the actions $\mathcal{D}_{1}(t+1)$ time slots later based on $\Stat_{1}(t+1)$ which is denotes as $\mathcal{A}_{1}(t+2)$.
     The signaling latency $\mathcal{D}_1(t)$ and $\mathcal{D}_1(t+1)$ can be different.
 \end{example}
 
@@ -186,17 +186,18 @@ The major notations used throughout this paper are summarized as in Table \ref{t
         $\mathcal{R}_{k}(t)$            & The LSI of the $k$-th AP at the beginning of the $t$-th broadcast interval \\
         $\mathcal{Q}_{m}(t)$            & The LSI of the $m$-th edge server at the beginning of the $t$-th broadcast interval \\
         $D_{k}(t)$                      & The \brlatency~for the $k$-th AP at the $t$-th broadcast interval \\
+        $\mathbb{D}(t)$                 & The vector of all \brlatency~ at the $t$-th broadcast interval \\
         $\Stat_{k}(t)$                  & The OSI of the $k$-th PA at the $t$-th broadcast interval \\
         $\Stat(t)$                      & The GSI at the $t$-th broadcast interval \\
-        $\omega_{k,j}(t)$               & (descriptions) \\
-        $\mathcal{A}_{k}$               & (descriptions) \\
-        $\Policy(\Stat(t),\Delay(t))$   & (descriptions) \\
-        $\Baseline(\Stat(t),\Delay(t))$ & (descriptions) \\
-        $\gamma$                        & (descriptions) \\
-        $\beta$                         & (descriptions) \\
-        $\hat{\mathcal{A}}$             & (descriptions) \\
-        $\tilde{\mathcal{A}}$           & (descriptions) \\
-        $\mathcal{Y}_{n}$               & (descriptions) \\
+        $\omega_{k,j}(t)$               & The dispatching action for type-$j$ job on the $k$-th AP at the beginning of $t$-th broadcast interval \\
+        $\mathcal{A}_{k}$               & The dispatching actions of the $k$-th AP at the beginning of $t$-th broadcast interval \\
+        $\Policy(\Stat(t),\Delay(t))$   & The aggregation of individual policy all APs \\
+        $\Baseline(\Stat(t),\Delay(t))$ & The proposed baseline policy \\
+        $\gamma$                        & The discount factor \\
+        $\beta$                         & The weight of overflow penalty \\
+        $\mathcal{Y}_{n}$               & The $n$-th subset partition in which the APs update their dispatching actions parallelly \\
+        $\tilde{\mathcal{A}}(t)$        & The aggregation of dispatching actions of the APs in the subset $\mathcal{Y}_{n}$, where $n \define t \pmod{N}$  \\
+        $\hat{\mathcal{A}}(t)$          & The aggregation of dispatching actions of the APs not in the subset $\mathcal{Y}_{n}$, where $n \define t \pmod{N}$ \\
         \hline
     \end{tabulary}
 \end{table}
