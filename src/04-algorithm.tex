@@ -35,7 +35,7 @@ Specifically, the baseline policy is elaborated below.
     \begin{align}
         \Pi_{k}\Paren{\Stat_{K}(t),\Delay(t)}
         &= \Brace{
-            \hat{\omega}_{k,j}(t+1) \Big| \forall j\in\jSpace
+            {\omega}_{k,j}(t+1) \Big| \forall j\in\jSpace
         }, \forall k\in\apSet.
     \end{align}
 \end{policy}
@@ -204,11 +204,11 @@ At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ a
 Moreover, we have the following conclusion on the decomposition of P2.
 \begin{lemma}[]
     The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs {for each subset partition}.
-    Specifically, {the local optimization for each AP (say the $y$-th AP) in the $n$-th subset ($\forall n$) can be written as} \comments{(symbols panic ...)}
+    Specifically, {the local optimization for each AP (say the $y$-th AP) in the $n$-th subset ($\forall n$) can be written as}
     \small{\begin{align}
         &\textbf{P3:}~
-        \min_{ \tilde{\mathcal{A}}_{y}(t) }
-        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), {\mathcal{A}}(t) }}
+        \min_{ \tilde{\mathcal{A}}_{y}(t+1) }
+        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \mathcal{A}_{y}(t), \tilde{\mathcal{A}}_{y}(t+1) }}
         \nonumber\\
         &~~~~\sum_{ j\in\jSpace,m\in\esSet_{y} } \Brace{
             \tilde{W}^{\AP}_{k,j}\Paren{\Stat_{y}(t+1)}
