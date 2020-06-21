@@ -33,7 +33,7 @@ Hence, we denote the time-invariant and policy-independent transition matrix $\h
           &                       & \ddots                & \ddots &                           \\
           & \text{\huge0}         &                       & \ddots & \bar{p}^{(k)}_{m,j,\Xi-1} \\
           &                       &                       &        & 0                         \\
-    \end{bmatrix}^{t_B},
+    \end{bmatrix},
 \end{align}
 where $\bar{p}^{(k)}_{m,j,\xi}$ denotes the probability of job still stay at the $k$-th AP in the next time slot as $\bar{p}^{(k)}_{m,j,\xi} = 1 - p^{(k)}_{m,j,\xi}$, and
 \begin{align}
@@ -41,7 +41,7 @@ where $\bar{p}^{(k)}_{m,j,\xi}$ denotes the probability of job still stay at the
 \end{align}
 denotes the probability of job offloading to the $m$-th edge server.
 
-Hence, let $\vecG{\Theta}^{(\Policy, k)}_{m,j}(t)$ and $\Gamma^{(k)}_{m,j}$ denotes the probability vector and transition matrix for the adjacent broadcast interval, respectively.
+Hence, let $\vecG{\Theta}^{(k, \Policy)}_{m,j}(t)$ and $\hat{\Gamma}^{(k)}_{m,j}$ denotes the probability vector and transition matrix for the adjacent broadcast interval, respectively.
 Based on the previous definition in the time slot, the explicit definitions is given as
 \begin{align}
     \vecG{\Theta}^{(\Policy, k)}_{m,j}(t) &\define \hat{\vecG{\Theta}}^{(\Policy, k)}_{m,j}(t,0)
