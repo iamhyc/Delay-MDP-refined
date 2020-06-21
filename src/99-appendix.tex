@@ -41,8 +41,8 @@ where $\bar{p}^{(k)}_{m,j,\xi}$ denotes the probability of job still staying at 
 \end{align}
 denotes the probability of job offloading to the $m$-th edge server.
 
-Hence, let ${\vecG{\Theta}}^{(k, \Policy)}_{m,j}(t)$ and ${\Gamma}^{(k)}_{m,j}$ denotes the probability vector and transition matrix for the adjacent broadcast interval, respectively.
-Based on the previous definitions at the scale of time slot, the expressions of $\vecG{\Theta}^{(\Policy, k)}_{m,j}(t)$ and the transition process between adjacent broadcast interval are given as follows.
+Hence, let ${\vecG{\Theta}}^{(k, \Policy)}_{m,j}(t)$ and ${\Gamma}^{(k)}_{m,j}$ denotes the probability vector and transition matrix for the adjacent broadcast intervals, respectively.
+Based on the previous definitions at the scale of time slot, the expressions of $\vecG{\Theta}^{(\Policy, k)}_{m,j}(t)$ and the transition process between adjacent broadcast intervals under policy $\Policy$ are given as follows.
 \begin{align}
     \vecG{\Theta}^{(k, \Policy)}_{m,j}(t) &\define \hat{\vecG{\Theta}}^{(k, \Policy)}_{m,j}(t,0),
     \\
@@ -105,8 +105,7 @@ Let $\hat{\vecG{\nu}}_{m,j}(t,n)$ denote the probability vector of $Q_{m,j}(t,n)
         \Pr\{Q_{m,j}(t,n)=0\}, \dots, \Pr\{Q_{m,j}(t,n)=L_{max}\}
     }.
 \end{align}
-}
-The transition matrix $\hat{\mat{P}}_{m,j}(\hat{\beta}^{\Policy}_{m,j}(t,n))$ for adjacent time slots is determined by $\hat{\beta}^{\Policy}_{m,j}(t,n)$ under policy $\Policy$, whose entries are elaborated as follows.
+}The transition matrix $\hat{\mat{P}}_{m,j}(\hat{\beta}^{\Policy}_{m,j}(t,n))$ for adjacent time slots is determined by $\hat{\beta}^{\Policy}_{m,j}(t,n)$ under policy $\Policy$, whose entries are elaborated as follows.
 {\small
 \begin{align}
     &\Bracket{ \hat{\mat{P}}_{m,j}(\hat{\beta}^{\Policy}_{m,j}(t,n)) }_{a,b} =
@@ -145,8 +144,7 @@ Let $\hat{\mat{P}}_{m,j}(\hat{\beta}^{\Baseline}_{m,j}(t,n))$ be the transition 
     \nonumber\\
     &= \sum_{k\in\apSet} \lambda_{k,j}I[\omega_{k,j}(t)=m] (\forall n),
 \end{align}
-}
-where $U_{k,m,j}$ denotes the random variable of job uploading latency.
+}where $U_{k,m,j}$ denotes the random variable of job uploading latency (with the unit of time slot).
 
 Let
 $\mat{P}^{\Baseline}_{m,j}(t) \define \big( \hat{\mat{P}}_{m,j}(\hat{\beta}^{\Baseline}_{m,j}(t,n)) \big)^{t_B}$
@@ -163,7 +161,7 @@ denote the transition matrix under baseline policy $\Baseline$ between adjacent 
     }^{-1} \vec{g}',
 \end{align}   
 }
-where $\vec{g}$ is the cost vector taking the definition in equation (\ref{eqn:g_vec}).
+where $\vec{g}$ is the cost vector whose definition is given in equation (\ref{eqn:g_vec}).
 %----------------------------------------------------------------------------------------%
 
 \section{ Proof of Lemma \ref{lemma:bound} }
