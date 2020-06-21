@@ -2,7 +2,7 @@
 \appendices
 \section{ Proof of Lemma \ref{lemma:w_ap} }
 \label{append_1}
-At the $n$-th time slot of the $t$-th broadcast interval, let $\hat{\vecG{\Theta}}^{(k,\Policy)}_{m,j}(t,n)$ denote the probability vector of job existence under dispatching policy $\Policy$ where the explicit definition is given as follows.
+At the $n$-th time slot of the $t$-th broadcast interval, let $\hat{\vecG{\Theta}}^{(k,\Policy)}_{m,j}(t,n)$ denote the probability vector of job existence under dispatching policy $\Policy$, and the explicit definition is given as follows.
 \begin{align}
     \hat{\vecG{\Theta}}^{(k,\Policy)}_{m,j}(t,n) \define \Bracket{
         \hat{\theta}^{(k,\Policy)}_{m,j}(0,t,n),
@@ -20,11 +20,11 @@ where
         \lambda_{k,j} I[\omega_{k,j}(t+1)=m], &\xi=0, n \geq \mathcal{D}_{k}(t) 
         \\
         \Pr\{R^{(k)}_{m,j}(\xi,t,n)=1\}, & \text{otherwise}
-    \end{cases}.
+    \end{cases}
 \end{align}
-}Thus, $\hat{\theta}^{(k,\Policy)}_{m,j}(\xi,t,n)$ represents the probability that $\xi$ jobs are uploading from the $k$-th AP to the $m$-th edge server under dispatching policy $\Policy$, at the $n$-th time slot of the $t$-th broadcast interval.
+}denotes the probability that $\xi$ jobs are in uploading from the $k$-th AP to the $m$-th edge server under dispatching policy $\Policy$, at the $n$-th time slot of the $t$-th broadcast interval.
 The dispatching policy $\Policy$ only affects the first entry of the probability vector, i.e., the arrival probability of one job in the time slot.
-Hence, we denote the time-invariant and policy-independent transition matrix $\hat{\Gamma}^{(k)}_{m,j}$ for the state transition on AP between adjacent time slots which is defined below
+Hence, we denote the time-invariant and policy-independent transition matrix $\hat{\Gamma}^{(k)}_{m,j}$ for the state transition on AP between adjacent time slots which is defined as follows.
 \begin{align}
     \hat{\Gamma}^{(k)}_{m,j} &\define
     \begin{bmatrix}
@@ -41,8 +41,8 @@ where $\bar{p}^{(k)}_{m,j,\xi}$ denotes the probability of job still stay at the
 \end{align}
 denotes the probability of job offloading to the $m$-th edge server.
 
-Hence, let $\vecG{\Theta}^{(k, \Policy)}_{m,j}(t)$ and $\hat{\Gamma}^{(k)}_{m,j}$ denotes the probability vector and transition matrix for the adjacent broadcast interval, respectively.
-Based on the previous definition in the time slot, the explicit definitions is given as
+Hence, let ${\vecG{\Theta}}^{(k, \Policy)}_{m,j}(t)$ and ${\Gamma}^{(k)}_{m,j}$ denotes the probability vector and transition matrix for the adjacent broadcast interval, respectively.
+Based on the previous definition in the time slot, the explicit definition of $\vecG{\Theta}^{(\Policy, k)}_{m,j}(t)$ is given as follows.
 \begin{align}
     \vecG{\Theta}^{(\Policy, k)}_{m,j}(t) &\define \hat{\vecG{\Theta}}^{(\Policy, k)}_{m,j}(t,0)
     \\
@@ -51,8 +51,7 @@ Based on the previous definition in the time slot, the explicit definitions is g
     \hat{\vecG{\Theta}}^{(k)}_{m,j}(t, \mathcal{D}_{k}(t)) &= \vecG{\Theta}_{m,j}(t) \times (\hat{\Gamma}^{(k)}_{m,j})^{\mathcal{D}_{k}(t)}.
 \end{align}
 % is composed of two-phase policy separated by $D_k(t)$, which is expressed as follows.
-
-Given that the cost raised on APs is approximated via baseline policy $\Baseline$, the AP (saying the $k$-th AP) would adopt the same dispatching actions as $\Baseline(\Stat(t))$ before and after $\mathcal{D}_{k}(t)$ time slots at the $t$-th broadcast interval.
+Given that the cost raised on APs are approximated via baseline policy $\Baseline$, the AP (saying the $k$-th AP) would adopt the same dispatching actions as $\Pi_{k}(\Stat_{k}(t), \mathcal{D}_{k})$ before and after $\mathcal{D}_{k}(t)$ time slots at the $t$-th broadcast interval.
 Hence, we have
 \begin{align}
     \vecG{\Theta}^{(k,\Baseline)}_{m,j}(t+1) = \vecG{\Theta}^{(k,\Baseline)}_{m,j}(t) \times (\hat{\Gamma}^{(k)}_{m,j})^{t_B}.
