@@ -100,22 +100,25 @@ This demonstrates its high dispatching efficiency.
 %-----------------------------------------------------------------------------------------------%
 
 \subsection{Sensitivity Study}
-\label{subsec:advance}  
-
+\label{subsec:advance}
 %-----------------------------------------------------------------------------------%
 \begin{figure*}[ht!]                                                                %
     \centering                                                                      %
-    \begin{tabular}{ccc}                                                            %
-        \includegraphics[width=0.30\textwidth]{LowPressure-d0.pdf}&                 %
-        \includegraphics[width=0.30\textwidth]{LowPressure-d1.pdf}&                 %
-        \includegraphics[width=0.30\textwidth]{LowPressure-d2.pdf}                  %
-        \\                                                                          %
-        {\small (a) Zero \brlatency} &                                                %
-        {\small (b) Signaling latency with Support $\set{10,11,\dots,16}$} &
-        {\small (c) Maximum \brlatency}                                             %
-    \end{tabular}                                                                   %
-    \caption{Algorithm Robustness versus Signaling Latency.}
-    \label{fig:ss_signal}                                                            %
+    \begin{minipage}[b]{0.30\textwidth}                                             %
+        \includegraphics[width=\textwidth]{the-delay-fixed-cdf.pdf} \\              %
+        {(a) Fixed \brlatency~as $15$}                                              %
+        \\ %NOTE: extra filling line                                                %
+    \end{minipage}                                                                  %
+    \begin{minipage}[b]{0.30\textwidth}                                             %
+        \includegraphics[width=\textwidth]{the-delay-normal-cdf.pdf} \\             %
+        {(b) Signaling latency with small support $\set{10,11,\dots,16}$}           %
+    \end{minipage}                                                                  %
+    \begin{minipage}[b]{0.30\textwidth}                                             %
+        \includegraphics[width=\textwidth]{the-delay-full-cdf.pdf} \\               %
+        {(c) Signaling latency with large support $\set{8,9,\dots,20}$}             %
+    \end{minipage}                                                                  %
+    \caption{Algorithm Robustness versus Signaling Latency.}                        %
+    \label{fig:ss_signal}                                                           %
 \end{figure*}                                                                       %
 %-----------------------------------------------------------------------------------%
 
