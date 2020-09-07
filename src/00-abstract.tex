@@ -1,14 +1,21 @@
 \IEEEtitleabstractindextext{
     \begin{abstract}
-        In this paper, we consider the distributed job dispatching problem in an edge computing network residing in a Metropolitan Area Network (MAN).
-        Specifically, multiple access points (APs) collect jobs from the mobile users, and upload each job to one edge server for computation.
+        In this paper, we investigate online distributed job dispatching in an edge computing system residing in a Metropolitan Are Network (MAN).
+        Specifically, job dispatchers are implemented on access points (APs) which collect jobs from mobile users and distribute each to a server at the edge or the cloud.
         A signaling mechanism with periodic broadcast is introduced to facilitate cooperation among APs.
-        The signaling and job dispatching latency is random and non-negligible in MAN, and the APs have to update their job dispatching strategies according to partially received and outdated broadcast information.
-        Hence, we formulate the distributed optimization of job dispatching strategies at all the APs as a partially observable Markov decision process (POMDP), whose minimization objective is a discounted measurement of job delivery and computation time.
-        The conventional solution for POMDP is impractical due to huge complexity.
-        In this paper, we propose a novel low-complexity solution framework of the distributed job dispatching to address the issue of algorithm complexity.
-        Based on it, the optimization of job dispatching policy can be decoupled via an alternative policy iteration algorithm, so that the distributed policy iteration of each AP can be made according to partial and outdated observation.
-        Finally, an analytical performance lower bound is provided for the approximate MDP solution.
+        The transmission latency is non-negligible in MAN, which leads to outdated information sharing among APs.
+        Moreover, the fully-observed system state is discouraged as reception of all broadcast is time consuming. Therefore, we formulate the distributed optimization of job dispatching strategies among the APs as a markov decision process with partial and outdated system state, i.e., partially observable Markov Decision Process (POMDP).
+        The conventional solution for POMDP is impractical due to huge time complexity. We propose a novel low-complexity solution framework for distributed job dispatching, based on which the optimization of job dispatching policy can be decoupled via an \emph{alternative policy iteration algorithm}, so that the distributed policy iteration of each AP can be made according to partial and outdated observation.
+        A theoretical 
+        % In this paper, we consider the distributed job dispatching problem in an edge computing network residing in a Metropolitan Area Network (MAN).
+        % Specifically, multiple access points (APs) collect jobs from the mobile users, and upload each job to one edge server for computation.
+        % A signaling mechanism with periodic broadcast is introduced to facilitate cooperation among APs.
+        % The signaling and job dispatching latency is random and non-negligible in MAN, and the APs have to update their job dispatching strategies according to partially received and outdated broadcast information.
+        % Hence, we formulate the distributed optimization of job dispatching strategies at all the APs as a partially observable Markov decision process (POMDP), whose minimization objective is a discounted measurement of job delivery and computation time.
+        % The conventional solution for POMDP is impractical due to huge complexity.
+        % In this paper, we propose a novel low-complexity solution framework of the distributed job dispatching to address the issue of algorithm complexity.
+        % Based on it, the optimization of job dispatching policy can be decoupled via an alternative policy iteration algorithm, so that the distributed policy iteration of each AP can be made according to partial and outdated observation.
+        % Finally, an analytical performance lower bound is provided for the approximate MDP solution.
     \end{abstract}
 
     % Note that keywords are not normally used for peer-review papers.
