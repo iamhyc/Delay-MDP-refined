@@ -55,6 +55,10 @@ Let $f_{m,j}$ be its probability mass function (PMF), we have
 \end{align}
 For each job type, the uploaded jobs are computed in a First-Come-First-Serve (FCFS) manner, and a processing queue with a maximum job number $L_{max}$ is established for each VM.
 The arrival jobs will be discarded when the processing queue is full.
+
+\begin{remark}
+    \hongyc{(actually, this network model could be generalized into general edge-cloud model. For example: cloud scheduling engaged (a edge server with high computational capability, topology related, suffer from heavy latency), edge server co-location with APs (edge servers are deployed together with APs, without transmission latency) )}
+\end{remark}
 %----------------------------------------------------------------------------------------%
 
 \subsection{{Signaling Mechanism with Periodic Broadcast}}
