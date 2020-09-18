@@ -15,15 +15,19 @@ The establishment of efficient cooperation among edge servers is one of the majo
 We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
 The APs should collect jobs offloaded from the mobile users in its service area and make dispatching decisions for each job.
 According to the MAN performance analysis in \cite{MAN-LATENCY}, the transmission latency {among APs and edge servers} varies a lot with respect to different hours of day and devices' locations in a MAN.
+In addition, each AP also suffers from signaling latency, which is teh time consumed for each AP to collect system state information under some signaling mechanism.
 There has been a number of existing literature considering random transmission latency of job delivery in the edge computing network \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}.
 However, there are only a few works considering random signaling latency of cooperation among distributed dispatchers \cite{tan-online,TWC18-LyuX}.
-In fact, it is challenging to consider random transmission latency in both job delivery and signaling.
-Firstly, the centralized dispatcher design is discouraged for outdated system information and unpredictable signaling latency.
-Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random transmission latency causes the inconsistency of system information at different dispatchers.
+In fact, it is full of challenge to consider random transmission latency in both job delivery and signaling.
+The cooperation of distributed dispatchers suffers from significant unpredictable signaling and transmission overhead.
+Therefor, aggregating the global system state information at each AP is not practical, and a centralized dispatcher design is discouraged.
+Moreover, the latency will also lead to outdated information at each dispatcher and information inconsistency among different dispatchers, which may introduce ineliminable estimation error on the number of jobs in the system and thus discourage the cooperative dispatcher design.
+% Firstly, the centralized dispatcher design is discouraged for outdated system information and unpredictable signaling latency.
+% Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random transmission latency causes the inconsistency of system information at different dispatchers.
 
 %NOTE: Our contributions
-In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP problem formulation and a novel low-complexity approximate MDP solution framework.
-Specifically, we consider a practical scenario where the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and each AP can only {receive the broadcast state information from part of the APs} with random latency (i.e., the global system state is not available at the APs).
+In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP (partially observable Markov decision process) problem formulation and a novel low-complexity approximate MDP solution framework.
+Specifically, we consider a practical scenario where the signaling latency among APs and edge servers as well as job uploading latency from APs to edge servers are assumed to be random, and each AP can only {receive the broadcast state information from part of the APs} with random latency (i.e., the global system state is not available at the APs).
 Our main contributions in this new optimization scenario are summarized as follows.
 \begin{itemize}
     \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs.
@@ -32,7 +36,8 @@ Our main contributions in this new optimization scenario are summarized as follo
     we directly derive the expression of approximate value function and the distributed dispatching policies at all the edge servers which can be facilitated via partial and local knowledge of the approximate value function.
     Thus, the complicated POMDP solution is avoided.
     To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem {with outdated and partial information} under MDP framework.
-    \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
+    \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound. \hongyc{Furthermore, we extend our solution framwork \algname~with reinforcement learning technique to online predict the unknown statistics of the system randomness.}
+    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that \algname~ can achieve $20.67\%$ reduction in average job response time, and \algname~ consistently performs well under various parameter settings of signaling latency, job arrival intensity and job processing time. \hongyc{The extended \algname~ could converge to the real settings fastly with negligible error and performs well after convergence.}
 \end{itemize}
 
 The remainder of this paper is organized as follows.
