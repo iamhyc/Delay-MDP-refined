@@ -44,7 +44,10 @@ The remainder of this paper is organized as follows.
 In Section \ref{sec:review}, the related works are elaborated.
 In Section \ref{sec:model}, we illustrate the system model and the signaling model with random latency.
 In Section \ref{sec:formulation}, we formulate the global optimization of dispatching decisions at all APs as an POMDP.
-In Section \ref{sec:algorithm}, we introduce the novel low-complexity distributed solution framework for the above POMDP.
+In Section \ref{sec:algorithm}, we introduce the novel low-complexity distributed solution framework called \algname~for the above POMDP problem.
+\hongyc{
+    In Section \ref{sec:rl-alg}, the solution framework is extended with reinforcement learning technique to online predict the unknown statistics.
+}
 The numerical analysis of the proposed solution is provided in Section \ref{sec:evaluation}, and the conclusion is drawn in Section \ref{sec:conclusion}.
 
 We use the following notations throughout this paper: 
