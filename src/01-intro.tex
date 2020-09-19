@@ -31,12 +31,12 @@ Specifically, we consider a practical scenario where the signaling latency among
 Our main contributions in this new optimization scenario are summarized as follows.
 \begin{itemize}
     \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs.
-    \deny{where each AP collects the information only from the APs and edge servers in close proximity and make dispatching decisions with random signaling latency.}
+    % {where each AP collects the information only from the APs and edge servers in close proximity and make dispatching decisions with random signaling latency.}
     Different from the conventional iteration for the value function of the Bellman's equations where global system state is requested in numerical calculation,
     we directly derive the expression of approximate value function and the distributed dispatching policies at all the edge servers which can be facilitated via partial and local knowledge of the approximate value function.
     Thus, the complicated POMDP solution is avoided.
     To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem {with outdated and partial information} under MDP framework.
-    \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound. \hongyc{Furthermore, we extend our solution framwork \algname~with reinforcement learning technique to online predict the unknown statistics of the system randomness.}
+    \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound. \hongyc{Furthermore, we extend our solution framwork with reinforcement learning technique to online predict the unknown statistics of the system randomness.}
     \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that \algname~ can achieve $20.67\%$ reduction in average job response time, and \algname~ consistently performs well under various parameter settings of signaling latency, job arrival intensity and job processing time. \hongyc{The extended \algname~ could converge to the real settings fastly with negligible error and performs well after convergence.}
 \end{itemize}
 
@@ -44,7 +44,7 @@ The remainder of this paper is organized as follows.
 In Section \ref{sec:review}, the related works are elaborated.
 In Section \ref{sec:model}, we illustrate the system model and the signaling model with random latency.
 In Section \ref{sec:formulation}, we formulate the global optimization of dispatching decisions at all APs as an POMDP.
-In Section \ref{sec:algorithm}, we introduce the novel low-complexity distributed solution framework called \algname~for the above POMDP problem.
+In Section \ref{sec:algorithm}, we introduce the novel low-complexity distributed solution framework with an \emph{alternative policy iteration algorithm}, called \algname, for the above POMDP problem.
 \hongyc{
     In Section \ref{sec:rl-alg}, the solution framework is extended with reinforcement learning technique to online predict the unknown statistics.
 }
