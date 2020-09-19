@@ -312,16 +312,26 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
 \section{Reinforcement Learning Algorithm}
 \label{sec:rl-alg}
 \hongyc{
-    blah blah blah
+    In the previous section, the value function of the baseline scheduling policy $?$ is derived analytically.
+    However, the calculation of $?$ requires the priori knowledge on the distributions in this system, i.e., job arrvial distributions, uploading latency distributions and computation time on edge servers, which are usually unknown in practice.
+    Therefore, in this part, a novel reinforcement leraning approach is proposed.
+    %TODO: the expressions of the statistical paramters.
+    Hence, a reinforcement learning algorithm is proposed to evaluate the approximate value function which is given as follows.
 }
 
 \begin{algorithm}[ht]
     \caption{Reinforcement Learning Algorithm}\label{alg_3}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
-    \KwIn{$\Stat(t), \Delay(t)$}
+    \KwIn{$\Stat(t)$, $B_{k,j}(t)$}
     \KwOut{$\hat{\lambda}_{k,j}(t)$, $\hat{c}_{m,j}(t)$, $\hat{u}_{m,j,\xi}(t)$}
-    $n \gets t \pmod{N}$\;
-    % Initialize all the APs with heuristic dispatching actions $\set{{\omega}_{k,j}(0)|\forall k\in\apSet,j\in\jSpace}$.\;
+    Initialize $\hat{\lambda}_{k,j}(t)$, $\hat{c}_{m,j}(t)$, $\hat{u}_{m,j,\xi}(t)$ as zero ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).\;
+    $t \gets 0$\;
+    \While{not convergence}{
+        $t \gets t + 1$
+        $\hat{\lambda}_{k,j}(t) \gets \frac{t-1}{t} \hat{\lambda}_{k,j}(t-1) + \frac{1}{t} I[B_{k,j}(t)=1]$\;
+        $\hat{c}_{m,j}(t) \gets \frac{t-1}{t} \hat{c}_{m,j}(t-1) + \frac{1}{t} Q_{m,j}(t,0)$\;
+        %TODO: the uploading parameters
+    }
     % \For{$t=0,1,2,\dots$}{
         % \tcc{Get the index of the subset to update at $t$.}
         % \ForPar{$y \in \mathcal{Y}_{n}$}{
@@ -331,7 +341,7 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
 
 \begin{theorem}[Convergence of Algorithm \ref{alg_3}]
     When $t\to\infty$, Algorithm \ref{alg_3} will converge, i.e., $\lim_{t\to\infty} \hat{\lambda}_{k,j}(t) = {\lambda}_{k,j}$, $\lim_{t\to\infty} \hat{c}_{m,j}(t) = {c}_{m,j}$ and $\lim_{t\to\infty} \hat{u}_{m,j,\xi} = \Pr\{U_{k,m,j}=\xi\}$ ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
-    \hongyc{As a remark notice that, the convergence of $\hat{u}_{m,j,\xi}$ could be accelerated via cooperation of APs sharing stale observation which obviously dose not affect the correctness of estimation.}
+    As a remark notice that, the convergence of $\hat{u}_{m,j,\xi}$ could be accelerated via cooperation of APs sharing stale observation which obviously dose not affect the correctness of estimation.
 \end{theorem}
 
 \begin{proof}
@@ -339,7 +349,12 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
 \end{proof}
 
 \begin{remark}[Learning Efficiency of Algorithm \ref{alg_3}]
-    \hongyc{(TODO.)}
+    \hongyc{
+        In conventional reinforcement learning algorithms, the value function should be evaluated for at least a large subset of system states or state-action paris before the convergence.
+        Moreover, the value function of a system state can be updated only when this system state appears after state transitions (which is impractical for our problem which is with enormous state space or action space), which leads to large computation complexity and convergence time.
+        In the proposed reinforcement learning algorithm, however, we only learn the unknown statistics of the value function by tracking their unbiased observations.
+        Hence, the proposed algorithm could converge faster.
+    }
 \end{remark}
 %----------------------------------------------------------------------------------------%
 %----------------------------------------------------------------------------------------%
