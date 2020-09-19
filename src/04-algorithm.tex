@@ -329,7 +329,7 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
     \While{not convergence}{
         $t \gets t + 1$
         $\hat{\lambda}_{k,j}(t) \gets \frac{t-1}{t} \hat{\lambda}_{k,j}(t-1) + \frac{1}{t} I[B_{k,j}(t)=1]$\;
-        $\hat{c}_{m,j}(t) \gets \frac{t-1}{t} \hat{c}_{m,j}(t-1) + \frac{1}{t} Q_{m,j}(t,0)$\;
+        $\hat{c}_{m,j}(t) \gets \frac{t-1}{t} \hat{c}_{m,j}(t-1) + \frac{1}{t} [\alpha_{m,j}\hat{p}^{c}_{m,j}(t) + (1-\alpha)]$\;
         %TODO: the uploading parameters
     }
     % \For{$t=0,1,2,\dots$}{
