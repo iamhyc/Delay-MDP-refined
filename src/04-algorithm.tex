@@ -229,8 +229,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
     At the $t$-th broadcast interval, the $y$-th AP in the subset $\mathcal{Y}_{n}$ updates its dispatching actions, which could only affect the future cost raised on itself and its corresponding \emph{candidate server set}, i.e., the part of its OSI.
     Hence, it's obvious that the expression of equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$).
 \end{proof}
-
-The optimization of {dispatching actions $\mathcal{A}_{y}(t+1)$} for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, {whose computational complexity is $O(J|\mathcal{M}_{y}|)$}.
+The optimization of dispatching actions $\mathcal{A}_{y}(t+1)$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational complexity is $O(J|\mathcal{M}_{y}|)$.
 As a result, the overall algorithm of job dispatching is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
     \caption{\algname: Online Alternative Actions Update Algorithm}\label{alg_1}
@@ -313,5 +312,9 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
 \section{Reinforcement Learning Algorithm}
 \label{sec:rl-alg}
 \hongyc{(append the subsection to show that scalability is good, when connection is uniform with APs and edge servers.)}
+
+\begin{remark}[Learning Efficiency of Algorithm]
+    \hongyc{(TODO.)}
+\end{remark}
 %----------------------------------------------------------------------------------------%
 %----------------------------------------------------------------------------------------%
