@@ -13,7 +13,7 @@ Specifically, the proposed distributed algorithm consists of the following two s
 %\hongyc{(move two steps adjacent in the following subsections)}
 \begin{enumerate}
     \item We first introduce a baseline policy, use its value function to approximate the value function of the optimal policy $\Policy^*$, and derive the analytical expression of the approximate value function for arbitrary GSI in Section \ref{subsec:baseline}.
-    \item With the approximate value function, in Section \ref{subsec:ap_alg}, \hongyc{the AP set is partitioned into multiple independent subsets with a heuristic greedy algorithm and the \algname, }
+    \item With the approximate value function, in Section \ref{subsec:ap_alg}, \hongyc{the AP set is partitioned into multiple independent subsets with a heuristic greedy algorithm and the \algname,}
     %an alternative action update algorithm
     where only a subset of APs are selected to update their dispatching actions distributedly in each broadcast interval, is proposed.
     Moreover, the analytical performance bound is also derived in Section \ref{subsec:analysis}.
@@ -319,8 +319,10 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
     \begin{itemize}
         \item The average arrival rate $\lambda_{k,j}$ of job arrival distribution $B_{k,j}(t)$ ($\forall k\in\apSet,j\in\jSpace$), which could be estimated directly from the job arrival events.
         \item The expectation of computation time $c_{m,j}$. Here, we further denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise); the computation time of the departure is denoted as $p^{c}_{m,j}(t)$ if $\alpha_{m,j}=1$; the estimation of $c_{m,j}$ is equivalent to sample a geometric distribution ($\forall m\in\esSet,j\in\jSpace$).
-        \item The uploading time distribution $\mathbb{U}_{k,m,j}(\Xi)$. For convenience, we denote $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi-1]$ and the estimation of $\vec{u}_{k,m,j}$ is easy by observing the uploading job state $\vec{R}^{(k)}_{m,j}(t)$ change on APs ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
+        \item The uploading time distribution $\mathbb{U}_{k,m,j}(\Xi)$. For convenience, we denote $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$ and the estimation of $\vec{u}_{k,m,j}$ is easy by observing the uploading job state $\vec{R}^{(k)}_{m,j}(t)$ change on APs ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
     \end{itemize}
+    As a remark notice that, the observation for statistical parameters estimation is at timeslot-level and could be shared with other APs and edge servers via broadcast information. And the update of statistics would take effect exactly when the broadcast information is partially received by the conflict AP set.
+    Hence, the convergence is not affected by the information staleness introduced in periodic broadcast and \brlatency.
     The reinforcement learning algorithm is given as follows.
 }
 
