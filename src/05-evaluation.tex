@@ -58,7 +58,7 @@ The discount factor $\gamma$ is $0.95$ and the overflow penalty weight $\beta$ i
 %-----------------------------------------------------------------------%
 
 %NOTE: Benchmark Elaboration
-We also propose {three heuristic benchmarks to profile the performance of the proposed MDP policy}, which are listed as follows.
+We also propose {three heuristic benchmarks to profile the performance of the proposed \algname}, which are listed as follows.
 \begin{itemize}
     \item \textbf{Random Dispatching Policy}:
             Randomly choose a dispatching edge server in each time slot; 
@@ -98,7 +98,7 @@ This demonstrates its high dispatching efficiency.
 \label{subsec:converge}
 \hongyc{
     The convergence property of the proposed reinforcement learning algorithm is illustrated in Fig.\ref{fig:rl_plot}.
-    It can be observed that the learning procedures for all the three statistical parameters converge after at most $XX$ broadcast intervals, which is far before the system achieving the balance dynamic under the dispatching policy.
+    It can be observed that the learning procedures for all the three statistical parameters converge after at most $??$ broadcast intervals, which is far before the system achieving the balance dynamic under the dispatching policy.
     On the other hand, the number of observations required for the convergence of conventional reinforcement learning algorithms is usually larger for enormous system and action space.
     This demonstrates the efficiency of the proposed reinforcement learning algorithm, which benefits from the derived expression the the approximate value function.
     % performance compared with prior-knowledge

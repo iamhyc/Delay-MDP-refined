@@ -13,9 +13,9 @@ Specifically, the proposed distributed algorithm consists of the following two s
 %\hongyc{(move two steps adjacent in the following subsections)}
 \begin{enumerate}
     \item We first introduce a baseline policy, use its value function to approximate the value function of the optimal policy $\Policy^*$, and derive the analytical expression of the approximate value function for arbitrary GSI in Section \ref{subsec:baseline}.
-    \item With the approximate value function, in Section \ref{subsec:ap_alg}, \hongyc{the AP set is partitioned into multiple independent subsets with a heuristic greedy algorithm and the \algname,}
+    \item With the approximate value function, in Section \ref{subsec:ap_alg}, \hongyc{the AP set is partitioned into multiple independent subsets with a heuristic greedy algorithm and the \algname~is proposed,}
     %an alternative action update algorithm
-    where only a subset of APs are selected to update their dispatching actions distributedly in each broadcast interval, is proposed.
+    where only a subset of APs are selected to update their dispatching actions distributedly in each broadcast interval.
     Moreover, the analytical performance bound is also derived in Section \ref{subsec:analysis}.
 \end{enumerate}
 As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge on system state.
@@ -314,7 +314,7 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
 \hongyc{
     In the previous section, the approximate value function $W_{\Baseline}(\Stat)$ is derived analytically.
     However, the calculation of $ W_{\Baseline}(\Stat)$ requires the priori knowledge on the distributions in this system, i.e., job arrival distributions, uploading latency distributions and computation time distributions, which are usually unknown in practice.
-    Therefore, we extend the \algname~ with a novel reinforcement learning approach.
+    Therefore, we extend the \algname~with a novel reinforcement learning approach.
     Specifically, with the explicit analytical expressions of $\tilde{W}^{\AP}_{k,m,j}$ and $\tilde{W}^{\ES}_{m,j}$ in Lemma \ref{lemma:w_ap} and Lemma \ref{lemma:w_es}, respectively, we only need to learn the following statistical parameters.
     \begin{itemize}
         \item The average arrival rate $\lambda_{k,j}$ of job arrival distribution $B_{k,j}(t)$ ($\forall k\in\apSet,j\in\jSpace$), which could be estimated directly from the job arrival events.
