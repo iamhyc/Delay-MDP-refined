@@ -41,25 +41,31 @@ Hence,
 \end{align}
 
 %NOTE: [uploading process]
-Each AP immediately dispatches each type of received jobs to one edge server.
-Different types of jobs may have different distributions of the input data size.
-Moreover, due to the random traffic in the network, the job uploading from one AP to one edge server consumes a random number of time slots.
-It is assumed that the random uploading latency are independent for each job.
-Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), whose expectation is denoted as $u_{k,m,j}$.
+%FIXME: cover the weakness
+\fixit{
+    Each AP immediately dispatches each type of received jobs to one edge server.
+    Different types of jobs may have different distributions of the input data size.
+    Moreover, due to the random traffic in the network, the job uploading from one AP to one edge server consumes a random number of time slots.
+    It is assumed that the random uploading latency are independent for each job.
+    Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), whose expectation is denoted as $u_{k,m,j}$.
+}
 
 %NOTE: [computation process]
-For job computation process on edge servers, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different edge servers would follow independent distribution.
-Specifically, there are $J$ parallel virtual machines (VMs) running on each edge server for processing the $J$ job types, respectively.
-It is assumed that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
-\footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of algorithm. In fact, the proposed algorithm can be easily extended to other distributions.}
-with different expectations as in \cite{TOWC18-HuangKb}.
-Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, $c_{m,j}$ is the expectation, and {$1/c_{m,j}$ represents the parameter of geometric distribution}.
-Let $f_{m,j}$ be its probability mass function (PMF), we have
-\begin{align}
-    f_{m,j}(x) \define (1-\frac{1}{c_{m,j}})^{x-1} \frac{1}{c_{m,j}}.
-\end{align}
-For each job type, the uploaded jobs are computed in a First-Come-First-Serve (FCFS) manner, and a processing queue with a maximum job number $L_{max}$ is established for each VM.
-The arrival jobs will be discarded when the processing queue is full.
+%FIXME: cover the weakness
+\fixit{
+    For job computation process on edge servers, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different edge servers would follow independent distribution.
+    Specifically, there are $J$ parallel virtual machines (VMs) running on each edge server for processing the $J$ job types, respectively.
+    It is assumed that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
+    \footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of algorithm. In fact, the proposed algorithm can be easily extended to other distributions.}
+    with different expectations as in \cite{TOWC18-HuangKb}.
+    Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, $c_{m,j}$ is the expectation, and {$1/c_{m,j}$ represents the parameter of geometric distribution}.
+    Let $f_{m,j}$ be its probability mass function (PMF), we have
+    \begin{align}
+        f_{m,j}(x) \define (1-\frac{1}{c_{m,j}})^{x-1} \frac{1}{c_{m,j}}.
+    \end{align}
+    For each job type, the uploaded jobs are computed in a First-Come-First-Serve (FCFS) manner, and a processing queue with a maximum job number $L_{max}$ is established for each VM.
+    The arrival jobs will be discarded when the processing queue is full.
+}
 
 \begin{remark}[General Edge-Cloud Model]
     \hongyc{
