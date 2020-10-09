@@ -24,10 +24,11 @@ To the best knowledge of authors, a POMDP can hardly be solved via the Bellman's
 
 \subsection{Baseline Policy and Approximate Value Function}
 \label{subsec:baseline}
-To alleviate the curse of dimensionality, we first use the baseline policy with fixed dispatching action to approximate value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}).
+To alleviate the curse of dimensionality, we first use the baseline policy $\Baseline$ with fixed dispatching actions to approximate value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}) \needref{baseline approximation reference}.
 Specifically, the baseline policy is elaborated below.
+% Specifically, the baseline policy we used in this paper is elaborated below.
 
-\begin{policy}[Baseline Policy]
+\begin{definition}[Baseline Policy]
     In the baseline policy $\Baseline$, each AP fixes the target processing edge server for each job type as the previous broadcast interval. Specifically, at the $t$-th broadcast interval,
     {\small
     \begin{align}
@@ -45,7 +46,7 @@ Specifically, the baseline policy is elaborated below.
             {\omega}_{k,j}(t+1) \Big| \forall j\in\jSpace
         }, \forall k\in\apSet.
     \end{align}
-\end{policy}
+\end{definition}
 
 Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseline$, we shall approximate the value function of the optimal policy $V(\cdot)$ via $W_{\Baseline}$, i.e.,
 {\small
