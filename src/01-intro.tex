@@ -30,11 +30,20 @@
 }
 
 %NOTE: Our contributions
-\fixit{
-    In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP (partially observable Markov decision process) problem formulation and a novel low-complexity approximate MDP solution framework.
-    Specifically, we consider a practical scenario where the signaling latency among APs and edge servers as well as job uploading latency from APs to edge servers are assumed to be random, and each AP can only {receive the broadcast state information from part of the APs} with random latency (i.e., the global system state is not available at the APs).
+In this paper, 
+{
+    shed some lights on the above challenging distributed dispatcher design
+    POMDP (partially observable Markov decision process) problem formulation
+    with a novel low-complexity approximate MDP solution framework.
 }
-Our main contributions in this new optimization scenario are summarized as follows.
+Specifically,
+{
+    random transmission latency among APs and edge servers residing in MAN
+    further, the signaling latency and information mechanism design, the AP capable to receive part of the state information of the edge system.
+    (i.e., the global system state is not available at the APs)
+}
+The major contributions in this paper are summarized as follows.
+%FIXME: rewrite the following contributions
 \begin{itemize}
     \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs.
     % {where each AP collects the information only from the APs and edge servers in close proximity and make dispatching decisions with random signaling latency.}
