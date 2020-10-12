@@ -9,21 +9,17 @@
         A signaling mechanism is introduced to facilitate information sharing among distributed schedulers on each AP via periodic broadcast.
         As the signaling latency is random and reception of all broadcast in a MAN is time consuming, the schedulers have to make job dispatching {decisions} individually according to partially received and outdated broadcast information.
         %NOTE: (4) technical contribution: POMDP; low-complexity solution with bound; RL;
-        Hence, we formulate this problem 
-        % we leverage POMDP to formulate this {long-term dynamic} problem, and design a {delicate} low-complexity framework, and extend it to unknown-priori scenario via a novel reinforcement learning framework.
-        % We formulate the distributed optimization of job dispatching strategies at all the APs, with partial and outdated information, as a partially observable Markov decision process (POMDP).
+        Hence, we formulate the {long-term stochastic} job dispatching problem leveraging partially observable Markov decision process (POMDP) and propose a novel low-complexity approximate MDP solution framework, called \algname, to avoid the huge time complexity of conventional POMDP solutions.
         %whose minimization objective is a discounted measurement of job delivery and computation time.
-        % The conventional solution for POMDP is impractical due to huge time complexity.
-        % In this paper, we propose a novel low-complexity solution framework for distributed job dispatching.
-        % Based on it, the optimization of job dispatching policy can be decoupled via an \emph{alternative policy iteration algorithm}, called \algname, so that the distributed policy iteration of each AP can be made according to partial and outdated observation.
-        % An analytical performance lower bound is provided for the approximate MDP solution.
-        Furthermore, we extend \algname~to handle a more general scenario where the statistics of job arrivals, uploading latency and job processing time are unknown.
+        A tight analytical performance lower bound is provided for the approximate MDP solution.
+        Furthermore, we extend \algname~to handle a more general scenario where the priori statistics are unknown.
         The extended \algname~leverages a novel and efficient reinforcement learning approach to online continuously improve the system performance.
         %NOTE: (5) the simulation and performance improvement
-        % Finally, we conduct extensive simulations based on the Google Cluster trace.
+        Finally, we conduct extensive simulations based on the Google Cluster trace.
         % The evaluation results show that our policy can achieve as high as $20.67\%$ reduction in average job response time compared with heuristic baselines, and our algorithm consistently performs well under various parameter settings.
         %NOTE: (recycled)
         % The transmission latency is non-negligible in MAN, which leads to outdated information sharing among APs. Moreover, the fully-observed system state is discouraged as reception of all broadcast is time consuming.
+        % Based on it, the optimization of job dispatching policy can be decoupled via an \emph{alternative policy iteration algorithm}, called \algname, so that the distributed policy iteration of each AP can be made according to partial and outdated observation.
     \end{abstract}
 
     % Note that keywords are not normally used for peer-review papers.
