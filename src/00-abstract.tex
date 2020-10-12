@@ -5,10 +5,10 @@
         With the random latency of information sharing among distributed schedulers, the shared system status information would inevitably become stale and thus deviates the optimality. %drift away from optimality.
         %NOTE: (2) online/distributed/cooperative/job dispatching/outdated information
         In this paper, we investigate an online distributed cooperative job dispatching problem in an edge computing system residing in a MAN, where multiple access points (APs) collect jobs from the mobile users and upload each job to one edge server for computation.
-        %NOTE: (3) the signaling (information sharing) mechanism; partial information reception
-        % we design the broadcast mechanism and extend to a general partial information practice with partial information, in the distributed system design.
+        %NOTE: (3) the signaling mechanism (information sharing); partial information;
         Furthermore, we introduce a signaling mechanism to facilitate information sharing among distributed schedulers on each AP.
         % with periodic broadcast to facilitate cooperations among APs.
+        % we design the broadcast mechanism and extend to a general partial information practice with partial information, in the distributed system design.
         Moreover, the fully-observed system state is discouraged as reception of all broadcast is time consuming.
         The signaling and job dispatching latency is random and non-negligible in MAN, and the APs have to update their job dispatching strategies according to partially received and outdated broadcast information.
         %NOTE: (4) technical contribution: we leverage POMDP to formulate this {long-term dynamic} problem, and design a {delicate} low-complexity framework, and extend it to unknown-priori scenario via a novel reinforcement learning framework.
