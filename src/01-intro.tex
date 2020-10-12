@@ -3,7 +3,7 @@
     \section{Introduction}
     \label{sec:introduction}
 }
-%NOTE: General Background of MEC and Motivation
+%NOTE: (1) General Background of MEC and Motivation
 \IEEEPARstart{E}{dge} computing is a promising solution for increasing computation-intensive and energy-hungry applications on mobile devices.
 \fixit{
     Large amount of mobile devices can connect to the access points (APs) which function as gateways to aggregate and dispatch jobs to the edge servers \cite{MEC-SURVEY}.
@@ -13,7 +13,7 @@
     %given the network transmission latency and signaling overhead
 }
 
-%NOTE: Motivation with MAN
+%NOTE: (2) Motivation with MAN
 \fixit{
     We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
     The APs should collect jobs offloaded from the mobile users in its service area and make dispatching decisions for each job.
@@ -29,7 +29,7 @@
     % Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random transmission latency causes the inconsistency of system information at different dispatchers.
 }
 
-%NOTE: Our contributions
+%NOTE: (3) Our contributions
 In this paper, 
 {
     shed some lights on the above challenging distributed dispatcher design
@@ -56,14 +56,12 @@ The major contributions in this paper are summarized as follows.
 \end{itemize}
 
 The remainder of this paper is organized as follows.
-\fixit{
-    In Section \ref{sec:review}, the related works are elaborated.
-    In Section \ref{sec:model}, we illustrate the system model and the signaling model with random latency.
-    In Section \ref{sec:formulation}, we formulate the global optimization of dispatching decisions at all APs as an POMDP.
-    In Section \ref{sec:algorithm}, we introduce the novel low-complexity distributed solution framework with an \emph{alternative policy iteration algorithm}, called \algname, for the above POMDP problem.
-    In Section \ref{sec:rl-alg}, the solution framework is extended with reinforcement learning technique to online predict the unknown statistics.
-    The numerical analysis of the proposed solution is provided in Section \ref{sec:evaluation}, and the conclusion is drawn in Section \ref{sec:conclusion}.
-}
+In Section \ref{sec:review}, we introduce some related works about job scheduling in edge computing systems.
+In Section \ref{sec:model}, we elaborate the system model and the signaling mechanism with random transmission latency.
+In Section \ref{sec:formulation}, we formulate the global-wise optimization of dispatching decisions at all APs as a POMDP.
+In Section \ref{sec:algorithm}, we propose a novel low-complexity approximate MDP solution framework via \emph{alternative policy iteration}, called \algname, where the policy iteration could be applied distributedly on each AP {with partial and outdated information}.
+In Section \ref{sec:rl-alg}, the solution framework is extended with reinforcement learning technique to online predict the unknown statistics.
+The numerical analysis of the proposed solution is provided in Section \ref{sec:evaluation}, and the conclusion is drawn in Section \ref{sec:conclusion}.
 
 We use the following notations throughout this paper: 
 non-bold letters (e.g., $a, A$) are used to denote scalar values,
