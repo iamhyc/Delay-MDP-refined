@@ -2,24 +2,25 @@
     \begin{abstract}
         %NOTE: (1) random latency matters; why random latency matters;
         Random transmission latency is appeared as a non-negligible issue in edge computing system when considering distributed scheduler implementation in a large network such as Metropolitan Area Network (MAN).
-        With the random latency of information sharing among distributed schedulers, the shared system status information would inevitably become outdated and thus deviates the optimality. %drift away from optimality.
+        With the random latency of information sharing among distributed schedulers, the shared system status information would inevitably become outdated and thus deviates the optimality.
         %NOTE: (2) online/distributed/cooperative/job dispatching/outdated information
         In this paper, we investigate an online distributed cooperative job dispatching problem in an edge computing system residing in a MAN, where multiple access points (APs) collect jobs from the mobile users and upload each job to one edge server for computation.
         %NOTE: (3) the signaling mechanism (information sharing); partial information;
         A signaling mechanism is introduced to facilitate information sharing among distributed schedulers on each AP via periodic broadcast.
         As the signaling latency is random and reception of all broadcast in a MAN is time consuming, the schedulers have to make job dispatching {decisions} individually according to partially received and outdated broadcast information.
         %NOTE: (4) technical contribution: POMDP; low-complexity solution with bound; RL;
-        Hence, we formulate the {long-term stochastic} job dispatching problem leveraging partially observable Markov decision process (POMDP) and propose a novel low-complexity approximate MDP solution framework, called \algname, to avoid the huge time complexity of conventional POMDP solutions.
-        %whose minimization objective is a discounted measurement of job delivery and computation time.
+        Hence, we formulate the distributed job dispatching problem leveraging partially observable Markov decision process (POMDP) and propose a novel low-complexity approximate MDP solution framework, called \algname, to avoid the huge time complexity of conventional POMDP solutions.
         A tight analytical performance lower bound is provided for the approximate MDP solution.
         Furthermore, we extend \algname~to handle a more general scenario where the priori statistics are unknown.
-        The extended \algname~leverages a novel and efficient reinforcement learning approach to online continuously improve the system performance.
         %NOTE: (5) the simulation and performance improvement
         Finally, we conduct extensive simulations based on the Google Cluster trace.
-        % The evaluation results show that our policy can achieve as high as $20.67\%$ reduction in average job response time compared with heuristic baselines, and our algorithm consistently performs well under various parameter settings.
+        The evaluation results show that our policy can achieve as high as $20.67\%$ reduction in average job response time compared with heuristic baselines, and our algorithm consistently performs well under various parameter settings.
         %NOTE: (recycled)
-        % The transmission latency is non-negligible in MAN, which leads to outdated information sharing among APs. Moreover, the fully-observed system state is discouraged as reception of all broadcast is time consuming.
-        % Based on it, the optimization of job dispatching policy can be decoupled via an \emph{alternative policy iteration algorithm}, called \algname, so that the distributed policy iteration of each AP can be made according to partial and outdated observation.
+        %- The transmission latency is non-negligible in MAN, which leads to outdated information sharing among APs.
+        %- whose minimization objective is a discounted measurement of job delivery and computation time.
+        %- The conventional solution for POMDP is impractical due to huge time complexity.
+        %- Based on which the optimization of job dispatching policy can be decoupled via an alternative policy iteration algorithm, so that the distributed policy iteration of each AP can be made according to partial and outdated observation.
+        %- The extended \algname~leverages a novel and efficient reinforcement learning approach to online continuously improve the system performance.
     \end{abstract}
 
     % Note that keywords are not normally used for peer-review papers.
