@@ -19,9 +19,9 @@ Specifically, the APs function as gateways to collect offloaded jobs from mobile
 %NOTE: (2a) why cooperation is needed; cooperation in MAN is another challenge
 To achieve better overall performance (e.g., average job response time) of all edge servers, the cooperation of jobs dispatching among distributed APs is one of the major challenge.
 Most of the existing works simply assume a centralized job dispatcher design, where the centralized dispatcher timely holds the global system status and distribute the dispatching decisions to all the APs without delay.
-However, the real-world practice prefers edge computing system deployment at Metropolitan Area Network (MAN) scale \needref{MAN-scale applications}, i.e., the latency of information exchange among APs and edge servers is non-negligible, which discourage the centralized dispatcher design.
-According to the MAN performance analysis in \cite{MAN-LATENCY}, the transmission latency varies a lot with respect to different hours of day and devices' locations in a MAN, which implies the randomness of job uploading latency from APs to edge servers and signaling latency (i.e., the transmission latency of receive the information exchange).
-%NOTE: (2c) challenge brought by random latency
+However, the real-world practice prefers edge computing system deployment at Metropolitan Area Network (MAN) scale \needref{MAN-scale applications}, i.e., the latency of information sharing among APs and edge servers is non-negligible, which discourage the centralized dispatcher design.
+According to the MAN performance analysis in \cite{MAN-LATENCY}, the transmission latency varies a lot with respect to different hours of day and devices' locations in a MAN, which implies the randomness of job uploading latency from APs to edge servers and signaling latency (i.e., the transmission latency of receive the shared information).
+%NOTE: (2b) challenge brought by random latency
 There has been a number of existing literature considering random transmission latency of job delivery in the edge computing network \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}.
 However, there are only a few works considering random signaling latency of information sharing among distributed dispatchers \cite{tan-online,TWC18-LyuX}.
 In fact, it is full of challenge to consider random transmission latency in both job uploading and signaling.
@@ -67,15 +67,13 @@ Using these notations, $[\mathbf{A}]_{i,j}$ and $\mathbf{A}'$ denotes the $(i,j)
 \section{Related Works}
 \label{sec:review}
 %NOTE: (1) resource placement (cache-like problem), service migration
-{
-    There have been a number of works focusing on the resource allocation, job dispatching and service migration of edge computing system.
-    For example, in \cite{TON19-WangSq}, the edge servers are one-to-one bound to the base stations (BSs), and the job migration could be applied according to users' mobility traces via the backhaul network connecting the BSs.
-    However, according to a recent research \cite{INFOCOM19-WuC}, the resource re-allocation for running jobs on servers is hard to implement in practice, as it is hard for jobs migration among heterogeneous edge servers with different resource configurations.
-    Hence, it might be more important to optimize the job dispatching strategy at their arrival time.
-}
+There have been a number of works aiming at reducing job response time by resource allocation and service migration in the edge computing system.
+For example, in \cite{TON19-WangSq}, the edge servers are one-to-one bound to the base stations (BSs), and the job migration could be applied according to users' mobility traces via the backhaul network connecting the BSs.
+However, according to a recent research \cite{INFOCOM19-WuC}, the resource re-allocation for running jobs on servers is hard to implement in practice, as it is hard for jobs migration among heterogeneous edge servers with different resource configurations.
+Hence, it might be more important to optimize the job dispatching strategy at their arrival time.
 
 %NOTE: (2) single-agent job dispatching, single UE/server
-There also have been a number of works considering the centralized job dispatching with instant and complete knowledge on the states of edge computing systems.
+There also have been a number of works considering the job dispatching with a centralized dispatcher design which holds timely and complete knowledge of the edge computing system.
 For example, in order to minimize the average job response time in the worst case, the authors in \cite{tan-online} designed an online algorithm for job dispatching in edge computing systems with fixed uploading latency.
 In the scenario that BSs and edge servers are connected via software defined network (SDN), the authors in \cite{IOTJ18-FanQ} proposed a heuristic algorithm to dispatch the jobs to the closest edge servers according to geographical locations.
 Considering random jobs arrival and job offloading to a single edge server, the authors in \cite{mdp-globecom,mdp-tvt} formulate the offloading problem as an infinite-horizon Markov decision process (MDP).
@@ -83,27 +81,24 @@ When the jobs can be dispatched to either edge servers or cloud servers with fix
 In the above works, a centralized dispatcher with complete and instant knowledge of the system status was assumed in the edge computing systems, which might be impractical.
 
 %NOTE: (3) multiple-agent job dispatching
-{
-    Hence, there are also some works considering the distributed job dispatching in edge computing systems.
-    For example, in order to minimize a weighted sum of total energy consumption and uploading latency, the authors in \cite{ToN-Xuchen2016} proposed a distributed job dispatching algorithm based on game theory to achieve the Nash equilibrium. 
-    Considering job migration at edge servers, the authors in \cite{ToN-xujie2018} optimized the edge computing performance in a distributed manner with limited energy resources via a congestion game framework.
-    In the scenario that APs cooperatively dispatch jobs with multiple edge servers, the authors in \cite{mdp-jcin} proposed a novel approximate MDP solution framework to alleviate the algorithm complexity and minimize the average job response time.
-    However, in the above works, the latency of information exchange among APs and edge servers is ignored.
-    In fact, due to the complicated network traffic, this latency might be significant, and the staleness of system state information at the dispatcher of a edge computing systems should be considered.
-}
+Hence, there are also some works considering the distributed job dispatching in edge computing systems.
+For example, in order to minimize a weighted sum of total energy consumption and uploading latency, the authors in \cite{ToN-Xuchen2016} proposed a distributed job dispatching algorithm based on game theory to achieve the Nash equilibrium. 
+Considering job migration at edge servers, the authors in \cite{ToN-xujie2018} optimized the edge computing performance in a distributed manner with limited energy resources via a congestion game framework.
+In the scenario that APs cooperatively dispatch jobs with multiple edge servers, the authors in \cite{mdp-jcin} proposed a novel approximate MDP solution framework to alleviate the algorithm complexity and minimize the average job response time.
+However, in the above works, the latency of information sharing among APs and edge servers is ignored.
+In fact, due to the complicated network traffic, this latency might be significant, and the staleness of system state information at the dispatcher of a edge computing systems should be considered.
 
 %NOTE: (4) stale-information based multi-agent related works
-{
-    The staleness of information sharing among APs and edge servers may degrade the performance of the job dispatching algorithm in edge computing systems.
-    To the best of our knowledge, there are very limited works investigating this issue.
-    For example, the authors in \cite{JSAC17-LyuX} proposed a randomized policy via Lyapunov optimization approach to stabilize the queues in a MEC system with multiple IoT devices offloading jobs to one edge server, where \brlatency~is considered. 
-    In \cite{TWC18-LyuX}, the above approach was applied to the scenario that mobile devices offload jobs to each other via D2D link.
-    In the above two works, there is one centralized dispatcher in the system and the objective is to stabilize the transmission queues.
-    Hence, the existence of \brlatency~may not raise significant challenge to the algorithm design with Lyapunov optimization.
-    However, the design of distributed dispatchers with \brlatency~could be more challenging.
-    For example, the signaling latencies at distributed dispatchers could be different, and the synchronization of their dispatching decisions become infeasible.
-    Furthermore, taking the signaling overhead and the possibility of packet drop in the consideration, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observable system state information, instead of global system state information.
-    To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
-}
+%FIXME: (Optional) if have time, rewrite this part
+The staleness of information sharing among APs and edge servers may degrade the performance of the job dispatching algorithm in edge computing systems.
+To the best of our knowledge, there are very limited works investigating this issue.
+For example, the authors in \cite{JSAC17-LyuX} proposed a randomized policy via Lyapunov optimization approach to stabilize the queues in a MEC system with multiple IoT devices offloading jobs to one edge server, where \brlatency~is considered. 
+In \cite{TWC18-LyuX}, the above approach was applied to the scenario that mobile devices offload jobs to each other via D2D link.
+In the above two works, there is one centralized dispatcher in the system and the objective is to stabilize the transmission queues.
+Hence, the existence of \brlatency~may not raise significant challenge to the algorithm design with Lyapunov optimization.
+However, the design of distributed dispatchers with \brlatency~could be more challenging.
+For example, the signaling latencies at distributed dispatchers could be different, and the synchronization of their dispatching decisions become infeasible.
+Furthermore, taking the signaling overhead and the possibility of packet drop in the consideration, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observable system state information, instead of global system state information.
+To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
 
 %----------------------------------------------------------------------------------------%
