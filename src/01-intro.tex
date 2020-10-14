@@ -17,7 +17,7 @@ Specifically, the APs function as gateways to collect offloaded jobs from mobile
 
 %NOTE: (2) Motivation with MAN and Distributed Dispatchers
 %NOTE: (2a) why cooperation is needed; cooperation in MAN is another challenge
-To achieve better overall performance (e.g., average job response time) of all edge servers, the cooperation of jobs dispatching among distributed APs is one of the major challenge.
+To achieve better overall performance (e.g., average job response time) of the edge computing system, the cooperation of jobs dispatching among distributed APs is one of the major challenge.
 Most of the existing works simply assume a centralized job dispatcher design, where the centralized dispatcher timely holds the global system status and distribute the dispatching decisions to all the APs without delay.
 However, the real-world practice prefers edge computing system deployment at Metropolitan Area Network (MAN) scale \needref{MAN-scale applications}, i.e., the latency of information sharing among APs and edge servers is non-negligible, which discourage the centralized dispatcher design.
 According to the MAN performance analysis in \cite{MAN-LATENCY}, the transmission latency varies a lot with respect to different hours of day and devices' locations in a MAN, which implies the randomness of job uploading latency from APs to edge servers and signaling latency (i.e., the transmission latency of receive the shared information).
@@ -27,7 +27,7 @@ However, there are only a few works considering random signaling latency of info
 In fact, it is full of challenge to consider random transmission latency in both job uploading and signaling.
 Firstly, the centralized dispatcher design is discouraged for outdated system information and unpredictable signaling latency.
 Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random job uploading latency causes the inconsistency of system information at different dispatchers because the arrivals on edge servers are unknown in advance.
-To conclude, the random transmission latency may introduce ineliminable estimation error on the number of jobs {distribution} in the system.
+To conclude, the random transmission latency may introduce ineliminable estimation error on the number of jobs in the system.
 % {i.e., the cooperation of APs are assumed inside one entity like a operator, but across a large network which is larger than a LAN.}
 % {In addition, each AP also suffers from signaling latency, which is the time consumed for each AP to collect system state information under some signaling mechanism.}
 
