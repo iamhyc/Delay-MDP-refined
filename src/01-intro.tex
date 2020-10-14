@@ -3,7 +3,7 @@
     \section{Introduction}
     \label{sec:introduction}
 }
-% (1) General Background of MEC and Motivation
+%NOTE: (1) General Background of MEC and Motivation
 \IEEEPARstart{E}{dge} computing is gaining more and more attentions with the prosperity of computation-intensive and delay-sensitive mobile applications. % computation-intensive, energy-hungry; NN learning/inferring, etc.
 The edge servers are deployed in closer proximity to mobile users than traditional cloud computing infrastructure, which alleviate the communication overhead and enable
 % Large amount of mobile devices can connect to the access points (APs) which function as gateways to aggregate and dispatch jobs to the edge servers \cite{MEC-SURVEY}.
@@ -12,7 +12,7 @@ However, the edge servers are usually deployed with limited computation resource
 The establishment of efficient cooperation among edge servers is one of the major design challenges, {given the signaling overhead and latency of distributed information exchange and decision making.}
 %given the network transmission latency and signaling overhead
 
-% (2) Motivation with MAN
+%NOTE: (2) Motivation with MAN
 %NOTE: (2a) deployment in MAN; transmission latency reference
 The cooperation of APs are assumed inside one entity e.g., operator (without loss of generality), but across a large network which is larger than a LAN.
 Actually, real applications are always deployed at MAN scale \needref{MAN-scale applications}.
@@ -31,27 +31,19 @@ Secondly, the cooperation of distributed dispatchers suffers from significant si
 % Therefore, aggregating the global system state information at each AP is not practical, and a centralized dispatcher design is discouraged.
 % Moreover, the latency will also lead to outdated information at each dispatcher and information inconsistency among different dispatchers, which may introduce ineliminable estimation error on the number of jobs in the system and thus discourage the cooperative dispatcher design.
 
-
-% (3) Our contributions
-In this paper, we conquer the above challenges leveraging POMDP problem formulation under standard MDP framework and solve it with a novel low-complexity approximate MDP solution framework.
-% shed some lights on the above challenging distributed dispatcher design
-Specifically, The random transmission latency among APs and edge servers residing in MAN; The signaling latency and information mechanism design; The APs are capable to receive part of the state information of the edge system (i.e., the global system state is not available at the APs).
+% NOTE: (3) Our contributions
+In this paper, we address the above challenges by leveraging a POMDP problem formulation under standard MDP framework and a novel low-complexity approximate MDP solution framework is proposed.
+Specifically, we consider a practical scenario where the APs cooperatively upload different types of jobs to different edge servers under random uploading latency and the APs receive the partial system state information under random signaling latency (i.e., the global system state is always partially available and always outdated at the APs).
 The major contributions in this paper are summarized below.
-%FIXME: rewrite the following contributions
 \begin{itemize}
-    % online/distributed/cooperative/job dispatching
-    % novel low-complexity approximate MDP solution framework via \emph{alternative policy iteration}
-    \item To handle the cooperative job dispatching decision with outdated and partial information, a distributed POMDP problem is formulated.
-    A novel low-complexity approximate MDP solution framework via \emph{alternative policy iteration} is proposed. %for the dispatcher design at the APs.
-    % {where each AP collects the information only from the APs and edge servers in close proximity and make dispatching decisions with random signaling latency.}
-    Different from the conventional iteration for the value function of the Bellman's equations where global system state is requested in numerical calculation,
-    we directly derive the expression of approximate value function and the distributed dispatching policies at all the edge servers which can be facilitated via partial and local knowledge of the approximate value function.
+    \item To realize the distributed cooperative job dispatching design with outdated and partial information, a POMDP problem is formulated under standard MDP framework.
+    Different from the conventional iteration for the value function of the Bellman's equations where global system states are requested in numerical calculation, a novel low-complexity approximate MDP solution framework via \emph{alternative policy iteration} is proposed, where the dispatching policies of all APs are updated distributed on the local knowledge of the approximate value function.
     Thus, the complicated POMDP solution is avoided.
-    \hongyc{Furthermore, the proof of a tight performance lower bound is provided to adjust the efficiency of \algname.} 
-    % To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem {with outdated and partial information} under MDP framework.
-    \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound. 
-    \item We extend our solution framework with a novel and efficient reinforcement learning approach to evaluate the value function when the priori knowledge of the system randomness is unknown.
-    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that \algname~can achieve $20.67\%$ reduction in average job response time, and \algname~consistently performs well under various parameter settings of signaling latency, job arrival intensity and job processing time. The extended \algname~could converge to the real parameter settings fast with negligible error.
+    % {where each AP collects the information only from the APs and edge servers in close proximity and make dispatching decisions with random signaling latency.}
+    % {we directly derive the expression of approximate value function}
+    \item A tight analytical cost lower bound is provided for the proposed distributed dispatching policy in the solution framework \algname. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method and hard to obtain analytical performance bound.
+    \item \hongyc{We extend our solution framework \algname~with a novel and efficient reinforcement learning approach to evaluate the value function when the priori knowledge of the system randomness is unknown.}
+    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that \algname~can achieve $20.67\%$ reduction in average job response time, and \algname~consistently performs well under various parameter settings of signaling latency, job arrival intensity and job processing time. \hongyc{The extended \algname~could converge to the real parameter settings fast with negligible error.}
 \end{itemize}
 
 The remainder of this paper is organized as follows.
