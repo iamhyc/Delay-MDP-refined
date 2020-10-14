@@ -11,13 +11,7 @@ as well as the signaling mechanism with periodic broadcast.
     \caption{The Illustration of System Model}
     \label{fig:system}
 \end{figure*}
-
-%TODO:
-\hongyc{
-    (Rewrite this section, to 1) differ from conference version, 2) cover the weakness.)
-}
-
-We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, which are connected in a network as illustrated in Fig.\ref{fig:system}.
+We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, which are connected in a edge network as illustrated in Fig.\ref{fig:system}.
 The sets of APs and edge servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{1,\dots,M}$, respectively.
 The communication latency among these APs and edge servers is random.
 Each AP collects the computation jobs from the mobile users within its coverage, and makes dispatching action on the processing edge servers for each job.
@@ -27,11 +21,9 @@ We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, an
 Different APs may have different candidate servers according to their locations in the network, as illustrated in Fig.\ref{fig:system}.
 In this edge computing network, each AP and edge server periodically broadcast their state information (the state information is defined in the Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
 In this paper, we shall optimize the job dispatching strategy distributed at APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
+
 %NOTE: [job space support and arrival process]
-Without loss of generality, it is assumed that there are $J$ types of jobs computed in this system, which are denoted via the set $\jSpace \define \set{1,\dots,J}$.
-\deny{
-    The job type assumption could be simply generalized to other edge-cloud model by pre-allocate computation resource for some classified jobs, and resource allocation is not the major concern in this paper.
-}
+Without loss of generality, it is assumed that there are $J$ types of jobs supported in this system, which are denoted via the set $\jSpace \define \set{1,\dots,J}$.
 The time axis of dispatching is organized by time slots.
 The arrivals of the type-$j$ jobs at the $k$-th AP ($\forall k\in\apSet,j\in\jSpace$) in different time slots are assumed to be independent and identically distributed (i.i.d.) Bernoulli random variables, and the arrival probability is denoted as $\lambda_{k,j}$.
 Let $B_{k,j}(t) \in \set{0,1}$ represent the event of job arrival, where $B_{k,j}(t)=1$ means one type-$j$ job arrives at the $k$-th AP in the $t$-th time slot, and $B_{k,j}(t)=0$ means otherwise.
@@ -41,38 +33,33 @@ Hence,
 \end{align}
 
 %NOTE: [uploading process]
-%FIXME: cover the weakness
-\fixit{
-    Each AP immediately dispatches each type of received jobs to one edge server.
-    Different types of jobs may have different distributions of the input data size.
-    Moreover, due to the random traffic in the network, the job uploading from one AP to one edge server consumes a random number of time slots.
-    It is assumed that the random uploading latency are independent for each job.
-    Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), whose expectation is denoted as $u_{k,m,j}$.
-}
+Each AP immediately dispatches each type of received jobs to one edge server.
+As the APs uploading jobs over shared edge networks illustrated in Fig.\ref{fig:system}, the actual uploading time is random due to random traffics initiated from other enabled services.
+Moreover, the notification of uploading completion from edge server to AP also consumes random time slots for the same reason and thus the uploading time is unknown in advance.
+Hence, we assume the the uploading time of different types of jobs and from different APs to edge servers follow a general discrete distribution.
+For the uploading latency of the type-$j$ job from the $k$-th AP to the $m$-th edge server, the other jobs in uploading could be taken as random traffics of other services, and thus the random uploading latency are independent for each job.
+% Different types of jobs may have different distributions of the input data size.
+Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$) where $\Xi$ is the possible maximum uploading time for all jobs, and the expectation is denoted as $u_{k,m,j}$.
 
 %NOTE: [computation process]
-%FIXME: cover the weakness
-\fixit{
-    For job computation process on edge servers, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different edge servers would follow independent distribution.
-    Specifically, there are $J$ parallel virtual machines (VMs) running on each edge server for processing the $J$ job types, respectively.
-    It is assumed that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
-    \footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of algorithm. In fact, the proposed algorithm can be easily extended to other distributions.}
-    with different expectations as in \cite{TOWC18-HuangKb}.
-    Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, $c_{m,j}$ is the expectation, and {$1/c_{m,j}$ represents the parameter of geometric distribution}.
-    Let $f_{m,j}$ be its probability mass function (PMF), we have
-    \begin{align}
-        f_{m,j}(x) \define (1-\frac{1}{c_{m,j}})^{x-1} \frac{1}{c_{m,j}}.
-    \end{align}
-    For each job type, the uploaded jobs are computed in a First-Come-First-Serve (FCFS) manner, and a processing queue with a maximum job number $L_{max}$ is established for each VM.
-    The arrival jobs will be discarded when the processing queue is full.
-}
+For job computation process on edge servers, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different edge servers would follow independent distribution.
+Specifically, there are $J$ parallel virtual machines (VMs) running on each edge server for processing the $J$ job types, respectively.
+It is assumed that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
+\footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of algorithm. In fact, the proposed algorithm can be easily extended to other distributions.}
+with different expectations as in \cite{TOWC18-HuangKb}.
+Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, $c_{m,j}$ is the expectation, and {$1/c_{m,j}$ represents the parameter of geometric distribution}.
+Let $f_{m,j}$ be its probability mass function (PMF), we have
+\begin{align}
+    f_{m,j}(x) \define (1-\frac{1}{c_{m,j}})^{x-1} \frac{1}{c_{m,j}}.
+\end{align}
+For each job type, the uploaded jobs are computed in a First-Come-First-Serve (FCFS) manner, and a processing queue with a maximum job number $L_{max}$ is established for each VM.
+The arrival jobs will be discarded when the processing queue is full.
 
 \begin{remark}[General Edge-Cloud Model]
-    {
-        In fact, this network model assumption could be generalized into a common edge-cloud system structure.
-        A cloud server in common edge-cloud systems could be modeled as a edge server in our model but with stronger computational capability and larger uploading latency and signaling latency to the APs.
-        And the placement of edge servers in the network could be formulated by assuming different latency distributions to the APs. For example, the collocated AP and edge server (i.e., the AP and the edge server are placed at same place) suffers from no uploading latency and signaling latency between each other.
-    }
+    In fact, this network model assumption could be generalized into a common edge-cloud system structure.
+    A cloud server in common edge-cloud systems could be modeled as a edge server in our model but with stronger computational capability and larger uploading latency and signaling latency to the APs.
+    And the placement of edge servers in the network could be formulated by assuming different latency distributions to the APs. For example, the collocated AP and edge server (i.e., the AP and the edge server are placed at same place) suffers from no uploading latency and signaling latency between each other.
+    Moreover, the job type assumption could be simply generalized to other edge-cloud model by pre-allocate computation resource for some classified jobs, where resource allocation is not the major concern in this paper.
 \end{remark}
 %----------------------------------------------------------------------------------------%
 
