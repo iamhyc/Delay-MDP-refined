@@ -24,7 +24,7 @@ To the best knowledge of authors, a POMDP can hardly be solved via the Bellman's
 
 \subsection{Baseline Policy and Approximate Value Function}
 \label{subsec:baseline}
-To alleviate the curse of dimensionality, we first use the baseline policy $\Baseline$ with fixed dispatching actions to approximate value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}) \needref{baseline approximation reference}.
+To alleviate the curse of dimensionality, we first use the baseline policy $\Baseline$ with fixed dispatching actions to approximate value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}).
 Specifically, the baseline policy is elaborated below.
 % Specifically, the baseline policy we used in this paper is elaborated below.
 
@@ -47,6 +47,13 @@ Specifically, the baseline policy is elaborated below.
         }, \forall k\in\apSet.
     \end{align}
 \end{definition}
+
+\hongyc{Specifically, the initial dispatching actions ($\omega_{k,j}(0)$) adopt the values as follows.}
+\begin{align}
+    \omega_{k,j}(0) = \arg\min_{m} u_{k,m,j} \vec{R}^{(k)}_{m,j}(0, 0) 
+    \\
+    + c_{m,j} (Q_{m,j}(0,0) + \|\|\vec{R}^{(k)}_{m,j}(0, 0)\|\| + 1)
+\end{align}
 
 \begin{example}[Time-related Fixed Actions in Baseline Policy]
     \hongyc{
