@@ -303,19 +303,23 @@ This conclusion is summarized below.
 \begin{lemma}[Analytical Cost Upper Bound]
     \label{lemma:bound}
     Let $W_{\tilde{\Policy}}(\cdot)$ be the value function (average cost) of the proposed policy $\tilde{\Omega}$, i.e.,
+    {\small
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \define
         \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
-            g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')} \Big| \Stat(1)=\Stat
+            g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),\Delay(t'))} \Big| \Stat(1)=\Stat
         },
     \end{align}
+    }
     we have
+    {\small
     \begin{align}
         V(\Stat)
         \leq W_{\tilde{\Policy}}(\Stat)
         \leq W_{\Baseline}(\Stat),
         \forall \Stat.
     \end{align}
+    }
 \end{lemma}
 \begin{proof}
     Please refer to Appendix \ref{append_3}.
