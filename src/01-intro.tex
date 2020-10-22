@@ -10,17 +10,17 @@ The edge servers are deployed in closer proximity to mobile users than tradition
 %NOTE: (1b) why multiple edge servers deployed
 On the other side, the edge servers are usually deployed with limited and non-scalable computation resource compared to cloud servers.
 Hence, the deployment of many standalone edge computing servers in the network is favored.
-In a general edge-cloud system architecture \cite{MEC-SURVEY}, the offloaded jobs from mobile devices could be offloaded to one of the edge servers considering the transmission latency, job processing time, back pressure and etc.
+In a general edge-cloud system architecture \cite{MEC-SURVEY}, the offloaded jobs from mobile devices could be delivered to one of the edge servers considering the transmission latency, job processing time, back pressure and etc.
 %NOTE: (1c) introduce the access points
 The entity which decides edge servers for offloaded jobs is called \emph{access points} (APs) throughout this paper.
 Specifically, the APs function as gateways to collect offloaded jobs from mobile devices in its service area and make dispatching decision for each job.
 
 %NOTE: (2) Motivation with MAN and Distributed Dispatchers
 %NOTE: (2a) why cooperation is needed; cooperation in MAN is another challenge
-To achieve better overall performance (e.g., average job response time) of the edge computing system, the cooperation of jobs dispatching among distributed APs is one of the major challenge.
-Most of the existing works simply assume a centralized job dispatcher design, where the centralized dispatcher timely holds the global system status and distribute the dispatching decisions to all the APs without delay.
-However, the real-world practice prefers edge computing system deployment at Metropolitan Area Network (MAN) scale \needref{MAN-scale applications}, i.e., the latency of information sharing among APs and edge servers is non-negligible, which discourage the centralized dispatcher design.
-According to the MAN performance analysis in \cite{MAN-LATENCY}, the transmission latency varies a lot with respect to different hours of day and devices' locations in a MAN, which implies the randomness of job uploading latency from APs to edge servers and signaling latency (i.e., the transmission latency of receive the shared information).
+To achieve better overall performance (e.g., average job response time) of the edge computing system, the cooperation of jobs dispatching among distributed APs is one of the major challenges.
+Most of the existing works simply assume a centralized job dispatcher design, where the dispatcher timely holds the global system status and distributes the dispatching decisions to all the APs without delay.
+However, the real-world practice prefers edge computing system deployment at Metropolitan Area Network (MAN) scale \needref{MAN-scale applications}, i.e., the latency of information sharing among APs and edge servers is non-negligible, which discourages the centralized dispatcher design.
+According to the MAN performance analysis in \cite{MAN-LATENCY}, the end-to-end transmission latency varies a lot with respect to different hours of day and devices' locations in a MAN, which implies the randomness of job uploading latency from APs to edge servers and signaling latency (i.e., the transmission latency of the shared {system status} information).
 %NOTE: (2b) challenge brought by random latency
 There has been a number of existing literature considering random transmission latency of job delivery in the edge computing network \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}.
 However, there are only a few works considering random signaling latency of information sharing among distributed dispatchers \cite{tan-online,TWC18-LyuX}.
@@ -33,18 +33,19 @@ To conclude, the random transmission latency may introduce ineliminable estimati
 
 
 % NOTE: (3) Our contributions
-In this paper, we address the above challenges by leveraging a partially observable Markov decision process (POMDP) problem formulation under standard MDP framework and a novel low-complexity approximate MDP solution framework is proposed.
-Specifically, we consider a practical scenario where the APs cooperatively upload different types of jobs to different edge servers under random uploading latency and the APs receive the partial system state information under random signaling latency (i.e., the global system state is always partially available and always outdated at the APs).
+In this paper, we address the above challenges by leveraging a partially observable Markov decision process (POMDP) problem formulation, and a novel low-complexity approximate MDP solution framework is proposed.
+Specifically, we consider a practical scenario where the APs cooperatively upload different types of jobs to different edge servers with random uploading latency and the APs receive the partial system state information with random signaling latency (i.e., the global system state is always partially available and outdated at the APs).
 The major contributions in this paper are summarized below.
 \begin{itemize}
-    \item To realize the distributed cooperative job dispatching design with outdated and partial information, a POMDP problem is formulated under standard MDP framework.
-    Different from the conventional iteration for the value function of the Bellman's equations where global system states are requested in numerical calculation, a novel low-complexity approximate MDP solution framework via \emph{alternative policy iteration} is proposed, where the dispatching policies of all APs are updated distributed on the local knowledge of the approximate value function.
+    \item To optimize the distributed cooperative job dispatching design with outdated and partial information, a POMDP problem is formulated.
+    Different from the conventional value or policy iteration of the Bellman's equations where global or historical system states are requested in numerical calculation, a novel low-complexity approximate MDP solution framework via \emph{alternative policy iteration} is proposed, where the dispatching policies of all APs are updated distributedly and alternatively on the {closed-form expression} of the approximate local value function.
     Thus, the complicated POMDP solution is avoided.
     % {where each AP collects the information only from the APs and edge servers in close proximity and make dispatching decisions with random signaling latency.}
     % {we directly derive the expression of approximate value function}
-    \item A tight analytical cost lower bound is provided for the proposed distributed dispatching policy in the solution framework \algname. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method and hard to obtain analytical performance bound.
-    \item \hongyc{We extend our solution framework \algname~with a novel and efficient reinforcement learning approach to evaluate the value function when the priori knowledge of the system randomness is unknown.}
-    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that \algname~can achieve $20.67\%$ reduction in average job response time, and \algname~consistently performs well under various parameter settings of signaling latency, job arrival intensity and job processing time. \hongyc{The extended \algname~could converge to the real parameter settings fast with negligible error.}
+    \item A tight analytical cost lower bound is provided for the proposed distributed dispatching policy in the solution framework \algname. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method as it is hard to obtain analytical performance bound.
+    \item {We extend our solution framework \algname~with a novel and efficient reinforcement learning approach to evaluate the approximate value function when the priori knowledge of the system randomness is absent.}
+    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that \algname~can achieve $20.67\%$ reduction in average job response time, and consistently perform well under various parameter settings of signaling latency, job arrival intensity and job processing time. {Moreover, the reinforcement learning algorithm converges fast.}
+    % The extended \algname~could converge to the real parameter settings fast with negligible error
 \end{itemize}
 
 The remainder of this paper is organized as follows.
