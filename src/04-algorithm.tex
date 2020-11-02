@@ -311,6 +311,13 @@ This conclusion is summarized below.
         },
     \end{align}
     }
+    \hongyc{(replace with a tight baseline $\tilde{\Pi}$, which is a $n$-step improved policy). }
+    \hongyc{(As the the closed analytical performance improvement is hard to obtain, we develop a semi-analytical expression of the tight baseline policy $W_{\tilde{\Pi}}$, where the cost function is evaluated by integrating numerical policy improvement part and analytical evaluation fixed policy part. The semi-analytical form is elaborated as follows.)}
+    {\small
+    \begin{align}
+        W_{\tilde{\Pi}}(\Stat(t)) = E[] + W_{?}(\Stat(t+n)),
+    \end{align}
+    }%
     we have
     {\small
     \begin{align}
@@ -320,8 +327,6 @@ This conclusion is summarized below.
         \forall \Stat.
     \end{align}
     }%
-    \hongyc{(replace with a $n$-step policy improved policy). }
-    \hongyc{(As the the closed analytical performance improvement is hard to obtain, we develop a semi-analytical expression of the tight baseline policy $W_{\tilde{\Pi}}$, where the cost function is evaluated by integrating numerical policy improvement part and analytical evaluation fixed policy part. The details are provided in Appendix \ref{append_3})}
 \end{lemma}
 \begin{proof}
     Please refer to Appendix \ref{append_3}.
