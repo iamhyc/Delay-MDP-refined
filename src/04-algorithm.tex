@@ -302,7 +302,6 @@ This conclusion is summarized below.
 % We have the following conclusion on the performance of the above proposed algorithm.
 \begin{lemma}[\hongyc{Semi-Analytical Cost Upper Bound}]
     \label{lemma:bound}
-    \hongyc{(replace with a $n$-step policy improved policy)}
     Let $W_{\tilde{\Policy}}(\cdot)$ be the value function (average cost) of the proposed policy $\tilde{\Omega}$, i.e.,
     {\small
     \begin{align}
@@ -320,8 +319,9 @@ This conclusion is summarized below.
         \leq W_{\Baseline}(\Stat),
         \forall \Stat.
     \end{align}
-    }
-    \hongyc{(As the the closed analytical expression of performance improvement is hard to obtain, we )}
+    }%
+    \hongyc{(replace with a $n$-step policy improved policy). }
+    \hongyc{(As the the closed analytical performance improvement is hard to obtain, we develop a semi-analytical expression of the tight baseline policy $W_{\tilde{\Pi}}$, where the cost function is evaluated by integrating numerical policy improvement part and analytical evaluation fixed policy part. The details are provided in Appendix \ref{append_3})}
 \end{lemma}
 \begin{proof}
     Please refer to Appendix \ref{append_3}.
