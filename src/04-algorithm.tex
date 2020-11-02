@@ -315,7 +315,7 @@ This conclusion is summarized below.
     \hongyc{(As the the closed analytical performance improvement is hard to obtain, we develop a semi-analytical expression of the tight baseline policy $W_{\tilde{\Pi}}$, where the cost function is evaluated by integrating numerical policy improvement part and analytical evaluation fixed policy part. The semi-analytical form is elaborated as follows.)}
     {\small
     \begin{align}
-        W_{\tilde{\Pi}}(\Stat(t)) = E[] + W_{?}(\Stat(t+n)),
+        V_{\tilde{\Baseline}}(\Stat(t)) = \sum_{\tau=0}^{n-1} \gamma^{\tau} E[c(t+\tau)] + \gamma^{n-1} W_{\tilde{\Baseline}}(\Stat(t+n)),
     \end{align}
     }%
     we have
@@ -323,7 +323,7 @@ This conclusion is summarized below.
     \begin{align}
         V(\Stat)
         \leq W_{\tilde{\Policy}}(\Stat)
-        \leq W_{\Baseline}(\Stat),
+        \leq V_{\tilde{\Baseline}}(\Stat),
         \forall \Stat.
     \end{align}
     }%
