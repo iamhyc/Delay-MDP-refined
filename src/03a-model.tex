@@ -34,12 +34,12 @@ Hence,
 
 %NOTE: [uploading process]
 Each AP immediately dispatches each type of received jobs to one edge server.
-As the APs uploading jobs over shared edge networks illustrated in Fig.\ref{fig:system}, the actual uploading time is random due to random traffics initiated from other enabled services.
+As the APs upload jobs over shared edge networks illustrated in Fig.\ref{fig:system}, the actual uploading time is random due to random traffics initiated from other enabled services.
 Moreover, the notification of uploading completion from edge server to AP also consumes random time slots for the same reason and thus the uploading time is unknown in advance.
-Hence, we assume the the uploading time of different types of jobs and from different APs to edge servers follow a general discrete distribution.
-For the uploading latency of the type-$j$ job from the $k$-th AP to the $m$-th edge server, the other jobs in uploading could be taken as random traffics of other services, and thus the random uploading latency are independent for each job.
+Hence, we assume the the uploading time of different types of jobs and from different APs to edge servers follow a general independent and discrete distribution.
+\fixit{For the uploading latency of the type-$j$ job from the $k$-th AP to the $m$-th edge server, the other jobs in uploading could be taken as random traffics of other services, and thus the random uploading latency are independent for each job.}
 % Different types of jobs may have different distributions of the input data size.
-Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$) where $\Xi$ is the possible maximum uploading time for all jobs, and the expectation is denoted as $u_{k,m,j}$.
+Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), where $\Xi$ is the maximum possible uploading time for all jobs and the expectation is denoted as $u_{k,m,j}$.
 
 %NOTE: [computation process]
 For job computation process on edge servers, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different edge servers would follow independent distribution.
@@ -47,19 +47,19 @@ Specifically, there are $J$ parallel virtual machines (VMs) running on each edge
 It is assumed that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
 \footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of algorithm. In fact, the proposed algorithm can be easily extended to other distributions.}
 with different expectations as in \cite{TOWC18-HuangKb}.
-Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, $c_{m,j}$ is the expectation, and {$1/c_{m,j}$ represents the parameter of geometric distribution}.
+Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, $c_{m,j}$ is the expectation.
 Let $f_{m,j}$ be its probability mass function (PMF), we have
 \begin{align}
-    f_{m,j}(x) \define (1-\frac{1}{c_{m,j}})^{x-1} \frac{1}{c_{m,j}}.
+    f_{m,j}(x) \define (1-\frac{1}{c_{m,j}})^{x-1} \frac{1}{c_{m,j}}, x=1,2,\dots.
 \end{align}
 For each job type, the uploaded jobs are computed in a First-Come-First-Serve (FCFS) manner, and a processing queue with a maximum job number $L_{max}$ is established for each VM.
 The arrival jobs will be discarded when the processing queue is full.
 
-\begin{remark}[General Edge-Cloud Model]
-    In fact, this network model assumption could be generalized into a common edge-cloud system structure.
-    A cloud server in common edge-cloud systems could be modeled as a edge server in our model but with stronger computational capability and larger uploading latency and signaling latency to the APs.
-    And the placement of edge servers in the network could be formulated by assuming different latency distributions to the APs. For example, the collocated AP and edge server (i.e., the AP and the edge server are placed at same place) suffers from no uploading latency and signaling latency between each other.
-    Moreover, the job type assumption could be simply generalized to other edge-cloud model by pre-allocate computation resource for some classified jobs, where resource allocation is not the major concern in this paper.
+\begin{remark}[Generalization to Edge-Cloud Model]
+    The above network model could be generalized into an edge-cloud system structure.
+    A cloud server in edge-cloud systems could be treated as a special edge server in our model but with stronger computational capability and larger uploading latency and signaling latency to the APs.
+    Furthermore, the placement of edge servers in the network determines their latency distributions to the APs. For example, the collocated AP and edge server (i.e., the AP and the edge server are placed at same place) suffers from no or tiny uploading latency and signaling latency between each other.
+    % Moreover, the job type assumption could be simply generalized to other edge-cloud model by pre-allocate computation resource for some classified jobs, where resource allocation is not the major concern in this paper.
 \end{remark}
 %----------------------------------------------------------------------------------------%
 
@@ -75,7 +75,8 @@ The LSI at the APs and edge servers, global state information, and observable st
 \begin{definition}[LSI of APs]
     Let $R^{(k)}_{m,j}(\xi,t,n) \in \set{0,1}$ be the indicator of the type-$j$ jobs at the $n$-th time slot of the $t$-th interval.
     Its value is $1$ when there is one job being uploaded from the $k$-th AP to the $m$-th server which has been delivered for $\xi$ time slots, and $0$ otherwise.
-    Let $\omega_{k,j}(t)$ be the target edge server for the type-$j$ jobs of the $k$-th AP at the very beginning of the $t$-th broadcast interval, and $\omega_{k,j}(t+1)$ be the updated target edge server when the $k$-th AP observes a number of the broadcast LSIs of the $t$-th broadcast interval.
+    Let $\omega_{k,j}(t)$ be the target edge server for the type-$j$ jobs of the $k$-th AP at the very beginning of the $t$-th broadcast interval.
+    % , and $\omega_{k,j}(t+1)$ be the updated target edge server when the $k$-th AP observes a number of the broadcast LSIs of the $t$-th broadcast interval.
     The LSI of the $k$-th AP at the beginning of the $t$-th broadcast interval is defined as
     {\small
     \begin{align}
@@ -128,7 +129,7 @@ For example, the transmission latency of the LSI from the edge servers out of it
 In this paper, we shall investigate the dispatching design based on the \emph{observable state information} at each AP.
 Specifically, the \emph{conflict AP sets} and the \emph{observable state information} are defined below, respectively.
 \begin{definition}[Conflict AP Set]
-    The conflict AP set to the $k$-th AP consists of the neighboring APs who have direct impact on the queueing time of the jobs dispatched from the $k$-th AP, i.e.,
+    The conflict AP set to the $k$-th AP ($\forall k\in\apSet$) consists of the neighboring APs who have direct impact on the queueing time of the jobs dispatched from the $k$-th AP, i.e.,
     \begin{align}
         \ccSet_{k} \define \bigcup_{m\in\esSet_{k}} \apSet_{m}.
     \end{align}
@@ -166,11 +167,11 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
     The signaling latency $\mathcal{D}_1(t)$ and $\mathcal{D}_1(t+1)$ can be different.
 \end{example}
 
-The major notations used throughout this paper are summarized as in Table \ref{table:symbols}.
+The notations used throughout this paper are summarized as in Table \ref{table:symbols}.
 \begin{table}[htp!]
     % \footnotesize
     \centering
-    \caption{Table of major notations and their descriptions throughout this paper.}
+    \caption{Table of notations and their descriptions throughout this paper.}
     \label{table:symbols}
     \begin{tabulary}{0.9\linewidth}{|p{1.8cm}|L|}
         \hline
