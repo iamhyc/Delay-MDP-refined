@@ -1,7 +1,7 @@
 \section{POMDP-based Problem Formulation}
 \label{sec:formulation}
 %----------------------------------------------------------------------------------------%
-In this section, we formulate the optimization of job dispatching at all APs as a Markov decision process (MDP) problem.
+In this section, we formulate the optimization of job dispatching at all APs as a Markov decision process (MDP).
 Since each AP update the job dispatching actions according to OSI instead of GSI, the MDP problem is a partially observable MDP (POMDP).
 Firstly, we give the definitions of \emph{dispatching policy} and \emph{cost function}, together with the \emph{system state} (i.e., the GSI) defined previously, to complete the MDP problem formulation.
 % Specifically, the individual dispatching policy of one AP, the system dispatching policy, and the cost function are first defined below.
@@ -55,7 +55,7 @@ Hence, we define the cost function per broadcast interval as follows, {given the
 Since the job dispatching in one broadcast interval will affect the GSI of the following broadcast intervals, we should consider the joint minimization of the costs of all the broadcast intervals.
 Specifically, we consider the following discounted sum of the costs of all the broadcast intervals as the system objective.
 \begin{align}
-    &\bar{G}(\Stat, \Policy) \define
+    &\bar{G}(\Stat(1), \Policy) \define
     \lim_{T \to \infty} \mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}}
     \Bracket{
         \sum_{t=1}^{T} \gamma^{t-1} g\Paren{\Stat(t)} \Big| \Stat(1)
@@ -65,7 +65,7 @@ where $\mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}}[\cdot]$ denotes the expec
 Hence, the optimization of job dispatching policy can be formulated as the following minimization problem.
 \begin{align}
     \textbf{P1:}~
-    \min_{\Policy} \bar{G}(\Stat, \Policy).
+    \min_{\Policy} \bar{G}(\Stat(1), \Policy).
 \end{align}
 
 If the GSI $\Stat(t)$ and \brlatency~$\Delay(t)$ are known to all the APs, the MDP in problem P1 can be solved via the following Bellman's equations as in \cite{sutton1998}.
