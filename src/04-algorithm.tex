@@ -40,14 +40,18 @@ Specifically, the baseline policy is elaborated below.
     \end{align}
     }
     where
+    {\small
     \begin{align}
         \Pi_{k}\Paren{\Stat_{k}(t),\mathcal{D}_{k}(t)}
         &= \Brace{
             {\omega}_{k,j}(t+1) \Big| \forall j\in\jSpace
-        }, \forall k\in\apSet.
+        }, \forall k\in\apSet,
     \end{align}
+    }
+    and $\omega_{k,j}(t+1) = \omega_{k,j}(t)$.
 \end{definition}
 
+\delete{TMC-v2}{
 \hongyc{Specifically, the initial dispatching actions ($\omega_{k,j}(0), \forall j\in\jSpace$) of the $k$-th AP adopt the values as follows.}
 \begin{align}
     \omega_{k,j}(0) = \arg\min_{m} u_{k,m,j} \vec{R}^{(k)}_{m,j}(0, 0) 
@@ -62,6 +66,7 @@ Specifically, the baseline policy is elaborated below.
         if the baseline policy only updated once, it would be ...)
     }
 \end{example}
+}%
 
 Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseline$, we shall approximate the value function of the optimal policy $V(\cdot)$ via $W_{\Baseline}$, i.e.,
 {\small

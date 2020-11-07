@@ -37,7 +37,7 @@ Each AP immediately dispatches each type of received jobs to one edge server.
 As the APs upload jobs over shared edge networks illustrated in Fig.\ref{fig:system}, the actual uploading time is random due to random traffics initiated from other enabled services.
 Moreover, the notification of uploading completion from edge server to AP also consumes random time slots for the same reason and thus the uploading time is unknown in advance.
 Hence, we assume the the uploading time of different types of jobs and from different APs to edge servers follow a general independent and discrete distribution.
-\fixit{For the uploading latency of the type-$j$ job from the $k$-th AP to the $m$-th edge server, the other jobs in uploading could be taken as random traffics of other services, and thus the random uploading latency are independent for each job.}
+% \fixit{For the uploading latency of the type-$j$ job from the $k$-th AP to the $m$-th edge server, the other jobs in uploading could be taken as random traffics of other services, and thus the random uploading latency are independent for each job.}
 % Different types of jobs may have different distributions of the input data size.
 Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), where $\Xi$ is the maximum possible uploading time for all jobs and the expectation is denoted as $u_{k,m,j}$.
 
