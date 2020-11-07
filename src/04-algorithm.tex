@@ -1,7 +1,6 @@
 \section{A Distributed Solution Framework with Partial Information}
 % Algorithm with Partial Information
 \label{sec:algorithm}
-%TODO: algorithm with a name
 In this section, we shall introduce a novel approximation method to decouple the centralized optimization on the RHS of the Bellman's equations in equation (\ref{eqn:sp_0}) to each AP for arbitrary system state.
 For the APs outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other APs.
 Thus, the optimization of their dispatching actions can be decoupled.
@@ -369,7 +368,7 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
         $t \gets t + 1$\;
         \ForPar{$k\in\apSet$, $m\in\esSet$, $j\in\jSpace$}{
             $\hat{\lambda}_{k,j}(t) \gets \frac{t-1}{t} \hat{\lambda}_{k,j}(t-1) + \frac{1}{t} I[B_{k,j}(t)=1]$\;
-            $\hat{c}_{m,j}(t) \gets \frac{t-1}{t} \hat{c}_{m,j}(t-1) + \frac{1}{t} [\alpha_{m,j}{p}^{c}_{m,j}(t) + (1-\alpha_{m,j})\hat{c}_{m,j}(t)]$\;
+            $\hat{c}_{m,j}(t) \gets \frac{t-1}{t} \hat{c}_{m,j}(t-1) + \frac{1}{t} [\alpha_{m,j}{p}^{c}_{m,j}(t) + (1-\alpha_{m,j})\hat{c}_{m,j}(t-1)]$\;
             $\hat{\vec{u}}_{k,m,j}(t) \gets \frac{t-1}{t} \hat{\vec{u}}_{k,m,j}(t-1) + \frac{
                 I[\vec{R}^{(k)}_{m,j}(t)=0] \cdot I[\vec{R}^{(k)}_{m,j}(t-1)\neq 0]
             }{
