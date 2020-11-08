@@ -232,18 +232,28 @@ Moreover, we have the following conclusion on the decomposition of P2.
 \begin{lemma}[]
     The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs {for each subset partition}.
     Specifically, {the local optimization for each AP (say the $y$-th AP) in the $n$-th subset ($\forall n$) can be written as}
-    \hongyc{(summation over revised set, previous uploading cost for ${y,m'}$, )}
-    \small{\begin{align}
+    \small{
+    \begin{align}
         &\textbf{P3:}~
         \min_{ {\mathcal{A}}_{y}(t+1) }
         \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \hat{\mathcal{A}}(t), {\mathcal{A}}_{y}(t+1) }}
         \nonumber\\
-        &~~~~\sum_{ j\in\jSpace,m\in\esSet_{y} } \Brace{
+        &~~~~\sum_{j\in\jSpace} \sum_{ k\in\tilde{\apSet}_{y},m\in\tilde{\esSet}_{y} }
+        \Brace{
             \tilde{W}^{\AP}_{k,j}\Paren{\Stat_{y}(t+1)}
             +\tilde{W}^{\ES}_{m,j}\Paren{\Stat_{y}(t+1)}
-        }.
+        },
         \label{eqn:partial}
-    \end{align} }
+    \end{align}
+    }%
+    where
+    {\small
+    \begin{align*}
+       \tilde{\apSet}_{y} &= \set{k\in\ccSet_{y} | \omega_{k,j}(t)=\omega_{y,j}(t+1)}, \\
+       \tilde{\esSet}_{y} &= \set{m\in\esSet_{y} | m=\omega_{y,j}(t+1)}
+    \end{align*}
+    }%
+    denote \hongyc{(variance cost on AP)} and \hongyc{(variance cost on edge server)}, respectively.
     \label{lemma:w_partial}
 \end{lemma}
 \begin{proof}
