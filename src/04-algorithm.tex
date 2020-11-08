@@ -238,7 +238,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
         \min_{ {\mathcal{A}}_{y}(t+1) }
         \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \hat{\mathcal{A}}(t), {\mathcal{A}}_{y}(t+1) }}
         \nonumber\\
-        &~~~~\sum_{j\in\jSpace} \sum_{ k\in\tilde{\apSet}_{y},m\in\tilde{\esSet}_{y} }
+        &~~~~\sum_{j\in\jSpace} \sum_{ k\in\tilde{\ccSet}_{y},m\in\tilde{\esSet}_{y} }
         \Brace{
             \tilde{W}^{\AP}_{k,j}\Paren{\Stat_{y}(t+1)}
             +\tilde{W}^{\ES}_{m,j}\Paren{\Stat_{y}(t+1)}
@@ -249,11 +249,11 @@ Moreover, we have the following conclusion on the decomposition of P2.
     where
     {\small
     \begin{align*}
-       \tilde{\apSet}_{y} &= \set{k\in\ccSet_{y} | \omega_{k,j}(t)=\omega_{y,j}(t+1)}, \\
-       \tilde{\esSet}_{y} &= \set{m\in\esSet_{y} | m=\omega_{y,j}(t+1)}
+       \tilde{\ccSet}_{y} &= \set{k\in\ccSet_{y} | \omega_{k,j}(t)=\omega_{y,j}(t+1), \forall j\in\jSpace}, \\
+       \tilde{\esSet}_{y} &= \set{m\in\esSet_{y} | m=\omega_{y,j}(t), m=\omega_{y,j}(t+1), \forall j\in\jSpace}
     \end{align*}
     }%
-    denote \hongyc{(variance cost on AP)} and \hongyc{(variance cost on edge server)}, respectively.
+    denote the {subset of conflict set} and {subset of candidate set} of the $y$-th AP, respectively, which are participated in value function evaluation.
     \label{lemma:w_partial}
 \end{lemma}
 \begin{proof}
@@ -261,7 +261,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
     Hence, it's obvious that the expression of equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$).
 \end{proof}
 The optimization of dispatching actions $\mathcal{A}_{y}(t+1)$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational complexity is $O(J|\mathcal{M}_{y}|)$.
-\hongyc{(Moreover, the brutal seraching could use reduced expression of vaultion function)}
+% \hongyc{(Moreover, the brutal seraching could use reduced expression of vaultion function)}
 As a result, the overall algorithm of job dispatching is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
     \caption{\algname: Online Alternative Actions Update Algorithm}\label{alg_1}
