@@ -314,7 +314,7 @@ As a remark notice that since in Algorithm \ref{alg_1}, the computation complexi
 In most of the existing approximate MDP solutions \cite{mdp-bound1,mdp-bound2,mdp-bound3}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate.
 Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
-This conclusion is summarized below.
+% This conclusion is summarized below.
 % We have the following conclusion on the performance of the above proposed algorithm.
 \begin{lemma}[\hongyc{Semi-Analytical Cost Upper Bound}]
     \label{lemma:bound}
@@ -327,11 +327,11 @@ This conclusion is summarized below.
         },
     \end{align}
     }
-    \hongyc{(a tight baseline $\tilde{\Pi}$, which is a $n$-step improved policy). }
-    \hongyc{(As the the closed analytical performance improvement is hard to obtain, we develop a semi-analytical expression of the tight baseline policy $W_{\tilde{\Pi}}$, where the cost function is evaluated by integrating numerical policy improvement part and analytical evaluation fixed policy part. The semi-analytical form is elaborated as follows.)}
+    \hongyc{(a tight baseline $\hat{\Baseline}$, which is a $n$-step improved policy). }
+    \hongyc{(As the the closed analytical performance improvement is hard to obtain, we develop a semi-analytical expression of the tight baseline policy $W_{\hat{\Baseline}}$, where the cost function is evaluated by integrating numerical policy improvement part and analytical evaluation fixed policy part. The semi-analytical form is elaborated as follows.)}
     {\small
     \begin{align}
-        V_{\tilde{\Baseline}}(\Stat(t)) = \sum_{\tau=0}^{n-1} \gamma^{\tau} E[c(t+\tau)] + \gamma^{n-1} W_{\tilde{\Baseline}}(\Stat(t+n)),
+        V_{\hat{\Baseline}}(\Stat(t)) = \sum_{\tau=0}^{n-1} \gamma^{\tau} E[c(t+\tau)] + \gamma^{n-1} W_{\hat{\Baseline}}(\Stat(t+n)),
     \end{align}
     }%
     we have
@@ -339,7 +339,8 @@ This conclusion is summarized below.
     \begin{align}
         V(\Stat)
         \leq W_{\tilde{\Policy}}(\Stat)
-        \leq V_{\tilde{\Baseline}}(\Stat),
+        \leq W_{\hat{\Baseline}}(\Stat)
+        \leq W_{\Baseline}(\Stat),
         \forall \Stat.
     \end{align}
     }%
