@@ -313,25 +313,40 @@ As a remark notice that since in Algorithm \ref{alg_1}, the computation complexi
 \label{subsec:analysis}
 In most of the existing approximate MDP solutions \cite{mdp-bound1,mdp-bound2,mdp-bound3}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate.
+\hongyc{Furthermore, a tight performance lower bound is proposed based on an \emph{$1$-step improved policy}, which could be obtained via a semi-analytical method.}
 Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
-% This conclusion is summarized below.
+This conclusion is summarized below.
 % We have the following conclusion on the performance of the above proposed algorithm.
-\begin{lemma}[\hongyc{Semi-Analytical Cost Upper Bound}]
+\begin{lemma}[Analytical Cost Upper Bound]
     \label{lemma:bound}
-    Let $W_{\tilde{\Policy}}(\cdot)$ be the value function (average cost) of the proposed policy $\tilde{\Omega}$, i.e.,
+    Let $W_{\tilde{\Policy}}(\cdot)$ be the value function of the proposed policy $\tilde{\Omega}$, i.e.,
     {\small
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \define
-        \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
-            g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),\Delay(t'))} \Big| \Stat(1)=\Stat
-        },
+        \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay} \Bracket{
+            g\Paren{\Stat(t')} \Big| \Stat(1)=\Stat
+        }.
     \end{align}
-    }
-    \hongyc{(a tight baseline $\hat{\Baseline}$, which is a $n$-step improved policy). }
-    \hongyc{(As the the closed analytical performance improvement is hard to obtain, we develop a semi-analytical expression of the tight baseline policy $W_{\hat{\Baseline}}$, where the cost function is evaluated by integrating numerical policy improvement part and analytical evaluation fixed policy part. The semi-analytical form is elaborated as follows.)}
+    }%
+    \hongyc
+    {We denote the \emph{$1$-step improved policy} as $\hat{\Baseline}$, which is an intermediate between the baseline policy and the proposed policy.
+    Specifically, $\hat{\Baseline}$ would update the dispatching actions following the Algorithm \ref{alg_1} in the first interval (saying the $t$-th interval) (i.e., at the same timeslot with same subset of APs), and then fixes the actions in the following intervals.
+    The explicit definitions are given as follows.}%
     {\small
     \begin{align}
-        V_{\hat{\Baseline}}(\Stat(t)) = \sum_{\tau=0}^{n-1} \gamma^{\tau} E[c(t+\tau)] + \gamma^{n-1} W_{\hat{\Baseline}}(\Stat(t+n)),
+        \hat{\Baseline}\Paren{\Stat(t), \Delay(t)} \define 
+        \begin{cases}
+            \tilde{\Policy}({\Stat(0), \Delay(0)}), &t=1
+            \\
+            \tilde{\Policy}({\Stat(1), \Delay(1)}), &\text{otherwise}
+        \end{cases}.
+    \end{align}
+    }%
+    Let $V_{\hat{\Baseline}}(\cdot)$ be the value function of the \emph{$1$-step improved policy} $\hat{\Baseline}$, i.e.,
+    {\small
+    \begin{align}
+        V_{\hat{\Baseline}}(\Stat) = \mathbb{E}_{\Delay}\Bracket{ g\Paren{\Stat(1)} + \gamma W_{\hat{\Baseline}}\Paren{\Stat(2)} | \Stat(1)=\Stat },
+        % \sum_{\tau=0}^{n-1} \gamma^{\tau} E[c(t+\tau)] + \gamma^{n-1} W_{\hat{\Baseline}}(\Stat(t+n)),
     \end{align}
     }%
     we have
@@ -339,11 +354,12 @@ Hence, the alternative dispatching action update can ensure to achieve a better 
     \begin{align}
         V(\Stat)
         \leq W_{\tilde{\Policy}}(\Stat)
-        \leq W_{\hat{\Baseline}}(\Stat)
+        \leq V_{\hat{\Baseline}}(\Stat)
         \leq W_{\Baseline}(\Stat),
         \forall \Stat.
     \end{align}
     }%
+    \hongyc{Moreover, as the broadcast interval is random, it is hard to obtain closed-form analytical expression for the tight performance bound $V_{\hat{\Baseline}}(\Stat)$ and a semi-analytical method is proposed.}
 \end{lemma}
 \begin{proof}
     Please refer to Appendix \ref{append_3}.

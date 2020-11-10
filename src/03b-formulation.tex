@@ -56,7 +56,7 @@ Since the job dispatching in one broadcast interval will affect the GSI of the f
 Specifically, we consider the following discounted sum of the costs of all the broadcast intervals as the system objective.
 \begin{align}
     &\bar{G}(\Stat(1), \Policy) \define
-    \lim_{T \to \infty} \mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}}
+    \lim_{T \to \infty} \mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}, \Delay}
     \Bracket{
         \sum_{t=1}^{T} \gamma^{t-1} g\Paren{\Stat(t)} \Big| \Stat(1)
     },
