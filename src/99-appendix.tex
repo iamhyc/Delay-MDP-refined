@@ -167,9 +167,7 @@ where $\vec{g}$ is the cost vector whose definition is given in equation (\ref{e
 \section{ Proof of Lemma \ref{lemma:bound} }
 \label{append_3}
 \hongyc{
-    base-lower performance bound (with fixed dispatching actions), tight-lower performance bound ($n$-step improvement), performance of proposed \algname and performance upper bound (optimal solution).
-    For analytical part, the performance gain for fixed actions comparision is obvious with following proof.
-    For numerical part, we need to show that inside the $n$-step policy improvement, the discounted summed cost is a bound indeed (saying within $100$ stage is enough, with a typical inital system state where no jobs exising in the system).
+    (firstly, show that (based on policy improvement): \emph{tight-lower bound} is better than \emph{base-lower bound}; secondly, show that \emph{proposed policy} is better than \emph{tight-lower bound} with the existing proof below; finally, is it possible to prove the $n$-step improvement as a bound?)
 }%
 
 Since the proposed policy $\tilde{\Policy}$ is not optimal policy and $W_{\tilde{\Policy}}(\Stat)$ represents the average system cost with the proposed policy $\tilde{\Policy}$, $V(\Stat) \leq W_{\tilde{\Policy}}(\Stat)$ is straightforward.
