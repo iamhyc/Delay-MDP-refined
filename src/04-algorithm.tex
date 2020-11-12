@@ -124,7 +124,8 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
             \begin{cases}
                 \lambda_{k,j} I[\omega_{k,j}(t)=m], & \xi=0
                 \\
-                \Pr\{R^{(k)}_{m,j}(\xi,t,0) = 1\}, & \text{otherwise}
+                R^{(k)}_{m,j} = 1, & \text{otherwise}
+                % \Pr\{R^{(k)}_{m,j}(\xi,t,0) = 1\}, & \text{otherwise}
             \end{cases}
         \end{align}
         denotes the probability that there is one type-$j$ job have been delivered from $k$-th AP to $m$-th edge server for $\xi$ time slots at the very beginning of the $t$-th broadcast interval, when the baseline policy $\Baseline$ is adopted;
@@ -199,7 +200,7 @@ A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
     \KwIn{$\apSet, \set{\esSet_{k}, \forall k\in\apSet}$ }
     \KwOut{a subset partition $\set{ \mathcal{Y}_{n} }$}
     Initialize the subset partition as $\mathcal{Y}_{n} = \set{n}$ ($\forall n\in\apSet$).\;
-    \While{ $\exists \mathcal{Y}_a$ and $\mathcal{Y}_b$ ($a \neq b$), $\cup\set{ \esSet_{y}|y\in\mathcal{Y}_a } \bigcap \cup\set{ \esSet_{y}|y\in\mathcal{Y}_b } \neq \emptyset$ }
+    \While{ $\exists \mathcal{Y}_a$ and $\mathcal{Y}_b$ ($a \neq b$), $\bigcup_{y\in\mathcal{Y}_a}\esSet_{y} \cap \bigcup_{y\in\mathcal{Y}_{b}} \esSet_{y} \neq \emptyset$ }
     {
         Count number of subsets in the current subset partition which have disjoint candidate set with $\mathcal{Y}_n$ ($\forall n$), denoted the number as $I_{n}$.\;
         $\tilde{n} \gets \arg\min_{n} I_{n}$\;
@@ -207,7 +208,7 @@ A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
     }
 \end{algorithm}
 
-At the $t$-th broadcast interval, the APs in the subset indexed with $n \define t \pmod{N}$ update their dispatching actions, while the other APs keep the same dispatching actions as the previous broadcast interval.
+At the $t$-th broadcast interval, the APs in the subset indexed with $n \define t \mod{N}$ update their dispatching actions, while the other APs keep the same dispatching actions as the previous broadcast interval.
 Hence, let
 \begin{align}
     \tilde{\mathcal{A}}(t) \define \Brace{ {\omega}_{y,j}(t+1) \Big| \forall y\in\mathcal{Y}_{n},j\in\jSpace }
@@ -236,24 +237,23 @@ Moreover, we have the following conclusion on the decomposition of P2.
     \begin{align}
         &\textbf{P3:}~
         \min_{ {\mathcal{A}}_{y}(t+1) }
-        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \hat{\mathcal{A}}(t), {\mathcal{A}}_{y}(t+1) }}
+        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), {\mathcal{A}}_{y}(t+1) }}
         \nonumber\\
-        &~~~~\sum_{j\in\jSpace} \sum_{ k\in\tilde{\ccSet}_{y},m\in\tilde{\esSet}_{y} }
+        &~~~~\sum_{j\in\jSpace}
         \Brace{
-            \tilde{W}^{\AP}_{k,j}\Paren{\Stat_{y}(t+1)}
-            +\tilde{W}^{\ES}_{m,j}\Paren{\Stat_{y}(t+1)}
+            \tilde{W}^{\AP}_{y,m,j}\Paren{\Stat_{y}(t+1)}
+            + \sum_{m\in\tilde{\esSet}_{y}} \tilde{W}^{\ES}_{m,j}\Paren{\Stat_{y}(t+1)}
         },
         \label{eqn:partial}
     \end{align}
     }%
-    where
+    where \footnote{In equation (\ref{eqn:baseline}), the costs $W^{\AP}_{y,m,j}(\Stat(t+1))$ and $W^{\ES}_{m,j}(\Stat(t+1))$ are expressed as a function of global system state $\Stat(t+1)$. In fact, these two costs in equation (\ref{eqn:partial}) can be completely determined by the OSI of the $y$-th AP. Hence, we use the notations $W^{\AP}_{y,m,j}(\Stat_y(t+1))$ and $W^{\ES}_{m,j}(\Stat_y(t+1))$ instead.}
     {\small
     \begin{align*}
-       \tilde{\ccSet}_{y} &= \set{k\in\ccSet_{y} | \omega_{k,j}(t)=\omega_{y,j}(t+1), \forall j\in\jSpace}, \\
-       \tilde{\esSet}_{y} &= \set{m\in\esSet_{y} | m=\omega_{y,j}(t), m=\omega_{y,j}(t+1), \forall j\in\jSpace}
+       \tilde{\esSet}_{y} &= \set{\omega_{y,j}(t), \omega_{y,j}(t+1) | \forall j\in\jSpace}.
     \end{align*}
     }%
-    denote the {subset of conflict set} and {subset of candidate set} of the $y$-th AP, respectively, which are participated in value function evaluation.
+    % denote the {subset of conflict set} and {subset of candidate set} of the $y$-th AP, respectively, which are participated in value function evaluation.
     \label{lemma:w_partial}
 \end{lemma}
 \begin{proof}
@@ -262,7 +262,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
 \end{proof}
 The optimization of dispatching actions $\mathcal{A}_{y}(t+1)$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational complexity is $O(J|\mathcal{M}_{y}|)$.
 % \hongyc{(Moreover, the brutal seraching could use reduced expression of vaultion function)}
-As a result, the overall algorithm of job dispatching is elaborated in Algorithm \ref{alg_1}.
+As a result, the overall algorithm of job dispatching, namely \algname, is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
     \caption{\algname: Online Alternative Actions Update Algorithm}\label{alg_1}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
@@ -271,7 +271,7 @@ As a result, the overall algorithm of job dispatching is elaborated in Algorithm
     Initialize all the APs with heuristic dispatching actions $\set{{\omega}_{k,j}(0)|\forall k\in\apSet,j\in\jSpace}$.\;
     \For{$t=0,1,2,\dots$}{
         \tcc{Get the index of the subset to update at $t$.}
-        $n \gets t \pmod{N}$\;
+        $n \gets t \mod{N}$\;
         \tcc{Parallelly update the actions of APs in the subset $\mathcal{Y}_{n}$.}
         \ForPar{$y \in \mathcal{Y}_{n}$}{
             \tcc{Each AP observes its LSI asynchronously.}
@@ -289,7 +289,7 @@ Moreover, we use the following example to illustrate the procedure of Algorithm 
 \begin{example}
     \label{exp:update}
     Consider an edge computing system as Fig.\ref{fig:system}, where the AP set $\apSet$ could be partitioned into two subsets which are denoted as $\mathcal{Y}_{0} = \set{1,3}$ and $\mathcal{Y}_{1} = \set{2}$, respectively.
-    As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3, while the AP in subset $\mathcal{Y}_{1}$ fix its actions.
+    As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3, respectively, while the AP in subset $\mathcal{Y}_{1}$ fix its actions.
     Denote the aggregation of their dispatching actions as $\tilde{\mathcal{A}}(1)$ and $\hat{\mathcal{A}}(1)$, respectively.
     Then in the $2$-nd interval, the APs in subset $\mathcal{Y}_{0}$ fix their actions as $\tilde{\mathcal{A}}(1)$ which is denoted as $\hat{\mathcal{A}}(2)$, while 
     the AP in subset $\mathcal{Y}_{1}$ updates the dispatching actions to $\tilde{\mathcal{A}}(2)$.
@@ -302,12 +302,12 @@ Moreover, we use the following example to illustrate the procedure of Algorithm 
     \end{figure*}
 \end{example}
 
-% As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
-% At the $t$-th broadcast interval, the dispatching actions is given by
-% \begin{align}
-%     \tilde{\Policy}(\Stat(t), \Delay(t)) \define \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
-% \end{align}
-As a remark notice that since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to {the size of candidate edge server set}, it can be deployed in a scenario with massive APs and edge servers, as long as the {the available number of edge servers for each AP} is limited.
+\hongyc{As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
+At the $t$-th broadcast interval, the dispatching actions is given by
+\begin{align}
+    \tilde{\Policy}(\Stat(t), \Delay(t)) \define \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
+\end{align}}
+As a remark notice that since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to {the size of candidate edge server set}, it can be deployed in a scenario with massive APs and edge servers, as long as the {the number of candidate edge servers for each AP} is limited.
 
 \subsection{Analytical Performance Bound}
 \label{subsec:analysis}
