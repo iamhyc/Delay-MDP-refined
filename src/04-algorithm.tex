@@ -306,13 +306,13 @@ Moreover, we use the following example to illustrate the procedure of Algorithm 
 At the $t$-th broadcast interval, the dispatching actions is given by
 \begin{align}
     \tilde{\Policy}(\Stat(t), \Delay(t)) \define \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
-\end{align}}
+\end{align}}%
 As a remark notice that since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to {the size of candidate edge server set}, it can be deployed in a scenario with massive APs and edge servers, as long as the {the number of candidate edge servers for each AP} is limited.
 
-\subsection{Analytical Performance Bound}
+\subsection{Analytical and Semi-Analytical Performance Bounds}
 \label{subsec:analysis}
 In most of the existing approximate MDP solutions \cite{mdp-bound1,mdp-bound2,mdp-bound3}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
-In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate.
+In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate value function.
 \hongyc{Furthermore, a tight performance lower bound is proposed based on an \emph{$1$-step improved policy}, which could be obtained via a semi-analytical method.}
 Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
 This conclusion is summarized below.
