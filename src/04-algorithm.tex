@@ -371,23 +371,27 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
 %----------------------------------------------------------------------------------------%
 \section{Reinforcement Learning Algorithm}
 \label{sec:rl-alg}
-\hongyc{
+{
     In the previous section, the approximate value function $W_{\Baseline}(\Stat)$ is derived analytically.
-    However, the calculation of $ W_{\Baseline}(\Stat)$ requires the priori knowledge on the distributions in this system, i.e., job arrival distributions, uploading latency distributions and computation time distributions, which are usually unknown in practice.
-    Therefore, we extend the \algname~with a novel reinforcement learning approach.
-    Specifically, with the explicit analytical expressions of $\tilde{W}^{\AP}_{k,m,j}$ and $\tilde{W}^{\ES}_{m,j}$ in Lemma \ref{lemma:w_ap} and Lemma \ref{lemma:w_es}, respectively, we only need to learn the following statistical parameters.
+    However, the calculation of $ W_{\Baseline}(\Stat)$ requires the priori knowledge on the distributions in this system, i.e., the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice.
+    Therefore, we extend the \algname~with an efficient reinforcement learning approach.
+    Specifically, with the explicit analytical expressions of $\tilde{W}^{\AP}_{k,m,j}$ and $\tilde{W}^{\ES}_{m,j}$ in Lemma \ref{lemma:w_ap} and Lemma \ref{lemma:w_es}, respectively, we only need to learn the following statistical parameters ($\forall k\in\apSet,m\in\esSet, j\in\jSpace$).
     \begin{itemize}
-        \item The average arrival rate $\lambda_{k,j}$ of job arrival distribution $B_{k,j}(t)$ ($\forall k\in\apSet,j\in\jSpace$), which could be estimated directly from the job arrival events.
-        \item The expectation of computation time $c_{m,j}$. Here, we further denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise); the computation time of the departure is denoted as $p^{c}_{m,j}(t)$ if $\alpha_{m,j}=1$; the estimation of $c_{m,j}$ is equivalent to sample a geometric distribution ($\forall m\in\esSet,j\in\jSpace$).
-        \item The uploading time distribution $\mathbb{U}_{k,m,j}(\Xi)$. For convenience, we denote $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$ and the estimation of $\vec{u}_{k,m,j}$ is easy by observing the uploading job state $\vec{R}^{(k)}_{m,j}(t)$ change on APs ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
+        \item The average arrival rate $\lambda_{k,j}$ of job arrival distribution $B_{k,j}(t)$ , which could be estimated directly from the job arrival events.
+        \item The expectation of computation time $c_{m,j}$, which could be estimated on each edge server respectively.
+        \item The uploading time distribution $\mathbb{U}_{k,m,j}(\Xi)$ , which could be estimated via the timestamp of each job transmission.
     \end{itemize}
-    As a remark notice that, the observation for statistical parameters estimation is at timeslot-level and could be shared with other APs and edge servers via broadcast information. And the update of statistics would take effect exactly when the broadcast information is partially received by the conflict AP set.
-    Hence, the convergence is not affected by the information staleness introduced in periodic broadcast and \brlatency.
-    The reinforcement learning algorithm is given as follows.
-}
+    % Here, we further denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise); the computation time of the departure is denoted as $p^{c}_{m,j}(t)$ if $\alpha_{m,j}=1$; the estimation of $c_{m,j}$ is equivalent to sample a geometric distribution ($\forall m\in\esSet,j\in\jSpace$).
+    %  For convenience, we denote $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$ and the estimation of $\vec{u}_{k,m,j}$ is easy by observing the uploading job state $\vec{R}^{(k)}_{m,j}(t)$ change on APs ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
+    Denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise) and $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$, the reinforcement learning algorithm to track the above statistical parameters is elaborated in Algorithm \ref{alg_2}.
+    As a remark notice that, the statistical parameters estimation is at time-slot level and could be shared with other APs and edge servers via broadcast information.
+    % And the update of statistics would take effect exactly when the broadcast information is partially received by the conflict AP set.
+    % Hence, the convergence is not affected by the information staleness introduced in periodic broadcast and \brlatency.
+    % The reinforcement learning algorithm is given as follows.
+}%
 
 \begin{algorithm}[ht]
-    \caption{Reinforcement Learning Algorithm}\label{alg_3}
+    \caption{Reinforcement Learning Algorithm}\label{alg_2}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
     \KwIn{$\vec{R}^{(k)}_{m,j}(t)$, $B_{k,j}(t)$, ${p}^{c}_{m,j}(t)$}
     \KwOut{$\hat{\lambda}_{k,j}(t)$, $\hat{c}_{m,j}(t)$, $\hat{\vec{u}}_{k,m,j}(t)$}
@@ -405,29 +409,21 @@ Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fix
             }$\;
         }
     }
-    % \For{$t=0,1,2,\dots$}{
-        % \tcc{Get the index of the subset to update at $t$.}
-        % \ForPar{$y \in \mathcal{Y}_{n}$}{
-        % }
-    % }
 \end{algorithm}
 
-\begin{theorem}[Convergence of Algorithm \ref{alg_3}]
-    When $t\to\infty$, Algorithm \ref{alg_3} will converge, i.e., $\lim_{t\to\infty} \hat{\lambda}_{k,j}(t) = {\lambda}_{k,j}$, $\lim_{t\to\infty} \hat{c}_{m,j}(t) = {c}_{m,j}$ and $\lim_{t\to\infty} \hat{\vec{u}}_{m,j}(t) = \vec{u}_{m,j}$ ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
-    % As a remark notice that, the convergence of $\hat{u}_{m,j,\xi}$ could be accelerated via cooperation of APs sharing stale observation which obviously dose not affect the correctness of estimation.
-\end{theorem}
+It is obvious that when $t\to\infty$, Algorithm \ref{alg_2} will converge, i.e., $\lim_{t\to\infty} \hat{\lambda}_{k,j}(t) = {\lambda}_{k,j}$, $\lim_{t\to\infty} \hat{c}_{m,j}(t) = {c}_{m,j}$ and $\lim_{t\to\infty} \hat{\vec{u}}_{m,j}(t) = \vec{u}_{m,j}$ ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
+% As a remark notice that, the convergence of $\hat{u}_{m,j,\xi}$ could be accelerated via cooperation of APs sharing stale observation which obviously dose not affect the correctness of estimation.
+% \begin{proof}
+%     Note that the statistics $\hat{\lambda}_{k,j}$, $\hat{c}_{m,j}$ and $\hat{\vec{u}}_{m,j}$ are updated with unbiased observation, the convergence is straightforward according to Theorem 1 in Chapter I of \cite{voinov2012unbiased}.
+% \end{proof}
 
-\begin{proof}
-    Note that the statistics $\hat{\lambda}_{k,j}$, $\hat{c}_{m,j}$ and $\hat{\vec{u}}_{m,j}$ are updated with unbiased observation, the convergence is straightforward according to Theorem 1 in Chapter I of \cite{voinov2012unbiased}.
-\end{proof}
-
-\begin{remark}[Learning Efficiency of Algorithm \ref{alg_3}]
-    \hongyc{
+\begin{remark}[Learning Efficiency of Algorithm \ref{alg_2}]
+    {
         In conventional reinforcement learning algorithms, the value function should be evaluated for at least a large subset of system states or state-action paris before the convergence.
         Moreover, the value function of a system state can be updated only when this system state appears after state transitions (which is impractical for our problem which is with enormous state space or action space), which leads to large computation complexity and convergence time.
         In the proposed reinforcement learning algorithm, however, we only learn the unknown statistics of the value function by tracking their unbiased observations.
         Hence, the proposed algorithm could converge faster.
-    }
+    }%
 \end{remark}
 %----------------------------------------------------------------------------------------%
 %----------------------------------------------------------------------------------------%
