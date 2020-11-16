@@ -187,7 +187,7 @@ Hence, we first define the following sequence of AP subsets, where each subset a
         \label{eqn:subset_cup}
         \\
         \esSet_{y} \cap \esSet_{y'} &=\emptyset, y' \neq y~(\forall y',y \in \mathcal{Y}_{n}).
-        \label{eqn:subset_disjoint}
+        \label{eqn:subset_disjoint}N
     \end{align}
 \end{definition}
 The condition in equation (\ref{eqn:subset_cup}) is to ensure all the APs can update their dispatching actions periodically; whereas the condition in equation (\ref{eqn:subset_disjoint}) is to ensure APs in the conflict AP sets of each other will not update their dispatching actions in the same broadcast interval.
@@ -229,6 +229,11 @@ At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ a
 \end{align}
 }
 
+\hongyc{As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
+At the $t$-th broadcast interval, the dispatching actions is given by
+\begin{align}
+    \tilde{\Policy}(\Stat(t), \Delay(t)) = \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
+\end{align}}%
 Moreover, we have the following conclusion on the decomposition of P2.
 \begin{lemma}[]
     The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs {for each subset partition}.
@@ -236,8 +241,8 @@ Moreover, we have the following conclusion on the decomposition of P2.
     \small{
     \begin{align}
         &\textbf{P3:}~
-        \min_{ {\mathcal{A}}_{y}(t+1) }
-        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), {\mathcal{A}}_{y}(t+1) }}
+        \min_{ \tilde{\Policy}_{y}(\Stat(t),\Delay(t)) }
+        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \tilde{\Policy}_{y}(\Stat(t),\Delay(t)) }}
         \nonumber\\
         &~~~~\sum_{j\in\jSpace}
         \Brace{
@@ -260,7 +265,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
     At the $t$-th broadcast interval, the $y$-th AP in the subset $\mathcal{Y}_{n}$ updates its dispatching actions, which could only affect the future cost raised on itself and its corresponding \emph{candidate server set}, i.e., the part of its OSI.
     Hence, it's obvious that the expression of equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$).
 \end{proof}
-The optimization of dispatching actions $\mathcal{A}_{y}(t+1)$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational complexity is $O(J|\mathcal{M}_{y}|)$.
+The optimization of dispatching actions $\tilde{\Policy}_{y}(\Stat(t),\Delay(t))$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational complexity is $O(J|\mathcal{M}_{y}|)$.
 % \hongyc{(Moreover, the brutal seraching could use reduced expression of vaultion function)}
 As a result, the overall algorithm of job dispatching, namely \algname, is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
@@ -302,11 +307,6 @@ Moreover, we use the following example to illustrate the procedure of Algorithm 
     \end{figure*}
 \end{example}
 
-\hongyc{As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
-At the $t$-th broadcast interval, the dispatching actions is given by
-\begin{align}
-    \tilde{\Policy}(\Stat(t), \Delay(t)) \define \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
-\end{align}}%
 As a remark notice that since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to {the size of candidate edge server set}, it can be deployed in a scenario with massive APs and edge servers, as long as the {the number of candidate edge servers for each AP} is limited.
 
 \subsection{Analytical and Semi-Analytical Performance Bounds}
