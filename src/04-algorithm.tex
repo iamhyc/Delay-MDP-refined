@@ -367,19 +367,19 @@ The following lemma shows the this analytical expression is a performance lower 
 % Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.
 The above cost upper bound $W_{\Baseline}(\Stat)$ is obtained by assuming all the APs fix the target edge servers for task computation.
 Its gap to the performance of the proposed policy, denoted as $W_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$, is mainly due to the adaptive job dispatching of the proposed policy.
-A tighter semi-analytical cost upper bound is provided below for quick performance evaluation.
+Therefore, a tighter semi-analytical cost upper bound is provided below which could be used for quick performance evaluation.
 \begin{lemma}[Semi-Analytical Cost Upper Bound]
-    Let $T$ be the arbitrary positive integer,
+    Let $T$ be arbitrary positive integer,
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \leq W_{\hat{\Baseline}}^{(T)}(\Stat)
         % \\\nonumber
         = &\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay}\Bracket{g\Paren{\Stat(t)} | \Stat(1)=\Stat}
         \\\nonumber
-        &+ \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}\Paren{\Stat(T+1)}}.
+        &+\gamma^{T} \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}\Paren{\Stat(T+1)}}.
     \end{align}
-    Moreover, the gap $e(T) = W^{(T)}_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$ is monotonically decreasing with respect to $T$.
+    Moreover, the gap $e(T) = W^{(T)}_{\hat{\Baseline}}(\Stat) - W_{\tilde{\Policy}}(\Stat)$ is monotonically decreasing with respect to $T$.
 \end{lemma}
-In the above cost upper bound, the first item $\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}[g(\Stat(t))]$ has to be evaluated numerically, but the second item $\mathbb{E}_{\Stat(T+1)}[{W^{\Baseline}_{\Baseline}(\Stat(T+1))}]$ can be calculated analytically.
+In the above cost upper bound, the first item $\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay}[g(\Stat(t))]$ has to be evaluated numerically, but the second item $\mathbb{E}^{\Baseline}_{\Stat(T+1)}[{W_{\Baseline}(\Stat(T+1))}]$ can be calculated analytically.
 Hence, it is a semi-analytical bound.
 
 %----------------------------------------------------------------------------------------%
