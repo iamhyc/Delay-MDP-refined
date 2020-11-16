@@ -366,16 +366,18 @@ The following lemma shows the this analytical expression is a performance lower 
 % Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
 % Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.
 The above cost upper bound $W_{\Baseline}(\Stat)$ is obtained by assuming all the APs fix the target edge servers for task computation.
-Its gap to the performance of the proposed policy, denoted as $W_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$ ($\forall \Stat$) is mainly due to the adaptive job dispatching of the proposed policy.
+Its gap to the performance of the proposed policy, denoted as $W_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$, is mainly due to the adaptive job dispatching of the proposed policy.
 A tighter semi-analytical cost upper bound is provided below for quick performance evaluation.
 \begin{lemma}[Semi-Analytical Cost Upper Bound]
     Let $T$ be the arbitrary positive integer,
     \begin{align}
-        W_{\tilde{\Policy}}(\Stat) &\leq 
+        W_{\tilde{\Policy}}(\Stat) \leq W_{\hat{\Baseline}}^{(T)}(\Stat)
+        % \\\nonumber
+        = &\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay}\Bracket{g\Paren{\Stat(t)} | \Stat(1)=\Stat}
         \\\nonumber
-        & = \sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}\Bracket{g(\Stat(t))} + \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}(\Stat(T+1))}.
+        &+ \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}\Paren{\Stat(T+1)}}.
     \end{align}
-    Moreover, the gap $e(T) = $ is monotonically decreasing with respect to $T$.
+    Moreover, the gap $e(T) = W^{(T)}_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$ is monotonically decreasing with respect to $T$.
 \end{lemma}
 In the above cost upper bound, the first item $\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}[g(\Stat(t))]$ has to be evaluated numerically, but the second item $\mathbb{E}_{\Stat(T+1)}[{W^{\Baseline}_{\Baseline}(\Stat(T+1))}]$ can be calculated analytically.
 Hence, it is a semi-analytical bound.
@@ -395,7 +397,7 @@ Hence, it is a semi-analytical bound.
     \end{itemize}
     % Here, we further denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise); the computation time of the departure is denoted as $p^{c}_{m,j}(t)$ if $\alpha_{m,j}=1$; the estimation of $c_{m,j}$ is equivalent to sample a geometric distribution ($\forall m\in\esSet,j\in\jSpace$).
     %  For convenience, we denote $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$ and the estimation of $\vec{u}_{k,m,j}$ is easy by observing the uploading job state $\vec{R}^{(k)}_{m,j}(t)$ change on APs ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
-    Denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise) and $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$, the reinforcement learning algorithm to track the above statistical parameters is elaborated in Algorithm \ref{alg_2}.
+    Denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise), the computation time of the departure as $p^{c}_{m,j}(t)$ and $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$, the reinforcement learning algorithm to track the above statistical parameters is elaborated in Algorithm \ref{alg_2}.
     As a remark notice that, the statistical parameters estimation is at time-slot level and could be shared with other APs and edge servers via broadcast information.
     % And the update of statistics would take effect exactly when the broadcast information is partially received by the conflict AP set.
     % Hence, the convergence is not affected by the information staleness introduced in periodic broadcast and \brlatency.
