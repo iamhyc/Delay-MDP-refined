@@ -119,7 +119,7 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
             \theta^{(k,\Baseline)}_{m,j}(\Xi,t)
             }$},
         where 
-        \begin{align}
+        \begin{align*}
             \theta^{(k,\Baseline)}_{m,j}(\xi,t) \define 
             \begin{cases}
                 \lambda_{k,j} I[\omega_{k,j}(t)=m], & \xi=0
@@ -127,7 +127,7 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
                 R^{(k)}_{m,j} = 1, & \text{otherwise}
                 % \Pr\{R^{(k)}_{m,j}(\xi,t,0) = 1\}, & \text{otherwise}
             \end{cases}
-        \end{align}
+        \end{align*}
         denotes the probability that there is one type-$j$ job have been delivered from $k$-th AP to $m$-th edge server for $\xi$ time slots at the very beginning of the $t$-th broadcast interval, when the baseline policy $\Baseline$ is adopted;
         \item $\Gamma^{(k)}_{m,j} \in \mathbb{R}^{(\Xi+1)\times(\Xi+1)}$ denotes the transition matrix of $\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t)$ ($\forall t$) under baseline policy $\Baseline$ whose entries are provided in Appendix \ref{append_1}.
     \end{itemize}
@@ -313,9 +313,10 @@ As a remark notice that since in Algorithm \ref{alg_1}, the computation complexi
 \label{subsec:analysis}
 In most of the existing approximate MDP solutions \cite{mdp-bound1,mdp-bound2,mdp-bound3}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate value function.
-\hongyc{Furthermore, a tight performance lower bound is proposed based on an \emph{$1$-step improved policy}, which could be obtained via a semi-analytical method.}
-Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
-This conclusion is summarized below.
+The following lemma shows the this analytical expression is a performance lower bound (cost upper bound) of our proposed policy in Algorithm \ref{alg_1}, which is denoted as $W_{\Baseline}(\Stat)$.
+% {Furthermore, a tight performance lower bound is proposed based on an \emph{$1$-step improved policy}, which could be obtained via a semi-analytical method.}
+% Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
+% This conclusion is summarized below.
 % We have the following conclusion on the performance of the above proposed algorithm.
 \begin{lemma}[Analytical Cost Upper Bound]
     \label{lemma:bound}
@@ -323,30 +324,9 @@ This conclusion is summarized below.
     {\small
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \define
-        \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay} \Bracket{
-            g\Paren{\Stat(t')} \Big| \Stat(1)=\Stat
-        }.
-    \end{align}
-    }%
-    \hongyc
-    {We denote the \emph{$1$-step improved policy} as $\hat{\Baseline}$, which is an intermediate between the baseline policy and the proposed policy.
-    Specifically, $\hat{\Baseline}$ would update the dispatching actions following the Algorithm \ref{alg_1} in the first interval (saying the $t$-th interval) (i.e., at the same timeslot with same subset of APs), and then fixes the actions in the following intervals.
-    The explicit definitions are given as follows.}%
-    {\small
-    \begin{align}
-        \hat{\Baseline}\Paren{\Stat(t), \Delay(t)} \define 
-        \begin{cases}
-            \tilde{\Policy}({\Stat(0), \Delay(0)}), &t=1
-            \\
-            \tilde{\Policy}({\Stat(1), \Delay(1)}), &\text{otherwise}
-        \end{cases}.
-    \end{align}
-    }%
-    Let $V_{\hat{\Baseline}}(\cdot)$ be the value function of the \emph{$1$-step improved policy} $\hat{\Baseline}$, i.e.,
-    {\small
-    \begin{align}
-        V_{\hat{\Baseline}}(\Stat) = \mathbb{E}_{\Delay}\Bracket{ g\Paren{\Stat(1)} + \gamma W_{\hat{\Baseline}}\Paren{\Stat(2)} | \Stat(1)=\Stat },
-        % \sum_{\tau=0}^{n-1} \gamma^{\tau} E[c(t+\tau)] + \gamma^{n-1} W_{\hat{\Baseline}}(\Stat(t+n)),
+        \sum_{t=1}^{\infty} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay} \Bracket{
+            g\Paren{\Stat(t)} \Big| \Stat(1)=\Stat
+        },
     \end{align}
     }%
     we have
@@ -354,19 +334,51 @@ This conclusion is summarized below.
     \begin{align}
         V(\Stat)
         \leq W_{\tilde{\Policy}}(\Stat)
-        \leq V_{\hat{\Baseline}}(\Stat)
+        % \leq V_{\hat{\Baseline}}(\Stat)
         \leq W_{\Baseline}(\Stat),
         \forall \Stat.
     \end{align}
     }%
-    \hongyc{Moreover, as the broadcast interval is random, it is hard to obtain closed-form analytical expression for the tight performance bound $V_{\hat{\Baseline}}(\Stat)$ and a semi-analytical method is proposed.}
+    % \hongyc{We denote the \emph{$1$-step improved policy} as $\hat{\Baseline}$, which is an intermediate between the baseline policy and the proposed policy. Specifically, $\hat{\Baseline}$ would update the dispatching actions following the Algorithm \ref{alg_1} in the first interval (saying the $t$-th interval) (i.e., at the same timeslot with same subset of APs), and then fixes the actions in the following intervals. The explicit definitions are given as follows.}%
+    % {\small
+    % \begin{align}
+    %     \hat{\Baseline}\Paren{\Stat(t), \Delay(t)} \define 
+    %     \begin{cases}
+    %         \tilde{\Policy}({\Stat(0), \Delay(0)}), &t=1
+    %         \\
+    %         \tilde{\Policy}({\Stat(1), \Delay(1)}), &\text{otherwise}
+    %     \end{cases}.
+    % \end{align}
+    % }%
+    % Let $V_{\hat{\Baseline}}(\cdot)$ be the value function of the \emph{$1$-step improved policy} $\hat{\Baseline}$, i.e.,
+    % {\small
+    % \begin{align}
+    %     V_{\hat{\Baseline}}(\Stat) = \mathbb{E}_{\Delay}\Bracket{ g\Paren{\Stat(1)} + \gamma W_{\hat{\Baseline}}\Paren{\Stat(2)} | \Stat(1)=\Stat },
+    %     % \sum_{\tau=0}^{n-1} \gamma^{\tau} E[c(t+\tau)] + \gamma^{n-1} W_{\hat{\Baseline}}(\Stat(t+n)),
+    % \end{align}
+    % }%
+    % \hongyc{Moreover, as the broadcast interval is random, it is hard to obtain closed-form analytical expression for the tight performance bound $V_{\hat{\Baseline}}(\Stat)$ and a semi-analytical method is proposed.}
 \end{lemma}
 \begin{proof}
     Please refer to Appendix \ref{append_3}.
 \end{proof}
-Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
-Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.
-% the average system cost of the proposed algorithm is upper bounded by $W_{\Baseline}(\Stat)$ ($\forall \Stat$) which means it is always better than the baseline policy. 
+
+% Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
+% Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.
+The above cost upper bound $W_{\Baseline}(\Stat)$ is obtained by assuming all the APs fix the target edge servers for task computation.
+Its gap to the performance of the proposed policy, denoted as $W_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$ ($\forall \Stat$) is mainly due to the adaptive job dispatching of the proposed policy.
+A tighter semi-analytical cost upper bound is provided below for quick performance evaluation.
+\begin{lemma}[Semi-Analytical Cost Upper Bound]
+    Let $T$ be the arbitrary positive integer,
+    \begin{align}
+        W_{\tilde{\Policy}}(\Stat) &\leq 
+        \\\nonumber
+        & = \sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}\Bracket{g(\Stat(t))} + \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}(\Stat(T+1))}.
+    \end{align}
+    Moreover, the gap $e(T) = $ is monotonically decreasing with respect to $T$.
+\end{lemma}
+In the above cost upper bound, the first item $\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}[g(\Stat(t))]$ has to be evaluated numerically, but the second item $\mathbb{E}_{\Stat(T+1)}[{W^{\Baseline}_{\Baseline}(\Stat(T+1))}]$ can be calculated analytically.
+Hence, it is a semi-analytical bound.
 
 %----------------------------------------------------------------------------------------%
 \section{Reinforcement Learning Algorithm}
