@@ -229,7 +229,7 @@ At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ a
 \end{align}
 }
 
-\hongyc{As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
+{As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
 At the $t$-th broadcast interval, the dispatching actions is given by
 \begin{align}
     \tilde{\Policy}(\Stat(t), \Delay(t)) = \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
@@ -313,7 +313,7 @@ As a remark notice that since in Algorithm \ref{alg_1}, the computation complexi
 \label{subsec:analysis}
 In most of the existing approximate MDP solutions \cite{mdp-bound1,mdp-bound2,mdp-bound3}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate value function.
-The following lemma shows the this analytical expression is a performance lower bound (cost upper bound) of our proposed policy in Algorithm \ref{alg_1}, which is denoted as $W_{\Baseline}(\Stat)$.
+The following lemma shows the this analytical expression is a performance lower bound (cost upper bound) of our proposed policy in Algorithm \ref{alg_1}.
 % {Furthermore, a tight performance lower bound is proposed based on an \emph{$1$-step improved policy}, which could be obtained via a semi-analytical method.}
 % Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
 % This conclusion is summarized below.
@@ -369,7 +369,7 @@ The above cost upper bound $W_{\Baseline}(\Stat)$ is obtained by assuming all th
 Its gap to the performance of the proposed policy, denoted as $W_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$, is mainly due to the adaptive job dispatching of the proposed policy.
 Therefore, a tighter semi-analytical cost upper bound is provided below which could be used for quick performance evaluation.
 \begin{lemma}[Semi-Analytical Cost Upper Bound]
-    Let $T$ be arbitrary positive integer,
+    Let $T$ be arbitrary positive integer, then
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \leq W_{\hat{\Baseline}}^{(T)}(\Stat)
         % \\\nonumber
@@ -378,16 +378,19 @@ Therefore, a tighter semi-analytical cost upper bound is provided below which co
         &+\gamma^{T} \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}\Paren{\Stat(T+1)}}.
     \end{align}
     Moreover, the gap $e(T) = W^{(T)}_{\hat{\Baseline}}(\Stat) - W_{\tilde{\Policy}}(\Stat)$ is monotonically decreasing with respect to $T$.
+    \label{lemma:semi-bound}
 \end{lemma}
-In the above cost upper bound, the first item $\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay}[g(\Stat(t))]$ has to be evaluated numerically, but the second item $\mathbb{E}^{\Baseline}_{\Stat(T+1)}[{W_{\Baseline}(\Stat(T+1))}]$ can be calculated analytically.
-Hence, it is a semi-analytical bound.
+\begin{proof}
+    Please refer to Appendix \ref{append_4}.
+\end{proof}
+In the above cost upper bound, the first item $\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay}[g(\Stat(t))]$ has to be evaluated numerically, but the second item $\mathbb{E}^{\Baseline}_{\Stat(T+1)}[{W_{\Baseline}(\Stat(T+1))}]$ can be calculated analytically according to Lemma \ref{lemma:bound}.
+The performance of both cost upper bounds will be illustrated in the following simulation section.
 
 %----------------------------------------------------------------------------------------%
 \section{Reinforcement Learning Algorithm}
 \label{sec:rl-alg}
 {
-    In the previous section, the approximate value function $W_{\Baseline}(\Stat)$ is derived analytically.
-    However, the calculation of $ W_{\Baseline}(\Stat)$ requires the priori knowledge on the distributions in this system, i.e., the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice.
+    Although, the approximate value function $W_{\Baseline}(\Stat)$ is derived analytically in the previous section, the calculation of $ W_{\Baseline}(\Stat)$ requires the priori knowledge on the distributions in this system, i.e., the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice.
     Therefore, we extend the \algname~with an efficient reinforcement learning approach.
     Specifically, with the explicit analytical expressions of $\tilde{W}^{\AP}_{k,m,j}$ and $\tilde{W}^{\ES}_{m,j}$ in Lemma \ref{lemma:w_ap} and Lemma \ref{lemma:w_es}, respectively, we only need to learn the following statistical parameters ($\forall k\in\apSet,m\in\esSet, j\in\jSpace$).
     \begin{itemize}
@@ -397,7 +400,7 @@ Hence, it is a semi-analytical bound.
     \end{itemize}
     % Here, we further denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise); the computation time of the departure is denoted as $p^{c}_{m,j}(t)$ if $\alpha_{m,j}=1$; the estimation of $c_{m,j}$ is equivalent to sample a geometric distribution ($\forall m\in\esSet,j\in\jSpace$).
     %  For convenience, we denote $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$ and the estimation of $\vec{u}_{k,m,j}$ is easy by observing the uploading job state $\vec{R}^{(k)}_{m,j}(t)$ change on APs ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
-    Denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise), the computation time of the departure as $p^{c}_{m,j}(t)$ and $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$, the reinforcement learning algorithm to track the above statistical parameters is elaborated in Algorithm \ref{alg_2}.
+    Denote the event of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if there is job departure and $0$ otherwise), the computation time of the departure job as $p^{c}_{m,j}(t)$ and $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}=1\}, \dots, \Pr\{U_{k,m,j}=\Xi\}]$, the reinforcement learning algorithm to track the above statistical parameters is elaborated in Algorithm \ref{alg_2}.
     As a remark notice that, the statistical parameters estimation is at time-slot level and could be shared with other APs and edge servers via broadcast information.
     % And the update of statistics would take effect exactly when the broadcast information is partially received by the conflict AP set.
     % Hence, the convergence is not affected by the information staleness introduced in periodic broadcast and \brlatency.
