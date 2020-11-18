@@ -413,17 +413,18 @@ The performance of both cost upper bounds will be illustrated in the following s
     \KwIn{$\vec{R}^{(k)}_{m,j}(t)$, $B_{k,j}(t)$, ${p}^{c}_{m,j}(t)$}
     \KwOut{$\hat{\lambda}_{k,j}(t)$, $\hat{c}_{m,j}(t)$, $\hat{\vec{u}}_{k,m,j}(t)$}
     Initialize $\hat{\lambda}_{k,j}(t)$, $\hat{c}_{m,j}(t)$, $\hat{\vec{u}}_{k,m,j}(t)$ as zero ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).\;
-    $t \gets 0$\;
+    $t \gets 0, t_c \gets 0$\;
     \While{not converge}{
         $t \gets t + 1$\;
         \ForPar{$k\in\apSet$, $m\in\esSet$, $j\in\jSpace$}{
             $\hat{\lambda}_{k,j}(t) \gets \frac{t-1}{t} \hat{\lambda}_{k,j}(t-1) + \frac{1}{t} I[B_{k,j}(t)=1]$\;
-            $\hat{c}_{m,j}(t) \gets \frac{t-1}{t} \hat{c}_{m,j}(t-1) + \frac{1}{t} [\alpha_{m,j}{p}^{c}_{m,j}(t) + (1-\alpha_{m,j})\hat{c}_{m,j}(t-1)]$\;
             $\hat{\vec{u}}_{k,m,j}(t) \gets \frac{t-1}{t} \hat{\vec{u}}_{k,m,j}(t-1) + \frac{
                 I[\vec{R}^{(k)}_{m,j}(t)=0] \cdot I[\vec{R}^{(k)}_{m,j}(t-1)\neq 0]
             }{
                 t || I[\vec{R}^{(k)}_{m,j}(t)=0] \cdot I[\vec{R}^{(k)}_{m,j}(t-1)\neq 0] ||_{2}
             }$\;
+            \hongyc{(need an if-conditon here)\;}
+            $\hat{c}_{m,j}(t) \gets \frac{t_c-1}{t_c} \hat{c}_{m,j}(t-1) + \frac{1}{t_c} [\alpha_{m,j}{p}^{c}_{m,j}(t) + (1-\alpha_{m,j})\hat{c}_{m,j}(t-1)]$\;
         }
     }
 \end{algorithm}
