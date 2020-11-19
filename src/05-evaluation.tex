@@ -96,13 +96,17 @@ This demonstrates its high dispatching efficiency.
 %NOTE: Reinforcement Learning Analysis
 \subsection{Convergence Analysis}
 \label{subsec:converge}
-\hongyc{
-    The convergence property of the proposed reinforcement learning algorithm is illustrated in Fig.\ref{fig:rl_plot}.
-    It can be observed that the learning procedures for all the three statistical parameters converge after at most $??$ broadcast intervals, which is far before the system achieving the balance dynamic under the dispatching policy.
-    On the other hand, the number of observations required for the convergence of conventional reinforcement learning algorithms is usually larger for enormous system and action space.
-    This demonstrates the efficiency of the proposed reinforcement learning algorithm, which benefits from the derived expression the the approximate value function.
-    % performance compared with prior-knowledge
-}
+The convergence property of the proposed reinforcement learning algorithm is illustrated in Fig.\ref{fig:rl_plot}.
+It can be observed that the learning procedures for all the three statistical parameters converge after at most $100$ broadcast intervals, which is far before the system achieving the balance dynamic under the dispatching policy.
+On the other hand, the number of observations required for the convergence of conventional reinforcement learning algorithms is usually larger for enormous system and action space.
+This demonstrates the efficiency of the proposed reinforcement learning algorithm, which benefits from the derived expression the the approximate value function.
+% performance compared with prior-knowledge
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.45\textwidth]{the-rl-fitting.pdf}
+    \caption{Illustration of reinforcement learning algorithm.}
+    \label{fig:rl_plot}
+\end{figure}   
 
 \subsection{Sensitivity Study}
 \label{subsec:advance}
