@@ -79,12 +79,14 @@ In the former figure, the average job response times, measuring the average numb
 It can be observed that the proposed policy still outperforms all the benchmarks.
 In Fig.\ref{fig:bar_plot}(c), the job dropping rates, measuring the ratio of jobs dropped by edge servers due to queue overflow, are also compared.
 It is shown that the proposed policy outperforms other three benchmarks with the minimum average cost and job response time.
-And there is no dropping jobs incurred compared with the Selfish policy, which is the initial baseline policy for our proposed algorithm.
+\hongyc{And there is no dropping jobs incurred compared with the Selfish policy, which is the initial baseline policy for our proposed algorithm.}
 Finally, an realization of job dispatching is illustrated in Fig.\ref{fig:general_timeline}, where the number of jobs in the system is plot versus the index of broadcast interval.
 It can be observed that the proposed policy manage to keep the number of jobs in lower level, compared with the other benchmarks.
 This demonstrates its high dispatching efficiency.
 
-\hongyc{(In Fig. \ref{fig:semi-bound}, show the performance gap $e(T)$ monotonic decreasing with respect to the proposed policy.)}
+\hongyc{
+    In Fig. \ref{fig:semi-bound}, it shows that the performance of proposed policy is always below the semi-analytical cost upper bound $W^{(T)}_{\hat{\Baseline}}(\Stat)$ (with a typical initial state with no jobs in the system) for any $T$ , and the performance gap $e(T)$ decreases monotonically with respect to $T$.
+}%
 
 %-----------------------------------------------------------------------------------------------%
 \begin{figure}[ht!]                                                                             %

@@ -424,8 +424,11 @@ The performance of both cost upper bounds will be illustrated in the following s
             }{
                 t || I[\vec{R}^{(k)}_{m,j}(t)=0] \cdot I[\vec{R}^{(k)}_{m,j}(t-1)\neq 0] ||_{2}
             }$\;
-            \hongyc{(need an if-conditon here)\;}
-            $\hat{c}_{m,j}(t) \gets \frac{t_c-1}{t_c} \hat{c}_{m,j}(t-1) + \frac{1}{t_c} [\alpha_{m,j}{p}^{c}_{m,j}(t) + (1-\alpha_{m,j})\hat{c}_{m,j}(t-1)]$\;
+            \If{$\alpha_{m,j}==1$}{
+                $\hat{c}_{m,j}(t) \gets \frac{t_c-1}{t_c} \hat{c}_{m,j}(t-1) + \frac{1}{t_c} {p}^{c}_{m,j}(t)$\;
+                $t_c \gets t_c + 1$\;
+            }
+            % $\hat{c}_{m,j}(t) \gets \frac{t_c-1}{t_c} \hat{c}_{m,j}(t-1) + \frac{1}{t_c} [\alpha_{m,j}{p}^{c}_{m,j}(t) + (1-\alpha_{m,j})\hat{c}_{m,j}(t-1)]$\;
         }
     }
 \end{algorithm}
