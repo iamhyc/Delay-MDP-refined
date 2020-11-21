@@ -84,6 +84,8 @@ Finally, an realization of job dispatching is illustrated in Fig.\ref{fig:genera
 It can be observed that the proposed policy manage to keep the number of jobs in lower level, compared with the other benchmarks.
 This demonstrates its high dispatching efficiency.
 
+\hongyc{(In Fig. \ref{fig:semi-bound}, show the performance gap $e(T)$ monotonic decreasing with respect to the proposed policy.)}
+
 %-----------------------------------------------------------------------------------------------%
 \begin{figure}[ht!]                                                                             %
     \centering                                                                                  %
@@ -91,6 +93,16 @@ This demonstrates its high dispatching efficiency.
     \caption{Illustration of cost versus index of broadcast interval.}
     \label{fig:general_timeline}                                                                %
 \end{figure}                                                                                    %
+%-----------------------------------------------------------------------------------------------%
+
+%TODO:
+%-----------------------------------------------------------------------------------------------%
+% \begin{figure}[ht!]                                                                             %
+%     \centering                                                                                  %
+%     \includegraphics[width=0.45\textwidth]{the-semi-bound-analysis.pdf}                     %
+%     \caption{Illustration of Performance Gap Monotonically Decreasing.}
+%     \label{fig:semi-bound}                                                                %
+% \end{figure}                                                                                    %
 %-----------------------------------------------------------------------------------------------%
 
 %NOTE: Reinforcement Learning Analysis
@@ -106,7 +118,7 @@ This demonstrates the efficiency of the proposed reinforcement learning algorith
     \includegraphics[width=0.45\textwidth]{the-rl-fitting.pdf}
     \caption{Illustration of reinforcement learning algorithm.} 
     \label{fig:rl_plot}
-\end{figure}   
+\end{figure}
 
 \subsection{Sensitivity Study}
 \label{subsec:advance}
@@ -115,12 +127,12 @@ This demonstrates the efficiency of the proposed reinforcement learning algorith
     \centering                                                                      %
     \begin{minipage}[b]{0.30\textwidth}                                             %
         \includegraphics[width=\textwidth]{the-delay-small.pdf} \\              %
-        {(a) \brlatency~as $5$ timeslots.}                                              %
+        {(a) \brlatency~as $5$ time slots.}                                              %
         \\ %NOTE: extra filling line                                                %
     \end{minipage}                                                                  %
     \begin{minipage}[b]{0.30\textwidth}                                             %
         \includegraphics[width=\textwidth]{the-delay-medium.pdf} \\             %
-        {(b) \brlatency~as $12$ timeslots.}           %
+        {(b) \brlatency~as $12$ time slots.}           %
     \end{minipage}                                                                  %
     \begin{minipage}[b]{0.30\textwidth}                                             %
         \includegraphics[width=\textwidth]{the-delay-large.pdf} \\               %
