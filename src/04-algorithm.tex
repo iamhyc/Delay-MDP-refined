@@ -327,6 +327,7 @@ The following lemma shows the this analytical expression is a performance lower 
         \sum_{t=1}^{\infty} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay} \Bracket{
             g\Paren{\Stat(t)} \Big| \Stat(1)=\Stat
         },
+        \label{eqn:bound}
     \end{align}
     }%
     we have
@@ -376,6 +377,7 @@ Therefore, a tighter semi-analytical cost upper bound is provided below which co
         = &\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay}\Bracket{g\Paren{\Stat(t)} | \Stat(1)=\Stat}
         \\\nonumber
         &+\gamma^{T} \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}\Paren{\Stat(T+1)}}.
+        \label{eqn:semi-bound}
     \end{align}
     Moreover, the gap $e(T) = W^{(T)}_{\hat{\Baseline}}(\Stat) - W_{\tilde{\Policy}}(\Stat)$ is monotonically decreasing with respect to $T$.
     \label{lemma:semi-bound}

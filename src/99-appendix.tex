@@ -180,7 +180,7 @@ Let
         -  g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t)}
     }
 \end{align*}
-}
+}%
 denote the improvement of the $t$-th policy update.
 According to Proposition 2.3.3 (a) in \cite{dp-control}, we have $\Delta(t)\geq 0$, $\forall t$.
 
@@ -216,11 +216,18 @@ Hence,
 
 \section{ Proof of Lemma \ref{lemma:semi-bound} }
 \label{append_4}
-\hongyc{
-    1. firstly, it is a bound;
+Firstly, it is obvious that $W^{(T)}_{\hat{\Baseline}}(\Stat)$ is a cost upper bound for the proposed policy $\tilde{\Policy}$.
+\hongyc{(split equation (\ref{eqn:bound}) into two part, one is the numerical part in equation (\ref{eqn:semi-bound}), the other one is bounded by the analytical part in equation (\ref{eqn:semi-bound}) as illustrated in the proof given in Appendix \ref{append_3}.)}
+{\small
+\begin{align}
+    W_{\tilde{\Policy}}(\Stat) =&
+    \sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay} \Bracket{ g\Paren{\Stat(t)} | \Stat(1)=\Stat }
+    +
+    \nonumber\\
+    &\sum_{t=T+1}^{\infty} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay} \Bracket{ g\Paren{\Stat(t)} | \Stat(T) }.
+\end{align}
+}%
+Secondly, the performance gap $e(T)$ monotonically decreases with respect to $T$.
+% Finally, why we need a semi-analytical solution, instead of analytical proof.
 
-    2. secondly, it is monotonically decreasing;
-
-    3. thirdly, why we need a semi-analytical solution, instead of analytical proof.
-}
 %----------------------------------------------------------------------------------------%
