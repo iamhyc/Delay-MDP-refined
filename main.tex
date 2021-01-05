@@ -1,7 +1,8 @@
 % \documentclass[journal, 12pt, onecolumn, draftclsnofoot]{IEEEtran} %JSAC 20'
 % \documentclass[sigconf]{acmart} %ACM Mobihoc 20'
 % \documentclass[conference]{IEEEtran} %ICDCS 20'
-\documentclass[10pt,journal,compsoc]{IEEEtran} %TMC 20'
+% \documentclass[10pt,journal,compsoc]{IEEEtran} %TMC 20'
+\documentclass[journal]{IEEEtran} %IOTJ 21'
 % \IEEEoverridecommandlockouts
 \usepackage[linesnumbered,vlined,ruled]{algorithm2e}
 \usepackage{algorithmic}
@@ -98,12 +99,34 @@
     % partial and outdated information 
     
     \author{
-        Yuncong~Hong,%~\IEEEmembership{Student Member,~IEEE,}
-        Bojie~Lv,%~\IEEEmembership{Student Member,~IEEE,}
-        Rui~Wang,%~\IEEEmembership{Member,~IEEE,}
-        Haisheng~Tan,%~\IEEEmembership{Senior Member,~IEEE,}
-        Zhenhua~Han,%~\IEEEmembership{Member,~IEEE,}
+        Yuncong~Hong,
+        %~\IEEEmembership{Student Member,~IEEE,}
+        Bojie~Lv,~\IEEEmembership{Student Member,~IEEE,}
+        Rui~Wang,~\IEEEmembership{Member,~IEEE,}
+        Haisheng~Tan,~\IEEEmembership{Senior Member,~IEEE,}
+        Zhenhua~Han,~\IEEEmembership{Member,~IEEE,}
         and~Francis~C.M.~Lau%~\IEEEmembership{Member,~IEEE,}
+        \thanks{
+          Hong is with Southern University of Science and Technology (SUSTech), and the University of Hong Kong (HKU) (Corresponding Author. email: ychong@cs.hku.hk).
+        }
+        \thanks{
+          Lv is with with the Department of Electrical and Electronic Engineering, Southern University of Science and Technology (SUSTech) (email: lvbj@mail.sustech.edu.cn).
+        }
+        \thanks{
+          Wang is with the Department of Electrical and Electronic Engineering, Southern University of Science and Technology (SUSTech) (email: wang.r@sustech.edu.cn).
+        }
+        \thanks{
+          Han is with University of Science and Technology of China (USTC), and the University of Hong Kong (HKU) (email: zhenhua@connect.hku.hk).
+        }%
+        \thanks{
+          Tan is with the LINKE Lab,  University of Science and Technology of China (USTC), Hefei, China (email: hstan@ustc.edu.cn).
+        }%
+        \thanks{
+          Lau is with the Department of Computing Science, the University of Hong Kong (HKU), Hong Kong (email: fcmlau@cs.hku.hk).
+        }%
+        \thanks{
+          A preliminary version of this work titled ``Online Distributed Job Dispatching with Outdated and Partially-Observable Information'' was published in Proc. of the 16th Annual IEEE International Conference on Mobility, Sensing and Networking (MSN 2020), Tokyo, Japan, December 2020~\cite{hong2020online}.
+        }
     }%
     % \author{
     %     \IEEEauthorblockN{
@@ -129,9 +152,10 @@
     % \markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
     % {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Computer Society Journals}
 
-    \input{src/00-abstract}
+    % \input{src/00-abstract}
     \maketitle
-    
+    \input{src/00-abstract}
+
     \input{src/01-intro}
     % \input{src/02a-background}
     % \input{src/02b-motivation}
@@ -160,5 +184,5 @@
     \bibliographystyle{IEEEtrans}
     \bibliography{references/final.bib}
 
-    \input{src/100-biography}
+    % \input{src/100-biography}
 \end{document}
