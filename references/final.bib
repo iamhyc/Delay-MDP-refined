@@ -1,3 +1,5 @@
+#Books
+#==================================================================================#
 @book{voinov2012unbiased,
   title={Unbiased Estimators and Their Applications: Volume 1: Univariate Case},
   author={Voinov, V.G. and Nikulin, M.S.},
@@ -39,12 +41,12 @@
 }
 
 @book{dp-control,
-author = {Bertsekas, Dimitri P.},
-title = {Dynamic Programming and Optimal Control},
-year = {2000},
-isbn = {1886529094},
-publisher = {Athena Scientific},
-edition = {2nd}
+    author = {Bertsekas, Dimitri P.},
+    title = {Dynamic Programming and Optimal Control},
+    year = {2000},
+    isbn = {1886529094},
+    publisher = {Athena Scientific},
+    edition = {2nd}
 }
 
 @article{Little1961,
@@ -64,7 +66,40 @@ edition = {2nd}
     publisher={INFORMS},
     address={Institute for Operations Research and the Management Sciences (INFORMS), Linthicum, Maryland, USA}
 }
+#==================================================================================#
 
+
+% MAN Support
+#==================================================================================#
+@inproceedings{MAN-LATENCY,
+    author = {Gember, Aaron and Akella, Aditya and Pang, Jeffrey and Varshavsky, Alexander and Caceres, Ramon},
+    title = {Obtaining In-context Measurements of Cellular Network Performance},
+    booktitle = {2012 Internet Measurement Conference},
+    series = {IMC '12},
+    year = {2012},
+    isbn = {978-1-4503-1705-4},
+    location = {Boston, Massachusetts, USA},
+    pages = {287--300},
+    numpages = {14},
+    doi = {10.1145/2398776.2398807},
+    acmid = {2398807},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    keywords = {active measurement, cellular network performance, device context},
+}
+
+@techreport{MAN-ECI,
+  author      = {},
+  title       = {5G MEC IP Network White Paper, Carrier Network for Edge Computing in the 5G Era: Challenges and Advice},
+  institution = {HUAWEI},
+  year        = {2020},
+}
+
+#==================================================================================#
+
+
+# Our MDP Work
+#==================================================================================#
 @ARTICLE{mdp-jcin,
   author={B. {Lyu} and Y. {Hong} and H. {Tan} and Z. {Han} and R. {Wang}},
   journal={Journal of Communications and Information Networks}, 
@@ -74,15 +109,17 @@ edition = {2nd}
   number={1},
   pages={75-85},
 }
+
 @INPROCEEDINGS{mdp-globecom,
-author={S. {Huang} and B. {Lv} and R. {Wang}},
-booktitle={2019 IEEE Global Communications Conference (GLOBECOM)},
-title={MDP-Based Scheduling Design for Mobile-Edge Computing Systems with Random User Arrival},
-year={2019},
-volume={},
-number={},
-pages={1-6},
+    author={S. {Huang} and B. {Lv} and R. {Wang}},
+    booktitle={2019 IEEE Global Communications Conference (GLOBECOM)},
+    title={MDP-Based Scheduling Design for Mobile-Edge Computing Systems with Random User Arrival},
+    year={2019},
+    volume={},
+    number={},
+    pages={1-6},
 }
+
 @ARTICLE{mdp-tvt,
   author={S. {Huang} and B. {Lv} and R. {Wang} and K. {Huang}},
   journal={IEEE Transactions on Vehicular Technology}, 
@@ -120,7 +157,11 @@ pages={1-6},
   number={},
   pages={2348-2356},
 }
+#==================================================================================#
 
+
+# survey
+#==================================================================================#
 @INPROCEEDINGS{tan-online,
 author={H. {Tan} and Z. {Han} and X. {Li} and F. C. M. {Lau}},
 booktitle={IEEE INFOCOM 2017 - IEEE Conference on Computer Communications},
@@ -148,7 +189,11 @@ month={May},
     ISSN={2373-745X},
     month={Fourthquarter},
 }
+#==================================================================================#
 
+
+# Related Works
+#==================================================================================#
 %NOTE: radio and computing resource allocation for network slices on edge servers;
     Highlight: multi-to-multi
     Weakness: 
@@ -206,7 +251,6 @@ month={May},
 }
 
 %NOTE: Centralized Dispatching and Scheduling
-
 % Weakness: all jobs firstly to one dispatching servers, avoidable transmission;
 @ARTICLE{IOTJ19-CaoJ,
 author={J. {Cao} and L. {Yang} and J. {Cao}},
@@ -294,7 +338,6 @@ year = {2017}
 }
 
 %NOTE: Decentralized Dispatching and Scheduling
-
 % Weakness: selfish decentralized
 @ARTICLE{TMC19-JosiloS,
     author={S. {Jošilo} and G. {Dán}},
@@ -340,7 +383,6 @@ ISSN={1558-2248},
 month={Nov},
 }
 
-%NOTE: MAN Support
 @inproceedings{MOBIHOC19-ZhouZ,
     author = {Zhou, Zhi and Chen, Xu and Wu, Weigang and Wu, Di and Zhang, Junshan},
     title = {Predictive Online Server Provisioning for Cost-Efficient IoT Data Streaming Across Collaborative Edges},
@@ -430,25 +472,11 @@ month={Nov},
     ISSN={0743-166X},
     month={April},
 }
-
-@inproceedings{MAN-LATENCY,
-    author = {Gember, Aaron and Akella, Aditya and Pang, Jeffrey and Varshavsky, Alexander and Caceres, Ramon},
-    title = {Obtaining In-context Measurements of Cellular Network Performance},
-    booktitle = {2012 Internet Measurement Conference},
-    series = {IMC '12},
-    year = {2012},
-    isbn = {978-1-4503-1705-4},
-    location = {Boston, Massachusetts, USA},
-    pages = {287--300},
-    numpages = {14},
-    doi = {10.1145/2398776.2398807},
-    acmid = {2398807},
-    publisher = {ACM},
-    address = {New York, NY, USA},
-    keywords = {active measurement, cellular network performance, device context},
-}
+#==================================================================================#
 
 
+# related works, with latency
+#==================================================================================#
 @ARTICLE{ToN-Xuchen2016, 
 	author={X. {Chen} and L. {Jiao} and W. {Li} and X. {Fu}}, 
 	journal={IEEE/ACM Transactions on Networking}, 
@@ -486,3 +514,4 @@ month={Nov},
     number={},
     pages={87-94}
 }
+#==================================================================================#

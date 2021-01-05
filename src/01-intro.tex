@@ -21,7 +21,8 @@ Specifically, the APs function as gateways to collect offloaded jobs from mobile
 %NOTE: (2a) why cooperation is needed; cooperation in MAN is another challenge
 To achieve better overall performance (e.g., average job response time) of the edge computing system, the cooperation of jobs dispatching among distributed APs is one of the major challenges.
 Most of the existing works simply assume a centralized job dispatcher design, where the dispatcher timely holds the global system status and distributes the dispatching decisions to all the APs without delay.
-However, the real-world practice prefers edge computing system deployment at Metropolitan Area Network (MAN) scale \needref{MAN-scale applications}, i.e., the latency of information sharing among APs and edge servers is non-negligible, which discourages the centralized dispatcher design.
+However, \hongyc{the real-world practice prefers edge computing system deployment at Metropolitan Area Network (MAN) scale (e.g., Edge Computing Interconnect (ECI) Network \cite{MAN-ECI})},
+i.e., the latency of information sharing among APs and edge servers is non-negligible, which discourages the centralized dispatcher design.
 According to the MAN performance analysis in \cite{MAN-LATENCY}, the end-to-end transmission latency varies a lot with respect to different hours of day and devices' locations in a MAN, which implies the randomness of job uploading latency from APs to edge servers and signaling latency (i.e., the transmission latency of the shared {system status} information).
 %NOTE: (2b) challenge brought by random latency
 There has been a number of existing literature considering random transmission latency of job delivery in the edge computing network \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}.
