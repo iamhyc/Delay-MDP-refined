@@ -1,0 +1,92 @@
+\documentclass[10pt,draftclsnofoot,onecolumn]{article}
+\usepackage{a4wide}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\usepackage{amsthm}
+\usepackage{amsfonts,amssymb}
+\usepackage{amsmath} % Required for some math elements
+{
+      \newtheorem{definition}{Definition}
+      \newtheorem{assumption}{Assumption}
+      \newtheorem{problem}{Problem}
+      \newtheorem{lemma}{Lemma}
+      \newtheorem{theorem}{Theorem}
+      \newtheorem{corollary}{Corollary}
+      \newtheorem{claim}{Claim}
+      \newtheorem{remark}{Remark}
+      \newtheorem{policy}{Policy}
+}
+
+\usepackage[linesnumbered,vlined,ruled]{algorithm2e}
+\usepackage{graphicx}
+\usepackage{subfigure}
+
+\usepackage{cite}
+%\usepackage{hyperref}
+%\usepackage[numbers,sort&compress]{natbib}
+
+\usepackage{xcolor}
+%\usepackage[usenames,dvipsnames]{color}
+%\usepackage{mathrsfs}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{rotating}
+
+\usepackage{amsfonts,amssymb}
+
+%\usepackage{ulem}
+%\usepackage{cancel}
+
+\usepackage{diagbox}
+\usepackage{sgame}
+%\usepackage{ulem}
+%\usepackage{sgamevar}
+%\usepackage{egameps}
+%\usepackage{caption2}
+
+\usepackage{caption}
+\usepackage{sidecap}
+\usepackage{url}
+
+%\usepackage{tablefootnote}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+
+\usepackage{array}
+
+\begin{document}
+
+Dear Editor and Reviewers,
+
+We are pleased to submit our paper titled ``Distributed Job Dispatching in Edge Computing Networks with Random Transmission Latency: A Low-Complexity POMDP Approach" for possible publication in IEEE Internet of Things Journal.
+% IEEE Transactions on Mobile Computing.
+
+A preliminary version with part of the results of this submission appeared in IEEE MSN 2020 held in Tokyo, Japan.
+Compared with the conference  publication, the current submission makes the following novel contributions:
+\begin{enumerate}
+% \item In the INFOCOM paper, we only solve the HetNets uplink scheduling problem using our  proposed algorithms. However, our solution framework can be applied to  a series of scheduling problems in multi-tier networks. In this submission, we add a section that extensively discusses how to extend our solution to other important multi-tier networks including Cloud-RAN and Mobile Edge Computing. [Please refer to Section 5]
+\item In this manuscript, we add a section of ``Background and Motivation'' to justify the setting of the limited backhaul capacity, and the motivation why we adopt reinforcement learning due to the diversity and time-varying characteristics in HetNets. [Please refer to Section 2]
+\item In the INFOCOM paper, we adopt discounted accumulated cost over infinite time-horizon when modelling the HetNets uplink scheduling problem. In this manuscript, we model the problem with a more realistic cost function, i.e., the average cost over infinite time-horizon, which is naturally derived from the real scenario [Please refer to Problem 1]. Our proposed algorithm has two approaches for the average cost model and the discounted cost model, respectively. For the average cost model, we add a new Bellman equation [Eqn. (9)], new reference states [Eqn. (14)], and a new $\mathbb Q$-function updating rule [Eqn. (18)]. Moreover, we bridge the gap between the average cost model and the discounted cost model by providing a justification of the benefits of discounted cost model. [Please refer to Section 4.1]
+\item In the INFOCOM paper, we assume the joint detection is a binary decision, i.e., each frame's signal can only be either jointly detected or local detected. In this submission, we improve this decision by allowing a portion of sub-frames to be locally detected. We further consider the case that the pico-BS may have limited detection ability that can only detect a limited number of sub-frames. [Please refer to Section 3.2]
+% add an evaluation here?
+\item In the INFOCOM paper, we only give the end-to-end delay as the cost function. Actually, the cost function can be general to  cover other forms of cost. In this submission, we propose two other forms of cost functions: the throughput and the power consumption. We also explain why using the end-to-end delay as cost function already maximizes the throughput. [Please refer to Remark 1 in Section 3.4]
+\item In the INFOCOM paper, we did not elaborate the related works in details. In this submission, we extensively introduce the related works, and compare them with our work. [Please refer to Section 2]
+\item In this submission, we add a new sensitivity experiment showing the percentage of local detection used with higher arrival rate. [Please refer to Fig. 6]
+\item In the INFOCOM paper, the proofs of NP-hardness, the data rate derivation, the convergence and the error bound are omitted due to limited space. We complete all the proofs in the appendices in this submitted manuscript.  [Please refer to the Appendix A, B, C and D]
+%\item \tant{In the INFOCOM paper, we only investigated the HetNets uplink scheduling problem. Actually, our solution framework can be applied to  a series of scheduling problems in multi-tier networks. In this submission, we add a section that extensively discusses how to extend our solution to other important multi-tier networks including Cloud-RAN and Mobile Edge Computing. [Please refer to Section 5]}
+\end{enumerate}
+
+Based on the aforementioned extensions, we believe this submitted manuscript comprises a significant technical contribution compared with the previous conference version.\\
+
+Thank you very much and we look forward to your feedbacks on this submission.\\
+
+Best Regards,
+
+Yuncong Hong on behalf of the authors
+\vspace{+20mm}
+
+\noindent [1] Y. Hong, B. Lv, R. Wang, H. Tan, Z. Han, H. Zhou, F. C. M. Lau, ``Online Distributed Job Dispatching with Outdated and Partially-Observable Information", in Proc. \emph{IEEE MSN}, 2020\\
+% \noindent [1] Z. Han, H. Tan, R. Wang, S. Tang and F. C. M. Lau, ``Online Learning based Uplink Scheduling in HetNets with Limited Backhaul Capacity'', in Proc. \emph{IEEE INFOCOM}, 2018\\
+\end{document}
