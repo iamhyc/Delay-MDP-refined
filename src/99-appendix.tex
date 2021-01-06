@@ -216,18 +216,21 @@ Hence,
 
 \section{ Proof of Lemma \ref{lemma:semi-bound} }
 \label{append_4}
-Firstly, it is obvious that $W^{(T)}_{\hat{\Baseline}}(\Stat)$ is a cost upper bound for the proposed policy $\tilde{\Policy}$.
-\hongyc{(split equation (\ref{eqn:bound}) into two part, one is the numerical part in equation (\ref{eqn:semi-bound}), the other one is bounded by the analytical part in equation (\ref{eqn:semi-bound}) as illustrated in the proof given in Appendix \ref{append_3}.)}
+Firstly, it is obvious that $W^{(T)}_{\hat{\Baseline}}(\Stat)$ is the cost upper bound for the proposed policy $\tilde{\Policy}$.
+As the equation (\ref{eqn:bound}) could be split into two parts as shown below,
 {\small
-\begin{align}
+\begin{align*}
     W_{\tilde{\Policy}}(\Stat) =&
     \sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay} \Bracket{ g\Paren{\Stat(t)} | \Stat(1)=\Stat }
     +
     \nonumber\\
-    &\sum_{t=T+1}^{\infty} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay} \Bracket{ g\Paren{\Stat(t)} | \Stat(T) }.
-\end{align}
+    &\gamma^{T} \sum_{t=1}^{\infty} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay,\Stat(T+1)} \Bracket{ g\Paren{\Stat(t+T)} },
+\end{align*}
 }%
+where the first part is exactly same as the first part in equation (\ref{eqn:semi-bound}) of $W^{(T)}_{\hat{\Baseline}}(\Stat)$, and the second part $\sum_{t=1}^{\infty}\gamma^{t-1}\mathbb{E}^{\tilde{\Policy}}_{\Delay}[g(\Stat(t+T))]$ is upper bounded by $W_{\Baseline}(\Stat(T+1))$ as illustrated in the proof given in lemma \ref{append_3}.
+% Hence, $W_{\tilde{\Policy}}(\Stat) \leq W^{(T)}_{\hat{\Baseline}}(\Stat)$ always exists.
+
 Secondly, the performance gap $e(T)$ monotonically decreases with respect to $T$.
-% Finally, why we need a semi-analytical solution, instead of analytical proof.
+
 
 %----------------------------------------------------------------------------------------%
