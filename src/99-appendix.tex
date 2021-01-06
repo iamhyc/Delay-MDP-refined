@@ -230,7 +230,20 @@ As the equation (\ref{eqn:bound}) could be split into two parts as shown below,
 where the first part is exactly same as the first part in equation (\ref{eqn:semi-bound}) of $W^{(T)}_{\hat{\Baseline}}(\Stat)$, and the second part $\sum_{t=1}^{\infty}\gamma^{t-1}\mathbb{E}^{\tilde{\Policy}}_{\Delay}[g(\Stat(t+T))]$ is upper bounded by $W_{\Baseline}(\Stat(T+1))$ as illustrated in the proof given in lemma \ref{append_3}.
 % Hence, $W_{\tilde{\Policy}}(\Stat) \leq W^{(T)}_{\hat{\Baseline}}(\Stat)$ always exists.
 
-Secondly, the performance gap $e(T)$ monotonically decreases with respect to $T$.
-
-
+Then, we show that the performance gap $e(T)$ monotonically decreases with respect to $T$.
+For any positive integer $T$, let
+{\small
+\begin{align*}
+    \Delta{W}(T) \define W^{(T+1)}_{\hat{\Baseline}}(\Stat) - W^{(T)}_{\hat{\Baseline}}(\Stat)
+    % = \mathbb{E}_{\Stat}
+\end{align*}
+}%
+denotes the performance gap due to one-step policy improvement described in equation (\ref{eqn:partial}).
+According to the \emph{Proposition 2.3.4 (Cost Improvement by Rollout)} in \cite{dp-control}, we have $W^{(T+1)}_{\hat{\Baseline}}(\Stat) \leq W^{(T)}_{\hat{\Baseline}}(\Stat)$ for all $\Stat$.
+Hence, we have $\Delta{W}(T) \geq 0$ for all $T$ and $e(T)$ decreases monotonically with respect to $T$.
+% {\small
+% \begin{align*}
+%     W^{(1)}_{\hat{\Baseline}}(\Stat) \leq W^{(2)}_{\hat{\Baseline}}(\Stat) \leq \dots
+% \end{align*}
+% }
 %----------------------------------------------------------------------------------------%
