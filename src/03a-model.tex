@@ -14,7 +14,7 @@ as well as the signaling mechanism with periodic broadcast.
 We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, which are connected in a edge network as illustrated in Fig.\ref{fig:system}.
 The sets of APs and edge servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{1,\dots,M}$, respectively.
 The communication latency among these APs and edge servers is random.
-Each AP collects the computation jobs from the mobile users within its coverage, and makes dispatching action on the processing edge servers for each job.
+Each AP collects the computation jobs from the \hongyc{mobile IoT devices} within its coverage, and makes dispatching action on the processing edge servers for each job.
 It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
 Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
 We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, and $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server ($\forall k\in\apSet, m\in\esSet$).

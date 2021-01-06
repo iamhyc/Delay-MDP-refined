@@ -79,7 +79,7 @@ In the former figure, the average job response times, measuring the average numb
 It can be observed that the proposed policy still outperforms all the benchmarks.
 In Fig.\ref{fig:bar_plot}(c), the job dropping rates, measuring the ratio of jobs dropped by edge servers due to queue overflow, are also compared.
 It is shown that the proposed policy outperforms other three benchmarks with the minimum average cost and job response time.
-\hongyc{And there is no dropping jobs incurred compared with the Selfish policy, which is the initial baseline policy for our proposed algorithm.}
+{And there is no dropping jobs incurred compared with the Selfish policy, which is the initial baseline policy for our proposed algorithm.}
 Finally, an realization of job dispatching is illustrated in Fig.\ref{fig:general_timeline}, where the number of jobs in the system is plot versus the index of broadcast interval.
 It can be observed that the proposed policy manage to keep the number of jobs in lower level, compared with the other benchmarks.
 This demonstrates its high dispatching efficiency.
@@ -209,7 +209,9 @@ The gain is negligible for light load, where the computation capability is suffi
 }
 
 \noindent\textbf{Mean Processing Time.}
-The simulation results of various mean processing time are illustrated in Fig.\ref{fig:ss_dist}, where the mean processing time is taken as $c_{m,j}$ of the processing time distribution $\mathbb{G}(1/c_{m,j})$ ($\forall m\in\esSet,j\in\jSpace$) in our computation model assumption.
+The simulation results of various mean processing time are illustrated in Fig.\ref{fig:ss_dist}, where the mean processing time is taken as $c_{m,j}$ of the processing time distribution $\mathbb{G}(1/c_{m,j})$
+% ($\forall m\in\esSet,j\in\jSpace$)
+in our computation model assumption.
 Generally speaking, with the increasing average processing time, the average system cost increases in all the benchmarks and our proposed policy.
 The simulation results are consistent with that in Fig.\ref{fig:ss_scale}.
 It can be observed that the proposed policy has better performance than the benchmarks.

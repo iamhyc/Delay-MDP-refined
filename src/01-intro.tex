@@ -8,14 +8,14 @@
 %NOTE: (1) MEC Introduction: Background, Challenge and Motivation
 %NOTE: (1a) general background and bluffing
 \IEEEPARstart{E}{dge} computing is gaining more and more attentions with the prosperity of computation-intensive and delay-sensitive mobile applications. % computation-intensive, energy-hungry
-The edge servers are deployed in closer proximity to mobile users than traditional cloud computing infrastructure, which alleviate the communication overhead and enable computation offloading from mobile devices.
+The edge servers are deployed in closer proximity to mobile users than traditional cloud computing infrastructure, which alleviate the communication overhead and enable computation offloading {from mobile IoT devices (e.g., mobile phones, video surveillance cameras and etc.)}.
 %NOTE: (1b) why multiple edge servers deployed
 On the other side, the edge servers are usually deployed with limited and non-scalable computation resource compared to cloud servers.
 Hence, the deployment of many standalone edge computing servers in the network is favored.
-In a general edge-cloud system architecture \cite{MEC-SURVEY}, the offloaded jobs from mobile devices could be delivered to one of the edge servers considering the transmission latency, job processing time, back pressure and etc.
+In a general edge-cloud system architecture \cite{MEC-SURVEY}, the offloaded jobs from {IoT devices} could be delivered to one of the edge servers considering the transmission latency, job processing time, back pressure and etc.
 %NOTE: (1c) introduce the access points
 The entity which decides edge servers for offloaded jobs is called \emph{access points} (APs) throughout this paper.
-Specifically, the APs function as gateways to collect offloaded jobs from mobile devices in its service area and make dispatching decision for each job.
+Specifically, the APs function as gateways to collect offloaded jobs from {mobile IoT devices} in its service area and make dispatching decision for each job.
 
 %NOTE: (2) Motivation with MAN and Distributed Dispatchers
 %NOTE: (2a) why cooperation is needed; cooperation in MAN is another challenge
@@ -23,13 +23,13 @@ To achieve better overall performance (e.g., average job response time) of the e
 Most of the existing works simply assume a centralized job dispatcher design, where the dispatcher timely holds the global system status and distributes the dispatching decisions to all the APs without delay.
 However, \hongyc{the real-world practice prefers edge computing system deployment at Metropolitan Area Network (MAN) scale (e.g., Edge Computing Interconnect (ECI) Network \cite{MAN-ECI})},
 i.e., the latency of information sharing among APs and edge servers is non-negligible, which discourages the centralized dispatcher design.
-According to the MAN performance analysis in \cite{MAN-LATENCY}, the end-to-end transmission latency varies a lot with respect to different hours of day and devices' locations in a MAN, which implies the randomness of job uploading latency from APs to edge servers and signaling latency (i.e., the transmission latency of the shared {system status} information).
+According to the MAN performance analysis in \cite{MAN-LATENCY}, the end-to-end transmission latency varies a lot with respect to different hours of day and IoT devices' locations in a MAN, which implies the randomness of job uploading latency from APs to edge servers and signaling latency (i.e., the transmission latency of the shared {system status} information).
 %NOTE: (2b) challenge brought by random latency
 There has been a number of existing literature considering random transmission latency of job delivery in the edge computing network \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}.
 However, there are only a few works considering random signaling latency of information sharing among distributed dispatchers \cite{tan-online,TWC18-LyuX}.
 In fact, it is full of challenge to consider random transmission latency in both job uploading and signaling.
 Firstly, the centralized dispatcher design is discouraged for outdated system information and unpredictable signaling latency.
-Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random job uploading latency causes the inconsistency of system information at different dispatchers because the arrivals on edge servers are unknown in advance.
+Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random uploading latency causes the inconsistency of system information at different dispatchers because the arrivals on edge servers are unknown in advance.
 To conclude, the random transmission latency may introduce ineliminable estimation error on the number of jobs in the system.
 % {i.e., the cooperation of APs are assumed inside one entity like a operator, but across a large network which is larger than a LAN.}
 % {In addition, each AP also suffers from signaling latency, which is the time consumed for each AP to collect system state information under some signaling mechanism.}
@@ -37,7 +37,7 @@ To conclude, the random transmission latency may introduce ineliminable estimati
 
 % NOTE: (3) Our contributions
 In this paper, we address the above challenges by leveraging a partially observable Markov decision process (POMDP) problem formulation, and a novel low-complexity approximate MDP solution framework is proposed.
-Specifically, we consider a practical scenario where the APs cooperatively upload different types of jobs to different edge servers with random uploading latency and the APs receive the partial system state information with random signaling latency (i.e., the global system state is always partially available and outdated at the APs).
+Specifically, we consider a practical scenario where the APs cooperatively upload different types of jobs to different edge servers with random uploading latency and the APs receive the partial system state information suffering from random signaling latency (i.e., the global system state is always partially available and outdated at the APs).
 The major contributions in this paper are summarized below.
 \begin{itemize}
     \item To optimize the distributed cooperative job dispatching design with outdated and partial information, a POMDP problem is formulated.
@@ -60,7 +60,7 @@ In Section \ref{sec:model}, we elaborate the system model and the signaling mech
 In Section \ref{sec:formulation}, we formulate the global-wise optimization of dispatching decisions at all APs as a POMDP.
 In Section \ref{sec:algorithm}, we propose a novel low-complexity approximate MDP solution framework, called \algname.
 % where the policy iteration could be applied distributedly on each AP {with partial and outdated information}.
-In Section \ref{sec:rl-alg}, the solution framework is extended with reinforcement learning technique to online predict the unknown statistics.
+In Section \ref{sec:rl-alg}, the solution framework is extended with reinforcement learning technique to handle the unknown statistics.
 The numerical analysis of the proposed solution is provided in Section \ref{sec:evaluation}, and the conclusion is drawn in Section \ref{sec:conclusion}.
 
 We use the following notations throughout this paper: 
@@ -84,7 +84,7 @@ There also have been a number of works considering the job dispatching with a ce
 For example, in order to minimize the average job response time in the worst case, the authors in \cite{tan-online} designed an online algorithm for job dispatching in edge computing systems with fixed uploading latency.
 In the scenario that BSs and edge servers are connected via software defined network (SDN), the authors in \cite{IOTJ18-FanQ} proposed a heuristic algorithm to dispatch the jobs to the closest edge servers according to geographical locations.
 Considering random jobs arrival and job offloading to a single edge server, the authors in \cite{mdp-globecom,mdp-tvt} formulate the offloading problem as an infinite-horizon Markov decision process (MDP).
-When the jobs can be dispatched to either edge servers or cloud servers with fixed uploading latency, the authors in \cite{MASS18-MengZ} formulated job dispatching problem as an integer linear programming to minimize the total uploading latency.
+When the jobs can be dispatched to either edge servers or cloud servers, the authors in \cite{MASS18-MengZ} formulated job dispatching problem as an integer linear programming to minimize the total uploading latency. % with fixed uploading latency
 In the above works, a centralized dispatcher with complete and instant knowledge of the system status was assumed in the edge computing systems, which might be impractical.
 
 %NOTE: (3) multiple-agent job dispatching

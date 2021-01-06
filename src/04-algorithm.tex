@@ -187,7 +187,7 @@ Hence, we first define the following sequence of AP subsets, where each subset a
         \label{eqn:subset_cup}
         \\
         \esSet_{y} \cap \esSet_{y'} &=\emptyset, y' \neq y~(\forall y',y \in \mathcal{Y}_{n}).
-        \label{eqn:subset_disjoint}N
+        \label{eqn:subset_disjoint}
     \end{align}
 \end{definition}
 The condition in equation (\ref{eqn:subset_cup}) is to ensure all the APs can update their dispatching actions periodically; whereas the condition in equation (\ref{eqn:subset_disjoint}) is to ensure APs in the conflict AP sets of each other will not update their dispatching actions in the same broadcast interval.
@@ -371,6 +371,7 @@ Its gap to the performance of the proposed policy, denoted as $W_{\Baseline}(\St
 Therefore, a tighter semi-analytical cost upper bound is provided below which could be used for quick performance evaluation.
 \begin{lemma}[Semi-Analytical Cost Upper Bound]
     Let $T$ be arbitrary positive integer, then
+    {\small
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \leq W_{\hat{\Baseline}}^{(T)}(\Stat)
         % \\\nonumber
@@ -379,6 +380,7 @@ Therefore, a tighter semi-analytical cost upper bound is provided below which co
         &+\gamma^{T} \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}\Paren{\Stat(T+1)}}.
         \label{eqn:semi-bound}
     \end{align}
+    }%
     Moreover, the gap $e(T) = W^{(T)}_{\hat{\Baseline}}(\Stat) - W_{\tilde{\Policy}}(\Stat)$ is monotonically decreasing with respect to $T$.
     \label{lemma:semi-bound}
 \end{lemma}
