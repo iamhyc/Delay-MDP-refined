@@ -7,16 +7,16 @@ The sensitivity study on parameters is also applied to provide some insights on 
 
 \subsection{Experiment Setup}
 \label{subsec:setup}
-In the simulation, we assume that there are $K=15$ APs, $M=10$ processing servers and $J=10$ types of jobs in the system.
+In the simulation, we assume that there are $K=15$ APs, $M=10$ edge servers and $J=10$ types of jobs in the system.
 One broadcast interval is consist of $t_{B}=25$ time slots.
 % The time slot duration is $20$ milliseconds and one broadcast interval consists of $t_{B}=25$ time slots.
-The network topology among APs is generated according to Barab\'asi-Albert (BA) model \cite{albert1999diameter} and the APs and processing servers are randomly placed.
+The network topology among APs is generated according to Barab\'asi-Albert (BA) model \cite{albert1999diameter} and the APs and edge servers are randomly placed in the network.
 % Under this network topology setup with degree as $3$, the subset partition algorithm \ref{alg_0} could reduce the update period $N$ from $15$ to $6$ time slots.
 % The BA model is parameterized by $n$ and $m$ and produces a graph with $n$ vertices and $m$ edges such that the degree distribution follows a power-law.
 The arrival traces and job processing time for each job type are extracted from Google cluster traces \cite{clusterdata:Reiss2011} and then randomly assigned on APs and edge servers, respectively.
 The maximum uploading latency is $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
 The \brlatency~ is with an integer support from $0.7t_B$ to $0.9t_B$ time slots.
-Each queue for VMs on edge server is with maximum queue length $L_{max}=50$, i.e., there would be at most $50$ jobs on one edge server.
+Each queue for VM on edge server is with maximum queue length $L_{max}=50$, i.e., there would be at most $50$ jobs on one edge server.
 The discount factor $\gamma$ is $0.95$ and the overflow penalty weight $\beta$ is $120$.
 
 \delete{TMC-v1}{
@@ -84,7 +84,8 @@ Finally, an realization of job dispatching is illustrated in Fig.\ref{fig:genera
 It can be observed that the proposed policy manage to keep the number of jobs in lower level, compared with the other benchmarks.
 This demonstrates its high dispatching efficiency.
 \hongyc{
-    In Fig. \ref{fig:semi-bound}, the simulation result demonstrates the change of performance gap under different semi-analytical cost upper bound $W^{(T)}_{\hat{\Baseline}}(\Stat)$, which shows that the proposed policy $\tilde{\Policy}$ is bounded and the performance gap $e(T)$ decreases monotonically when $T$ increases.
+    In Fig. \ref{fig:semi-bound}, the simulation result demonstrates the change of performance gap under different semi-analytical cost upper bound $W^{(T)}_{\hat{\Baseline}}(\Stat)$, where the numerical part is obtained by Monte Carlo simulation.
+    It shows that the proposed policy $\tilde{\Policy}$ is bounded and the performance gap $e(T)$ decreases monotonically when $T$ increases.
     % (with a typical initial state with no jobs in the system)
 }%
 
