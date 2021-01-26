@@ -20,7 +20,7 @@ Hence, it is necessary to investigate the cooperative job dispatching among mult
 %NOTE: (2) Motivation with MAN and Distributed Dispatchers
 %NOTE: (2a) why cooperation is needed; cooperation in MAN is another challenge
 % To achieve better overall performance (e.g., average job response time) of the edge computing system, the cooperation of jobs dispatching among distributed APs is one of the major challenges.
-Most of the existing works assume a centralized job dispatcher design, which has timely and complete knowledge of the global system status and distributes the dispatching decisions to all the APs without delay \needref{at least three references}.
+Most of the existing works assume a centralized job dispatcher design, which has timely and complete knowledge of the global system status and distributes the dispatching decisions to all the APs without delay \cite{tan-online,IOTJ18-FanQ,mdp-globecom,mdp-tvt,MASS18-MengZ}.
 However, the edge computing systems are usually deployed at Metropolitan Area Network (MAN) scale in practice, e.g., the Edge Computing Interconnect (ECI) Network \cite{MAN-ECI}, where the latency of information sharing among APs and edge servers is non-negligible and the centralized dispatcher design is discouraged.
 According to the MAN performance analysis in \cite{MAN-LATENCY}, the end-to-end transmission latency varies a lot with respect to different hours of day and IoT devices' locations in a MAN, which implies the randomness of job uploading latency from APs to edge servers and signaling latency (i.e., the transmission latency of the shared {system status} information).
 %NOTE: (2b) challenge brought by random latency
