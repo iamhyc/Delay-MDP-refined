@@ -1,4 +1,3 @@
-
 % \IEEEraisesectionheading{
 %     \section{Introduction}
 %     \label{sec:introduction}
@@ -44,7 +43,8 @@ The major contributions in this paper are summarized below.
     Thus, the conventional complicated POMDP solution is avoided.
     % {where each AP collects the information only from the APs and edge servers in close proximity and make dispatching decisions with random signaling latency.}
     % {we directly derive the expression of approximate value function}
-    \item Both analytical performance lower bound and tighter semi-analytical lower bound is provided are derived for the proposed distributed dispatching policy. In the conventional approximate MDP methods, the performance is usually evaluated numerically method. The lower bounds not only justify the reliability of the proposed policy, but also provide a method of quick performance evaluation.
+    \item Both analytical performance lower bound and tighter semi-analytical lower bound are derived for the proposed distributed dispatching policy. In the conventional approximate MDP methods, the performance is usually evaluated numerically method.
+    The lower bounds not only justify the reliability of the proposed policy, but also provide a method of quick performance evaluation.
     \item We extend our solution framework \algname~with an efficient online learning approach to evaluate the approximate value function when the priori knowledge of the system randomness is absent.
 \end{itemize}
 
@@ -88,12 +88,12 @@ When the jobs can be dispatched to either edge servers or cloud servers, the aut
 % In the above works, a centralized dispatcher with complete and instant knowledge of the system status was assumed in the edge computing systems, which might be impractical.
 
 %NOTE: (3) multiple-agent job dispatching
-Since centralized dispatching design might not be suitable for a edge computing system with distributed deployment, there are also some works considering the distributed job dispatching.
+Since centralized dispatching design might not be suitable for a edge computing system with distributed deployment, there are also some works addressing the distributed job dispatching.
 For example, in order to minimize a weighted sum of total energy consumption and uploading latency, the authors in \cite{ToN-Xuchen2016} proposed a distributed job dispatching algorithm based on game theory to achieve the Nash equilibrium. 
 Considering job migration at edge servers, the authors in \cite{ToN-xujie2018} optimized the edge computing performance in a distributed manner with limited energy resources via a congestion game framework.
 In the scenario that APs cooperatively dispatch jobs with multiple edge servers, the authors in \cite{mdp-jcin} proposed a novel approximate MDP solution framework to alleviate the algorithm complexity and minimize the average job response time.
 However, in the above works, the latency of information sharing among APs and edge servers is ignored.
-In fact, due to the complicated network traffic, this latency might be significant, and the staleness \fixit{and failed transmission} of system state information at the dispatcher of a edge computing systems should be considered.
+In fact, due to the complicated network traffic, this latency might be significant, and the staleness {and failed transmission} of system state information at the dispatcher of a edge computing systems should be considered.
 
 %NOTE: (4) stale-information based multi-agent related works
 %TODO: (Optional) if have time, rewrite this part
