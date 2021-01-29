@@ -230,20 +230,20 @@ At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ a
 \end{align}
 }
 
-{As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
-At the $t$-th broadcast interval, the dispatching actions is given by
+% As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
+\fixit{At the $t$-th broadcast interval, the dispatching actions is given by
 \begin{align}
     \tilde{\Policy}(\Stat(t), \Delay(t)) = \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
 \end{align}}%
 Moreover, we have the following conclusion on the decomposition of P2.
 \begin{lemma}[]
-    The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs {for each subset partition}.
-    Specifically, {the local optimization for each AP (say the $y$-th AP) in the $n$-th subset ($\forall n$) can be written as}
+    The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs in $\mathcal{Y}_n$.%{for each subset partition}
+    Specifically, {the local optimization for each AP (say the $y$-th AP) in $\mathcal{Y}_n$ can be written as}% the $n$-th subset ($\forall n$)
     \small{
     \begin{align}
         &\textbf{P3:}~
-        \min_{ \tilde{\Policy}_{y}(\Stat(t),\Delay(t)) }
-        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \tilde{\Policy}_{y}(\Stat(t),\Delay(t)) }}
+        \min_{ \tilde{\mathcal{A}}(t+1) } %\tilde{\Policy}_{y}(\Stat(t),\Delay(t))
+        \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \tilde{\mathcal{A}}(t+1),\hat{\mathcal{A}}(t+1) }}
         \nonumber\\
         &~~~~\sum_{j\in\jSpace}
         \Brace{
@@ -253,7 +253,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
         \label{eqn:partial}
     \end{align}
     }%
-    where \footnote{In equation (\ref{eqn:baseline}), the costs $W^{\AP}_{y,m,j}(\Stat(t+1))$ and $W^{\ES}_{m,j}(\Stat(t+1))$ are expressed as a function of global system state $\Stat(t+1)$. In fact, these two costs in equation (\ref{eqn:partial}) can be completely determined by the OSI of the $y$-th AP. Hence, we use the notations $W^{\AP}_{y,m,j}(\Stat_y(t+1))$ and $W^{\ES}_{m,j}(\Stat_y(t+1))$ instead.}
+    where \footnote{In equation (\ref{eqn:baseline}), the costs $W^{\AP}_{y,m,j}(\Stat(t+1))$ and $W^{\ES}_{m,j}(\Stat(t+1))$ are expressed as a function of global system state $\Stat(t+1)$. In fact, these two costs can be completely determined by the OSI of the $y$-th AP as in equation (\ref{eqn:partial}). Hence, we use the notations $W^{\AP}_{y,m,j}(\Stat_y(t+1))$ and $W^{\ES}_{m,j}(\Stat_y(t+1))$ instead.}
     {\small
     \begin{align*}
        \tilde{\esSet}_{y} &= \set{\omega_{y,j}(t), \omega_{y,j}(t+1) | \forall j\in\jSpace}.
@@ -266,9 +266,9 @@ Moreover, we have the following conclusion on the decomposition of P2.
     At the $t$-th broadcast interval, the $y$-th AP in the subset $\mathcal{Y}_{n}$ updates its dispatching actions, which could only affect the future cost raised on itself and its corresponding \emph{candidate server set}, i.e., the part of its OSI.
     Hence, it's obvious that the expression of equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$).
 \end{proof}
-The optimization of dispatching actions $\tilde{\Policy}_{y}(\Stat(t),\Delay(t))$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, whose computational complexity is $O(J|\mathcal{M}_{y}|)$.
+The optimization of dispatching actions $\tilde{\Policy}_{y}(\Stat(t),\Delay(t))$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in candidate edge server set $\esSet_{y}$, whose computational complexity is $O(J|\mathcal{M}_{y}|)$.
 % \hongyc{(Moreover, the brutal seraching could use reduced expression of vaultion function)}
-As a result, the overall algorithm of job dispatching, namely \algname, is elaborated in Algorithm \ref{alg_1}.
+As a result, the overall algorithm of job dispatching, is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
     \caption{\algname: Online Alternative Actions Update Algorithm}\label{alg_1}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
@@ -314,7 +314,7 @@ As a remark notice that since in Algorithm \ref{alg_1}, the computation complexi
 \label{subsec:analysis}
 In most of the existing approximate MDP solutions \cite{mdp-bound1,mdp-bound2,mdp-bound3}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate value function.
-The following lemma shows the this analytical expression is a performance lower bound (cost upper bound) of our proposed policy in Algorithm \ref{alg_1}.
+The following lemma shows the this analytical expression is a performance lower bound (cost upper bound) of our proposed policy (Algorithm \ref{alg_1}), \fixit{denoted as $\tilde{\Policy}(\Stat(t), \Delay(t))$}.
 % {Furthermore, a tight performance lower bound is proposed based on an \emph{$1$-step improved policy}, which could be obtained via a semi-analytical method.}
 % Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
 % This conclusion is summarized below.
@@ -395,7 +395,7 @@ The performance of both cost upper bounds will be illustrated in the following s
 \section{Reinforcement Learning Algorithm}
 \label{sec:rl-alg}
 {
-    Although, the approximate value function $W_{\Baseline}(\Stat)$ is derived analytically in the previous section, the calculation of $ W_{\Baseline}(\Stat)$ requires the priori knowledge on the distributions in this system, i.e., the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice.
+    Although the approximate value function $W_{\Baseline}(\Stat)$ is derived analytically in the previous section, the calculation of $ W_{\Baseline}(\Stat)$ requires the priori knowledge on the distributions in this system, i.e., the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice.
     Therefore, we extend the \algname~with an efficient reinforcement learning approach.
     Specifically, with the explicit analytical expressions of $\tilde{W}^{\AP}_{k,m,j}$ and $\tilde{W}^{\ES}_{m,j}$ in Lemma \ref{lemma:w_ap} and Lemma \ref{lemma:w_es}, respectively, we only need to learn the following statistical parameters ($\forall k\in\apSet,m\in\esSet, j\in\jSpace$).
     \begin{itemize}
@@ -446,7 +446,7 @@ It is obvious that when $t\to\infty$, Algorithm \ref{alg_2} will converge, i.e.,
 
 \begin{remark}[Learning Efficiency of Algorithm \ref{alg_2}]
     {
-        In conventional reinforcement learning algorithms, the value function should be evaluated for at least a large subset of system states or state-action paris before the convergence.
+        In conventional reinforcement learning algorithms, the value function should be evaluated for at least a large subset of system states or state-action paris (e.g., Q-learning) before the convergence.
         Moreover, the value function of a system state can be updated only when this system state appears after state transitions (which is impractical for our problem which is with enormous state space or action space), which leads to large computation complexity and convergence time.
         In the proposed reinforcement learning algorithm, however, we only learn the unknown statistics of the value function by tracking their unbiased observations.
         Hence, the proposed algorithm could converge faster.
