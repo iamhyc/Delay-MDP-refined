@@ -196,9 +196,9 @@ In all the figures, the proposed policy outperforms all  the benchmarks, which d
     In all the figures, the proposed policy performs better than the benchmarks, which demonstrates the robustness of its performance versus signaling latency.
 }
 
-\noindent\textbf{Job Arrival Intensity.}
-We carry out the sensitivity study of job arrival intensity by scaling the interval of jobs arriving in Google cluster traces.
-% The simulation results of various arrival intensity are illustrated in Fig.\ref{fig:ss_scale}.
+\noindent\textbf{Job Arrival Probability.}
+We carry out the sensitivity study of job arrival probability by scaling the interval of jobs arriving in Google cluster traces.
+% The simulation results of various arrival probability are illustrated in Fig.\ref{fig:ss_scale}.
 The average system cost versus the number of APs is illustrated in Fig.\ref{fig:ss_scale}.
 With the increasing of job arrival probability, the average system cost increases in all the benchmarks and our proposed policy.
 It can be observed that our policy performs the best.
@@ -215,7 +215,7 @@ The gain is negligible for light load, where the computation capability is suffi
 }
 
 \noindent\textbf{Mean Processing Time.}
-The simulation results with different mean processing time ${c_{m,j}|\forall m\in\esSet,j\in\jSpace}$ are illustrated in Fig.\ref{fig:ss_dist}, where the average processing time from Google cluster traces is scaled by a factor from $0.8$ to $1.6$ respectively.
+The simulation results with different mean processing time $\set{c_{m,j}|\forall m\in\esSet,j\in\jSpace}$ are illustrated in Fig.\ref{fig:ss_dist}, where the average processing time from Google cluster traces is scaled by a factor from $0.8$ to $1.6$ respectively.
 % where the mean processing time is taken as $c_{m,j}$ of the processing time distribution $\mathbb{G}(1/c_{m,j})$
 % ($\forall m\in\esSet,j\in\jSpace$)
 in our computation model assumption.
