@@ -1,10 +1,10 @@
 \section{A Distributed Solution Framework with Partial Information}
 % Algorithm with Partial Information
 \label{sec:algorithm}
-In this section, we shall introduce a novel approximation framework, called \algname, to decouple the centralized optimization on the RHS of the Bellman's equations in equation (\ref{eqn:sp_0}) to each AP for arbitrary system state.
-For the APs outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other ones.
+In this section, we shall propose a novel approximation framework, called \algname, to decouple the centralized optimization on the RHS of the Bellman's equations in Eqn. (\ref{eqn:sp_0}) to each AP for arbitrary system state.
+\tannCHK{For the APs outside $\ccSet_{k}$, i.e., the conflict AP set of the $k$-th AP, the update of their dispatching actions will not affect the task computation originated from the $k$-th AP ($\forall k\in\apSet$).} 
 Thus, the optimization of their dispatching actions can be decoupled.
-On the other hand, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
+However, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
 Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
 Hence, cooperative optimization of dispatching actions for the APs within the same conflict AP set is difficult. %infeasible
 To this end, we introduce an \emph{alternative policy iteration algorithm}, to alternatively optimize the dispatching actions of one AP in a conflict AP set in each broadcast interval, while other APs maintain their dispatching actions in the previous broadcast interval.
@@ -17,15 +17,15 @@ Specifically, the proposed distributed algorithm consists of the following two s
     and only one out of these subsets is selected to update dispatching actions distributedly in each broadcast interval.
     Moreover, both analytical and semi-analytical performance bounds are derived in Section \ref{subsec:analysis}.
 \end{enumerate}
-As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge on system state.
-In our proposed approximate solution framework, we extend this procedure to the POMDP problem in P1 by exploiting the structure of partially connected edge computing systems.
+As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge of the system state.
+In our proposed solution framework, we extend this procedure to the POMDP problem in P1 by exploiting the structure of partially connected edge computing systems.
 % To the best knowledge of authors, a POMDP can hardly be solved via the Bellman's equations of full system state knowledge in the existing literature.
 
 \subsection{Baseline Policy and Approximate Value Function}
 \label{subsec:baseline}
-To alleviate the curse of dimensionality, we first use the baseline policy $\Baseline$ with fixed dispatching actions to approximate value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}).
-Specifically, the baseline policy is elaborated below.
-% Specifically, the baseline policy we used in this paper is elaborated below.
+To alleviate the curse of dimensionality, we first use the baseline policy $\Baseline$ with fixed dispatching actions to approximate the value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}).
+% Specifically, the baseline policy is elaborated below.
+Specifically, the baseline policy we used in this paper is elaborated below.
 
 \begin{definition}[Baseline Policy]
     In the baseline policy $\Baseline$, each AP fixes the target processing edge server for each job type as the previous broadcast interval. Specifically, at the $t$-th broadcast interval,
@@ -37,7 +37,7 @@ Specifically, the baseline policy is elaborated below.
             \Pi_{K}(\Stat_{K}(t),\mathcal{D}_{K}(t))
         },
     \end{align}
-    }
+    }%
     where the baseline policy of the $k$-th AP $\Pi_k$ is given by 
     {\small
     \begin{align}
@@ -46,7 +46,7 @@ Specifically, the baseline policy is elaborated below.
             {\omega}_{k,j}(t+1) \Big| \forall j\in\jSpace
         }, \forall k\in\apSet,
     \end{align}
-    }
+    }%
     and $\omega_{k,j}(t+1) = \omega_{k,j}(t)$.
 \end{definition}
 
@@ -78,7 +78,8 @@ Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseli
     },
     \label{eqn:baseline}
 \end{align}
-}where $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs which are being transmitted from the $k$-th AP to the $m$-th edge server with the baseline policy $\Baseline$ and initial system state $\Stat(t+1)$, and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs on the $m$-th server.
+}%
+where $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs which are being transmitted from the $k$-th AP to the $m$-th edge server with baseline policy $\Baseline$ and system state $\Stat(t+1)$, and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs on the $m$-th server.
 Their definitions are given below.
 {\small
 \begin{align}
@@ -96,7 +97,7 @@ Their definitions are given below.
 \end{align}
 }
 
-Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ are derived in the following lemmas, respectively.
+Moreover, the analytical expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ are derived in the following lemmas, respectively.
 
 \begin{lemma}[Analytical Expression of $\tilde{W}^{\AP}_{k,m,j}$]
     \label{lemma:w_ap}
@@ -192,7 +193,7 @@ Hence, we first define the following collection of AP subsets, namely \emph{AP p
     \end{align}
 \end{definition}
 The condition in equation (\ref{eqn:subset_cup}) is to ensure all the APs can update their dispatching actions periodically; whereas the condition in equation (\ref{eqn:subset_disjoint}) is to ensure APs in the conflict AP sets of each other will not update their dispatching actions in the same broadcast interval.
-For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could be decomposed of two subsets as $\set{1,3}$ and $\set{2}$.
+\hongycCHK{For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could be decomposed of three subsets as $\set{1,3,4}$, $\set{2}$ and $\set{5}$.}
 The subset partition is not trivial and a partition minimizing the update period $N$ is preferred.
 A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
 \begin{algorithm}[ht]
@@ -201,7 +202,7 @@ A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
     \KwIn{$\apSet, \set{\esSet_{k}, \forall k\in\apSet}$ }
     \KwOut{a subset partition $\set{ \mathcal{Y}_{n} }$}
     Initialize the subset partition as $\mathcal{Y}_{n} = \set{n}$ ($\forall n\in\apSet$).\;
-    \While{ $\exists \mathcal{Y}_a$ and $\mathcal{Y}_b$ ($a \neq b$), $\bigcup_{y\in\mathcal{Y}_a}\esSet_{y} \cap \bigcup_{y\in\mathcal{Y}_{b}} \esSet_{y} \neq \emptyset$ }
+    \While{ $\exists \mathcal{Y}_a$ and $\mathcal{Y}_b$ ($a \neq b$), $\bigcup_{y\in\mathcal{Y}_a}\esSet_{y} \cap \bigcup_{y\in\mathcal{Y}_{b}} \esSet_{y} = \emptyset$ }
     {
         Count number of subsets in the current subset partition which have disjoint candidate set with $\mathcal{Y}_n$ ($\forall n$), denoted the number as $I_{n}$.\;
         $\tilde{n} \gets \arg\min_{n} I_{n}$\;
@@ -237,8 +238,8 @@ At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ a
 % \end{align}}%
 Moreover, we have the following conclusion on the decomposition of P2.
 \begin{lemma}[]
-    The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs in $\mathcal{Y}_n$.%{for each subset partition}
-    Specifically, {the local optimization for each AP (say the $y$-th AP) in $\mathcal{Y}_n$ can be written as}% the $n$-th subset ($\forall n$)
+    The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs in $\mathcal{Y}_n$. %{for each subset partition}
+    Specifically, {the local optimization for each AP (say the $y$-th AP) in $\mathcal{Y}_n$ can be written as} % the $n$-th subset ($\forall n$)
     \small{
     \begin{align}
         &\textbf{P3:}~
@@ -294,12 +295,13 @@ As a result, the overall algorithm of job dispatching, is elaborated in Algorith
 Moreover, we use the following example to illustrate the procedure of Algorithm \ref{alg_1}.
 \begin{example}
     \label{exp:update}
-    Consider an edge computing system as Fig.\ref{fig:system}, where the AP set $\apSet$ could be partitioned into two subsets which are denoted as $\mathcal{Y}_{0} = \set{1,3}$ and $\mathcal{Y}_{1} = \set{2}$, respectively.
-    As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3, respectively, while the AP in subset $\mathcal{Y}_{1}$ fix its actions.
+    Consider an edge computing system as Fig.\ref{fig:system}, where the AP set $\apSet$ could be partitioned into three subsets which are denoted as $\mathcal{Y}_{0} = \set{1,3,4}$, $\mathcal{Y}_{1} = \set{2}$, and $\mathcal{Y}_{2} = \set{5}$, respectively.
+    As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3, respectively, while the APs in subset $\mathcal{Y}_{1}$ and $\mathcal{Y}_{2}$ fix their actions.
     Denote the aggregation of their dispatching actions as $\tilde{\mathcal{A}}(1)$ and $\hat{\mathcal{A}}(1)$, respectively.
-    Then in the $2$-nd interval, the APs in subset $\mathcal{Y}_{0}$ fix their actions as $\tilde{\mathcal{A}}(1)$ which is denoted as $\hat{\mathcal{A}}(2)$, while 
-    the AP in subset $\mathcal{Y}_{1}$ updates the dispatching actions to $\tilde{\mathcal{A}}(2)$.
-    Hence, every AP update its dispatching actions with period $N=2$.
+    In the $2$-nd interval, the APs in subset $\mathcal{Y}_{0}$ and $\mathcal{Y}_{2}$ fix their actions which is denoted via $\hat{\mathcal{A}}(2)$, while 
+    the AP in subset $\mathcal{Y}_{1}$ updates the dispatching action. %to $\tilde{\mathcal{A}}(2)$.
+    In the $3$-rd interval, the APs in subset $\mathcal{Y}_{0}$ and $\mathcal{Y}_{1}$ fix their actions and the AP in subset $\mathcal{Y}_{2}$ updates the dispatching action.
+    Hence, every AP update its dispatching actions with period $N=3$.
     \begin{figure*}[htp!]
         \centering
         \includegraphics[width=0.60\textwidth]{update-timeline.pdf}
@@ -314,7 +316,7 @@ As a remark notice that since in Algorithm \ref{alg_1}, the computation complexi
 \label{subsec:analysis}
 In most of the existing approximate MDP solutions \cite{mdp-bound1,mdp-bound2,mdp-bound3}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate value function.
-The following lemma shows the this analytical expression is a performance lower bound (cost upper bound) of our proposed policy (Algorithm \ref{alg_1}), \fixit{denoted as $\tilde{\Policy}(\Stat(t), \Delay(t))$}.
+The following lemma shows the this analytical expression is a performance lower bound (cost upper bound) of our proposed policy (Algorithm \ref{alg_1}), {denoted as $\tilde{\Policy}(\Stat(t), \Delay(t))$}.
 % {Furthermore, a tight performance lower bound is proposed based on an \emph{$1$-step improved policy}, which could be obtained via a semi-analytical method.}
 % Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
 % This conclusion is summarized below.
@@ -371,12 +373,12 @@ The above cost upper bound $W_{\Baseline}(\Stat)$ is obtained by assuming all th
 Its gap to the performance of the proposed policy, denoted as $W_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$, is mainly due to the adaptive job dispatching of the proposed policy.
 Therefore, a tighter semi-analytical cost upper bound is provided below which could be used for quick performance evaluation.
 \begin{lemma}[Semi-Analytical Cost Upper Bound]
-    Let $T$ be arbitrary positive integer, then
+    Let $\hat{\Baseline}^{(T)}$ denote an intermediate policy, which follows $\tilde{\Policy}$ in the first $T$ intervals and then fixes the policy in the $T$-th interval in the following intervals ($T$ is an arbitrary positive integer), then
     {\small
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \leq W_{\hat{\Baseline}}^{(T)}(\Stat)
         % \\\nonumber
-        = &\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay}\Bracket{g\Paren{\Stat(t)} | \Stat(1)=\Stat}
+        \define &\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay}\Bracket{g\Paren{\Stat(t)} | \Stat(1)=\Stat}
         \\\nonumber
         &+\gamma^{T} \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}\Paren{\Stat(T+1)}}.
         \label{eqn:semi-bound}
@@ -446,7 +448,7 @@ It is obvious that when $t\to\infty$, Algorithm \ref{alg_2} will converge, i.e.,
 
 \begin{remark}[Learning Efficiency of Algorithm \ref{alg_2}]
     {
-        In conventional reinforcement learning algorithms, the value function should be evaluated for at least a large subset of system states or state-action paris (e.g., Q-learning) before the convergence.
+        In conventional reinforcement learning algorithms, the value function should be evaluated for at least a large subset of system states or state-action pairs (e.g., Q-learning) before the convergence.
         Moreover, the value function of a system state can be updated only when this system state appears after state transitions (which is impractical for our problem which is with enormous state space or action space), which leads to large computation complexity and convergence time.
         In the proposed reinforcement learning algorithm, however, we only learn the unknown statistics of the value function by tracking their unbiased observations.
         Hence, the proposed algorithm could converge faster.

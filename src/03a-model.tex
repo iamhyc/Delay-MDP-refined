@@ -5,21 +5,22 @@ as well as the signaling mechanism with periodic broadcast.
 % as well as the signaling model with periodic broadcast which introduce the job dispatching actions making under partially observable system state at each AP.
 %----------------------------------------------------------------------------------------%
 \subsection{Network Model}
-\begin{figure*}[htp!]
-    \centering
-    \includegraphics[width=0.60\textwidth]{system-model.pdf}
-    \caption{The Illustration of System Model.}
-    \label{fig:system}
-\end{figure*}
+% \begin{figure*}[htp!]
+%     \centering
+%     \includegraphics[width=0.60\textwidth]{system-model.pdf}
+%     \caption{The Illustration of System Model.}
+%     \label{fig:system}
+% \end{figure*}
 We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, which are connected in an edge network as illustrated in Fig.\ref{fig:system}.
 The sets of APs and edge servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{1,\dots,M}$, respectively.
-The communication latency among these APs and edge servers is random.
-Each AP collects the computation jobs from the {mobile IoT devices} within its coverage, and makes dispatching decision on the processing edge servers for each job.
+\hongycCHK{An edge server is typically deployed and collocated with an AP so that mobile devices can upload jobs efficiently.} 
+% The communication latency among these APs and edge servers is random.
+Each AP collects the computation jobs from the {mobile IoT devices} within its coverage, and makes dispatching decision on the edge servers for each job.
 It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
 Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
-We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, and $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server ($\forall k\in\apSet, m\in\esSet$).
-Different APs may have different candidate servers according to their locations in the network, as illustrated in Fig.\ref{fig:system}.
-In this edge computing network, APs and edge servers periodically broadcast their state information (the state information is defined in the Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
+We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server, \hongycCHK{and $\rho_{k,m}$ as the collocation indicator (i.e., $\rho_{k,m}=1$ if $k$-th AP and $m$-th edge server collocated, otherwise $\rho_{k,m}=0$)} ($\forall k\in\apSet, m\in\esSet$).
+Different APs may have different candidate servers according to their locations in the network.%, as illustrated in Fig.\ref{fig:system}.
+In this edge computing network, APs and edge servers periodically broadcast their state information (the state information is defined in Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
 In this paper, we shall optimize the job dispatching strategy distributed at APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
 
 %NOTE: [job space support and arrival process]
@@ -39,7 +40,8 @@ Moreover, the notification of uploading completion from edge server to AP also c
 Hence, we assume the the uploading time of different types of jobs from different APs to edge servers follow independent and discrete distributions.
 % \fixit{For the uploading latency of the type-$j$ job from the $k$-th AP to the $m$-th edge server, the other jobs in uploading could be taken as random traffics of other services, and thus the random uploading latency are independent for each job.}
 % Different types of jobs may have different distributions of the input data size.
-Specifically, let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency (in terms of time slots) distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), where $\Xi$ is the maximum possible uploading time for all jobs and the expectation is denoted as $u_{k,m,j}$.
+Let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency (in terms of time slots) distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), where $\Xi$ is the maximum possible uploading time for all jobs and the expectation is denoted as $u_{k,m,j}$.
+\hongycCHK{Specifically, the uploading latency is fixed as $0$ if $\rho_{k,m}=1$ for job uploading to the collocated edge server.}
 
 %NOTE: [computation process]
 For job computation process on edge servers, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different edge servers would follow independent distributions.
@@ -57,8 +59,9 @@ The arrival jobs will be discarded when the processing queue is full.
 
 \begin{remark}%[Generalization to Edge-Cloud Model]
     The above network model could be generalized into an computing system with both edge servers and cloud center.
-    A cloud center could be treated as a special edge server in our model but with stronger computational capability and larger uploading latency and signaling latency to the APs.
-    Furthermore, the placement of edge servers in the network determines their latency distributions to the APs in our model. For example, the collocated AP and edge server (i.e., the AP and the edge server are placed at same place) suffers from no or tiny uploading latency and signaling latency between each other.
+    A cloud center could be treated as a special edge server in our model but with stronger computational capability and larger uploading latency and signaling latency \tannCHK{to the APs}.
+    % Furthermore, the placement of edge servers in the network determines their latency distributions to the APs in our model.
+    % For example, the collocated AP and edge server (i.e., the AP and the edge server are placed at same place) suffers from no or tiny uploading latency and signaling latency between each other.
     % Moreover, the job type assumption could be simply generalized to other edge-cloud model by pre-allocate computation resource for some classified jobs, where resource allocation is not the major concern in this paper.
 \end{remark}
 %----------------------------------------------------------------------------------------%
@@ -67,7 +70,7 @@ The arrival jobs will be discarded when the processing queue is full.
 \label{subsec:broadcast}
 In order to facilitate distributed and cooperative dispatching for the APs, {the signaling mechanism with periodic broadcast is introduced.}
 We refer to every $t_B$ time slots as a \emph{broadcast interval}.
-As illustrated in Fig.\ref{fig:brd_timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its dispatching strategy of job dispatching when observing the broadcast LSI s from some APs and edge servers.
+As illustrated in Fig.\ref{fig:brd_timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its dispatching strategy of job dispatching when observing the broadcast LSIs from some APs and edge servers.
 As a remark notice that the observable LSI may be outdated due to transmission latency among APs and edge servers.
 The LSI at the APs and edge servers, global state information, and observable state information at the APs are defined below, respectively.
 
@@ -86,24 +89,28 @@ The LSI at the APs and edge servers, global state information, and observable st
             \mathcal{A}_{k}(t)
         },
     \end{align}
-    }
+    }%
     where
+    {\small
     \begin{align}
         \vec{R}^{(k)}_{m,j}(t,0) \define \Paren{
             R^{(k)}_{m,j}(0,t,0), \dots, R^{(k)}_{m,j}(\Xi,t,0)
         },
     \end{align}
+    }%
     and
+    {\small
     \begin{align}
         \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
     \end{align}
-    are referred as status of the type-$j$ job uploading from the $k$-th AP to $m$-th edge server and the dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
+    }%
+    are referred as status of the type-$j$ job uploading from the $k$-th AP to the $m$-th edge server, and the dispatching actions for all types of jobs of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
 \end{definition}
 
 %NOTE: State and Broadcast Information for Edge Server
 \begin{definition}[LSI of Edge Servers]
     Let $Q_{m,j}({t,n})$ be the number of type-$j$ jobs on the $m$-th edge server at the $n$-th time slot of the $t$-th interval ($\forall m\in\esSet, j\in\jSpace$).
-    The LSI of the $m$-th edge server at the $t$-th broadcast interval is defined as
+    The LSI of the $m$-th edge server in the $t$-th broadcast interval is defined as
     \begin{align}
         \mathcal{Q}_{m}(t) \define \Brace{
             Q_{m,j}(t, 0) \Big| \forall j\in\jSpace
@@ -137,6 +144,7 @@ Specifically, the \emph{conflict AP sets} and the \emph{observable state informa
 
 \begin{definition}[Observable State Information]
     The observable state information (OSI) of the $k$-th AP ($\forall k\in\apSet$) at the $t$-th broadcast interval is defined as the aggregation of LSIs of the APs in {conflict AP set} and the edge servers in {candidate server set} of the $k$-th AP, i.e.,
+    {
     \begin{align}
         \Stat_{k}(t) &\define
         \Paren{
@@ -144,6 +152,7 @@ Specifically, the \emph{conflict AP sets} and the \emph{observable state informa
             \Brace{\mathcal{Q}_{m}(t) \Big| \forall m\in\esSet_{k}}
         }.
     \end{align}
+    }%
     \label{def:OSI}
 \end{definition}
 

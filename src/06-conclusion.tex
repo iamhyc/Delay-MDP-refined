@@ -5,7 +5,6 @@ The APs and edge servers periodically broadcast their local state information to
 Due to random transmission latency, the system information observed at different dispatchers are asynchronous.
 We also consider a practical scenario that not all the state information can be observed by each AP.
 Hence, the distributed optimization of job dispatching strategies at all the APs is formulated as a POMDP, whose minimization objective is a discount measurement of job delivery and computation time.
-We propose a novel low-complexity distributed solution framework based on analytical approximation of value function and one-step policy iteration, where the complicated POMDP solution or value iteration is avoided and the analytical performance lower bound is derived.
-The simulation results show that the proposed solution framework outperforms various benchmarks.
-This work assumes available knowledge on the distributions of signaling latency, uploading latency and computation time.
-As an extension, the reinforcement learning would be integrated with the proposed solution framework when the above statistics are absent.
+We propose a novel low-complexity distributed solution framework, called \algname, based on analytical approximation of value function and one-step policy iteration, where the complicated POMDP solution or value iteration is avoided. Both the analytical and semi-analytical performance lower bounds are derived for the approximate MDP solution.
+Furthremore, to handle a general scenario where the statistics of signaling latency, uploading latency and computation time are unknown in advance, an efficient online learning approach is proposed.
+The simulation results show that the proposed solution framework outperforms various heuristic baselines.
