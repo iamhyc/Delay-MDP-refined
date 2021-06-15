@@ -63,8 +63,9 @@
 \newcommand{\Baseline}{\vecG{\Pi}}
 \newcommand{\algname}{\texttt{DecMDP}}
 
-\newcommand{\comments}[1]{\spaceblank\noindent{\leavevmode\color{black}\em#1}\\}
-\newcommand{\response}[1]{{\leavevmode\color{blue}#1}}
+\newcommand{\comments}[1]{\spaceblank\noindent{\leavevmode\color{black}\em#1}}
+\newcommand{\response}[1]{\spaceblank{\leavevmode\color{blue}#1}}
+\newcommand{\thankyou}{Thank you for the comment}
 %
 \newcommand{\wangr}[1]{{\leavevmode\color{orange}#1}}
 \newcommand{\hongyc}[1]{{\leavevmode\color{purple}#1}}
@@ -75,52 +76,75 @@
 \newcommand{\brlatency}{signaling latency}
 
 \begin{document}
-    \title{Reply to the Editor and Reviewers' Comments on Manuscript ID IoT-16294-2021
-    }
+    \title{Reply to the Editor and Reviewers' Comments on Manuscript ID IoT-16294-2021}
     \author{}
     \maketitle
 
     %---------------------------------------------------------------%
-    We thank the editor and reviewers for all the constructive comments. They have helped to improve the technical accuracy and presentation of the manuscript. In the revised manuscript, the main changes are emphasized in \response{blue} for the reading convenience.
+    We thank the editor and reviewers for all the constructive comments. They have helped to improve the technical accuracy and presentation of the manuscript.
+    In the revised manuscript, the main changes are emphasized in {\color{blue}blue} for the reading convenience.
 
-    In this reply file, we first state the comments in \comments{italics and black}, and then respond to them in \response{blue}. Unless mentioned otherwise, the equation, figure and citation numbers refer to those in this reply file.
+    In this reply file, we first state the comments in {\em\color{black} italic and black}, and then respond to them in {\color{blue}blue}.
+    Unless mentioned otherwise, the equation, figure and citation numbers refer to those in this reply file.
     %---------------------------------------------------------------%
 
     %-------------------------------- Response to Reviewer 1 -------------------------------%
     \section{Response to Reviewer 1}
     \comments{
+        This paper investigates the distributed job dispatching in edge computing systems with complete technical analysis. The randomness in transmission latency is considered. I have the following suggestions and questions.
+    }
+
+    \comments{
         \textbf{Comment 1:} In the related, it is stated "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered“. How do you deal with the failed transmission of system state information?
     }
     \response{
-        \textbf{Response R1-1:}
+        \textbf{Response R1-1:} \thankyou.
+        \hongyc{
+            Actually the transmission failuer is implied in the random broadcast time.
+            The modification is made correspondingly in the revised manuscript.
+        }
     }
 
     \comments{
         \textbf{Comment 2:} Does edge servers need to broadcast their state information? In my understanding, only APs need to exchange state information as an edge server is collocated with an AP.
     }
     \response{
-        \textbf{Response R1-2:}
+        \textbf{Response R1-2:} \thankyou.
+        \hongyc{
+            Yes, the edge servers also need to broadcast their state information.
+            As stated in Section III.B in the original manuscript, "at the beginning of each broadcast interval, the local state information (LSI) of APs and edge srevers are broadcast".
+            Intuitively, the job dispatcher on edge servers need queue status information from the candidate servers to make job dispatching decisions.
+        }
     }
 
     \comments{
         \textbf{Comment 3:} Does job response include the job processing time?
     }
     \response{
-        \textbf{Response R1-3:}
+        \textbf{Response R1-3:} \thankyou.
+        \hongyc{
+            Yes, the job response time includes the job processing time on the processing server.
+        }
     }
 
     \comments{
         \textbf{Comment 4:} Appearance of words in figures is in different sizes. Please revise them to be clear.
     }
     \response{
-        \textbf{Response R1-4:}
+        \textbf{Response R1-4:} \thankyou.
+        \hongyc{
+            The words in all the figures are now adjusted into same size.
+        }
     }
 
     \comments{
         \textbf{Comment 5:} Please check the presentation carefully. For example, it should be "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered" but not "staleness and failed transmission of system state information at the dispatcher of a edge computing systems should be considered".
     }
     \response{
-        \textbf{Response R1-5:}
+        \textbf{Response R1-5:} \thankyou.
+        \hongyc{
+            
+        }
     }
     %-------------------------------- Response to Reviewer 1 -------------------------------%
 
@@ -162,6 +186,8 @@
         \textbf{Response R2-5:}
     }
     %-------------------------------- Response to Reviewer 2 -------------------------------%
+
+
 
     \bibliographystyle{IEEEtran}
     % \bibliography{references.bib}
