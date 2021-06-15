@@ -138,7 +138,7 @@
     }
 
     \comments{
-        \textbf{Comment 5:} Please check the presentation carefully. For example, it should be "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered" but not "staleness and failed transmission of system state information at the dispatcher of a edge computing systems should be considered".
+        \textbf{Comment 5:} Please checked the presentation carefully. For example, it should be "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered" but not "staleness and failed transmission of system state information at the dispatcher of a edge computing systems should be considered".
     }
     \response{
         \textbf{Response R1-5:} \thankyou.
@@ -155,35 +155,57 @@
         \textbf{Comment 1:} The authors leveraged partially observable Markov decision process for problem formulation. According to Definition 5, “the observable state information (OSI) of the k-th AP is defined as the aggregation of LSIs of the APs in conflict AP set and the edge servers in candidate server set of the k-th AP”. However, the state information of the APs in non-conflict AP set and the edge servers not in candidate server set of the k-th AP is useless to the k-th AP. In other words, the k-th AP can observe all information related to it during each broadcast interval. To some extent, it can also be said that the AP has observed “global information”. What do the authors think of the global information for a single AP?
     }
     \response{
-        \textbf{Response R2-1:}
+        \textbf{Response R2-1:} \thankyou.
+        \hongyc{
+            It is still partial information.
+            Actually, We set the constraint to make only the partial information is enough for decision making (and scable to large AP set).
+            Actually, there could be a schema which leverages all the broadcast information (i.e., global information), but 1) not scable; 2) broadcast interval would be larger; 3) randomness would increase regarding the transmission failure.
+        }
     }
 
     \comments{
         \textbf{Comment 2:} Does the proposed job dispatching framework consider the possibility of packet drop? For example, in Fig. 2, What if the information broadcast by the 2-nd AP is not received by the 1-st AP?
     }
     \response{
-        \textbf{Response R2-2:}
+        \textbf{Response R2-2:} \thankyou.
+        \hongyc{
+            The packet drop, a.k.a. packet transmission failure, 
+            Actually the transmission failuer is implied in the random broadcast time.
+            The modification is made correspondingly in the revised manuscript.
+        }
     }
 
     \comments{
         \textbf{Comment 3:} In Section VI, the authors mentioned “the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice”. However, the proposed reinforcement learning approach can estimate these values in reality. What are the challenges of Algorithm 2 not being able to estimate these values?
     }
     \response{
-        \textbf{Response R2-3:}
+        \textbf{Response R2-3:} \thankyou.
+        \hongyc{
+            Yes, it is unknown in practice.
+            RL is used for estimation of the statistics and perfom well with non-biased estimation in our situation.
+            The challenges 
+        }
     }
 
     \comments{
         \textbf{Comment 4:} The proposed MDP policy is compared with three kinds of baselines. Are there any state-of-the-art methods proposed recently?
     }
     \response{
-        \textbf{Response R2-4:}
+        \textbf{Response R2-4:} \thankyou.
+        \hongyc{
+            There is no exisiting state-of-the-art baseline, no such scheduling consider distributed scheduling with partial and stale information.
+            Moreover, the three kinds of baselines are proposed to demonstrate the performance improvement proposed by our solution framework, under different scenario in the sensitivity study section.
+        }
     }
 
     \comments{
         \textbf{Comment 5:} It is recommended to enlarge the legends of Figures 5 and 7.
     }
     \response{
-        \textbf{Response R2-5:}
+        \textbf{Response R2-5:} \thankyou.
+        \hongyc{
+            The legends are modifed for Figure 5 and 7.
+        }
     }
     %-------------------------------- Response to Reviewer 2 -------------------------------%
 
