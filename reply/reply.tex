@@ -1,0 +1,168 @@
+\documentclass[12pt, onecolumn]{IEEEtran}
+
+\usepackage{cite}
+% \usepackage[noend]{algpseudocode}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{dcolumn}
+\usepackage[utf8]{inputenc}
+\usepackage{soul}
+\usepackage{array}
+\usepackage{tabulary}
+%---------------------------------------------------------------%
+\newtheorem{definition}{Definition}   % 
+\theoremstyle{definition}             % alter theorem style: <definition>
+\newtheorem{program}{Program}         % [program]
+\newtheorem{assumption}{Assumption}   % [assumption]
+\newtheorem{example}{Example}         % [example]
+\newtheorem{Algorithm}{Algorithm}     % [algorithm]
+\newtheorem{policy}{Policy}           % [policy]
+\newtheorem{problem}{Problem}         % [problem]
+\theoremstyle{remark}                 % alter theorem style: <remark>
+\newtheorem{remark}{Remark}           % [remark]
+\theoremstyle{plain}                  % alter theorem style: <plain>
+\newtheorem{theorem}{Theorem}         % [theorem]
+\newtheorem{lemma}{Lemma}             % [lemma]
+\newtheorem{corollary}{Corollary}     % [corollary]
+%---------------------------------------------------------------%
+\newcommand{\eq}{=}
+\newcommand{\domZ}{\mathbb{Z}_{*}}
+\newcommand{\domP}{\mathbb{Z}_{*}}
+\newcommand{\vecOne}{\mathbf{1}}
+\newcommand{\ind}{\mathbf{I}}
+\newcommand{\mat}{\mathbf}
+\newcommand{\Poisson}{\text{Poisson}}
+\newcommand{\Bernoulli}{\text{Bernoulli}}
+\newcommand{\define}{\triangleq}
+\newcommand{\leadto}{\Rightarrow}
+\newcommand{\vecG}{\boldsymbol}
+\renewcommand{\vec}{\mathbf}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+\DeclarePairedDelimiter{\norm}{|}{|}
+\DeclarePairedDelimiter{\Inorm}{\|}{\|_1}
+\DeclarePairedDelimiter{\Paren}{\bigg(}{\bigg)}
+\DeclarePairedDelimiter{\Bracket}{\bigg[}{\bigg]}
+\DeclarePairedDelimiter{\Brace}{\bigg\{}{\bigg\}}
+%
+\newcommand{\spaceblank}{\vskip 4mm}
+\renewcommand{\baselinestretch}{1.4}
+%---------------------------------------------------------------%
+\newcommand{\AP}{\dagger}
+\newcommand{\ES}{\ddagger}
+\newcommand{\apSet}{\mathcal{K}}
+\newcommand{\esSet}{\mathcal{M}}
+\newcommand{\ccSet}{\mathcal{X}}
+\newcommand{\jSpace}{\mathcal{J}}
+\newcommand{\Stat}{\mathbf{S}}
+\newcommand{\Obsv}{\mathcal{Y}}
+\newcommand{\Policy}{\vecG{\Omega}}
+\newcommand{\Delay}{\vecG{\mathcal{D}}}
+\newcommand{\Baseline}{\vecG{\Pi}}
+\newcommand{\algname}{\texttt{DecMDP}}
+
+\newcommand{\comments}[1]{\spaceblank\noindent{\leavevmode\color{black}\em#1}\\}
+\newcommand{\response}[1]{{\leavevmode\color{blue}#1}}
+%
+\newcommand{\wangr}[1]{{\leavevmode\color{orange}#1}}
+\newcommand{\hongyc}[1]{{\leavevmode\color{purple}#1}}
+\newcommand{\hongycCHK}[1]{{\leavevmode\color{black}#1}}
+\newcommand{\tann}[1]{{\leavevmode\color{red}#1}}
+\newcommand{\tannCHK}[1]{{\leavevmode\color{black}#1}}
+%---------------------------------------------------------------%
+\newcommand{\brlatency}{signaling latency}
+
+\begin{document}
+    \title{Reply to the Editor and Reviewers' Comments on Manuscript ID IoT-16294-2021
+    }
+    \author{}
+    \maketitle
+
+    %---------------------------------------------------------------%
+    We thank the editor and reviewers for all the constructive comments. They have helped to improve the technical accuracy and presentation of the manuscript. In the revised manuscript, the main changes are emphasized in \response{blue} for the reading convenience.
+
+    In this reply file, we first state the comments in \comments{italics and black}, and then respond to them in \response{blue}. Unless mentioned otherwise, the equation, figure and citation numbers refer to those in this reply file.
+    %---------------------------------------------------------------%
+
+    %-------------------------------- Response to Reviewer 1 -------------------------------%
+    \section{Response to Reviewer 1}
+    \comments{
+        \textbf{Comment 1:} In the related, it is stated "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered“. How do you deal with the failed transmission of system state information?
+    }
+    \response{
+        \textbf{Response R1-1:}
+    }
+
+    \comments{
+        \textbf{Comment 2:} Does edge servers need to broadcast their state information? In my understanding, only APs need to exchange state information as an edge server is collocated with an AP.
+    }
+    \response{
+        \textbf{Response R1-2:}
+    }
+
+    \comments{
+        \textbf{Comment 3:} Does job response include the job processing time?
+    }
+    \response{
+        \textbf{Response R1-3:}
+    }
+
+    \comments{
+        \textbf{Comment 4:} Appearance of words in figures is in different sizes. Please revise them to be clear.
+    }
+    \response{
+        \textbf{Response R1-4:}
+    }
+
+    \comments{
+        \textbf{Comment 5:} Please check the presentation carefully. For example, it should be "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered" but not "staleness and failed transmission of system state information at the dispatcher of a edge computing systems should be considered".
+    }
+    \response{
+        \textbf{Response R1-5:}
+    }
+    %-------------------------------- Response to Reviewer 1 -------------------------------%
+
+
+    %-------------------------------- Response to Reviewer 2 -------------------------------%
+    \section{Response to Reviewer 2}
+    \comments{
+        \textbf{Comment 1:} The authors leveraged partially observable Markov decision process for problem formulation. According to Definition 5, “the observable state information (OSI) of the k-th AP is defined as the aggregation of LSIs of the APs in conflict AP set and the edge servers in candidate server set of the k-th AP”. However, the state information of the APs in non-conflict AP set and the edge servers not in candidate server set of the k-th AP is useless to the k-th AP. In other words, the k-th AP can observe all information related to it during each broadcast interval. To some extent, it can also be said that the AP has observed “global information”. What do the authors think of the global information for a single AP?
+    }
+    \response{
+        \textbf{Response R2-1:}
+    }
+
+    \comments{
+        \textbf{Comment 2:} Does the proposed job dispatching framework consider the possibility of packet drop? For example, in Fig. 2, What if the information broadcast by the 2-nd AP is not received by the 1-st AP?
+    }
+    \response{
+        \textbf{Response R2-2:}
+    }
+
+    \comments{
+        \textbf{Comment 3:} In Section VI, the authors mentioned “the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice”. However, the proposed reinforcement learning approach can estimate these values in reality. What are the challenges of Algorithm 2 not being able to estimate these values?
+    }
+    \response{
+        \textbf{Response R2-3:}
+    }
+
+    \comments{
+        \textbf{Comment 4:} The proposed MDP policy is compared with three kinds of baselines. Are there any state-of-the-art methods proposed recently?
+    }
+    \response{
+        \textbf{Response R2-4:}
+    }
+
+    \comments{
+        \textbf{Comment 5:} It is recommended to enlarge the legends of Figures 5 and 7.
+    }
+    \response{
+        \textbf{Response R2-5:}
+    }
+    %-------------------------------- Response to Reviewer 2 -------------------------------%
+
+    \bibliographystyle{IEEEtran}
+    % \bibliography{references.bib}
+\end{document}
