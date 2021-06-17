@@ -91,20 +91,25 @@
     %-------------------------------- Response to Reviewer 1 -------------------------------%
     \section{Response to Reviewer 1}
     \comments{
-        This paper investigates the distributed job dispatching in edge computing systems with complete technical analysis. The randomness in transmission latency is considered. I have the following suggestions and questions.
+        This paper investigates the distributed job dispatching in edge computing systems with complete technical analysis. The randomness in transmission latency is considered.
+        I have the following suggestions and questions.
     }
 
+    %FIXME: update-needed issue
     \comments{
         \textbf{Comment 1:} In the related, it is stated "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered“. How do you deal with the failed transmission of system state information?
     }
     \response{
         \textbf{Response R1-1:} \thankyou.
+        Actually, the broadcast mechanism is designed that the information must to be received inside one broadcast interval.
+        Considering the 
         \hongyc{
             Actually the transmission failuer is implied in the random broadcast time.
             The modification is made correspondingly in the revised manuscript.
         }
     }
 
+    %NOTE: normal issue
     \comments{
         \textbf{Comment 2:} Does edge servers need to broadcast their state information? In my understanding, only APs need to exchange state information as an edge server is collocated with an AP.
     }
@@ -117,6 +122,7 @@
         }
     }
 
+    %FIXME: update-needed issue
     \comments{
         \textbf{Comment 3:} Does job response include the job processing time?
     }
@@ -127,6 +133,7 @@
         }
     }
 
+    %FIXME: update-needed issue
     \comments{
         \textbf{Comment 4:} Appearance of words in figures is in different sizes. Please revise them to be clear.
     }
@@ -137,20 +144,32 @@
         }
     }
 
+    %FIXME: update-needed issue
     \comments{
-        \textbf{Comment 5:} Please checked the presentation carefully. For example, it should be "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered" but not "staleness and failed transmission of system state information at the dispatcher of a edge computing systems should be considered".
+        \textbf{Comment 5:} Please checked the presentation carefully. For example, it should be
+        "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered"
+        but not
+        "staleness and failed transmission of system state information at the dispatcher of a edge computing systems should be considered".
     }
     \response{
         \textbf{Response R1-5:} \thankyou.
-        \hongyc{
-            We have carefully check the presentation used in the original manuscript, and
-        }
+        We have carefully checked the presentation used in the original manuscript, and made the corresponding modifications in the revised version.
     }
     %-------------------------------- Response to Reviewer 1 -------------------------------%
 
 
     %-------------------------------- Response to Reviewer 2 -------------------------------%
     \section{Response to Reviewer 2}
+    \comments{
+        Since highly dynamic transmission latency and job arrival distribution make it difficult for Access Points (APs) to dispatch jobs to edge servers, this paper constructs a distributed job dispatching framework, where the APs cooperatively upload different types of jobs to different edge servers with random uploading latency.
+        Considering the APs receive the partial system state information suffering from random signaling latency, a Partially Observable Markov Decision Process (POMDP) problem is formulated, subjected to the partially available and outdated global system state at the APs.
+        In order to solve the constructed Bellman’s equations, the authors first propose a baseline policy to approximate the optimal value function.
+        Then, the APs are partitioned into non-conflict subsets to realize distributed action update via alternative policy iteration.
+        Sufficient analytical derivation on performance lower bound is a strong aspect of this work.
+        However, the following issues should be clarified before publication.
+    }
+
+    %NOTE: normal issue
     \comments{
         \textbf{Comment 1:} The authors leveraged partially observable Markov decision process for problem formulation. According to Definition 5, “the observable state information (OSI) of the k-th AP is defined as the aggregation of LSIs of the APs in conflict AP set and the edge servers in candidate server set of the k-th AP”. However, the state information of the APs in non-conflict AP set and the edge servers not in candidate server set of the k-th AP is useless to the k-th AP. In other words, the k-th AP can observe all information related to it during each broadcast interval. To some extent, it can also be said that the AP has observed “global information”. What do the authors think of the global information for a single AP?
     }
@@ -163,6 +182,7 @@
         }
     }
 
+    %FIXME: update-needed issue
     \comments{
         \textbf{Comment 2:} Does the proposed job dispatching framework consider the possibility of packet drop? For example, in Fig. 2, What if the information broadcast by the 2-nd AP is not received by the 1-st AP?
     }
@@ -175,6 +195,7 @@
         }
     }
 
+    %NOTE: normal issue
     \comments{
         \textbf{Comment 3:} In Section VI, the authors mentioned “the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice”. However, the proposed reinforcement learning approach can estimate these values in reality. What are the challenges of Algorithm 2 not being able to estimate these values?
     }
@@ -187,6 +208,7 @@
         }
     }
 
+    %NOTE: normal issue
     \comments{
         \textbf{Comment 4:} The proposed MDP policy is compared with three kinds of baselines. Are there any state-of-the-art methods proposed recently?
     }
@@ -198,6 +220,7 @@
         }
     }
 
+    %FIXME: update-needed issue
     \comments{
         \textbf{Comment 5:} It is recommended to enlarge the legends of Figures 5 and 7.
     }
@@ -208,7 +231,6 @@
         }
     }
     %-------------------------------- Response to Reviewer 2 -------------------------------%
-
 
 
     \bibliographystyle{IEEEtran}
