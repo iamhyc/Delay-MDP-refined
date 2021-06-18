@@ -1,7 +1,6 @@
 \section{System Model}
 \label{sec:model}
-In this section, we elaborate the model of edge computing networks with random job arrivals, uploading latency and computation time,
-as well as the signaling mechanism with periodic broadcast.
+In this section, we elaborate the model of edge computing networks with random job arrivals, uploading latency and computation time, as well as the signaling mechanism with periodic broadcast.
 % as well as the signaling model with periodic broadcast which introduce the job dispatching actions making under partially observable system state at each AP.
 %----------------------------------------------------------------------------------------%
 \subsection{Network Model}
@@ -15,7 +14,7 @@ We consider an edge computing system with $K$ Access Points (APs) and $M$ edge s
 The sets of APs and edge servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{1,\dots,M}$, respectively.
 \hongycCHK{An edge server is typically deployed and collocated with an AP so that mobile devices can upload jobs efficiently.} 
 % The communication latency among these APs and edge servers is random.
-Each AP collects the computation jobs from the {mobile IoT devices} within its coverage, and makes dispatching decision on the edge servers for each job.
+Each AP collects the computation jobs from the {mobile IoT devices} within its coverage, and makes dispatching \revision{decisions} on the edge servers for each job.
 It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
 Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
 We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server, \hongycCHK{and $\rho_{k,m}$ as the collocation indicator (i.e., $\rho_{k,m}=1$ if $k$-th AP and $m$-th edge server collocated, otherwise $\rho_{k,m}=0$)} ($\forall k\in\apSet, m\in\esSet$).
@@ -36,8 +35,8 @@ Hence,
 %NOTE: [uploading process]
 Each AP immediately dispatches each type of received jobs to one edge server.
 As the APs upload jobs over shared edge networks illustrated in Fig.\ref{fig:system}, the actual uploading time is random due to random traffics initiated from other enabled services.
-Moreover, the notification of uploading completion from edge server to AP also consumes random time slots for the same reason and thus the uploading time is unknown in advance.
-Hence, we assume the the uploading time of different types of jobs from different APs to edge servers follow independent and discrete distributions.
+Moreover, the notification of uploading completion from edge server to AP also consumes random time slots for the same reason, and thus the uploading time is unknown in advance.
+Hence, we assume the uploading time of different types of jobs from different APs to edge servers follow independent and discrete distributions.
 % \fixit{For the uploading latency of the type-$j$ job from the $k$-th AP to the $m$-th edge server, the other jobs in uploading could be taken as random traffics of other services, and thus the random uploading latency are independent for each job.}
 % Different types of jobs may have different distributions of the input data size.
 Let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency (in terms of time slots) distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), where $\Xi$ is the maximum possible uploading time for all jobs and the expectation is denoted as $u_{k,m,j}$.
@@ -58,7 +57,7 @@ For each job type, the uploaded jobs are computed in a First-Come-First-Serve (F
 The arrival jobs will be discarded when the processing queue is full.
 
 \begin{remark}%[Generalization to Edge-Cloud Model]
-    The above network model could be generalized into an computing system with both edge servers and cloud center.
+    The above network model could be generalized into \revision{a} computing system with both edge servers and cloud center.
     A cloud center could be treated as a special edge server in our model but with stronger computational capability and larger uploading latency and signaling latency \tannCHK{to the APs}.
     % Furthermore, the placement of edge servers in the network determines their latency distributions to the APs in our model.
     % For example, the collocated AP and edge server (i.e., the AP and the edge server are placed at same place) suffers from no or tiny uploading latency and signaling latency between each other.
@@ -144,7 +143,7 @@ Specifically, the \emph{conflict AP sets} and the \emph{observable state informa
 
 \begin{definition}[Observable State Information]
     The observable state information (OSI) of the $k$-th AP ($\forall k\in\apSet$) at the $t$-th broadcast interval is defined as the aggregation of LSIs of the APs in {conflict AP set} and the edge servers in {candidate server set} of the $k$-th AP, i.e.,
-    {
+    {\small
     \begin{align}
         \Stat_{k}(t) &\define
         \Paren{
