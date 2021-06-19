@@ -102,7 +102,6 @@
     \response{
         \textbf{Response R1-1:} \thankyou.
         
-
         \hongyc{
             Actually the transmission failuer is implied in the random broadcast time.
             Actually, the broadcast mechanism is designed that the information must to be received inside one broadcast interval.
@@ -209,18 +208,14 @@
         }
     }
 
-    %NOTE: normal issue
     \comments{
-        \textbf{Comment 3:} In Section VI, the authors mentioned “the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice”. However, the proposed reinforcement learning approach can estimate these values in reality. What are the challenges of Algorithm 2 not being able to estimate these values?
+        \textbf{Comment 3:} In Section VI, the authors mentioned "the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice". However, the proposed reinforcement learning approach can estimate these values in reality. What are the challenges of Algorithm 2 not being able to estimate these values?
     }
     \response{
         \textbf{Response R2-3:} \thankyou.
-
-        \hongyc{
-            Yes, it is unknown in practice.
-            RL is used for estimation of the statistics and perfom well with non-biased estimation in our situation.
-            The challenges 
-        }
+        Sorry for the misunderstanding.
+        With the help of the proposed reinforcement learning algorithm, the unknown statistics (i.e., the distributions of job arrival, uploading latency and computation time) could be learned efficiently, and then the calculation of approximate value function $W_{\Policy}(\Stat)$ is feasible.
+        We have replaced "in practice" with a more precise expression "in advance" in the revised version.
     }
 
     %FIXME: normal but exhausting issue
@@ -229,6 +224,7 @@
     }
     \response{
         \textbf{Response R2-4:} \thankyou.
+
         \hongyc{
             There is no exisiting state-of-the-art baseline, no such scheduling consider distributed scheduling with partial and stale information.
             Moreover, the three kinds of baselines are proposed to demonstrate the performance improvement proposed by our solution framework, under different scenario in the sensitivity study section.

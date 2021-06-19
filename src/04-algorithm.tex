@@ -397,7 +397,7 @@ The performance of both cost upper bounds will be illustrated in the following s
 \section{Reinforcement Learning Algorithm}
 \label{sec:rl-alg}
 {
-    Although the approximate value function $W_{\Baseline}(\Stat)$ is derived analytically in the previous section, the calculation of $ W_{\Baseline}(\Stat)$ requires the priori knowledge on the distributions in this system, i.e., the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice.
+    Although the approximate value function $W_{\Baseline}(\Stat)$ is derived analytically in the previous section, the calculation of $ W_{\Baseline}(\Stat)$ requires the priori knowledge on the distributions in this system, i.e., the distributions of job arrival, uploading latency and computation time, \revision{are usually unknown in advance}. %which are usually unknown in practice.
     Therefore, we extend the \algname~with an efficient reinforcement learning approach.
     Specifically, with the explicit analytical expressions of $\tilde{W}^{\AP}_{k,m,j}$ and $\tilde{W}^{\ES}_{m,j}$ in Lemma \ref{lemma:w_ap} and Lemma \ref{lemma:w_es}, respectively, we only need to learn the following statistical parameters ($\forall k\in\apSet,m\in\esSet, j\in\jSpace$).
     \begin{itemize}
