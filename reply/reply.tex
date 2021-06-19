@@ -101,11 +101,12 @@
     }
     \response{
         \textbf{Response R1-1:} \thankyou.
-        Actually, the broadcast mechanism is designed that the information must to be received inside one broadcast interval.
-        Considering the 
+        
         \hongyc{
             Actually the transmission failuer is implied in the random broadcast time.
+            Actually, the broadcast mechanism is designed that the information must to be received inside one broadcast interval.
             The modification is made correspondingly in the revised manuscript.
+            % We have added a subsection to discuss the complexity of our proposed algorithm in the revised manuscript.
         }
     }
 
@@ -115,11 +116,9 @@
     }
     \response{
         \textbf{Response R1-2:} \thankyou.
-        \hongyc{
-            Yes, the edge servers also need to broadcast their state information.
-            As stated in Section III.B in the original manuscript, "at the beginning of each broadcast interval, the local state information (LSI) of APs and edge srevers are broadcast".
-            Intuitively, the job dispatcher on edge servers need queue status information from the candidate servers to make job dispatching decisions.
-        }
+        The edge servers also need to broadcast their state information.
+        It is stated in Section III.B in the original manuscript, "at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast."
+        % Intuitively, the job dispatcher on edge servers needs queue status information from the candidate servers to make job dispatching decisions.
     }
 
     %FIXME: update-needed issue
