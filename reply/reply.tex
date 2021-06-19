@@ -102,6 +102,7 @@
     \response{
         \textbf{Response R1-1:} \thankyou.
         
+
         \hongyc{
             Actually the transmission failuer is implied in the random broadcast time.
             Actually, the broadcast mechanism is designed that the information must to be received inside one broadcast interval.
@@ -158,18 +159,39 @@
         However, the following issues should be clarified before publication.
     }
 
-    %NOTE: normal issue
     \comments{
         \textbf{Comment 1:} The authors leveraged partially observable Markov decision process for problem formulation. According to Definition 5, “the observable state information (OSI) of the k-th AP is defined as the aggregation of LSIs of the APs in conflict AP set and the edge servers in candidate server set of the k-th AP”. However, the state information of the APs in non-conflict AP set and the edge servers not in candidate server set of the k-th AP is useless to the k-th AP. In other words, the k-th AP can observe all information related to it during each broadcast interval. To some extent, it can also be said that the AP has observed “global information”. What do the authors think of the global information for a single AP?
     }
     \response{
         \textbf{Response R2-1:} \thankyou.
-
-        \hongyc{
-            It is still partial information.
-            Actually, We set the constraint to make only the partial information is enough for decision making (and scable to large AP set).
-            Actually, there could be a schema which leverages all the broadcast information (i.e., global information), but 1) not scable; 2) broadcast interval would be larger; 3) randomness would increase regarding the transmission failure.
+        Actually, "the state information in non-conflict AP set and the edge servers not in candidate server set is useless" only holds in Problem P2, i.e., the problem formulated for each AP after \emph{AP partition} is established.
+        Before \emph{AP partition}, each AP targets to solve problem P1 via equation (\ref{eqn:sp_0})
+        {\small\begin{align}
+            &V\Paren{\Stat(t)} =g\Paren{\Stat(t)}
+                + \gamma\mathbb{E}_{\Delay}\bigg\{
+                    \min_{\Policy(\Stat(t),\Delay(t))}
+                    % \nonumber\\
+                    \sum_{\Stat(t+1)} \Pr \Big\{ 
+                        \Stat(t+1) \Big| \Stat(t), \Policy(\Stat(t), \Delay(t)) \Big\} \cdot V\Big(\Stat(t+1)\Big)
+                    \bigg\},
+            \label{eqn:sp_0}
+        \end{align}}
+        where the global state information (GSI) $\Stat(t)$ is engaged.
+        With the GSI available on each AP, the update of dispatching actions could be simultaneously carried out on each AP by solving equation (\ref{eqn:sp_0}) once they observe the GSI, and the order of action update does not matter.
+        However, this action update schema is not achievable as GSI is not available on each AP.
+        The APs have to follow an \emph{alternative action update} schema with the help of \emph{AP partition}, where only a subset of APs can update dispatching actions in one broadcast interval by solving equation (\ref{eqn:sp_1})
+        {\small
+        \begin{align}
+            \min_{ \tilde{\mathcal{A}}(t) }
+            &\sum_{\Stat(t+1)} \Pr\Brace{
+                \Stat(t+1) \Big| \Stat(t), \hat{\mathcal{A}}(t), \tilde{\mathcal{A}}(t)
+            } \cdot W_{\Baseline}\Paren{\Stat(t+1)},
+            \label{eqn:sp_1}
+        \end{align}
         }
+        while the others maintain the same actions in the previous broadcast interval.
+        Hence, the observed information on each AP would still be considered partial information as OSI but not GSI.
+        % Moreover, the schema which leverages all the broadcast information (i.e., global information), suffers from 1) not scalable; 2) broadcast interval would be larger; 3) randomness would increase regarding the transmission failure.
     }
 
     %FIXME: update-needed issue
@@ -178,10 +200,11 @@
     }
     \response{
         \textbf{Response R2-2:} \thankyou.
-
+        The job dispatching framework could support possibility of packet drop, a.k.a. failed transmission of system state information.
         \hongyc{
+            As explained in {Response R1-1}, 
             The packet drop, a.k.a. packet transmission failure, 
-            Actually the transmission failuer is implied in the random broadcast time.
+            Actually the transmission failure is implied in the random broadcast time.
             The modification is made correspondingly in the revised manuscript.
         }
     }
