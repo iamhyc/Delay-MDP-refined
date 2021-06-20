@@ -128,14 +128,6 @@ The LSI at the APs and edge servers, global state information, and observable st
     \end{align}
 \end{definition}
 
-\revision{
-    \begin{remark}[Handling Transmission Failure]
-        % R1-1: How do you deal with the failed transmission of system state information?
-        % R2-2: What if the information broadcast by the 2-nd AP is not received by the 1-st AP?
-        The failed transmission
-    \end{remark}
-}
-
 %NOTE: Conflict of AP set and partial information definition
 As the APs and edge servers may reside in different locations of a MAN, the transmission latency of LSI is not negligible.
 It might be inefficient {and costly} for one AP to collect the complete GSI before the update of dispatching policy.
@@ -182,6 +174,23 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
     In the $(t+1)$-th broadcast interval, the $1$-st AP will firstly keep the previous actions $\mathcal{A}_{1}(t+1)$, and then updates the actions $\mathcal{D}_{1}(t+1)$ time slots later based on $\Stat_{1}(t+1)$. The new action is denotes as $\mathcal{A}_{1}(t+2)$.
     The signaling latency $\mathcal{D}_1(t)$ and $\mathcal{D}_1(t+1)$ can be different.
 \end{example}
+
+\revision{
+    \begin{remark}[Handling Broadcast Information Transmission Failure]
+        % R1-1: How do you deal with the failed transmission of system state information?
+        % R2-2: What if the information broadcast by the 2-nd AP is not received by the 1-st AP?
+        The transmission failure of broadcast information could be easily handled with a simple retransmission schema.
+        \hongyc{
+            In one broadcast interval, if any AP could not receive the broadcast within a certain time limit which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
+            The AP or edge server will immediately repeat the broadcast when receive the retransmission request, and we denote the (RTT) as $\tau_1$ (random variable with support $\set{0, \dots,\hat{\tau}_1}$).
+            As the retransmission request or the repeated broadcast may fail again, we denote $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.
+            The retransmission times until success is denoted as $\theta_\tau$.
+            Therefore, the broadcast interval $T$ must be set to bound the maximum time elapsed $\hat{\theta}_{\tau}(\hat{\tau}_0+\hat{\tau}_1)$ to guarantee the complete reception of OSI in one broadcast interval.
+            Moreover, $(\hat{\tau}_0+\hat{\tau}_1)$ is limited because of the original constraint of hops, and $\hat{\theta}_\tau$ is usually small.
+            As a remark notice that the elapsed time $\theta_{\tau}(\tau_0+\tau_1)$ for the $k$-th AP at the $t$-th broadcast interval is exactly the \brlatency~$\Delay_k(t)$.
+        }
+    \end{remark}
+}
 
 The notations used throughout this paper are summarized as in Table \ref{table:symbols}.
 \begin{table}[htp!]
