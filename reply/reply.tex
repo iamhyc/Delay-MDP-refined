@@ -107,8 +107,10 @@
             In one broadcast interval, if any AP could not receive the broadcast within a certain time limit which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
             The AP or edge server will immediately repeat the broadcast when receive the retransmission request, and we denote the (RTT) as $\tau_1$ (random variable with support $\set{0, \dots,\hat{\tau}_1}$).
             As the retransmission request or the repeated broadcast may fail again, we denote $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.
-            Therefore, the broadcast interval $T$ must be set to bound the maximum time elapsed $\theta_{\tau}(\hat{\tau}_0+\hat{\tau}_1)$ to guarantee the complete reception of OSI in one broadcast interval.
-            Moreover, $(\hat{\tau}_0+\hat{\tau}_1)$ is limited because of the original constraint of hops, and $\theta_\tau$ is usually small.
+            The retransmission times until success is denoted as $\theta_\tau$.
+            Therefore, the broadcast interval $T$ must be set to bound the maximum time elapsed $\hat{\theta}_{\tau}(\hat{\tau}_0+\hat{\tau}_1)$ to guarantee the complete reception of OSI in one broadcast interval.
+            Moreover, $(\hat{\tau}_0+\hat{\tau}_1)$ is limited because of the original constraint of hops, and $\hat{\theta}_\tau$ is usually small.
+            As a remark notice that the elapsed time $\theta_{\tau}(\tau_0+\tau_1)$ for the $k$-th AP at the $t$-th broadcast interval is exactly the \brlatency~$\Delay_k(t)$.
         }
         Hence, our framework could handle the general packet transmission failure issue with the appended simple retransmission schema.
         We have appended a remark in Section.III to address this issue in the revised manuscript.
