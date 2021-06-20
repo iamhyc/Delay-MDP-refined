@@ -100,7 +100,7 @@
     }
     \response{
         \textbf{Response R1-1:} \thankyou.
-        In th original manuscript, the "failed transmission" occurred only when "some broadcast information may be discarded by the routers after a certain number of hops", which results into partially observable state information for each AP.
+        In th original manuscript, the "failed transmission" occurred only when "some broadcast information may be discarded by the routers after a certain number of hops", which results in partially observable state information for each AP.
         \hongyc{
             % We shall introduce a simple retransmission schema.
             However, our proposed solution framework could be easily extended to handle more general transmission failure situation with a simple retransmission schema.
@@ -109,11 +109,11 @@
             As the retransmission request or the repeated broadcast may fail again, we denote $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.
             The retransmission times until success is denoted as $\theta_\tau$.
             Therefore, the broadcast interval $T$ must be set to bound the maximum time elapsed $\hat{\theta}_{\tau}(\hat{\tau}_0+\hat{\tau}_1)$ to guarantee the complete reception of OSI in one broadcast interval.
-            Moreover, $(\hat{\tau}_0+\hat{\tau}_1)$ is limited because of the original constraint of hops, and $\hat{\theta}_\tau$ is usually small.
+            Moreover, $(\hat{\tau}_0+\hat{\tau}_1)$ is limited because of the constraint of hops, and $\hat{\theta}_\tau$ is usually small.
             As a remark notice that the elapsed time $\theta_{\tau}(\tau_0+\tau_1)$ for the $k$-th AP at the $t$-th broadcast interval is exactly the \brlatency~$\Delay_k(t)$.
         }
         Hence, our framework could handle the general packet transmission failure issue with the appended simple retransmission schema.
-        We have appended a remark in Section.III to address this issue in the revised manuscript.
+        We have appended a remark in Section III to address this issue in the revised manuscript.
     }
 
     \comments{
@@ -207,7 +207,7 @@
         The job dispatching framework could support possibility of packet drop, a.k.a. failed transmission of system state information.
         As explained in \textbf{Response R1-1}, with a simple retransmission schema, the $1$-st AP will request a retransmission of the broadcast information from the $2$-nd AP until success.
         % The time elapsed until success is believed to be limited.
-        We have appended a remark in Section.III to address this issue in the revised manuscript.
+        We have appended a remark in Section III to address this issue in the revised manuscript.
     }
 
     \comments{
