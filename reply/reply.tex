@@ -95,19 +95,23 @@
         I have the following suggestions and questions.
     }
 
-    %FIXME: update-needed issue
     \comments{
         \textbf{Comment 1:} In the related, it is stated "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered". How do you deal with the failed transmission of system state information?
     }
     \response{
         \textbf{Response R1-1:} \thankyou.
-        
+        In th original manuscript, the "failed transmission" occurred only when "some broadcast information may be discarded by the routers after a certain number of hops", which results into partially observable state information for each AP.
         \hongyc{
-            Actually the transmission failuer is implied in the random broadcast time.
-            Actually, the broadcast mechanism is designed that the information must to be received inside one broadcast interval.
-            The modification is made correspondingly in the revised manuscript.
-            % We have added a subsection to discuss the complexity of our proposed algorithm in the revised manuscript.
+            % We shall introduce a simple retransmission schema.
+            However, our proposed solution framework could be easily extended to handle more general transmission failure situation with a simple retransmission schema.
+            In one broadcast interval, if any AP could not receive the broadcast within a certain time limit which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
+            The AP or edge server will immediately repeat the broadcast when receive the retransmission request, and we denote the (RTT) as $\tau_1$ (random variable with support $\set{0, \dots,\hat{\tau}_1}$).
+            As the retransmission request or the repeated broadcast may fail again, we denote $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.
+            Therefore, the broadcast interval $T$ must be set to bound the maximum time elapsed $\theta_{\tau}(\hat{\tau}_0+\hat{\tau}_1)$ to guarantee the complete reception of OSI in one broadcast interval.
+            Moreover, $(\hat{\tau}_0+\hat{\tau}_1)$ is limited because of the original constraint of hops, and $\theta_\tau$ is usually small.
         }
+        Hence, our framework could handle the general packet transmission failure issue with the appended simple retransmission schema.
+        We have appended a remark in Section.III to address this issue in the revised manuscript.
     }
 
     \comments{
@@ -193,19 +197,15 @@
         % Moreover, the schema which leverages all the broadcast information (i.e., global information), suffers from 1) not scalable; 2) broadcast interval would be larger; 3) randomness would increase regarding the transmission failure.
     }
 
-    %FIXME: update-needed issue
     \comments{
         \textbf{Comment 2:} Does the proposed job dispatching framework consider the possibility of packet drop? For example, in Fig. 2, What if the information broadcast by the 2-nd AP is not received by the 1-st AP?
     }
     \response{
         \textbf{Response R2-2:} \thankyou.
         The job dispatching framework could support possibility of packet drop, a.k.a. failed transmission of system state information.
-        \hongyc{
-            As explained in {Response R1-1}, 
-            The packet drop, a.k.a. packet transmission failure, 
-            Actually the transmission failure is implied in the random broadcast time.
-            The modification is made correspondingly in the revised manuscript.
-        }
+        As explained in \textbf{Response R1-1}, with a simple retransmission schema, the $1$-st AP will request a retransmission of the broadcast information from the $2$-nd AP until success.
+        % The time elapsed until success is believed to be limited.
+        We have appended a remark in Section.III to address this issue in the revised manuscript.
     }
 
     \comments{
@@ -218,16 +218,18 @@
         We have replaced "in practice" with a more precise expression "in advance" in the revised version.
     }
 
-    %FIXME: normal but exhausting issue
+    %NOTE: normal issue
     \comments{
         \textbf{Comment 4:} The proposed MDP policy is compared with three kinds of baselines. Are there any state-of-the-art methods proposed recently?
     }
     \response{
         \textbf{Response R2-4:} \thankyou.
-
         \hongyc{
-            There is no exisiting state-of-the-art baseline, no such scheduling consider distributed scheduling with partial and stale information.
-            Moreover, the three kinds of baselines are proposed to demonstrate the performance improvement proposed by our solution framework, under different scenario in the sensitivity study section.
+            To the best of our knowledge, there is no exisiting methods proposed to solve job dispatching with outdated and partial information in edge computing systems.
+            The three baselines used in the original manuscript is to profile the performance of the proposed solution framework \algname~under different parameter setthings. 
+            % Specifically,
+            % There is no exisiting state-of-the-art baseline, no such scheduling consider distributed scheduling with partial and stale information.
+            % in the sensitivity study section
         }
     }
 
@@ -236,7 +238,7 @@
     }
     \response{
         \textbf{Response R2-5:} \thankyou.
-        We have enlarge the legends of Figures 5 and 7 to make it easier to read.
+        We have enlarged the legends of Figures 5 and 7 to make them easier to read.
     }
     %-------------------------------- Response to Reviewer 2 -------------------------------%
 
