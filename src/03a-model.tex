@@ -182,7 +182,7 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
         The transmission failure of broadcast information could be easily handled with a simple retransmission schema.
         \hongyc{
             In one broadcast interval, if any AP could not receive the broadcast within a certain time limit which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
-            The AP or edge server will immediately repeat the broadcast when receive the retransmission request, and we denote the (RTT) as $\tau_1$ (random variable with support $\set{0, \dots,\hat{\tau}_1}$).
+            The AP or edge server will immediately repeat the broadcast when receive the retransmission request, and we denote the Round-Trip Time (RTT) as $\tau_1$ (random variable with support $\set{0, \dots,\hat{\tau}_1}$).
             As the retransmission request or the repeated broadcast may fail again, we denote $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.
             The retransmission times until success is denoted as $\theta_\tau$.
             Therefore, the broadcast interval $T$ must be set to bound the maximum time elapsed $\hat{\theta}_{\tau}(\hat{\tau}_0+\hat{\tau}_1)$ to guarantee the complete reception of OSI in one broadcast interval.
