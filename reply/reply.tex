@@ -100,14 +100,13 @@
     }
     \response{
         \textbf{Response R1-1:} \thankyou.
-        In th original manuscript, the "failed transmission" occurred only when "some broadcast information may be discarded by the routers after a certain number of hops", which results in partially observable state information for each AP.
+        In the original manuscript, the "failed transmission" occurred only when "some broadcast information may be discarded by the routers after a certain number of hops", which results in partially observable state information for each AP.
         \hongyc{
             % We shall introduce a simple retransmission schema.
-            However, our proposed solution framework could be easily extended to handle more general transmission failure situation with a simple retransmission schema.
-            In one broadcast interval, if any AP could not receive the broadcast within a certain time limit which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
+            However, our proposed solution framework could be easily extended to handle more general transmission failure situations with a simple retransmission schema.
+            In one broadcast interval, if any AP could not receive the broadcast within a specific time limit, which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
             The AP or edge server will immediately repeat the broadcast when receive the retransmission request, and we denote the Round-Trip Time (RTT) as $\tau_1$ (random variable with support $\set{0, \dots,\hat{\tau}_1}$).
-            As the retransmission request or the repeated broadcast may fail again, we denote $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.
-            The retransmission times until success is denoted as $\theta_\tau$.
+            As the retransmission request or the repeated broadcast may fail again, we denote retransmission times until success is denoted as $\theta_\tau$, and $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.
             Therefore, the broadcast interval $T$ must be set to bound the maximum time elapsed $\hat{\theta}_{\tau}(\hat{\tau}_0+\hat{\tau}_1)$ to guarantee the complete reception of OSI in one broadcast interval.
             Moreover, $(\hat{\tau}_0+\hat{\tau}_1)$ is limited because of the constraint of hops, and $\hat{\theta}_\tau$ is usually small.
             As a remark notice that the elapsed time $\theta_{\tau}(\tau_0+\tau_1)$ for the $k$-th AP at the $t$-th broadcast interval is exactly the \brlatency~$\Delay_k(t)$.
@@ -215,7 +214,7 @@
     }
     \response{
         \textbf{Response R2-3:} \thankyou.
-        Sorry for the misunderstanding.
+        We are sorry for the misunderstanding.
         With the help of the proposed reinforcement learning algorithm, the unknown statistics (i.e., the distributions of job arrival, uploading latency and computation time) could be learned efficiently, and then the calculation of approximate value function $W_{\Policy}(\Stat)$ is feasible.
         We have replaced "in practice" with a more precise expression "in advance" in the revised version.
     }
@@ -227,8 +226,8 @@
     \response{
         \textbf{Response R2-4:} \thankyou.
         \hongyc{
-            To the best of our knowledge, there is no exisiting methods proposed to solve job dispatching with outdated and partial information in edge computing systems.
-            The three baselines used in the original manuscript is to profile the performance of the proposed solution framework \algname~under different parameter setthings. 
+            To the best of our knowledge, there are no existing methods proposed to solve job dispatching with outdated and partial information in edge computing systems.
+            The three baselines used in the original manuscript are to profile the performance of the proposed solution framework \algname~under different parameter settings.
             % Specifically,
             % There is no exisiting state-of-the-art baseline, no such scheduling consider distributed scheduling with partial and stale information.
             % in the sensitivity study section
