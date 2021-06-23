@@ -66,6 +66,7 @@
 \newcommand{\comments}[1]{\spaceblank\noindent{\leavevmode\color{black}\em#1}}
 \newcommand{\response}[1]{\spaceblank{\leavevmode\color{blue}#1}}
 \newcommand{\thankyou}{Thank you for the comment}
+\newcommand{\delete}[2]{}
 %
 \newcommand{\wangr}[1]{{\leavevmode\color{orange}#1}}
 \newcommand{\hongyc}[1]{{\leavevmode\color{purple}#1}}
@@ -100,18 +101,24 @@
     }
     \response{
         \textbf{Response R1-1:} \thankyou.
-        In the original manuscript, the "failed transmission" occurred only when "some broadcast information may be discarded by the routers after a certain number of hops", which results in partially observable state information for each AP.
-        \hongyc{
-            % We shall introduce a simple retransmission schema.
-            However, our proposed solution framework could be easily extended to handle more general transmission failure situations with a simple retransmission schema.
-            In one broadcast interval, if any AP could not receive the broadcast within a specific time limit, which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
-            The AP or edge server will immediately repeat the broadcast when receive the retransmission request, and we denote the Round-Trip Time (RTT) as $\tau_1$ (random variable with support $\set{0, \dots,\hat{\tau}_1}$).
-            As the retransmission request or the repeated broadcast may fail again, we denote retransmission times until success is denoted as $\theta_\tau$, and $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.
-            Therefore, the broadcast interval $T$ must be set to bound the maximum time elapsed $\hat{\theta}_{\tau}(\hat{\tau}_0+\hat{\tau}_1)$ to guarantee the complete reception of OSI in one broadcast interval.
-            Moreover, $(\hat{\tau}_0+\hat{\tau}_1)$ is limited because of the constraint of hops, and $\hat{\theta}_\tau$ is usually small.
-            As a remark notice that the elapsed time $\theta_{\tau}(\tau_0+\tau_1)$ for the $k$-th AP at the $t$-th broadcast interval is exactly the \brlatency~$\Delay_k(t)$.
-        }
-        Hence, our framework could handle the general packet transmission failure issue with the appended simple retransmission schema.
+        In the original manuscript, the "failed transmission" occurred when "some broadcast information may be discarded by the routers after a certain number of hops" (Section III.B, 2nd paragraph), which results in partially observable state information for each AP (named as OSI in the Definition 5 of the manuscript).
+        % We shall introduce a simple retransmission schema.
+        Specifically, each AP makes scheduling decision according to the state information of APs in its \hongyc{conflict AP set} and edge servers in its \hongyc{candidate server set}.
+        The state information of other nodes is not requested, the state information transmission from those nodes to the AP is tolerable.
+        %
+        Moreover, the transmission failure of OSI is also tolerable in the proposed algorithm, which can actually be transferred to transmission latency.
+        For example, if $k$-th AP is in the \hongyc{conflict AP set} of the $m$-th AP and the state information transmission from the $k$-th AP failed, the $m$-th AP may request retransmissions until a successful reception.
+        This will raise the transmission latency of OSI, and the random transmission latency of OSI is considered in this work.
+        % \delete{v1}{
+        %     However, our proposed solution framework could be easily extended to handle more general transmission failure situations with a simple retransmission schema.
+        %     In one broadcast interval, if any AP could not receive the broadcast within a specific time limit, which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
+        %     The AP or edge server will immediately repeat the broadcast when receive the retransmission request, and we denote the Round-Trip Time (RTT) as $\tau_1$ (random variable with support $\set{0, \dots,\hat{\tau}_1}$).
+        %     As the retransmission request or the repeated broadcast may fail again, we denote retransmission times until success is denoted as $\theta_\tau$, and $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.
+        %     Therefore, the broadcast interval $T$ must be set to bound the maximum time elapsed $\hat{\theta}_{\tau}(\hat{\tau}_0+\hat{\tau}_1)$ to guarantee the complete reception of OSI in one broadcast interval.
+        %     Moreover, $(\hat{\tau}_0+\hat{\tau}_1)$ is limited because of the constraint of hops, and $\hat{\theta}_\tau$ is usually small.
+        %     As a remark notice that the elapsed time $\theta_{\tau}(\tau_0+\tau_1)$ for the $k$-th AP at the $t$-th broadcast interval is exactly the \brlatency~$\Delay_k(t)$.
+        %     Hence, our framework could handle the general packet transmission failure issue with the appended simple retransmission schema.
+        % }
         We have appended a remark in Section III to address this issue in the revised manuscript.
     }
 
@@ -120,8 +127,9 @@
     }
     \response{
         \textbf{Response R1-2:} \thankyou.
-        The edge servers also need to broadcast their state information.
+        In face, the edge servers also broadcast their state information to the APs \hongyc{in the potential AP set}.
         It is stated in Section III.B in the original manuscript, "at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast."
+        \hongyc{It is necessary for the APs to collect task queueing information from edge servers, even it is outdated.}
         % Intuitively, the job dispatcher on edge servers needs queue status information from the candidate servers to make job dispatching decisions.
     }
 
@@ -130,7 +138,8 @@
     }
     \response{
         \textbf{Response R1-3:} \thankyou.
-        Yes, the job response time includes the job processing time on the processing server.
+        Yes, the job response time includes the job processing time on the processing server \hongyc{plus the uploading time from the AP the the edge server}.
+        We have revised the manuscript to avoid potential misunderstanding.
     }
 
     \comments{
