@@ -67,6 +67,7 @@
 \newcommand{\response}[1]{\spaceblank{\leavevmode\color{blue}#1}}
 \newcommand{\thankyou}{Thank you for the comment}
 \newcommand{\delete}[2]{}
+\newcommand{\needref}[1]{{\leavevmode\color{red}[#1]}}
 %
 \newcommand{\wangr}[1]{{\leavevmode\color{orange}#1}}
 \newcommand{\hongyc}[1]{{\leavevmode\color{purple}#1}}
@@ -246,10 +247,13 @@
     }
     \response{
         \textbf{Response R2-4:} \thankyou.
-
+        As mentioned in the introduction section of the original manuscript, MDP has already been applied in scheduling algorithm design for edge computing systems \needref{Edge-MDP}.
+        However, to the best of our knowledge, there are no existing methods proposed to solve job dispatching with outdated and partial information of the edge computing system.
         \hongyc{
-            To the best of our knowledge, there are no existing methods proposed to solve job dispatching with outdated and partial information in edge computing systems.
-            The three baselines used in the original manuscript are to profile the performance of the proposed solution framework \algname~under different parameter settings.
+            Because it is infeasible to solve the Bellman's equation in the considered scenario.
+            In fact, the three baselines are commonly considered in the existing literature.
+            For example, 
+            % The three baselines used in the original manuscript are to profile the performance of the proposed solution framework \algname~under different parameter settings.
             % Specifically,
             % There is no exisiting state-of-the-art baseline, no such scheduling consider distributed scheduling with partial and stale information.
             % in the sensitivity study section
