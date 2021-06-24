@@ -102,11 +102,11 @@
     }
 
     \comments{
-        \textbf{Comment 1:} In the related, it is stated "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered". How do you deal with the failed transmission of system state information?
+        \textbf{Comment 1:} In the related, it is stated ``staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered''. How do you deal with the failed transmission of system state information?
     }
     \response{
         \textbf{Response R1-1:} \thankyou.
-        In the original manuscript, the "failed transmission" occurred when "some broadcast information may be discarded by the routers after a certain number of hops" (Section III.B, 2nd paragraph), which results in partially observable state information for each AP (named as OSI in the Definition 5 of the manuscript).
+        In the original manuscript, the ``failed transmission'' occurred when ``some broadcast information may be discarded by the routers after a certain number of hops'' (Section III.B, 2nd paragraph), which results in partially observable state information for each AP (named as OSI in the Definition 5 of the manuscript).
         % We shall introduce a simple retransmission schema.
         Specifically, each AP makes dispatching decisions according to the state information of APs in its \emph{conflict AP set} and edge servers in its \emph{candidate server set}.
         The state information of other nodes is not requested, and the latency of state information transmission from those nodes to the AP is tolerable.
@@ -132,8 +132,8 @@
     }
     \response{
         \textbf{Response R1-2:} \thankyou.
-        In face, the edge servers also broadcast their state information to the APs in the \emph{potential AP set}.
-        It is stated in Section III.B in the original manuscript, "at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast."
+        In fact, the edge servers also broadcast their state information to the APs in the \emph{potential AP set}.
+        It is stated in Section III.B in the original manuscript, ``at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast.''
         It is necessary for the APs to collect task queueing information from edge servers, even it is outdated.
         % Intuitively, the job dispatcher on edge servers needs queue status information from the candidate servers to make job dispatching decisions.
     }
@@ -157,7 +157,7 @@
 
     \comments{
         \textbf{Comment 5:} Please checked the presentation carefully. For example, it should be
-        "staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered" but not "staleness and failed transmission of system state information at the dispatcher of a edge computing systems should be considered".
+        ``staleness and failed transmission of system state information at the dispatcher of edge computing systems should be considered'' but not ``staleness and failed transmission of system state information at the dispatcher of a edge computing systems should be considered''.
     }
     \response{
         \textbf{Response R1-5:} \thankyou.
@@ -182,17 +182,16 @@
     }
 
     \comments{
-        \textbf{Comment 1:} The authors leveraged partially observable Markov decision process for problem formulation. According to Definition 5, “the observable state information (OSI) of the k-th AP is defined as the aggregation of LSIs of the APs in conflict AP set and the edge servers in candidate server set of the k-th AP”. However, the state information of the APs in non-conflict AP set and the edge servers not in candidate server set of the k-th AP is useless to the k-th AP. In other words, the k-th AP can observe all information related to it during each broadcast interval. To some extent, it can also be said that the AP has observed “global information”. What do the authors think of the global information for a single AP?
+        \textbf{Comment 1:} The authors leveraged partially observable Markov decision process for problem formulation. According to Definition 5, ``the observable state information (OSI) of the k-th AP is defined as the aggregation of LSIs of the APs in conflict AP set and the edge servers in candidate server set of the k-th AP''. However, the state information of the APs in non-conflict AP set and the edge servers not in candidate server set of the k-th AP is useless to the k-th AP. In other words, the k-th AP can observe all information related to it during each broadcast interval. To some extent, it can also be said that the AP has observed ``global information''. What do the authors think of the global information for a single AP?
     }
     \response{
         \textbf{Response R2-1:} \thankyou.
-        % 1. GSI/OSI, direct/indirect impact on job scheduling;
-        % Actually, "the state information in non-conflict AP set and the edge servers not in candidate server set is useless" only holds in Problem P2, i.e., the problem formulated for each AP after \emph{AP partition} is established.
-        % Before \emph{AP partition}, each AP targets to solve problem P1 via equation (\ref{eqn:sp_0}), where the global state information (GSI) $\Stat(t)$ is engaged.
-        % With the GSI available on each AP, the update of dispatching actions could be simultaneously carried out on each AP by solving equation (\ref{eqn:sp_0}) once they observe the GSI, and the order of action update does not matter.
-        % However, this action update schema is not achievable as GSI is not available on each AP.
-        % The APs have to follow an \emph{alternative action update} schema with the help of \emph{AP partition}, where only a subset of APs can update dispatching actions in one broadcast interval by solving equation (\ref{eqn:sp_1}), while the others maintain the same actions in the previous broadcast interval.
-        % Hence, the observed information on each AP would still be considered partial information as OSI but not GSI.
+        % ``the state information in {non-conflict AP set} and {non-candidate server set} is useless.''
+        % 1. GSI/OSI, direct/indirect impact on dispatching decisions;
+        First of all, the state information (GSI or OSI) defined in this paper is used to predict future system states.
+        Then the APs could make dispatching decisions accordingly to minimize the average job response time.
+        However, the OSI is actually not enough to achieve this goal unless with the proposed \emph{alternative policy iteration algorithm}.
+        Here we use a simple example below to demonstrate the difference between OSI and GSI.
         % 2. An example with a figure;
         \begin{figure*}[htp!]
             \centering
@@ -200,27 +199,17 @@
             \caption{An Example of System Model.}
             \label{fig:osi_example}
         \end{figure*}
-        % 3. GSI is better but 1) not scalable, 2) broadcast interval would be larger (regarding the transmission failure)
-
-        % {\small\begin{align}
-        %     &V\Paren{\Stat(t)} =g\Paren{\Stat(t)}
-        %         + \gamma\mathbb{E}_{\Delay}\bigg\{
-        %             \min_{\Policy(\Stat(t),\Delay(t))}
-        %             % \nonumber\\
-        %             \sum_{\Stat(t+1)} \Pr \Big\{ 
-        %                 \Stat(t+1) \Big| \Stat(t), \Policy(\Stat(t), \Delay(t)) \Big\} \cdot V\Big(\Stat(t+1)\Big)
-        %             \bigg\},
-        %     \label{eqn:sp_0}
-        % \end{align}}
-        % {\small
-        % \begin{align}
-        %     \min_{ \tilde{\mathcal{A}}(t) }
-        %     &\sum_{\Stat(t+1)} \Pr\Brace{
-        %         \Stat(t+1) \Big| \Stat(t), \hat{\mathcal{A}}(t), \tilde{\mathcal{A}}(t)
-        %     } \cdot W_{\Baseline}\Paren{\Stat(t+1)},
-        %     \label{eqn:sp_1}
-        % \end{align}
-        % }
+        In Fig.\ref{fig:osi_example}, there are three APs indexed with $1,2,3$, each of which is collocated with an edge server.
+        For the $1$-st AP, the OSI includes the state information of the APs indexed with $2,3$ and edge servers indexed with $1,2$, and the state information of the $3$-rd edge server is out of its scope.
+        Therefore, it seems sufficient for the $1$-st AP to predict the future system states with OSI, as its dispatching decisions have no impacts on the other states (i.e., the state of the $3$-rd edge server).
+        However, as the state information of the $3$-rd edge server is in the OSI of the $1$-st and $2$-nd AP, the changes of dispatching decisions of those APs will have \emph{indirect impacts} on the future OSI of the $1$-st AP.
+        Therefore, the $1$-st AP should use GSI to predict the whole system states and generate a global dispatching decisions to be updated on all APs.
+        % 3. GSI is better but not scalable
+        As GSI is not available on each AP in practice and the solution to global prediction problem is non-scalable for the scenario with massive APs and edge servers, our proposed framework prefers to use OSI instead of GSI to allow parallel dispatching decisions update by leveraging an \emph{alternative policy iteration algorithm}.
+        To conclude, the information in GSI except OSI is useful and has \emph{indirect impacts} on the update of dispatching decisions.
+        Hence, we cannot say the AP could observe ``global information'' with only OSI.
+        % With the GSI available on each AP, the update of dispatching actions could be simultaneously carried out on each AP.
+        % Therefore, the computation complexity at each AP scales linearly with respect to the size of it candidate edge server set and the algorithm can be deployed in a scenario with massive APs and edge servers.
     }
 
     \comments{
@@ -236,7 +225,7 @@
     }
 
     \comments{
-        \textbf{Comment 3:} In Section VI, the authors mentioned "the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice". However, the proposed reinforcement learning approach can estimate these values in reality. What are the challenges of Algorithm 2 not being able to estimate these values?
+        \textbf{Comment 3:} In Section VI, the authors mentioned ``the distributions of job arrival, uploading latency and computation time, which are usually unknown in practice''. However, the proposed reinforcement learning approach can estimate these values in reality. What are the challenges of Algorithm 2 not being able to estimate these values?
     }
     \response{
         \textbf{Response R2-3:} \thankyou.
@@ -245,7 +234,6 @@
         Our proposed algorithm provides an efficient method to track these statistics in an online manner.
         We have revised the sentence to avoid misunderstanding.
         % With the help of the proposed reinforcement learning algorithm, the unknown statistics (i.e., the distributions of job arrival, uploading latency and computation time) could be learned efficiently, and then the calculation of approximate value function $W_{\Policy}(\Stat)$ is feasible.
-        % We have replaced "in practice" with a more precise expression "in advance" in the revised version.
     }
 
     %NOTE: normal issue
@@ -260,11 +248,9 @@
             Because it is infeasible to solve the Bellman's equation in the considered scenario.
             In fact, the three baselines are commonly considered in the existing literature.
             For example, \dots
-            % The three baselines used in the original manuscript are to profile the performance of the proposed solution framework \algname~under different parameter settings.
-            % Specifically,
-            % There is no exisiting state-of-the-art baseline, no such scheduling consider distributed scheduling with partial and stale information.
-            % in the sensitivity study section
+            % The basedline proposed resembles other popular algorithms in this field.
         }
+        % The three baselines used in the original manuscript are to profile the performance of the proposed solution framework \algname~under different parameter settings.
     }
 
     \comments{
