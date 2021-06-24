@@ -176,11 +176,23 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
 \end{example}
 
 \revision{
-    \begin{remark}[Handling Broadcast Information Transmission Failure]
+    \begin{remark}
+        % [Handling Broadcast Information Transmission Failure]
         % R1-1: How do you deal with the failed transmission of system state information?
         % R2-2: What if the information broadcast by the 2-nd AP is not received by the 1-st AP?
-        The transmission failure of broadcast information could be easily handled with a simple retransmission schema.
+        The transmission failure of OSI is also in the proposed algorithm, which can actually be transferred to transmission latency.
+
         \hongyc{
+            Each AP makes scheduling decision according to the state information of APs in its \emph{conflict AP set} and edge servers in its \emph{candidate server set}.
+            The state information of other nodes is not requested, and the state information transmission from those nodes to the AP is tolerable.
+            %
+            Moreover, the transmission failure of OSI is also tolerable in the proposed algorithm, which can actually be transferred to transmission latency.
+            For example, if $k$-th AP is in the \emph{conflict AP set} of the $m$-th AP and the state information transmission from the $k$-th AP failed, the $m$-th AP may request retransmissions until a successful reception.
+            This will raise the transmission latency of OSI, and the random transmission latency of OSI is considered in this work.
+        }
+        
+        \hongyc{
+            The transmission failure of broadcast information could be easily handled with a simple retransmission schema.
             In one broadcast interval, if any AP could not receive the broadcast within a certain time limit which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
             The AP or edge server will immediately repeat the broadcast when receive the retransmission request, and we denote the Round-Trip Time (RTT) as $\tau_1$ (random variable with support $\set{0, \dots,\hat{\tau}_1}$).
             As the retransmission request or the repeated broadcast may fail again, we denote $\theta_\tau$ as the maximum retransmission times after which the transmission is believed to be received.

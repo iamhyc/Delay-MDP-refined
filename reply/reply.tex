@@ -103,11 +103,11 @@
         \textbf{Response R1-1:} \thankyou.
         In the original manuscript, the "failed transmission" occurred when "some broadcast information may be discarded by the routers after a certain number of hops" (Section III.B, 2nd paragraph), which results in partially observable state information for each AP (named as OSI in the Definition 5 of the manuscript).
         % We shall introduce a simple retransmission schema.
-        Specifically, each AP makes scheduling decision according to the state information of APs in its \hongyc{conflict AP set} and edge servers in its \hongyc{candidate server set}.
-        The state information of other nodes is not requested, the state information transmission from those nodes to the AP is tolerable.
+        Specifically, each AP makes scheduling decision according to the state information of APs in its \emph{conflict AP set} and edge servers in its \emph{candidate server set}.
+        The state information of other nodes is not requested, and the state information transmission from those nodes to the AP is tolerable.
         %
         Moreover, the transmission failure of OSI is also tolerable in the proposed algorithm, which can actually be transferred to transmission latency.
-        For example, if $k$-th AP is in the \hongyc{conflict AP set} of the $m$-th AP and the state information transmission from the $k$-th AP failed, the $m$-th AP may request retransmissions until a successful reception.
+        For example, if $k$-th AP is in the \emph{conflict AP set} of the $m$-th AP and the state information transmission from the $k$-th AP failed, the $m$-th AP may request retransmissions until a successful reception.
         This will raise the transmission latency of OSI, and the random transmission latency of OSI is considered in this work.
         % \delete{v1}{
         %     However, our proposed solution framework could be easily extended to handle more general transmission failure situations with a simple retransmission schema.
@@ -127,9 +127,9 @@
     }
     \response{
         \textbf{Response R1-2:} \thankyou.
-        In face, the edge servers also broadcast their state information to the APs \hongyc{in the potential AP set}.
+        In face, the edge servers also broadcast their state information to the APs in the \emph{potential AP set}.
         It is stated in Section III.B in the original manuscript, "at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast."
-        \hongyc{It is necessary for the APs to collect task queueing information from edge servers, even it is outdated.}
+        It is necessary for the APs to collect task queueing information from edge servers, even it is outdated.
         % Intuitively, the job dispatcher on edge servers needs queue status information from the candidate servers to make job dispatching decisions.
     }
 
@@ -138,7 +138,7 @@
     }
     \response{
         \textbf{Response R1-3:} \thankyou.
-        Yes, the job response time includes the job processing time on the processing server \hongyc{plus the uploading time from the AP the the edge server}.
+        Yes, the job response time includes the job processing time on the edge server, plus the uploading time from the AP to the edge server and the waiting time in the processing queue on the edge server.
         We have revised the manuscript to avoid potential misunderstanding.
     }
 
@@ -172,11 +172,19 @@
         However, the following issues should be clarified before publication.
     }
 
+    \hongyc{
+        % Thanks to the 2nd reviewer
+    }
+
     \comments{
         \textbf{Comment 1:} The authors leveraged partially observable Markov decision process for problem formulation. According to Definition 5, “the observable state information (OSI) of the k-th AP is defined as the aggregation of LSIs of the APs in conflict AP set and the edge servers in candidate server set of the k-th AP”. However, the state information of the APs in non-conflict AP set and the edge servers not in candidate server set of the k-th AP is useless to the k-th AP. In other words, the k-th AP can observe all information related to it during each broadcast interval. To some extent, it can also be said that the AP has observed “global information”. What do the authors think of the global information for a single AP?
     }
     \response{
         \textbf{Response R2-1:} \thankyou.
+        \hongyc{
+            1. GSI/OSI, Direct and Indirect impact on job scheduling;
+            2.
+        }
         Actually, "the state information in non-conflict AP set and the edge servers not in candidate server set is useless" only holds in Problem P2, i.e., the problem formulated for each AP after \emph{AP partition} is established.
         Before \emph{AP partition}, each AP targets to solve problem P1 via equation (\ref{eqn:sp_0})
         {\small\begin{align}
@@ -212,9 +220,10 @@
     }
     \response{
         \textbf{Response R2-2:} \thankyou.
-        The job dispatching framework could support possibility of packet drop, a.k.a. failed transmission of system state information.
-        As explained in \textbf{Response R1-1}, with a simple retransmission schema, the $1$-st AP will request a retransmission of the broadcast information from the $2$-nd AP until success.
-        % The time elapsed until success is believed to be limited.
+        % The job dispatching framework could support possibility of packet drop, a.k.a. failed transmission of system state information.
+        As explained in \textbf{Response R1-1}, if packet drip occurs in the transmission of OSI, retransmissions can be requested by the receiving AP.
+        Hence, the packet drop can be transferred to receiving latency of OSI, which has been addressed by the proposed algorithm.
+        % with a simple retransmission schema, the $1$-st AP will request a retransmission of the broadcast information from the $2$-nd AP until success.
         We have appended a remark in Section III to address this issue in the revised manuscript.
     }
 
@@ -224,8 +233,11 @@
     \response{
         \textbf{Response R2-3:} \thankyou.
         We are sorry for the misunderstanding.
-        With the help of the proposed reinforcement learning algorithm, the unknown statistics (i.e., the distributions of job arrival, uploading latency and computation time) could be learned efficiently, and then the calculation of approximate value function $W_{\Policy}(\Stat)$ is feasible.
-        We have replaced "in practice" with a more precise expression "in advance" in the revised version.
+        Because the network may not be stationary for a long time, it is difficult to predict the distribution of job arrival, uploading latency and computation time offline in advance.
+        Our proposed algorithm provide an efficient method to track these statistics in an online manner.
+        We have revised the sentence to avoid misunderstanding.
+        % With the help of the proposed reinforcement learning algorithm, the unknown statistics (i.e., the distributions of job arrival, uploading latency and computation time) could be learned efficiently, and then the calculation of approximate value function $W_{\Policy}(\Stat)$ is feasible.
+        % We have replaced "in practice" with a more precise expression "in advance" in the revised version.
     }
 
     %NOTE: normal issue
@@ -234,6 +246,7 @@
     }
     \response{
         \textbf{Response R2-4:} \thankyou.
+
         \hongyc{
             To the best of our knowledge, there are no existing methods proposed to solve job dispatching with outdated and partial information in edge computing systems.
             The three baselines used in the original manuscript are to profile the performance of the proposed solution framework \algname~under different parameter settings.
@@ -248,7 +261,7 @@
     }
     \response{
         \textbf{Response R2-5:} \thankyou.
-        We have enlarged the legends of Figures 5 and 7 to make them easier to read.
+        We have enlarged the legends of Figures 5 and 7.
     }
     %-------------------------------- Response to Reviewer 2 -------------------------------%
 
