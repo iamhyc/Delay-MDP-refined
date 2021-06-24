@@ -30,7 +30,11 @@ Firstly, we give the definitions of \emph{dispatching policy} and \emph{cost fun
     where $\Delay(t) \define \set{ \mathcal{D}_{1}(t), \dots, \mathcal{D}_{K}(t) }$.
 \end{definition}
 
-According to the Little's law \cite{Little1961}, the average response time per job, counting the number of \revision{time slots} from job arrival to the accomplishment of computation, is proportional to the number of jobs in the system, given the job arrival rates at all the APs. %broadcast intervals
+\revision{
+    The job response time counts the number of time slots from job arrival to the accomplishment of computation, which includes the uploading time from the AP to the edge server, the waiting time in the processing queue and the job processing time on the edge server.
+    According to the Little's law \cite{Little1961}, the average response time per job is proportional to the number of jobs in the system, given the job arrival rates at all the APs.
+    % According to the Little's law \cite{Little1961}, the average response time per job, counting the number of \revision{time slots} from job arrival to the accomplishment of computation, is proportional to the number of jobs in the system, given the job arrival rates at all the APs. %broadcast intervals
+}
 Hence, we define the cost function per broadcast interval as follows, {given the information contained in periodic broadcast.}
 
 \begin{definition}[Cost Function per Broadcast Interval]
