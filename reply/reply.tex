@@ -108,11 +108,11 @@
         \textbf{Response R1-1:} \thankyou.
         In the original manuscript, the "failed transmission" occurred when "some broadcast information may be discarded by the routers after a certain number of hops" (Section III.B, 2nd paragraph), which results in partially observable state information for each AP (named as OSI in the Definition 5 of the manuscript).
         % We shall introduce a simple retransmission schema.
-        Specifically, each AP makes scheduling decision according to the state information of APs in its \emph{conflict AP set} and edge servers in its \emph{candidate server set}.
-        The state information of other nodes is not requested, and the state information transmission from those nodes to the AP is tolerable.
+        Specifically, each AP makes dispatching decisions according to the state information of APs in its \emph{conflict AP set} and edge servers in its \emph{candidate server set}.
+        The state information of other nodes is not requested, and the latency of state information transmission from those nodes to the AP is tolerable.
         %
         Moreover, the transmission failure of OSI is also tolerable in the proposed algorithm, which can actually be transferred to transmission latency.
-        For example, if $k$-th AP is in the \emph{conflict AP set} of the $m$-th AP and the state information transmission from the $k$-th AP failed, the $m$-th AP may request retransmissions until a successful reception.
+        For example, if the $y$-th AP is in the \emph{conflict AP set} of the $k$-th AP and the state information transmission from the $y$-th AP failed, the $k$-th AP may request retransmissions until a successful reception.
         This will raise the transmission latency of OSI, and the random transmission latency of OSI is considered in this work.
         % \delete{v1}{
         %     However, our proposed solution framework could be easily extended to handle more general transmission failure situations with a simple retransmission schema.

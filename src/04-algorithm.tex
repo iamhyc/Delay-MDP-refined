@@ -373,7 +373,7 @@ The above cost upper bound $W_{\Baseline}(\Stat)$ is obtained by assuming all th
 Its gap to the performance of the proposed policy, denoted as $W_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$, is mainly due to the adaptive job dispatching of the proposed policy.
 Therefore, a tighter semi-analytical cost upper bound is provided below which could be used for quick performance evaluation.
 \begin{lemma}[Semi-Analytical Cost Upper Bound]
-    Let $\hat{\Baseline}^{(T)}$ denote an intermediate policy, which follows $\tilde{\Policy}$ in the first $T$ intervals and then fixes the policy in the $T$-th interval in the following intervals ($T$ is an arbitrary positive integer), then
+    Let $\hat{\Baseline}^{(T)}$ denote an intermediate policy, which follows $\tilde{\Policy}$ in the first $T$ intervals and then fixes the policy at the $T$-th interval in the following intervals ($T$ is an arbitrary positive integer), then
     {\small
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \leq W_{\hat{\Baseline}}^{(T)}(\Stat)
