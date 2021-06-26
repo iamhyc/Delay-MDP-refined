@@ -61,12 +61,12 @@ The discount factor $\gamma$ is $0.95$ and the overflow penalty weight $\beta$ i
 %NOTE: Benchmark Elaboration
 We also propose {three heuristic benchmarks to profile the performance of the proposed solution framework \algname}, which are listed as follows.
 \begin{itemize}
-    \item \textbf{Random Dispatching Policy}:
+    \item \textbf{Random Policy}:
             Randomly choose a dispatching edge server in each time slot; 
     \item \textbf{Selfish Policy}:
             Always choose the edge server with the minimum sum of the expected uploading time and processing time;
     \item \textbf{Queue-aware Policy}:
-            Always choose the edge server with the minimum sum of expected uploading time, processing time and queueing time based on the observation of outdated queue states.
+            Always choose the edge server with the minimum sum of expected uploading time, processing time and queueing time based on the observation of outdated queue status.
 \end{itemize}
 Moreover, we choose the Selfish Policy as the initial dispatching action (Baseline Policy) for our proposed algorithm (Algorithm \ref{alg_1}).
 
