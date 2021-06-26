@@ -203,7 +203,7 @@
         For the $1$-st AP, the OSI includes the state information of the APs indexed with $2,3$ and edge servers indexed with $1,2$, and the state information of the $3$-rd edge server is out of its scope.
         Therefore, it seems sufficient for the $1$-st AP to predict the future system states with OSI, as its dispatching decisions have no impacts on the other states (i.e., the state of the $3$-rd edge server).
         However, as the state information of the $3$-rd edge server is in the OSI of the $1$-st and $2$-nd AP, the changes of dispatching decisions of those APs will have \emph{indirect impacts} on the future OSI of the $1$-st AP.
-        Therefore, the $1$-st AP should use GSI to predict the whole system states and generate a global dispatching decisions to be updated on all APs.
+        Therefore, the $1$-st AP should use GSI to predict the whole system states and also the global dispatching decisions to be updated on all APs.
         % 3. GSI is better but not scalable
         As GSI is not available on each AP in practice and the solution to global prediction problem is non-scalable for the scenario with massive APs and edge servers, our proposed framework prefers to use OSI instead of GSI to allow parallel dispatching decisions update by leveraging an \emph{alternative policy iteration algorithm}.
         To conclude, the information in GSI except OSI is useful and has \emph{indirect impacts} on the update of dispatching decisions.
@@ -242,14 +242,23 @@
     }
     \response{
         \textbf{Response R2-4:} \thankyou.
-        As mentioned in the introduction section of the original manuscript, MDP has already been applied in scheduling algorithm design for edge computing systems \cite{mdp-jcin,mdp-globecom,mdp-tvt}.
-        However, to the best of our knowledge, there are no existing methods proposed to solve job dispatching with outdated and partial information of the edge computing system because it is infeasible to solve Bellman's equation in the considered scenario.
-        \hongyc{
-            In fact, the three baselines are commonly considered in the existing literature.
-            For example, \dots
-            % The basedline proposed resembles other popular algorithms in this field.
-        }
-        % The three baselines used in the original manuscript are to profile the performance of the proposed solution framework \algname~under different parameter settings.
+        %% no other works consider partial and outdated information
+        As mentioned in the introduction section of the original manuscript, ``most existing works assume a centralized job dispatcher, which has timely and complete knowledge of the global system status \cite{tan-online,IOTJ18-FanQ,mdp-globecom,mdp-tvt,MASS18-MengZ}.''
+        % and distributes the dispatching decisions to all the APs without delay .
+        To the best of our knowledge, there are no existing methods proposed to solve job dispatching with outdated and partial information of the system.
+        %% our baselines are heuristic but efficient
+        In fact, the three baselines are commonly considered in the existing literature.
+        The three baselines used in the original manuscript are to profile the performance of the proposed solution framework \algname~under different parameter settings.
+        %% why MDP works
+        There are only two works consider outdated information by leveraging Lyapunov optimization to achieve queue stability, because it is infeasible to solve the optimization of queue length in the considered scenario.
+        % solve Bellman's equation in the considered scenario.
+
+        % \wangr{
+        %     As mentioned in the introduction section of the original manuscript, MDP has already been applied in scheduling algorithm design for edge computing systems \cite{mdp-jcin,mdp-globecom,mdp-tvt}.
+        %     However, to the best of our knowledge, there are no existing methods proposed to solve job dispatching with outdated and partial information of the system because it is infeasible to solve Bellman's equation in the considered scenario.
+        %     In fact, the three baselines are commonly considered in the existing literature.
+        %     For example, \dots
+        % }
     }
 
     \comments{
