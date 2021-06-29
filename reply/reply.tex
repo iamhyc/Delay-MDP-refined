@@ -188,16 +188,15 @@
         \textbf{Response R2-1:} \thankyou.
         % ``the state information in {non-conflict AP set} and {non-candidate server set} is useless.''
         % 1. GSI/OSI, direct/indirect impact on dispatching decisions;
-        The OSI is not sufficient for the AP (say the $k$-th AP) to make global optimal solution.
-        Thus, it is direct and local information, rather than global information.
-        In fact, the state information outside the scope of the $k$-th AP's OSI also has indirect impact on the scheduling performance of the $k$-th AP.
-        Specifically, it affects the transition probability of the $k$-th AP' OSI.
+        The OSI of the $k$-th AP (namely, the $k$-th OSI) is not sufficient for that AP to determine the global optimal scheduling policy.
+        The $k$-th OSI is direct and local information for the $k$-th AP, rather than global information.
+        In fact, the state information outside the scope of the $k$-th OSI also has indirect impact on the scheduling performance of the $k$-th AP: it affects the transition probability of the $k$-th OSI.
         % \delete{v3}{
         %     First of all, the state information (GSI or OSI) defined in this paper is used to predict future system states.
         %     Then the APs could make dispatching decisions accordingly to minimize the average job response time.
         %     However, the OSI is actually not enough to achieve this goal unless with the proposed \emph{alternative policy iteration algorithm}.
         % }
-        Here we use a simple example below to demonstrate the difference between OSI and GSI.
+        
         % 2. An example with a figure;
         \begin{figure*}[htp!]
             \centering
@@ -205,16 +204,16 @@
             \caption{An Example of System Model.}
             \label{fig:osi_example}
         \end{figure*}
-        {
-            In Fig.\ref{fig:osi_example}, there are three APs and three edge servers in the edge computing system, where the solid directed lines show the job dispatching paths for the APs.
-            % indexed with $1,2,3$, each of which is collocated with an edge server.
-            For the $1$-st AP, the OSI includes the state information of the APs indexed with $2,3$ and the edge servers indexed with $1,2$, and the state information of the $3$-rd edge server is out of its scope.
-        }
+        Here we use a simple example below to demonstrate the impact of GSI.
+        In Fig.\ref{fig:osi_example}, there are three APs and three edge servers in the edge computing system, where the solid directed lines show all the possible job dispatching paths for the APs.
+        For the $1$-st AP, the OSI includes the state information of the APs indexed with $2,3$ and the edge servers indexed with $1,2$.
+        The  state information of the $3$-rd edge server is out of its scope.
+        \hongyc{Moreover, the $3$-rd OSI includes ...}
         Note that the prediction of future state distribution is essential for solving an MDP problem.
-        It is clear that, without GSI, it is impossible to predict the future dispatching decisions of the {$2$-nd AP from the perspective of the $1$-st AP}.
-        It is thereby impossible to predict the future states of the $1$-st and $2$-nd edge servers, which are directed connected with the $1$-st AP, due to the lack of future OSI.
-        As a result, the evaluation of value function is infeasible, and the MDP is POMDP.
-        On the other hand, if the GSI were available at all the APs without latency, there would exist global optimal scheduling policy for the MDP formulation, which is superior to the policy proposed in our work. However, this scenario might be impractical.
+        Without GSI, it is impossible to predict the future dispatching decisions of the $3$-rd AP from the perspective of the $1$-st AP, since they observe different OSIs.
+        It is thereby impossible for the $1$-st AP to predict the future state distributions of the $2$-nd edge server, lack of the dispatching decisions of the $3$-rd AP.
+        As a result, the evaluation of optimal value function of the Bellman's equation if infeasible at both $1$-st and $3$-rd APs, and the distributed policy optimization for them is POMDP.
+        On the other hand, if the GSI were available at all the APs without latency, there would exist global optimal scheduling policy for the MDP formulation, which should be superior to the policy proposed in our work. However, this scenario might be impractical.
         We have added the above discussion into the revised manuscript.
         % \delete{v3}{
         %     Therefore, it seems sufficient for the $1$-st AP to predict the future system states with OSI, as its dispatching decisions have no impacts on the other states (i.e., the state of the $3$-rd edge server).
