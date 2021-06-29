@@ -199,6 +199,33 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
     \end{remark}
 }
 
+\revision{
+    \begin{remark}
+        The OSI is not sufficient for the AP (say the $k$-th AP) to make global information optimal solution.
+        Thus, it is direct and local information, rather than global information.
+        In fact, the state information outside the scope of the $k$-th AP's OSI also has indirect impact on the scheduling performance of the $k$-th AP.
+        Specifically, it affects the transition probability of the $k$-th AP' OSI.
+        Here we use a simple example below to demonstrate the difference between OSI and GSI.
+        % 2. An example with a figure;
+        \begin{figure}[htp!]
+            \centering
+            \includegraphics[width=0.45\textwidth]{reply/images/osi-example.pdf}
+            \caption{An Example of System Model.}
+            \label{fig:osi_example}
+        \end{figure}
+        \hongyc{
+            In Fig.\ref{fig:osi_example}, there are three APs indexed with $1,2,3$, each of which is collocated with an edge server.
+            For the $1$-st AP, the OSI includes the state information of the APs indexed with $2,3$ and edge servers indexed with $1,2$, and the state information of the $3$-rd edge server is out of its scope.
+        }
+        Note that the prediction of future state distribution is essential for solving an MDP problem.
+        It is clear that, without GSI, it is impossible to predict the future OSI of the \hongyc{$2$-nd AP from the perspective of the $1$-st AP}.
+        It is thereby impossible to predict the future states of the $1$-st and $2$-nd edge servers, which are directed connected with the $1$-st AP, due to the lack of future OSI.
+        As a result, the evaluation of value function is infeasible, and the MDP is POMDP.
+
+        On the other hand, if the GSI were available at all the APs without latency, there would exist global optimal scheduling policy for the MDP formulation, which is superior to the policy proposed in our work. However, this scenario might be impractical.
+    \end{remark}
+}
+
 The notations used throughout this paper are summarized as in Table \ref{table:symbols}.
 \begin{table}[htp!]
     % \footnotesize
