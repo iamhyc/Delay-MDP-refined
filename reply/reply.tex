@@ -208,7 +208,7 @@
         In Fig.\ref{fig:osi_example}, there are three APs and three edge servers in the edge computing system, where the solid directed lines show all the possible job dispatching paths for the APs.
         For the $1$-st AP, the OSI includes the state information of the APs indexed with $2,3$ and the edge servers indexed with $1,2$.
         The  state information of the $3$-rd edge server is out of its scope.
-        \hongyc{Moreover, the $3$-rd OSI includes ...}
+        {Moreover, the $3$-rd OSI includes the state information of the APs indexed with $1,2$ and the edge servers indexed with $2,3$.}
         Note that the prediction of future state distribution is essential for solving an MDP problem.
         Without GSI, it is impossible to predict the future dispatching decisions of the $3$-rd AP from the perspective of the $1$-st AP, since they observe different OSIs.
         It is thereby impossible for the $1$-st AP to predict the future state distributions of the $2$-nd edge server, lack of the dispatching decisions of the $3$-rd AP.
