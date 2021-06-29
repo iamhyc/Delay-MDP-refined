@@ -259,17 +259,20 @@
     \response{
         \textbf{Response R2-4:} \thankyou.
         %% no other works consider partial and outdated information
-        As mentioned in the introduction section of the original manuscript, ``most existing works assume a centralized job dispatcher, which has timely and complete knowledge of the global system status \cite{tan-online,IOTJ18-FanQ,mdp-globecom,mdp-tvt,MASS18-MengZ}.''
+        In fact, the three heuristic baseline schemes are efficient and widely used as performance baselines in the existing literature with many different scenarios \needref{temp}.
+        However, there is no state-of-the-art job dispatching design for our considered scenario.
+        As mentioned in the introduction section of the original manuscript, ``most existing works assume a centralized job dispatcher, which has timely and complete knowledge of the global system status \cite{tan-online,IOTJ18-FanQ,mdp-globecom,mdp-tvt,MASS18-MengZ}.'' %cite more delay-and-complete knowledge.
+        To the best of our knowledge, there are no existing methods proposed to solve job dispatching with \textbf{outdated and partial information} of the system, not to mention the cooperation of multiple dispatchers in the system.
+        %
         % and distributes the dispatching decisions to all the APs without delay .
-        To the best of our knowledge, there are no existing methods proposed to solve job dispatching with outdated and partial information of the system, not to mention the cooperation of multiple dispatchers in the system.
         %% our baselines are heuristic but efficient
-        Hence, we use three heuristic but efficient baselines in the original manuscript to profile the performance of the proposed solution framework \algname. %under different parameter settings
-        Specifically, 
-        \emph{Random Policy} randomly dispatches the jobs for load balancing,
-        \emph{Selfish Policy} chooses the edge server with minimum time only awareness of statistical parameters (expected uploading time and processing time) but regardless of queueing status,
-        and \emph{Queue-aware Policy} chooses the edge server awareness of queueing status of the edge servers but with outdated observation. % is invariant of \brlatency
+        % Hence, we use three heuristic but efficient baselines in the original manuscript to profile the performance of the proposed solution framework \algname. %under different parameter settings
+        % Specifically, 
+        % \emph{Random Policy} randomly dispatches the jobs for load balancing,
+        % \emph{Selfish Policy} chooses the edge server with minimum time only awareness of statistical parameters (expected uploading time and processing time) but regardless of queueing status,
+        % and \emph{Queue-aware Policy} chooses the edge server awareness of queueing status of the edge servers but with outdated observation. % is invariant of \brlatency
         %% why MDP works (extended answer)
-        Moreover, compared to other works leveraging MDP in scheduling algorithm design for edge computing systems \cite{mdp-jcin,mdp-globecom,mdp-tvt}, our proposed policy could solve Bellman's equation efficiently in the considered scenario.
+        % Moreover, compared to other works leveraging MDP in scheduling algorithm design for edge computing systems \cite{mdp-jcin,mdp-globecom,mdp-tvt}, our proposed policy could solve Bellman's equation efficiently in the considered scenario.
         % There are only two works consider outdated information by leveraging Lyapunov optimization to achieve queue stability, because it is infeasible to solve the optimization of queue length in the considered scenario.
         % the existence of \brlatency~may not raise a significant challenge to the algorithm design with Lyapunov optimization.
         % In fact, the design of distributed dispatchers with \brlatency~could be more challenging.
