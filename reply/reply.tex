@@ -136,8 +136,8 @@
         Hence, it is necessary for the APs to collect task queueing information from both collocated and non-collocated edge servers, even it is outdates.
 
         In practical implementation, if one edge server collocates with one AP, the broadcast of AP information and edge server information may be in the same message or different message.
-        For the generalization of description, we claim that both APs and edge servers broadcast their state information.
-        There is no contradiction, and this model can be trivially extended to the scenario where the APs and edge servers are deployed separately.
+        For the generalization of description, we assume that both APs and edge servers broadcast their state information.
+        There is no contradiction, and this model can also be applied extended to the more general scenario where the APs and edge servers are deployed separately.
         % the edge servers also broadcast their state information to the APs in the \emph{potential AP set}.
         % It is stated in Section III.B in the original manuscript, ``at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast.''
         % It is necessary for the APs to collect task queueing information from edge servers, even it is outdated.
@@ -207,21 +207,21 @@
         \begin{figure*}[htp!]
             \centering
             \includegraphics[width=0.60\textwidth]{osi-example.pdf}
-            \caption{An Example of System Model.}
+            \caption{An example of system model, where the edge servers $1,2,3$ are collocated with the APs indexed with $1,2,4$, respectively.}
             \label{fig:osi_example}
         \end{figure*}
         Here we use a simple example below to demonstrate the impact of GSI.
-        {
+        {%
             In Fig.\ref{fig:osi_example}, there are four APs and three edge servers collocated with the APs indexed with $1,2,4$, respectively, in the edge computing system, where the solid directed lines show all the possible job dispatching paths for the APs.
-            For the $2$-nd AP, the OSI includes the state information of the APs indexed with $1,3$ and the edge servers indexed with $1,2$.
-            The state information of the $4$-th edge server is out of its scope.
-            Moreover, the $3$-rd OSI includes the state information of the APs indexed with $2,4$ and the edge servers indexed with $2,4$.
+            For the $2$-nd AP, its OSI includes the state information of the APs indexed with $1,3$ and the edge servers indexed with $1,2$.
+            The state information of the $3$-rd edge server is out of its scope.
+            Moreover, the $3$-rd OSI includes the state information of the APs indexed with $2,4$ and the edge servers indexed with $2,3$.
         }%
         Note that the prediction of future state distribution is essential for solving an MDP problem.
-        {
+        {%
             Without GSI, it is impossible to predict the future dispatching decisions of the $3$-rd AP from the perspective of the $2$-nd AP, since they observe different OSIs.
-            It is thereby impossible for the $2$-nd AP to predict the future state distributions of the $4$-th edge server, lack of the dispatching decisions of the $3$-rd AP.
-            As a result, the evaluation of optimal value function of the Bellman's equation is infeasible at both $2$-nd and $4$-th APs, and the distributed policy optimization for them is POMDP.
+            It is thereby impossible for the $2$-nd AP to predict the future state distributions of the $2$-nd edge server, lack of the dispatching decisions of the $3$-rd AP.
+            As a result, the evaluation of optimal value function of the Bellman's equation is infeasible at both $2$-nd and $3$-rd APs, and the distributed policy optimization for them is a POMDP.
         }%
         Hence, the standard MDP (or approximate MDP) solution method cannot be applied.
 

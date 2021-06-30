@@ -104,24 +104,22 @@ Thus, problem P1 is actually a POMDP\revision{, which is further demonstrated by
     \begin{figure}[htp!]
         \centering
         \includegraphics[width=0.45\textwidth]{reply/images/osi-example.pdf}
-        \caption{An Example of System Model.}
+        \caption{An example of system model, where the edge servers $1,2,3$ are collocated with the APs indexed with $1,2,4$, respectively.}
         \label{fig:osi_example}
     \end{figure}
 
     \begin{example}
-        The OSI of the $k$-th AP (namely, the $k$-th OSI) is not sufficient for that AP to determine the global optimal scheduling policy.
-        Here we use a simple example below to demonstrate the impact of GSI.
-        {
-            In Fig.\ref{fig:osi_example}, there are four APs and three edge servers collocated with the APs indexed with $1,2,4$, respectively, in the edge computing system, where the solid directed lines show all the possible job dispatching paths for the APs.
-            For the $2$-nd AP, the OSI includes the state information of the APs indexed with $1,3$ and the edge servers indexed with $1,2$.
-            The state information of the $4$-th edge server is out of its scope.
-            Moreover, the $3$-rd OSI includes the state information of the APs indexed with $2,4$ and the edge servers indexed with $2,4$.
+        {%
+            As illustrated in Fig.\ref{fig:osi_example}, there are four APs and three edge servers collocated with the APs indexed with $1,2,4$, respectively, in the edge computing system, where the solid directed lines show all the possible job dispatching paths for the APs.
+            For the $2$-nd AP, its OSI includes the state information of the APs indexed with $1,3$ and the edge servers indexed with $1,2$.
+            The state information of the $3$-rd edge server is out of its scope.
+            Moreover, the OSI of the $3$-rd AP (namely, the $3$-rd OSI) includes the state information of the APs indexed with $2,4$ and the edge servers indexed with $2,3$.
         }%
-        Note that the prediction of future state distribution is essential for solving an MDP problem.
-        {
+        Note that the prediction of future state distribution is essential for solving the RHS of equation (\ref{eqn:sp_0}).
+        {%
             Without GSI, it is impossible to predict the future dispatching decisions of the $3$-rd AP from the perspective of the $2$-nd AP, since they observe different OSIs.
-            It is thereby impossible for the $2$-nd AP to predict the future state distributions of the $4$-th edge server, lack of the dispatching decisions of the $3$-rd AP.
-            As a result, the evaluation of optimal value function of the Bellman's equation is infeasible at both $2$-nd and $4$-th APs, and the distributed policy optimization for them is POMDP.
+            It is thereby impossible for the $2$-nd AP to predict the future state distributions of the $2$-nd edge server, lack of the dispatching decisions of the $3$-rd AP.
+            As a result, the evaluation of optimal value function of equation (\ref{eqn:val_f}) is infeasible at both $2$-nd and $3$-rd APs, and the distributed policy optimization for them is a POMDP.
         }
     \end{example}
 }%
