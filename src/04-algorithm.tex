@@ -180,7 +180,7 @@ Moreover, the analytical expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ an
 Although the optimal value function has been approximated via the baseline policy in the previous part, it is still infeasible for all the APs to solve the RHS of the Bellman's equations in a distributed manner with OSI and local \brlatency~only.
 This is because the evaluation of equation (\ref{w_ap}) and (\ref{w_es}) requires the knowledge of GSI and \brlatency~at all APs.
 Instead, it is feasible for part of APs to update their dispatching actions distributedly in each broadcast interval and achieve a better performance compared with baseline policy.
-Hence, we first define the following collection of AP subsets, namely \emph{AP partition}, where one subset is selected to update dispatching actions in one broadcast interval, and all the subsets are selected alternatively for different broadcast \revision{intervals}.
+Hence, we first define the following collection of AP subsets, namely \emph{AP partition}, where one subset is selected to update dispatching actions in one broadcast interval, and all the subsets are selected alternatively for different broadcast {intervals}.
 \begin{definition}[AP Partition]
     A collection of AP subsets $(Y_1, ..., Y_N)$ is named as AP partition, if $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \apSet$ and
     % be a collection of subsets of AP set $\apSet$, which satisfy
@@ -301,7 +301,7 @@ Moreover, we use the following example to illustrate the procedure of Algorithm 
     In the $2$-nd interval, the APs in subset $\mathcal{Y}_{0}$ and $\mathcal{Y}_{2}$ fix their actions which is denoted via $\hat{\mathcal{A}}(2)$, while 
     the AP in subset $\mathcal{Y}_{1}$ updates the dispatching action. %to $\tilde{\mathcal{A}}(2)$.
     In the $3$-rd interval, the APs in subset $\mathcal{Y}_{0}$ and $\mathcal{Y}_{1}$ fix their actions and the AP in subset $\mathcal{Y}_{2}$ updates the dispatching action.
-    Hence, every AP \revision{updates} its dispatching actions with period $N=3$.
+    Hence, every AP {updates} its dispatching actions with period $N=3$.
     \begin{figure*}[htp!]
         \centering
         \includegraphics[width=0.60\textwidth]{update-timeline.pdf}

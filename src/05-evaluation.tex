@@ -79,10 +79,10 @@ More insights on the performance comparison are provided in Fig.\ref{fig:bar_plo
 In the former figure, the average job response times, measuring the average number of broadcast intervals from job's arrival at one AP to the completeness of computation at one edge server, are compared.
 It can be observed that the proposed policy still outperforms all the benchmarks.
 In Fig.\ref{fig:bar_plot}(c), the job dropping rates, measuring the ratio of jobs dropped by edge servers due to queue overflow, are also compared.
-\revision{In} summary, the proposed policy outperforms \revision{the} other three benchmarks with the minimum average cost and job response time.
-{Moreover, there \revision{are} no dropping jobs incurred compared with the Selfish policy, which is the initial baseline policy for our proposed algorithm.}
+{In} summary, the proposed policy outperforms {the} other three benchmarks with the minimum average cost and job response time.
+{Moreover, there {are} no dropping jobs incurred compared with the Selfish policy, which is the initial baseline policy for our proposed algorithm.}
 Finally, an realization of job dispatching is illustrated in Fig.\ref{fig:general_timeline}, where the number of jobs in the system is plot versus the index of broadcast interval.
-It can be observed that the proposed policy \revision{manages} to keep the number of jobs \revision{at a} lower level, compared with the other benchmarks.
+It can be observed that the proposed policy {manages} to keep the number of jobs {at a} lower level, compared with the other benchmarks.
 This demonstrates its high dispatching efficiency.
 
 {
@@ -116,7 +116,7 @@ The convergence property of the proposed reinforcement learning algorithm is ill
 It can be observed that the learning procedures for all the three statistical parameters converge after $80$ broadcast intervals.
 % which is far before the system achieving the balance dynamic under the dispatching policy.
 On the other hand, the number of observations required for the convergence of conventional reinforcement learning algorithms is usually larger for enormous system and action space.
-This demonstrates the efficiency of the proposed reinforcement learning algorithm, which benefits from the derived expression \revision{of} the approximate value function.
+This demonstrates the efficiency of the proposed reinforcement learning algorithm, which benefits from the derived expression {of} the approximate value function.
 % performance compared with prior-knowledge
 \begin{figure}[ht!]
     \centering
@@ -200,7 +200,7 @@ In all the figures, the proposed policy outperforms all the benchmarks, which de
 We carry out the sensitivity study of job arrival probability by scaling the interval of jobs arriving in Google cluster traces.
 % The simulation results of various arrival probability are illustrated in Fig.\ref{fig:ss_scale}.
 The average system cost versus the number of APs is illustrated in Fig.\ref{fig:ss_scale}.
-With the \revision{increase} of job arrival probability, the average system cost increases in all the benchmarks and our proposed policy.
+With the {increase} of job arrival probability, the average system cost increases in all the benchmarks and our proposed policy.
 It can be observed that our policy performs the best.
 Moreover, the performance gain becomes significant when the computation load is heavy.
 This demonstrates the dispatching efficiency of the proposed policy with heavy load.

@@ -14,7 +14,7 @@ We consider an edge computing system with $K$ Access Points (APs) and $M$ edge s
 The sets of APs and edge servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{1,\dots,M}$, respectively.
 \hongycCHK{An edge server is typically deployed and collocated with an AP so that mobile devices can upload jobs efficiently.} 
 % The communication latency among these APs and edge servers is random.
-Each AP collects the computation jobs from the {mobile IoT devices} within its coverage, and makes dispatching \revision{decisions} on the edge servers for each job.
+Each AP collects the computation jobs from the {mobile IoT devices} within its coverage, and makes dispatching {decisions} on the edge servers for each job.
 It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
 Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
 We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server, \hongycCHK{and $\rho_{k,m}$ as the collocation indicator (i.e., $\rho_{k,m}=1$ if $k$-th AP and $m$-th edge server collocated, otherwise $\rho_{k,m}=0$)} ($\forall k\in\apSet, m\in\esSet$).
@@ -181,7 +181,8 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
         % R1-1: How do you deal with the failed transmission of system state information?
         % R2-2: What if the information broadcast by the 2-nd AP is not received by the 1-st AP?
         Each AP (say the $k$-th AP) makes dispatching decisions according to the OSI $\Stat_{k}(t)$ received, which includes the state information of APs in its \emph{conflict AP set} $\ccSet_{k}$ and edge servers in its \emph{candidate server set} $\esSet_{k}$.
-        Moreover, the transmission failure of OSI is tolerable.
+        The state information of other nodes is not requested, and the latency of state information transmission from those nodes to the AP is tolerable.
+        Moreover, the transmission failure of OSI is tolerable, which can actually be transferred to transmission latency.
         For example, if the $y$-th AP is in the \emph{conflict AP set} of the $k$-th AP and the state information transmission from the $y$-th AP failed, the $k$-th AP may request retransmissions until a successful reception.
         This will raise the transmission latency of OSI and consists of the random \brlatency~$\Delay_{k}(t)$ of the $k$-th AP at the $t$-th broadcast interval.
         % This will raise the transmission latency of OSI, and the random transmission latency of OSI is considered in this work.
@@ -201,6 +202,7 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
 
 \revision{
     \begin{remark}
+        The OSI of the $k$-th AP (namely, the $k$-th OSI) is not sufficient for that AP to determine the global optimal scheduling policy.
         \begin{figure}[htp!]
             \centering
             \includegraphics[width=0.45\textwidth]{reply/images/osi-example.pdf}
