@@ -31,10 +31,11 @@ Firstly, we give the definitions of \emph{dispatching policy} and \emph{cost fun
 \end{definition}
 
 \revision{
-    The job response time counts the number of time slots from job arrival to the accomplishment of computation, which includes the uploading time from the AP to the edge server, the waiting time in the processing queue and the job processing time on the edge server.
+    In this paper, the average job response time and packet drop rate are considered as the system cost.
+    The job response time counts the number of broadcast intervals from job arrival to the accomplishment of computation, which includes the uploading time from the AP to the edge server, the waiting time in the processing queue and the job processing time on the edge server.
     According to the Little's law \cite{Little1961}, the average response time per job is proportional to the number of jobs in the system, given the job arrival rates at all the APs.
-    % According to the Little's law \cite{Little1961}, the average response time per job, counting the number of \revision{time slots} from job arrival to the accomplishment of computation, is proportional to the number of jobs in the system, given the job arrival rates at all the APs. %broadcast intervals
-}
+    % According to the Little's law \cite{Little1961}, the average response time per job, counting the number of broadcast intervals from job arrival to the accomplishment of computation, is proportional to the number of jobs in the system, given the job arrival rates at all the APs. %broadcast intervals
+}%
 Hence, we define the cost function per broadcast interval as follows, {given the information contained in periodic broadcast.}
 
 \begin{definition}[Cost Function per Broadcast Interval]
@@ -98,7 +99,33 @@ Moreover, the optimal dispatching policy $\Omega^{*}$ can be obtained by solving
 
 However, it is infeasible to solve the above Bellman's equations {and achieve the performance of $\Policy^*$ in our considered distributed dispatching scenario.}
 This is because each AP (say the $k$-th AP) only has the knowledge of its own OSI $\Stat_{k}(t)$ and local \brlatency~$\mathcal{D}_{k}(t)$, but the optimal solution (dispatching actions of all APs) for the RHS of equation (\ref{eqn:sp_0}) depends on the GSI and the knowledge of global \brlatency.
-Thus, problem P1 is actually a POMDP.
+Thus, problem P1 is actually a POMDP\revision{, which is further demonstrated by a toy example below.}
+\revision{
+    \begin{figure}[htp!]
+        \centering
+        \includegraphics[width=0.45\textwidth]{reply/images/osi-example.pdf}
+        \caption{An Example of System Model.}
+        \label{fig:osi_example}
+    \end{figure}
+
+    \begin{example}
+        The OSI of the $k$-th AP (namely, the $k$-th OSI) is not sufficient for that AP to determine the global optimal scheduling policy.
+        Here we use a simple example below to demonstrate the impact of GSI.
+        {
+            In Fig.\ref{fig:osi_example}, there are four APs and three edge servers collocated with the APs indexed with $1,2,4$, respectively, in the edge computing system, where the solid directed lines show all the possible job dispatching paths for the APs.
+            For the $2$-nd AP, the OSI includes the state information of the APs indexed with $1,3$ and the edge servers indexed with $1,2$.
+            The state information of the $4$-th edge server is out of its scope.
+            Moreover, the $3$-rd OSI includes the state information of the APs indexed with $2,4$ and the edge servers indexed with $2,4$.
+        }%
+        Note that the prediction of future state distribution is essential for solving an MDP problem.
+        {
+            Without GSI, it is impossible to predict the future dispatching decisions of the $3$-rd AP from the perspective of the $2$-nd AP, since they observe different OSIs.
+            It is thereby impossible for the $2$-nd AP to predict the future state distributions of the $4$-th edge server, lack of the dispatching decisions of the $3$-rd AP.
+            As a result, the evaluation of optimal value function of the Bellman's equation is infeasible at both $2$-nd and $4$-th APs, and the distributed policy optimization for them is POMDP.
+        }
+    \end{example}
+}%
+
 The general solution of POMDP is of huge complexity {as all the historical system states should be traced back in the current system state} \cite{IJCAI03-NairR,IJCAI99-BoutilierC}.
 In this paper, we shall propose a novel low-complexity solution framework based on an analytical approximation of the value function $V(\cdot)$ and alternative actions update, where distributed job dispatching via the Bellman's equations becomes feasible
 (the minimization at the RHS of equation (\ref{eqn:sp_0}) is solvable with the approximate value function)

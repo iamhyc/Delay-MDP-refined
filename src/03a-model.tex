@@ -57,7 +57,7 @@ For each job type, the uploaded jobs are computed in a First-Come-First-Serve (F
 The arrival jobs will be discarded when the processing queue is full.
 
 \begin{remark}%[Generalization to Edge-Cloud Model]
-    The above network model could be generalized into \revision{a} computing system with both edge servers and cloud center.
+    The above network model could be generalized into a computing system with both edge servers and cloud center.
     A cloud center could be treated as a special edge server in our model but with stronger computational capability and larger uploading latency and signaling latency \tannCHK{to the APs}.
     % Furthermore, the placement of edge servers in the network determines their latency distributions to the APs in our model.
     % For example, the collocated AP and edge server (i.e., the AP and the edge server are placed at same place) suffers from no or tiny uploading latency and signaling latency between each other.
@@ -176,17 +176,13 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
 \end{example}
 
 \revision{
-    \begin{remark}
+    \begin{remark}[Transmission Failure of OSI]
         % [Handling Broadcast Information Transmission Failure]
         % R1-1: How do you deal with the failed transmission of system state information?
         % R2-2: What if the information broadcast by the 2-nd AP is not received by the 1-st AP?
-        Each AP (say the $k$-th AP) makes dispatching decisions according to the OSI $\Stat_{k}(t)$ received, which includes the state information of APs in its \emph{conflict AP set} $\ccSet_{k}$ and edge servers in its \emph{candidate server set} $\esSet_{k}$.
-        The state information of other nodes is not requested, and the latency of state information transmission from those nodes to the AP is tolerable.
-        Moreover, the transmission failure of OSI is tolerable, which can actually be transferred to transmission latency.
+        In the system model, the transmission failure of OSI is tolerable: it can actually be transferred to transmission latency.
         For example, if the $y$-th AP is in the \emph{conflict AP set} of the $k$-th AP and the state information transmission from the $y$-th AP failed, the $k$-th AP may request retransmissions until a successful reception.
-        This will raise the transmission latency of OSI and consists of the random \brlatency~$\Delay_{k}(t)$ of the $k$-th AP at the $t$-th broadcast interval.
-        % This will raise the transmission latency of OSI, and the random transmission latency of OSI is considered in this work.
-        
+        This will raise the transmission latency of OSI, which contributes to the random \brlatency~$\Delay_{k}(t)$ of the $k$-th AP.
         % \delete{RV1}{
         %     The transmission failure of broadcast information could be easily handled with a simple retransmission schema.
         %     In one broadcast interval, if any AP could not receive the broadcast within a certain time limit which is denoted as $\tau_0$ (random variable with support $\set{0, \dots, \hat{\tau}_0}$), it will request a retransmission of the broadcast from the corresponding AP or edge server.
@@ -198,28 +194,7 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
         %     As a remark notice that the elapsed time $\theta_{\tau}(\tau_0+\tau_1)$ for the $k$-th AP at the $t$-th broadcast interval is exactly the \brlatency~$\Delay_k(t)$.
         % }
     \end{remark}
-}
-
-\revision{
-    \begin{remark}
-        The OSI of the $k$-th AP (namely, the $k$-th OSI) is not sufficient for that AP to determine the global optimal scheduling policy.
-        \begin{figure}[htp!]
-            \centering
-            \includegraphics[width=0.45\textwidth]{reply/images/osi-example.pdf}
-            \caption{An Example of System Model.}
-            \label{fig:osi_example}
-        \end{figure}
-        Here we use a simple example below to demonstrate the impact of GSI.
-        In Fig.\ref{fig:osi_example}, there are three APs and three edge servers in the edge computing system, where the solid directed lines show all the possible job dispatching paths for the APs.
-        For the $1$-st AP, the OSI includes the state information of the APs indexed with $2,3$ and the edge servers indexed with $1,2$.
-        The  state information of the $3$-rd edge server is out of its scope.
-        {Moreover, the $3$-rd OSI includes the state information of the APs indexed with $1,2$ and the edge servers indexed with $2,3$.}
-        Note that the prediction of future state distribution is essential for solving an MDP problem.
-        Without GSI, it is impossible to predict the future dispatching decisions of the $3$-rd AP from the perspective of the $1$-st AP, since they observe different OSIs.
-        It is thereby impossible for the $1$-st AP to predict the future state distributions of the $2$-nd edge server, lack of the dispatching decisions of the $3$-rd AP.
-        As a result, the evaluation of optimal value function of the Bellman's equation if infeasible at both $1$-st and $3$-rd APs, and the distributed policy optimization for them is POMDP.
-    \end{remark}
-}
+}%
 
 The notations used throughout this paper are summarized as in Table \ref{table:symbols}.
 \begin{table}[htp!]
