@@ -1,15 +1,15 @@
 % \IEEEtitleabstractindextext{
     \begin{abstract}    
         %NOTE: (1) background: distributed job dispatching with latency;
-        Job dispatching is a fundamental problem in edge computing for load balancing among multiple edge servers. When implementing an edge computing system with distributed job dispatchers in an extensive network, such as a Metropolitan Area Network (MAN), the highly dynamic transmission latency is a non-negligible issue. The exchange of system status information would inevitably become outdated, and the reception of whole information exchange is discouraged.
+        Job dispatching is a fundamental problem in edge computing for load balancing among multiple edge servers. When implementing an edge computing system with distributed job dispatchers in an extensive network, such as a Metropolitan Area Network (MAN), the highly dynamic transmission latency is a non-negligible issue, which leads to outdated information sharing. Moreover, the fully-observed system state is discouraged as reception of all broadcast is time consuming. %The exchange of system status information would inevitably become outdated, and the reception of whole system information is discouraged.
         % the transmission latency is a non-negligible issue, such that the exchange of system status information would inevitably become outdated.
         % Moreover, as the latency might be highly dynamic in a MAN, the reception of whole information exchange is time-consuming and thus discouraged.
         % \hongyc{Most of the existing works did not take the variable transmission latency into consideration.}
         %NOTE: (3) problem formulation: online/distributed/job dispatching; the signaling mechanism (information sharing); claim partial&outdated again;
-        In this paper, we investigate an online distributed job dispatching problem in an edge computing system, where multiple access points (APs) collect jobs from the mobile Internet of Things (IoT) devices and then dispatch each job to an edge server.
-        The distributed dispatchers on each AP would receive information exchange via periodic broadcast.
+        In this paper, we investigate an online distributed job dispatching problem in edge computing, where multiple access points (APs) collect jobs and then dispatch each job to an edge server.
+        The distributed dispatcher on each AP would receive partially and outdated information exchanged via periodic broadcast.
         % A signaling mechanism is introduced to facilitate periodic information broadcast among distributed dispatchers on each AP.
-        Due to the highly dynamic latency, the dispatchers have to make job dispatching decisions individually according to partially received and outdated broadcast information.
+        %Due to the highly dynamic latency, the job dispatchers have to make decisions individually according to partially received and outdated broadcast information.
         %NOTE: (4) technical contribution: POMDP; low-complexity solution with bound;
         Hence, we formulate the distributed job dispatching problem by leveraging partially observable Markov decision process (POMDP) and propose a novel approximate MDP solution framework, called \algname, to avoid the huge time complexity of conventional POMDP solutions.
         Both analytical and semi-analytical performance lower bounds are derived for the approximate MDP solution. %for quick performance evaluation.
