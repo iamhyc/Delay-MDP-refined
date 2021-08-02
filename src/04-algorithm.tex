@@ -1,30 +1,25 @@
 \section{A Distributed Solution Framework with Partial Information}
-% Algorithm with Partial Information
 \label{sec:algorithm}
 In this section, we shall propose a novel approximation framework, called \algname, to decouple the centralized optimization on the RHS of the Bellman's equations in Eqn. (\ref{eqn:sp_0}) to each AP for arbitrary system state.
 \tannCHK{For the APs outside $\ccSet_{k}$, i.e., the conflict AP set of the $k$-th AP, the update of their dispatching actions will not affect the task computation originated from the $k$-th AP ($\forall k\in\apSet$).} 
 Thus, the optimization of their dispatching actions can be decoupled.
 However, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
 Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
-Hence, cooperative optimization of dispatching actions for the APs within the same conflict AP set is difficult. %infeasible
+Hence, cooperative optimization of dispatching actions for the APs within the same conflict AP set is difficult.
 To this end, we introduce an \emph{alternative policy iteration algorithm}, to alternatively optimize the dispatching actions of one AP in a conflict AP set in each broadcast interval, while other APs maintain their dispatching actions in the previous broadcast interval.
 Specifically, the proposed distributed algorithm consists of the following two steps:
-%\hongyc{(move two steps adjacent in the following subsections)}
 \begin{enumerate}
     \item We first introduce a baseline policy, use its value function to approximate the value function of the optimal policy $\Policy^*$, and derive the analytical expression of the approximate value function for arbitrary GSI in Section \ref{subsec:baseline}.
     \item With the approximate value function, in Section \ref{subsec:ap_alg}, the AP set is partitioned into multiple independent subsets,
-    %an alternative action update algorithm
     and only one out of these subsets is selected to update dispatching actions distributedly in each broadcast interval.
     Moreover, both analytical and semi-analytical performance bounds are derived in Section \ref{subsec:analysis}.
 \end{enumerate}
 As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge of the system state.
 In our proposed solution framework, we extend this procedure to the POMDP problem in P1 by exploiting the structure of partially connected edge computing systems.
-% To the best knowledge of authors, a POMDP can hardly be solved via the Bellman's equations of full system state knowledge in the existing literature.
 
 \subsection{Baseline Policy and Approximate Value Function}
 \label{subsec:baseline}
 To alleviate the curse of dimensionality, we first use the baseline policy $\Baseline$ with fixed dispatching actions to approximate the value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}).
-% Specifically, the baseline policy is elaborated below.
 Specifically, the baseline policy we used in this paper is elaborated below.
 
 \begin{definition}[Baseline Policy]
@@ -49,23 +44,6 @@ Specifically, the baseline policy we used in this paper is elaborated below.
     }%
     and $\omega_{k,j}(t+1) = \omega_{k,j}(t)$.
 \end{definition}
-
-\delete{TMC-v2}{
-\hongyc{Specifically, the initial dispatching actions ($\omega_{k,j}(0), \forall j\in\jSpace$) of the $k$-th AP adopt the values as follows.}
-\begin{align}
-    \omega_{k,j}(0) = \arg\min_{m} u_{k,m,j} \vec{R}^{(k)}_{m,j}(0, 0) 
-    \\
-    + c_{m,j} (Q_{m,j}(0,0) + \|\|\vec{R}^{(k)}_{m,j}(0, 0)\|\| + 1)
-\end{align}
-
-\begin{example}[Time-related Fixed Actions in Baseline Policy]
-    \hongyc{
-        (Give an example why baseline policy is time-related;
-        if the baseline policy not updated at $t=0$, it would be ...;
-        if the baseline policy only updated once, it would be ...)
-    }
-\end{example}
-}%
 
 Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseline$, we shall approximate the value function of the optimal policy $V(\cdot)$ via $W_{\Baseline}$, i.e.,
 {\small
@@ -126,7 +104,6 @@ Moreover, the analytical expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ an
                 \lambda_{k,j} I[\omega_{k,j}(t)=m], & \xi=0
                 \\
                 R^{(k)}_{m,j} = 1, & \text{otherwise}
-                % \Pr\{R^{(k)}_{m,j}(\xi,t,0) = 1\}, & \text{otherwise}
             \end{cases}
         \end{align*}
         denotes the probability that there is one type-$j$ job have been delivered from $k$-th AP to $m$-th edge server for $\xi$ time slots at the very beginning of the $t$-th broadcast interval, when the baseline policy $\Baseline$ is adopted;
@@ -183,7 +160,6 @@ Instead, it is feasible for part of APs to update their dispatching actions dist
 Hence, we first define the following collection of AP subsets, namely \emph{AP partition}, where one subset is selected to update dispatching actions in one broadcast interval, and all the subsets are selected alternatively for different broadcast {intervals}.
 \begin{definition}[AP Partition]
     A collection of AP subsets $(Y_1, ..., Y_N)$ is named as AP partition, if $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \apSet$ and
-    % be a collection of subsets of AP set $\apSet$, which satisfy
     \begin{align}
         &\bigcup_{n=0,\dots,N-1} \mathcal{Y}_{n} = \apSet
         \label{eqn:subset_cup}
@@ -231,11 +207,6 @@ At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ a
 \end{align}
 }
 
-% As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
-% \fixit{At the $t$-th broadcast interval, the dispatching actions is given by
-% \begin{align}
-%     \tilde{\Policy}(\Stat(t), \Delay(t)) = \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
-% \end{align}}%
 Moreover, we have the following conclusion on the decomposition of P2.
 \begin{lemma}[]
     The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs in $\mathcal{Y}_n$. %{for each subset partition}
@@ -243,7 +214,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
     \small{
     \begin{align}
         &\textbf{P3:}~
-        \min_{ \tilde{\mathcal{A}}(t+1) } %\tilde{\Policy}_{y}(\Stat(t),\Delay(t))
+        \min_{ \tilde{\mathcal{A}}(t+1) }
         \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \tilde{\mathcal{A}}(t+1),\hat{\mathcal{A}}(t+1) }}
         \nonumber\\
         &~~~~\sum_{j\in\jSpace}
@@ -260,7 +231,6 @@ Moreover, we have the following conclusion on the decomposition of P2.
        \tilde{\esSet}_{y} &= \set{\omega_{y,j}(t), \omega_{y,j}(t+1) | \forall j\in\jSpace}.
     \end{align*}
     }%
-    % denote the {subset of conflict set} and {subset of candidate set} of the $y$-th AP, respectively, which are participated in value function evaluation.
     \label{lemma:w_partial}
 \end{lemma}
 \begin{proof}
@@ -268,13 +238,10 @@ Moreover, we have the following conclusion on the decomposition of P2.
     Hence, it's obvious that the expression of equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$).
 \end{proof}
 The optimization of dispatching actions $\tilde{\Policy}_{y}(\Stat(t),\Delay(t))$ for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in candidate edge server set $\esSet_{y}$, whose computational complexity is $O(J|\mathcal{M}_{y}|)$.
-% \hongyc{(Moreover, the brutal seraching could use reduced expression of vaultion function)}
 As a result, the overall algorithm of job dispatching, is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
     \caption{\algname: Online Alternative Actions Update Algorithm}\label{alg_1}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
-    % \KwIn{$\Stat(t), \Delay(t)$}
-    % \KwOut{$\tilde{\mathcal{A}}(t)$}
     Initialize all the APs with heuristic dispatching actions $\set{{\omega}_{k,j}(0)|\forall k\in\apSet,j\in\jSpace}$.\;
     \For{$t=0,1,2,\dots$}{
         \tcc{Get the index of the subset to update at $t$.}
@@ -299,7 +266,7 @@ Moreover, we use the following example to illustrate the procedure of Algorithm 
     As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3, respectively, while the APs in subset $\mathcal{Y}_{1}$ and $\mathcal{Y}_{2}$ fix their actions.
     Denote the aggregation of their dispatching actions as $\tilde{\mathcal{A}}(1)$ and $\hat{\mathcal{A}}(1)$, respectively.
     In the $2$-nd interval, the APs in subset $\mathcal{Y}_{0}$ and $\mathcal{Y}_{2}$ fix their actions which is denoted via $\hat{\mathcal{A}}(2)$, while 
-    the AP in subset $\mathcal{Y}_{1}$ updates the dispatching action. %to $\tilde{\mathcal{A}}(2)$.
+    the AP in subset $\mathcal{Y}_{1}$ updates the dispatching action.
     In the $3$-rd interval, the APs in subset $\mathcal{Y}_{0}$ and $\mathcal{Y}_{1}$ fix their actions and the AP in subset $\mathcal{Y}_{2}$ updates the dispatching action.
     Hence, every AP {updates} its dispatching actions with period $N=3$.
     \begin{figure*}[htp!]
@@ -317,10 +284,6 @@ As a remark notice that since in Algorithm \ref{alg_1}, the computation complexi
 In most of the existing approximate MDP solutions \cite{mdp-bound1,mdp-bound2,mdp-bound3}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate value function.
 The following lemma shows this analytical expression is a performance lower bound (cost upper bound) of our proposed policy (Algorithm \ref{alg_1}), {denoted as $\tilde{\Policy}(\Stat(t), \Delay(t))$}.
-% {Furthermore, a tight performance lower bound is proposed based on an \emph{$1$-step improved policy}, which could be obtained via a semi-analytical method.}
-% Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
-% This conclusion is summarized below.
-% We have the following conclusion on the performance of the above proposed algorithm.
 \begin{lemma}[Analytical Cost Upper Bound]
     \label{lemma:bound}
     Let $W_{\tilde{\Policy}}(\cdot)$ be the value function of the proposed policy $\tilde{\Omega}$, i.e.,
@@ -343,32 +306,11 @@ The following lemma shows this analytical expression is a performance lower boun
         \forall \Stat.
     \end{align}
     }%
-    % \hongyc{We denote the \emph{$1$-step improved policy} as $\hat{\Baseline}$, which is an intermediate between the baseline policy and the proposed policy. Specifically, $\hat{\Baseline}$ would update the dispatching actions following the Algorithm \ref{alg_1} in the first interval (saying the $t$-th interval) (i.e., at the same time slot with same subset of APs), and then fixes the actions in the following intervals. The explicit definitions are given as follows.}%
-    % {\small
-    % \begin{align}
-    %     \hat{\Baseline}\Paren{\Stat(t), \Delay(t)} \define 
-    %     \begin{cases}
-    %         \tilde{\Policy}({\Stat(0), \Delay(0)}), &t=1
-    %         \\
-    %         \tilde{\Policy}({\Stat(1), \Delay(1)}), &\text{otherwise}
-    %     \end{cases}.
-    % \end{align}
-    % }%
-    % Let $V_{\hat{\Baseline}}(\cdot)$ be the value function of the \emph{$1$-step improved policy} $\hat{\Baseline}$, i.e.,
-    % {\small
-    % \begin{align}
-    %     V_{\hat{\Baseline}}(\Stat) = \mathbb{E}_{\Delay}\Bracket{ g\Paren{\Stat(1)} + \gamma W_{\hat{\Baseline}}\Paren{\Stat(2)} | \Stat(1)=\Stat },
-    %     % \sum_{\tau=0}^{n-1} \gamma^{\tau} E[c(t+\tau)] + \gamma^{n-1} W_{\hat{\Baseline}}(\Stat(t+n)),
-    % \end{align}
-    % }%
-    % \hongyc{Moreover, as the broadcast interval is random, it is hard to obtain closed-form analytical expression for the tight performance bound $V_{\hat{\Baseline}}(\Stat)$ and a semi-analytical method is proposed.}
 \end{lemma}
 \begin{proof}
     Please refer to Appendix \ref{append_3}.
 \end{proof}
 
-% Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
-% Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.
 The above cost upper bound $W_{\Baseline}(\Stat)$ is obtained by assuming all the APs fix the target edge servers for task computation.
 Its gap to the performance of the proposed policy, denoted as $W_{\Baseline}(\Stat) - W_{\tilde{\Policy}}(\Stat)$, is mainly due to the adaptive job dispatching of the proposed policy.
 Therefore, a tighter semi-analytical cost upper bound is provided below which could be used for quick performance evaluation.
@@ -377,7 +319,6 @@ Therefore, a tighter semi-analytical cost upper bound is provided below which co
     {\small
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \leq W_{\hat{\Baseline}}^{(T)}(\Stat)
-        % \\\nonumber
         \define &\sum_{t=1}^{T} \gamma^{t-1} \mathbb{E}^{\tilde{\Policy}}_{\Delay}\Bracket{g\Paren{\Stat(t)} | \Stat(1)=\Stat}
         \\\nonumber
         &+\gamma^{T} \mathbb{E}^{\Baseline}_{\Stat(T+1)}\Bracket{W_{\Baseline}\Paren{\Stat(T+1)}}.
@@ -405,13 +346,8 @@ The performance of both cost upper bounds will be illustrated in the following s
         \item The expectation of computation time $c_{m,j}$, which could be estimated on each edge server respectively.
         \item The uploading time distribution $\mathbb{U}_{k,m,j}(\Xi)$ , which could be estimated via the timestamp of each job transmission.
     \end{itemize}
-    % Here, we further denote the observation of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if job departures and $0$ otherwise); the computation time of the departure is denoted as $p^{c}_{m,j}(t)$ if $\alpha_{m,j}=1$; the estimation of $c_{m,j}$ is equivalent to sample a geometric distribution ($\forall m\in\esSet,j\in\jSpace$).
-    %  For convenience, we denote $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}\}=1, \dots, \Pr\{U_{k,m,j}\}=\Xi]$ and the estimation of $\vec{u}_{k,m,j}$ is easy by observing the uploading job state $\vec{R}^{(k)}_{m,j}(t)$ change on APs ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
     Denote the event of type-$j$ job departure from the $m$-th edge server at the $t$-th slot as $\alpha_{m,j}$ (i.e., $\alpha_{m,j}=1$ if there is job departure and $0$ otherwise), the computation time of the departure job as $p^{c}_{m,j}(t)$ and $\vec{u}_{k,m,j} \define [\Pr\{U_{k,m,j}=1\}, \dots, \Pr\{U_{k,m,j}=\Xi\}]$, the reinforcement learning algorithm to track the above statistical parameters is elaborated in Algorithm \ref{alg_2}.
     As a remark notice that, the statistical parameters estimation is at time-slot level and could be shared with other APs and edge servers via broadcast information.
-    % And the update of statistics would take effect exactly when the broadcast information is partially received by the conflict AP set.
-    % Hence, the convergence is not affected by the information staleness introduced in periodic broadcast and \brlatency.
-    % The reinforcement learning algorithm is given as follows.
 }%
 
 \begin{algorithm}[ht]
@@ -425,7 +361,6 @@ The performance of both cost upper bounds will be illustrated in the following s
         $t \gets t + 1$\;
         \ForPar{$k\in\apSet$, $m\in\esSet$, $j\in\jSpace$}{
             $\hat{\lambda}_{k,j}(t) \gets \frac{t-1}{t} \hat{\lambda}_{k,j}(t-1) + \frac{1}{t} I[B_{k,j}(t)=1]$\;
-            % \hongyc{(replace with a counter instead)\;}
             $\hat{\vec{u}}_{k,m,j}(t) \gets \frac{t-1}{t} \hat{\vec{u}}_{k,m,j}(t-1) + \frac{
                 I[\vec{R}^{(k)}_{m,j}(t)=0] \cdot I[\vec{R}^{(k)}_{m,j}(t-1)\neq 0]
             }{
@@ -435,16 +370,11 @@ The performance of both cost upper bounds will be illustrated in the following s
                 $\hat{c}_{m,j}(t) \gets \frac{t_c-1}{t_c} \hat{c}_{m,j}(t-1) + \frac{1}{t_c} {p}^{c}_{m,j}(t)$\;
                 $t_c \gets t_c + 1$\;
             }
-            % $\hat{c}_{m,j}(t) \gets \frac{t_c-1}{t_c} \hat{c}_{m,j}(t-1) + \frac{1}{t_c} [\alpha_{m,j}{p}^{c}_{m,j}(t) + (1-\alpha_{m,j})\hat{c}_{m,j}(t-1)]$\;
         }
     }
 \end{algorithm}
 
 It is obvious that when $t\to\infty$, Algorithm \ref{alg_2} will converge, i.e., $\lim_{t\to\infty} \hat{\lambda}_{k,j}(t) = {\lambda}_{k,j}$, $\lim_{t\to\infty} \hat{c}_{m,j}(t) = {c}_{m,j}$ and $\lim_{t\to\infty} \hat{\vec{u}}_{m,j}(t) = \vec{u}_{m,j}$ ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
-% As a remark notice that, the convergence of $\hat{u}_{m,j,\xi}$ could be accelerated via cooperation of APs sharing stale observation which obviously dose not affect the correctness of estimation.
-% \begin{proof}
-%     Note that the statistics $\hat{\lambda}_{k,j}$, $\hat{c}_{m,j}$ and $\hat{\vec{u}}_{m,j}$ are updated with unbiased observation, the convergence is straightforward according to Theorem 1 in Chapter I of \cite{voinov2012unbiased}.
-% \end{proof}
 
 \begin{remark}[Learning Efficiency of Algorithm \ref{alg_2}]
     {

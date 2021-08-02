@@ -4,7 +4,6 @@
 In this section, we formulate the optimization of job dispatching problem of all APs as a Markov decision process (MDP).
 Since each AP updates the job dispatching action according to OSI instead of GSI, the MDP problem is a partially observable MDP (POMDP).
 Firstly, we give the definitions of \emph{dispatching policy} and \emph{cost function}, together with the \emph{system state} (i.e., the GSI) defined previously, to complete the MDP problem formulation.
-% Specifically, the individual dispatching policy of one AP, the system dispatching policy, and the cost function are first defined below.
 
 \begin{definition}[Dispatching Policy]
     The individual dispatching policy of the $k$-th AP, denoted as $\Omega_{k}$ ($\forall k \in\apSet$), maps from its OSI $\Stat_{k}$ and its \brlatency~$\mathcal{D}_{k}$ to the dispatching action for each job type, i.e.,
@@ -34,7 +33,6 @@ Firstly, we give the definitions of \emph{dispatching policy} and \emph{cost fun
     In this paper, the average job response time and packet drop rate are considered as the system cost.
     The job response time counts the number of broadcast intervals from job arrival to the accomplishment of computation, which includes the uploading time from the AP to the edge server, the waiting time in the processing queue and the job processing time on the edge server.
     According to the Little's law \cite{Little1961}, the average response time per job is proportional to the number of jobs in the system, given the job arrival rates at all the APs.
-    % According to the Little's law \cite{Little1961}, the average response time per job, counting the number of broadcast intervals from job arrival to the accomplishment of computation, is proportional to the number of jobs in the system, given the job arrival rates at all the APs. %broadcast intervals
 }%
 Hence, we define the cost function per broadcast interval as follows, {given the information contained in periodic broadcast.}
 

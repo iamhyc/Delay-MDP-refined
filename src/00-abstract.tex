@@ -1,26 +1,13 @@
-% \IEEEtitleabstractindextext{
-    \begin{abstract}    
-        %NOTE: (1) background: distributed job dispatching with latency;
-        Job dispatching is a fundamental problem in edge computing for load balancing among multiple edge servers. When implementing an edge computing system with distributed job dispatchers in an extensive network, such as a Metropolitan Area Network (MAN), the highly dynamic transmission latency is a non-negligible issue, which leads to outdated information sharing. Moreover, the fully-observed system state is discouraged as reception of all broadcast is time consuming. %The exchange of system status information would inevitably become outdated, and the reception of whole system information is discouraged.
-        % the transmission latency is a non-negligible issue, such that the exchange of system status information would inevitably become outdated.
-        % Moreover, as the latency might be highly dynamic in a MAN, the reception of whole information exchange is time-consuming and thus discouraged.
-        % \hongyc{Most of the existing works did not take the variable transmission latency into consideration.}
-        %NOTE: (3) problem formulation: online/distributed/job dispatching; the signaling mechanism (information sharing); claim partial&outdated again;
-        In this paper, we investigate an online distributed job dispatching problem in edge computing, where multiple access points (APs) collect jobs and then dispatch each job to an edge server.
-        The distributed dispatcher on each AP would receive partially and outdated information exchanged via periodic broadcast.
-        % A signaling mechanism is introduced to facilitate periodic information broadcast among distributed dispatchers on each AP.
-        %Due to the highly dynamic latency, the job dispatchers have to make decisions individually according to partially received and outdated broadcast information.
-        %NOTE: (4) technical contribution: POMDP; low-complexity solution with bound;
-        Hence, we formulate the distributed job dispatching problem by leveraging partially observable Markov decision process (POMDP) and propose a novel approximate MDP solution framework, called \algname, to avoid the huge time complexity of conventional POMDP solutions.
-        Both analytical and semi-analytical performance lower bounds are derived for the approximate MDP solution. %for quick performance evaluation.
-        Furthermore, we extend \algname~to handle a more general scenario where the priori knowledge of the system is absent.
-        %NOTE: (5) solution and results: \tann{In this work, our solution and results.}
-        % The evaluation results show that our policy can achieve as high as $20.67\%$ reduction in average job response time compared with heuristic baselines,
-        Finally, extensive simulations based on the Google Cluster trace show that our policy can achieve the best performance compared with heuristic baselines, e.g., achieving $20.67\%$ reduction in average job response time, and consistently performs well under various parameter settings.
-    \end{abstract}
+\begin{abstract}    
+    Job dispatching is a fundamental problem in edge computing for load balancing among multiple edge servers. When implementing an edge computing system with distributed job dispatchers in an extensive network, such as a Metropolitan Area Network (MAN), the highly dynamic transmission latency is a non-negligible issue, which leads to outdated information sharing. Moreover, the fully-observed system state is discouraged as reception of all broadcast is time consuming.
+    In this paper, we investigate an online distributed job dispatching problem in edge computing, where multiple access points (APs) collect jobs and then dispatch each job to an edge server.
+    The distributed dispatcher on each AP would receive partially and outdated information exchanged via periodic broadcast.
+    Hence, we formulate the distributed job dispatching problem by leveraging partially observable Markov decision process (POMDP) and propose a novel approximate MDP solution framework, called \algname, to avoid the huge time complexity of conventional POMDP solutions.
+    Both analytical and semi-analytical performance lower bounds are derived for the approximate MDP solution.
+    Furthermore, we extend \algname~to handle a more general scenario where the priori knowledge of the system is absent.
+    Finally, extensive simulations based on the Google Cluster trace show that our policy can achieve the best performance compared with heuristic baselines, e.g., achieving $20.67\%$ reduction in average job response time, and consistently performs well under various parameter settings.
+\end{abstract}
 
-    % Note that keywords are not normally used for peer-review papers.
-    \begin{IEEEkeywords}
-        Edge computing, metropolitan area network, partially-observable MDP.
-    \end{IEEEkeywords}
-% }
+\begin{IEEEkeywords}
+    Edge computing, metropolitan area network, partially-observable MDP.
+\end{IEEEkeywords}

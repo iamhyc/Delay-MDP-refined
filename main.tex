@@ -1,7 +1,4 @@
-% \documentclass[journal, 12pt, onecolumn, draftclsnofoot]{IEEEtran} %JSAC 20'
-% \documentclass[sigconf]{acmart} %ACM Mobihoc 20'
-% \documentclass[conference]{IEEEtran} %ICDCS 20'
-% \documentclass[10pt,journal,compsoc]{IEEEtran} %TMC 20'
+
 \documentclass[journal]{IEEEtran} %IOTJ 21'
 % \IEEEoverridecommandlockouts
 \usepackage[linesnumbered,vlined,ruled]{algorithm2e}
@@ -26,7 +23,6 @@
 \usepackage{soul}
 \usepackage{array}
 \usepackage{tabulary}
-% \renewcommand{\algorithmicforall}{\textbf{for all}}
 %---------------------------------------------------------------%
 \newtheorem{definition}{Definition}   % 
 \theoremstyle{definition}             % alter theorem style: <definition>
@@ -100,7 +96,6 @@
 \begin{document}
     \title{Distributed Job Dispatching in Edge Computing Networks with Random Transmission Latency: A Low-Complexity POMDP Approach
     }
-    % partial and outdated information 
     
     \author{
         Yuncong~Hong,
@@ -116,9 +111,6 @@
         \thanks{
           Lv and Wang are with the Department of Electrical and Electronic Engineering, Southern University of Science and Technology (SUSTech), Shenzhen, China (email: lvbj@mail.sustech.edu.cn, wang.r@sustech.edu.cn).
         }
-        %\thanks{
-          %Wang is with the Department of Electrical and Electronic %Engineering, Southern University of Science and Technology 5(SUSTech) (email: wang.r@sustech.edu.cn).
-        %}
         \thanks{
           Han is with University of Science and Technology of China (USTC), and the University of Hong Kong (HKU) (email: Zhenhua.Han@microsoft.com).
         }%
@@ -135,37 +127,11 @@
           Copyright (c) 2021 IEEE. Personal use of this material is permitted. However, permission to use this material for any other purposes must be obtained from the IEEE by sending a request to pubs-permissions@ieee.org.
         }}%
     }%
-    % \author{
-    %     \IEEEauthorblockN{
-    %         Yuncong Hong\IEEEauthorrefmark{1}\IEEEauthorrefmark{2},
-    %         Bojie Lv\IEEEauthorrefmark{1},
-    %         Rui Wang\IEEEauthorrefmark{1},
-    %         Haisheng Tan\IEEEauthorrefmark{3},
-    %         Zhenhua Han\IEEEauthorrefmark{2},
-    %         Francis C.M. Lau\IEEEauthorrefmark{2}
-    %     }
-    %     \IEEEauthorblockA{\IEEEauthorrefmark{1}
-    %         Department of Electrical and Electronic Engineering, Southern University of Science and Technology, Shenzhen, China \\
-    %     }
-    %     \IEEEauthorblockA{\IEEEauthorrefmark{2}
-    %         Department of Computer Science, The University of Hong Kong, Hong Kong, China \\
-    %     }
-    %     \IEEEauthorblockA{\IEEEauthorrefmark{3}
-    %        LINKE Lab, University of Science and Technology of China, Hefei, China \\
-    %     }
-    % }
-    % \thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
 
-    % \markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
-    % {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Computer Society Journals}
-
-    % \input{src/00-abstract}
     \maketitle
     \input{src/00-abstract}
 
     \input{src/01-intro}
-    % \input{src/02a-background}
-    % \input{src/02b-motivation}
 
     \input{src/03a-model}
     \input{src/03b-formulation}

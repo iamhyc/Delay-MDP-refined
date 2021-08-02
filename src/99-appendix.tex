@@ -1,4 +1,3 @@
-%NOTE: transition matrix and vector for AP
 \appendices
 \section{ Proof of Lemma \ref{lemma:w_ap} }
 \label{append_1}
@@ -72,7 +71,6 @@ Hence, the expression of the cost raised on the AP (say the $k$-th AP) under bas
 \end{align}
 
 
-%NOTE: transition matrix and vector for ES
 \section{ Proof of Lemma \ref{lemma:w_es} }
 \label{append_2}
 The state transition on edge server is composed of both arrival processes of all the APs in the corresponding \emph{potential AP set}, and the departure processes of jobs computation.
@@ -97,7 +95,6 @@ Specifically, the probability distribution of $\sum_{k\in\apSet_{m}} \vecG{\rho}
     \label{eqn_0}
 \end{align}
 
-%NOTE: transition matrix and vector for Edge Server
 Let $\hat{\vecG{\nu}}_{m,j}(t,n)$ denote the probability vector of $Q_{m,j}(t,n)$ at the $n$-th time slot of the $t$-th broadcast interval ($\forall m\in\esSet, j\in\jSpace$)
 {\small
 \begin{align}
@@ -166,9 +163,6 @@ where $\vec{g}$ is the cost vector whose definition is given in equation (\ref{e
 
 \section{ Proof of Lemma \ref{lemma:bound} }
 \label{append_3}
-% \hongyc{
-%     (firstly, show that (based on policy improvement): \emph{tight-lower bound} is better than \emph{base-lower bound}; secondly, show that \emph{proposed policy} is better than \emph{tight-lower bound} with the existing proof below; finally, is it possible to prove the $n$-step improvement as a bound?)
-% }%
 Since the proposed policy $\tilde{\Policy}$ is not optimal policy and $W_{\tilde{\Policy}}(\Stat)$ represents the average system cost with the proposed policy $\tilde{\Policy}$, $V(\Stat) \leq W_{\tilde{\Policy}}(\Stat)$ is straightforward.
 Let 
 {\small
@@ -228,22 +222,15 @@ As the equation (\ref{eqn:bound}) could be split into two parts as shown below,
 \end{align*}
 }%
 where the first part is exactly same as the first part in equation (\ref{eqn:semi-bound}) of $W^{(T)}_{\hat{\Baseline}}(\Stat)$, and the second part $\sum_{t=1}^{\infty}\gamma^{t-1}\mathbb{E}^{\tilde{\Policy}}_{\Delay}[g(\Stat(t+T))]$ is upper bounded by $W_{\Baseline}(\Stat(T+1))$ as illustrated in the proof given in lemma \ref{append_3}.
-% Hence, $W_{\tilde{\Policy}}(\Stat) \leq W^{(T)}_{\hat{\Baseline}}(\Stat)$ always exists.
 
 Then, we show that the performance gap $e(T)$ monotonically decreases with respect to $T$.
 For any positive integer $T$, let
 {\small
 \begin{align*}
     \Delta{W}(T) \define W^{(T+1)}_{\hat{\Baseline}}(\Stat) - W^{(T)}_{\hat{\Baseline}}(\Stat)
-    % = \mathbb{E}_{\Stat}
 \end{align*}
 }%
 denotes the performance gap due to one-step policy improvement described in equation (\ref{eqn:partial}).
 According to the \emph{Proposition 2.3.4 (Cost Improvement by Rollout)} in \cite{dp-control}, we have $W^{(T+1)}_{\hat{\Baseline}}(\Stat) \leq W^{(T)}_{\hat{\Baseline}}(\Stat)$ for all $\Stat$.
 Hence, we have $\Delta{W}(T) \geq 0$ for all $T$ and the performance gap $e(T)$ decreases monotonically with respect to $T$.
-% {\small
-% \begin{align*}
-%     W^{(1)}_{\hat{\Baseline}}(\Stat) \leq W^{(2)}_{\hat{\Baseline}}(\Stat) \leq \dots
-% \end{align*}
-% }
 %----------------------------------------------------------------------------------------%
