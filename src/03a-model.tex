@@ -11,7 +11,7 @@ It is assumed that the $k$-th AP only dispatches computation jobs to edge server
 Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs which may upload jobs to the $m$-th edge server.
 We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server, and $\rho_{k,m}$ as the collocation indicator (i.e., $\rho_{k,m}=1$ if $k$-th AP and $m$-th edge server are collocated; otherwise $\rho_{k,m}=0$) ($\forall k\in\apSet, m\in\esSet$).
 Different APs may have different candidate servers according to their locations in the network.
-In this edge computing network, APs and edge servers periodically broadcast their state information (defined in Section \ref{subsec:broadcast}), and \hongyc{each AP will try to} updates its strategy of job dispatching when receiving the broadcast state information.
+In this edge computing network, APs and edge servers periodically broadcast their state information (defined in Section \ref{subsec:broadcast}), and \hongycCHK{each AP will try to} updates its strategy of job dispatching when receiving the broadcast state information.
 In this paper, we shall optimize the job dispatching strategy distributed across the APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
 
 Without loss of generality, we assume there are $J$ types of jobs in the system, which are denoted by the set $\jSpace \define \set{1,\dots,J}$.
