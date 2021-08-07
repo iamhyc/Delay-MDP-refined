@@ -1,11 +1,11 @@
 \begin{abstract}    
-    Job dispatching is a fundamental problem in edge computing for load balancing among multiple edge servers. When implementing an edge computing system with distributed job dispatchers in an extensive network, such as a Metropolitan Area Network (MAN), the highly dynamic transmission latency is a non-negligible issue, which leads to outdated information sharing. Moreover, the fully-observed system state is discouraged as reception of all broadcast is time consuming.
-    In this paper, we investigate an online distributed job dispatching problem in edge computing, where multiple access points (APs) collect jobs and then dispatch each job to an edge server.
+    Job dispatching is a fundamental problem in edge computing for load balancing among multiple edge servers. When implementing an edge computing system with distributed job dispatchers in a sizable network, such as a Metropolitan Area Network (MAN), the highly dynamic transmission latency is non-negligible, which could lead to outdated information being shared. Moreover, the fully-observed system state is beyond reach as the reception of any broadcast is time consuming.
+    In this paper, we investigate the online distributed job dispatching problem in edge computing, where multiple access points (APs) collect jobs and then dispatch each job to an edge server.
     The distributed dispatcher on each AP would receive partially and outdated information exchanged via periodic broadcast.
-    Hence, we formulate the distributed job dispatching problem by leveraging partially observable Markov decision process (POMDP) and propose a novel approximate MDP solution framework, called \algname, to avoid the huge time complexity of conventional POMDP solutions.
+    Hence, we formulate the distributed job dispatching problem by leveraging the partially observable Markov decision process (POMDP) and propose a novel approximate MDP solution framework, called \algname, that bypasses the huge time complexity of conventional POMDP solutions.
     Both analytical and semi-analytical performance lower bounds are derived for the approximate MDP solution.
-    Furthermore, we extend \algname~to handle a more general scenario where the priori knowledge of the system is absent.
-    Finally, extensive simulations based on the Google Cluster trace show that our policy can achieve the best performance compared with heuristic baselines, e.g., achieving $20.67\%$ reduction in average job response time, and consistently performs well under various parameter settings.
+    Furthermore, we extend \algname~to handle a more general scenario where a priori knowledge of the system is absent.
+    Finally, extensive simulations based on the Google Cluster traces show that our policy can achieve the best performance when compared with heuristic baselines, e.g., achieving $20.67\%$ reduction in average job response time, and consistently performs well under various parameter settings.
 \end{abstract}
 
 \begin{IEEEkeywords}

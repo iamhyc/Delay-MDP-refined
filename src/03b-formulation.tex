@@ -1,9 +1,9 @@
 \section{POMDP-based Problem Formulation}
 \label{sec:formulation}
 %----------------------------------------------------------------------------------------%
-In this section, we formulate the optimization of job dispatching problem of all APs as a Markov decision process (MDP).
+In this section, we formulate the optimization of the job dispatching problem of all the APs as a Markov decision process (MDP).
 Since each AP updates the job dispatching action according to OSI instead of GSI, the MDP problem is a partially observable MDP (POMDP).
-Firstly, we give the definitions of \emph{dispatching policy} and \emph{cost function}, together with the \emph{system state} (i.e., the GSI) defined previously, to complete the MDP problem formulation.
+Firstly, we give the definitions of \emph{dispatching policy} and \emph{cost function}, together with the \emph{system state} (i.e., the GSI) as defined previously, to complete the MDP problem formulation.
 
 \begin{definition}[Dispatching Policy]
     The individual dispatching policy of the $k$-th AP, denoted as $\Omega_{k}$ ($\forall k \in\apSet$), maps from its OSI $\Stat_{k}$ and its \brlatency~$\mathcal{D}_{k}$ to the dispatching action for each job type, i.e.,
@@ -31,7 +31,7 @@ Firstly, we give the definitions of \emph{dispatching policy} and \emph{cost fun
 
 \revision{
     In this paper, the average job response time and packet drop rate are considered as the system cost.
-    The job response time counts the number of broadcast intervals from job arrival to the accomplishment of computation, which includes the uploading time from the AP to the edge server, the waiting time in the processing queue and the job processing time on the edge server.
+    The job response time counts the number of broadcast intervals from job arrival to the accomplishment of the computation, which includes the uploading time from the AP to the edge server, the waiting time in the processing queue and the job processing time on the edge server.
     According to the Little's law \cite{Little1961}, the average response time per job is proportional to the number of jobs in the system, given the job arrival rates at all the APs.
 }%
 Hence, we define the cost function per broadcast interval as follows, {given the information contained in periodic broadcast.}
@@ -49,7 +49,7 @@ Hence, we define the cost function per broadcast interval as follows, {given the
             },
     \end{align}
     }%
-    where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, $\sum_{k\in\apSet} \Inorm{\vec{R}^{(k)}_{m,j}(t,0)}$ measures the number of type-$j$ jobs being uploaded from the $k$-th AP to the $m$-th edge server, $Q_{m,j}(t,0)$ measures the number of type-$j$ jobs on the $m$-th edge server, and $\beta$ is the weight of overflow penalty.
+    where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, $\sum_{k\in\apSet} \Inorm{\vec{R}^{(k)}_{m,j}(t,0)}$ measures the number of type-$j$ jobs being uploaded from the $k$-th AP to the $m$-th edge server, $Q_{m,j}(t,0)$ measures the number of type-$j$ jobs on the $m$-th edge server, and $\beta$ is the weight of the overflow penalty.
     \deny{
         The cost function per broadcast interval could be taken as a uniform sampling of cost function per time slot.
     }
@@ -73,7 +73,7 @@ Hence, the optimization of job dispatching policy can be formulated as the follo
     \min_{\Policy} \bar{G}(\Stat(1), \Policy).
 \end{align}
 
-If the GSI $\Stat(t)$ and \brlatency~$\Delay(t)$ are known to all the APs, the MDP in problem P1 can be solved via the following Bellman's equations as in \cite{sutton1998}.
+If the GSI $\Stat(t)$ and \brlatency~$\Delay(t)$ are known to all the APs, the MDP in problem P1 can be solved via the following Bellman's equations, as in \cite{sutton1998}.
 \begin{align}
     &V\Paren{\Stat(t)} =g\Paren{\Stat(t)}
         + \gamma\mathbb{E}_{\Delay}\bigg\{
@@ -95,35 +95,35 @@ where the value function $V(\Stat(t))$ of the optimal policy $\Policy^{*}$ (if G
 \end{align}
 Moreover, the optimal dispatching policy $\Omega^{*}$ can be obtained by solving the right-hand-side (RHS) of the above Bellman's equations (\ref{eqn:sp_0}).
 
-However, it is infeasible to solve the above Bellman's equations {and achieve the performance of $\Policy^*$ in our considered distributed dispatching scenario.}
+However, it is infeasible for us to solve the above Bellman's equations {and achieve the performance of $\Policy^*$ in our considered distributed dispatching scenario.}
 This is because each AP (say the $k$-th AP) only has the knowledge of its own OSI $\Stat_{k}(t)$ and local \brlatency~$\mathcal{D}_{k}(t)$, but the optimal solution (dispatching actions of all APs) for the RHS of equation (\ref{eqn:sp_0}) depends on the GSI and the knowledge of global \brlatency.
-Thus, problem P1 is actually a POMDP\revision{, which is further demonstrated by a toy example below.}
+Thus, problem P1 is actually a POMDP\revision{, which we demonstrate by a toy example below.}
 \revision{
     \begin{figure}[htp!]
         \centering
         \includegraphics[width=0.45\textwidth]{hong3.pdf}
-        \caption{An example of system model, where the edge servers $1,2,3$ are collocated with the APs $1,2,4$, respectively.}
+        \caption{An example of the system model, where the edge servers $1,2,3$ are collocated with the APs $1,2,4$, respectively.}
         \label{fig:osi_example}
     \end{figure}
 
     \begin{example}
         {%
-            As illustrated in Fig.\ref{fig:osi_example}, there are four APs and three edge servers collocated with the APs, in the edge computing system, where the solid directed lines show all the possible job dispatching paths for the APs.
-            For the $2$-nd AP, its OSI includes the state information of the APs indexed with $1,3$ and the edge servers indexed with $1,2$.
+            As illustrated in Fig.~\ref{fig:osi_example}, there are four APs and three edge servers collocated with the APs in the edge computing system, where the solid directed lines are all the possible job dispatching paths for the APs.
+            For the $2$-nd AP, its OSI includes the state information of the APs indexed $1,3$ and the edge servers indexed $1,2$.
             The state information of the $3$-rd edge server is out of its scope.
-            Moreover, the OSI of the $3$-rd AP (namely, the $3$-rd OSI) includes the state information of the APs indexed with $2,4$ and the edge servers indexed with $2,3$.
+            Moreover, the OSI of the $3$-rd AP (namely, the $3$-rd OSI) includes the state information of the APs indexed $2,4$ and the edge servers indexed $2,3$.
         }%
         Note that the prediction of future state distribution is essential for solving the RHS of equation (\ref{eqn:sp_0}).
         {%
             Without GSI, it is impossible to predict the future dispatching decisions of the $3$-rd AP from the perspective of the $2$-nd AP, since they observe different OSIs.
-            It is thereby impossible for the $2$-nd AP to predict the future state distributions of the $2$-nd edge server, lack of the dispatching decisions of the $3$-rd AP.
-            As a result, the evaluation of optimal value function of equation (\ref{eqn:val_f}) is infeasible at both $2$-nd and $3$-rd APs, and the distributed policy optimization for them is a POMDP.
+            It is thereby impossible for the $2$-nd AP to predict the future state distributions of the $2$-nd edge server, when lacking the dispatching decisions of the $3$-rd AP.
+            As a result, the evaluation of the optimal value function of equation (\ref{eqn:val_f}) is infeasible at both the $2$-nd and the $3$-rd APs, and the distributed policy optimization for them is a POMDP.
         }
     \end{example}
 }%
 
-The general solution of POMDP is of huge complexity {as all the historical system states should be traced back in the current system state} \cite{IJCAI03-NairR,IJCAI99-BoutilierC}.
-In this paper, we shall propose a novel low-complexity solution framework based on an analytical approximation of the value function $V(\cdot)$ and alternative actions update, where distributed job dispatching via the Bellman's equations becomes feasible
+The general solution of POMDP is hugely complex {as all the historical system states need to be traced back in the current system state} \cite{IJCAI03-NairR,IJCAI99-BoutilierC}.
+In this paper, we propose a novel low-complexity solution framework based on an analytical approximation of the value function $V(\cdot)$ and alternative action updates, with which distributed job dispatching via the Bellman's equations becomes feasible
 (the minimization at the RHS of equation (\ref{eqn:sp_0}) is solvable with the approximate value function)
-even with OSI and local \brlatency.
+even with only OSI and local \brlatency.
 %----------------------------------------------------------------------------------------%

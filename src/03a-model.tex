@@ -1,41 +1,40 @@
 \section{System Model}
 \label{sec:model}
-In this section, we elaborate the model of edge computing networks with random job arrivals, uploading latency and computation time, as well as the signaling mechanism with periodic broadcast.
+In this section, we elaborate on the model of edge computing network with random job arrivals, uploading latency and computation time, as well as the signaling mechanism with periodic broadcast.
 %----------------------------------------------------------------------------------------%
 \subsection{Network Model}
-We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, which are connected in an edge network as illustrated in Fig.\ref{fig:system}.
+We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, which are connected in an edge network as illustrated in Fig.~\ref{fig:system}.
 The sets of APs and edge servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{1,\dots,M}$, respectively.
-\hongycCHK{An edge server is typically deployed and collocated with an AP so that mobile devices can upload jobs efficiently.} 
+An edge server is typically deployed at and collocated with an AP so that mobile devices can upload their jobs efficiently.
 Each AP collects the computation jobs from the {mobile IoT devices} within its coverage, and makes dispatching {decisions} on the edge servers for each job.
-It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
-Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
-We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server, \hongycCHK{and $\rho_{k,m}$ as the collocation indicator (i.e., $\rho_{k,m}=1$ if $k$-th AP and $m$-th edge server collocated, otherwise $\rho_{k,m}=0$)} ($\forall k\in\apSet, m\in\esSet$).
+It is assumed that the $k$-th AP only dispatches computation jobs to edge servers within a certain number of hops.
+Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs which may upload jobs to the $m$-th edge server.
+We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server, and $\rho_{k,m}$ as the collocation indicator (i.e., $\rho_{k,m}=1$ if $k$-th AP and $m$-th edge server are collocated; otherwise $\rho_{k,m}=0$) ($\forall k\in\apSet, m\in\esSet$).
 Different APs may have different candidate servers according to their locations in the network.
-In this edge computing network, APs and edge servers periodically broadcast their state information (the state information is defined in Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
-In this paper, we shall optimize the job dispatching strategy distributed at APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
+In this edge computing network, APs and edge servers periodically broadcast their state information (defined in Section \ref{subsec:broadcast}), and \hongyc{each AP will try to} updates its strategy of job dispatching when receiving the broadcast state information.
+In this paper, we shall optimize the job dispatching strategy distributed across the APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
 
-Without loss of generality, it is assumed that there are $J$ types of jobs in this system, which are denoted via the set $\jSpace \define \set{1,\dots,J}$.
+Without loss of generality, we assume there are $J$ types of jobs in the system, which are denoted by the set $\jSpace \define \set{1,\dots,J}$.
 The time axis of dispatching is organized by time slots.
-The arrivals of the type-$j$ jobs at the $k$-th AP ($\forall k\in\apSet,j\in\jSpace$) in different time slots are assumed to be independent and identically distributed (i.i.d.) Bernoulli random variables, and the arrival probability is denoted as $\lambda_{k,j}$.
-Let $B_{k,j}(t) \in \set{0,1}$ represent the event of job arrival, where $B_{k,j}(t)=1$ means one type-$j$ job arrives at the $k$-th AP at the $t$-th time slot, and $B_{k,j}(t)=0$ means otherwise.
+The arrivals of type-$j$ jobs at the $k$-th AP ($\forall k\in\apSet,j\in\jSpace$) in different time slots are assumed to be independent and identically distributed (i.i.d.) Bernoulli random variables, and the arrival probability is denoted as $\lambda_{k,j}$.
+Let $B_{k,j}(t) \in \set{0,1}$ represents the event of job arrival, where $B_{k,j}(t)=1$ means one type-$j$ job arriving at the $k$-th AP at the $t$-th time slot, and $B_{k,j}(t)=0$ means otherwise.
 Hence,
 \begin{align}
     \Pr\{ B_{k,j}(t) = 1 \} = \lambda_{k,j}, \forall t,k\in\apSet,j\in\jSpace.
 \end{align}
 
-Each AP immediately dispatches each type of received jobs to one edge server.
-As the APs upload jobs over shared edge networks illustrated in Fig.\ref{fig:system}, the actual uploading time is random due to random traffics initiated from other enabled services.
+Each AP immediately dispatches each type of received jobs to an edge server.
+As the APs upload the jobs over the shared edge network as illustrated in Fig.~\ref{fig:system}, the actual uploading time is random due to random traffics coming from other enabled services.
 Moreover, the notification of uploading completion from edge server to AP also consumes random time slots for the same reason, and thus the uploading time is unknown in advance.
-Hence, we assume the uploading time of different types of jobs from different APs to edge servers follow independent and discrete distributions.
-Let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency (in terms of time slots) distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), where $\Xi$ is the maximum possible uploading time for all jobs and the expectation is denoted as $u_{k,m,j}$.
-\hongycCHK{Specifically, the uploading latency is fixed as $0$ if $\rho_{k,m}=1$ for job uploading to the collocated edge server.}
+Hence, we assume the uploading times of different types of jobs from different APs to edge servers follow independent and discrete distributions.
+Let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency (in terms of time slots) distribution of type-$j$ jobs from the $k$-th AP to the $m$-th edge server with support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), where $\Xi$ is the maximum possible uploading time for all jobs and the expectation is denoted as $u_{k,m,j}$.
+Specifically, the uploading latency is fixed as $0$ if $\rho_{k,m}=1$ for job uploading to the collocated edge server.
 
-For job computation process on edge servers, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different edge servers would follow independent distributions.
+For the job computation process on edge servers, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different edge servers would follow independent distributions.
 Specifically, there are $J$ parallel virtual machines (VMs) running on each edge server for processing the $J$ job types, respectively.
-It is assumed that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
-\footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of algorithm. In fact, the proposed algorithm can be easily extended to other distributions.}
+It is assumed that the computation time of different job types on different edge servers follows an independent memoryless geometric distribution\footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of algorithm. The proposed algorithm can be easily extended to other distributions.}
 with different expectations as in \cite{TOWC18-HuangKb}.
-Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for the type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, $c_{m,j}$ is the expectation.
+Let $\mathbb{G}(1/c_{m,j})$ be the distribution of the computation time slots for type-$j$ jobs on the $m$-th edge server, where $\mathbb{G}$ denotes the geometric distribution, and $c_{m,j}$ is the expectation.
 Let $f_{m,j}$ be its probability mass function (PMF), we have
 \begin{align}
     f_{m,j}(x) \define (1-\frac{1}{c_{m,j}})^{x-1} \frac{1}{c_{m,j}}, x=1,2,\dots.
@@ -44,23 +43,23 @@ For each job type, the uploaded jobs are computed in a First-Come-First-Serve (F
 The arrival jobs will be discarded when the processing queue is full.
 
 \begin{remark}%[Generalization to Edge-Cloud Model]
-    The above network model could be generalized into a computing system with both edge servers and cloud center.
-    A cloud center could be treated as a special edge server in our model but with stronger computational capability and larger uploading latency and signaling latency \tannCHK{to the APs}.
+    The above network model could be generalized into a computing system with both edge servers and a cloud center.
+    The cloud center could be treated as a special edge server in our model but with stronger computational capability and larger uploading latency and signaling latency to the APs.
 \end{remark}
 %----------------------------------------------------------------------------------------%
 
 \subsection{Signaling Mechanism with Periodic Broadcast}
 \label{subsec:broadcast}
-In order to facilitate distributed and cooperative dispatching for the APs, {the signaling mechanism with periodic broadcast is introduced.}
-We refer to every $t_B$ time slots as a \emph{broadcast interval}.
-As illustrated in Fig.\ref{fig:brd_timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its dispatching strategy of job dispatching when observing the broadcast LSIs from some APs and edge servers.
-As a remark notice that the observable LSI may be outdated due to transmission latency among APs and edge servers.
-The LSI at the APs and edge servers, global state information, and observable state information at the APs are defined below, respectively.
+In order to facilitate distributed and cooperative dispatching for the APs, a signaling mechanism with periodic broadcast is introduced.
+We refer to every $t_B$ time slot as a \emph{broadcast interval}.
+As illustrated in Fig.\ref{fig:brd_timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its dispatching strategy of job dispatching when receiving these observed broadcast LSIs from some APs or edge servers.
+It is important to note that the observable LSI may be outdated due to transmission delays among APs and edge servers.
+The LSI at the APs and edge servers, global state information, and observable state information at the APs are defined below.
 
 \begin{definition}[LSI of APs]
-    Let $R^{(k)}_{m,j}(\xi,t,n) \in \set{0,1}$ be the indicator of the type-$j$ jobs at the $n$-th time slot of the $t$-th interval.
+    Let $R^{(k)}_{m,j}(\xi,t,n) \in \set{0,1}$ be the indicator of type-$j$ jobs at the $n$-th time slot of the $t$-th interval.
     Its value is $1$ when there is one job being uploaded from the $k$-th AP to the $m$-th server which has been delivered for $\xi$ time slots, and $0$ otherwise.
-    Let $\omega_{k,j}(t)$ be the target edge server for the type-$j$ jobs of the $k$-th AP at the very beginning of the $t$-th broadcast interval.
+    Let $\omega_{k,j}(t)$ be the target edge server for type-$j$ jobs of the $k$-th AP at the very beginning of the $t$-th broadcast interval.
     The LSI of the $k$-th AP at the beginning of the $t$-th broadcast interval is defined as
     {\small
     \begin{align}
@@ -85,7 +84,7 @@ The LSI at the APs and edge servers, global state information, and observable st
         \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
     \end{align}
     }%
-    are referred as status of the type-$j$ job uploading from the $k$-th AP to the $m$-th edge server, and the dispatching actions for all types of jobs of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
+    are the status of the type-$j$ job uploading from the $k$-th AP to the $m$-th edge server, and the dispatching actions for all types of jobs of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
 \end{definition}
 
 \begin{definition}[LSI of Edge Servers]
@@ -110,12 +109,12 @@ The LSI at the APs and edge servers, global state information, and observable st
 \end{definition}
 
 As the APs and edge servers may reside in different locations of a MAN, the transmission latency of LSI is not negligible.
-It might be inefficient {and costly} for one AP to collect the complete GSI before the update of dispatching policy.
+It might be inefficient {and costly} for one AP to collect the complete GSI before the update of the dispatching policy.
 For example, the transmission latency of the LSI from the edge servers outside the \emph{candidate server set} $\esSet_{k}$ to the $k$-th AP may be large, and some broadcast information may be discarded by the routers after a certain number of hops.
-In this paper, we shall investigate the distributed dispatching design based on the \emph{observable state information} at each AP.
-Specifically, the \emph{conflict AP sets} and the \emph{observable state information} are defined below, respectively.
+In this paper, we shall investigate the distributed dispatching design based on \emph{observable state information} at each AP.
+The \emph{conflict AP sets} and \emph{observable state information} are defined below.
 \begin{definition}[Conflict AP Set]
-    The conflict AP set to the $k$-th AP ($\forall k\in\apSet$) consists of the neighboring APs who share any common edge server with the $k$-th AP, i.e.,
+    The conflict AP set of the $k$-th AP ($\forall k\in\apSet$) consists of the neighboring APs who share any common edge server with the $k$-th AP, i.e.,
     \begin{align}
         \ccSet_{k} \define \bigcup_{m\in\esSet_{k}} \apSet_{m}.
     \end{align}
@@ -138,28 +137,28 @@ Specifically, the \emph{conflict AP sets} and the \emph{observable state informa
 \begin{figure*}[t]
     \centering
     \includegraphics[width=0.60\textwidth]{hong2.pdf}
-    \caption{The timeline illustration of reception of OSI for the $1$-st AP where $2$-nd AP is in its \emph{conflict AP set} and $1$-st server is in its \emph{candidate server set}.}
+    \caption{The timeline illustration of the reception of OSI for the $1$-st AP where the $2$-nd AP is in its \emph{conflict AP set} and the $1$-st server is in its \emph{candidate server set}.}
     \label{fig:brd_timeline}
 \end{figure*}
 
 The $k$-th AP is able to collect its OSI $\Stat_{k}(t)$ at the $\mathcal{D}_{k}(t)$-th time slots of the $t$-th broadcast interval, where the \emph{\brlatency}~$\mathcal{D}_{k}(t)$ is a random variable.
-It is assumed that $\mathcal{D}_{k}(t)$ follows identical and independent distribution in different broadcast interval.
+It is assumed that $\mathcal{D}_{k}(t)$ follows an identical and independent distribution in different broadcast intervals.
 An example is given below to demonstrate how the \brlatency~affects the reception of OSI and the update of the dispatching strategy.
-Moreover, the notations used throughout this paper are summarized as in Table \ref{table:symbols}.
+Moreover, the notations used throughout this paper are summarized in Table~\ref{table:symbols}.
 
 \begin{example}
-    In Fig.\ref{fig:brd_timeline}, the $2$-nd AP and $1$-st server are in the \emph{conflict AP set} and \emph{candidate server set} of the $1$-st AP, respectively.
-    At the beginning of the $t$-th broadcast interval, the dispatching actions $\mathcal{A}_{1}(t)$ is adopted by the $1$-st AP.
-    After $\mathcal{D}_{1}(t)$ time slots, it updates the dispatching actions to $\mathcal{A}_{1}(t+1)$ based on its OSI $\Stat_{1}(t)$.
-    In the $(t+1)$-th broadcast interval, the $1$-st AP will firstly keep the previous actions $\mathcal{A}_{1}(t+1)$, and then updates the actions $\mathcal{D}_{1}(t+1)$ time slots later based on $\Stat_{1}(t+1)$. The new action is denotes as $\mathcal{A}_{1}(t+2)$.
+    In Fig.~\ref{fig:brd_timeline}, the $2$-nd AP and the $1$-st server are in the \emph{conflict AP set} and the \emph{candidate server set} of the $1$-st AP, respectively.
+    At the beginning of the $t$-th broadcast interval, the dispatching action $\mathcal{A}_{1}(t)$ is adopted by the $1$-st AP.
+    After $\mathcal{D}_{1}(t)$ time slots, it updates the dispatching action to $\mathcal{A}_{1}(t+1)$ based on its OSI $\Stat_{1}(t)$.
+    In the $(t+1)$-th broadcast interval, the $1$-st AP will firstly keep the previous action $\mathcal{A}_{1}(t+1)$, and then updates the action $\mathcal{D}_{1}(t+1)$ time slots later based on $\Stat_{1}(t+1)$. The new action is denotes as $\mathcal{A}_{1}(t+2)$.
     The signaling latency $\mathcal{D}_1(t)$ and $\mathcal{D}_1(t+1)$ can be different.
 \end{example}
 
 \revision{
     \begin{remark}[Transmission Failure of OSI]
-        In the system model, the transmission failure of OSI is tolerable: it can actually be transferred to transmission latency.
+        In the system model, the transmission failure of OSI is tolerable: it can actually be treated as transmission latency.
         For example, if the $y$-th AP is in the \emph{conflict AP set} of the $k$-th AP and the state information transmission from the $y$-th AP failed, the $k$-th AP may request retransmissions until a successful reception.
-        This will raise the transmission latency of OSI, which contributes to the random \brlatency~$\Delay_{k}(t)$ of the $k$-th AP.
+        This will add to the transmission latency of OSI, which contributes to the random \brlatency~$\Delay_{k}(t)$ of the $k$-th AP.
     \end{remark}
 }%
 
