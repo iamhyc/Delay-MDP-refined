@@ -1,6 +1,6 @@
 \section{A Distributed Solution Framework with Partial Information}
 \label{sec:algorithm}
-In this section, we shall propose a novel approximation framework, called \algname, to ``decouple" the centralized optimization on the RHS of the Bellman's equations in Eqn. (\ref{eqn:sp_0}) in each AP for arbitrary system state.
+In this section, we shall propose a novel approximation framework, called \algname, to ``decouple" the centralized optimization on the RHS of the Bellman's equations in equation (\ref{eqn:sp_0}) in each AP for arbitrary system state.
 For the APs outside $\ccSet_{k}$, i.e., the conflict AP set of the $k$-th AP, the update of their dispatching actions will not affect the task computation at the $k$-th AP ($\forall k\in\apSet$).
 Thus, the optimization of their dispatching actions can be decoupled.
 However, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
